@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/panel_icon"
+        android:layout_width="414dp"
+        android:layout_height="161dp"
+        android:background="@color/colorBitsafeBlue">
+
+        <ImageView
+            android:id="@+id/iv_icon_bitsafe"
+            android:layout_width="330dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/Bitsafe"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/panel_icon">
+
+        <EditText
+            android:id="@+id/et_numero_celular"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/texto_redondo"
+            android:digits="1234567890"
+            android:gravity="center"
+            android:hint="número de celular"
+            android:enabled="false"
+            android:imeOptions="actionDone"
+            android:inputType="phone"
+            android:singleLine="true"
+            android:textColorHint="@color/colorBitsafeBlue" />
+
+        <GridLayout
+            android:id="@+id/teclado_numerico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_numero_celular"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:columnCount="3"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/Siete"
+                android:layout_margin="2dp"
+                android:background="@drawable/texto_redondo"
+                android:text="7"
+                android:textColor="@color/colorBitsafeBlue" />
+
+            <Button
+                android:id="@+id/Ocho"
+                android:layout_margin="2dp"
+                android:background="@drawable/texto_redondo"
+                android:text="8"
+                android:textColor="@color/colorBitsafeBlue" />
+
+            <Button
+                android:id="@+id/Nueve"
+                android:layout_margin="2dp"
+                android:background="@drawable/texto_redondo"
+                android:text="9"
+                android:textColor="@color/colorBitsafeBlue" />
+
+            <Button
+                android:id="@+id/Cuatro"
+                android:layout_margin="2dp"
+                android:background="@drawable/texto_redondo"
+                android:text="4"
+                android:textColor="@color/colorBitsafeBlue" />
+
+            <Button
+                android:id="@+id/Cinco"
+                android:layout_margin="2dp"
+                android:background="@drawable/texto_redondo"
+                android:text="5"
+                android:textColor="@color/colorBitsafeBlue" />
+
+            <Button
+                android:id="@+id/Seis"
+                android:layout_margin="2dp"
+                android:background="@drawable/texto_redondo"
+                android:text="6"
+                android:textColor="@color/colorBitsafeBlue" />
+
+            <Button
+                android:id="@+id/Uno"
+                android:layout_margin="2dp"
+                android:background="@drawable/texto_redondo"
+                android:text="1"
+                android:textColor="@color/colorBitsafeBlue" />
+
+            <Button
+                android:id="@+id/Dos"
+                android:layout_margin="2dp"
+                android:background="@drawable/texto_redondo"
+                android:text="2"
+                android:textColor="@color/colorBitsafeBlue" />
+
+            <Button
+                android:id="@+id/Tres"
+                android:layout_margin="2dp"
+                android:background="@drawable/texto_redondo"
+                android:text="3"
+                android:textColor="@color/colorBitsafeBlue" />
+
+            <Button
+                android:id="@+id/Cero"
+                android:layout_columnSpan="2"
+                android:layout_margin="2dp"
+                android:background="@drawable/texto_redondo"
+                android:text="0"
+                android:textColor="@color/colorBitsafeBlue" />
+
+            <Button
+                android:id="@+id/Borrar"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:gravity="center|right"
+                android:layout_marginLeft="20dp"
+                android:background="@mipmap/ic_delete"
+                android:textColor="@color/colorBitsafeBlue"
+                android:layout_row="0"
+                />
+
+        </GridLayout>
+
+        <TextView
+            android:id="@+id/tv_registrarse"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_alignBottom="@+id/teclado_numerico"
+            android:layout_alignParentBottom="true"
+            android:alpha="0.60"
+            android:background="@color/colorBitsafeBlue"
+            android:gravity="center"
+            android:text="Registrarme"
+            android:textColor="@color/colorWhite" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
