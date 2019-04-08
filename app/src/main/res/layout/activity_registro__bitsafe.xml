@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/panel_icon_registro"
+        android:layout_width="414dp"
+        android:layout_height="161dp"
+        android:background="@color/colorBitsafeBlue">
+
+        <ImageView
+            android:id="@+id/iv_icon_bitsafe_registro"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_bitsafe_icon" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/panel_icon_registro"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/tv_registro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/registro_registro"
+            android:textColor="@color/colorBitsafeBlue"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/et_nombre_registro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_registro"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/texto_redondo_registro"
+            android:text="@string/registro_nombre"
+            android:textColorHint="@color/colorBitsafeBlue" />
+
+        <EditText
+            android:id="@+id/et_cedula_registro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_nombre_registro"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/texto_redondo_registro"
+            android:text="@string/registro_cedula"
+            android:textColorHint="@color/colorBitsafeBlue" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

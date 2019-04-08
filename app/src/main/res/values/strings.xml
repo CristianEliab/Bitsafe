@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">BitSafe</string>
+    <string name="login_celular_registro">Registrarme</string>
+    <string name="login_huella_registro">Registrarme</string>
+    <string name="login_huella_introduce">INTRODUCE LA CONTRASEÑA</string>
+    <string name="login_celular_numero">número de celular</string>
+    <string name="registro_registro">Registro</string>
+    <string name="registro_nombre">Nombre</string>
+    <string name="registro_cedula">Cédula</string>
+    <string name="registro_celular">Celular</string>
+    <string name="registro_datos_opcionales">Datos opcionales</string>
+    <string name="registro_registrarse">Registrarse</string>
+    <string name="registro_registrarse_facebook">Registrarse con Facebook</string>
+    <string name="registro_registrarse_google">Registrarse con Google</string>
+    <string name="registro_correo">Correo</string>
+    <string name="registro_ubicacion">Ubicación</string>
 </resources>

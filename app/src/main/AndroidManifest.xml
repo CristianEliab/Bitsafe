@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login"></activity>
+        <activity android:name=".Registro_Bitsafe"></activity>
+        <activity android:name=".Login_huella" />
+        <activity android:name=".Login" />
         <activity android:name=".Splash" />
         <activity android:name=".MainActivity">
             <intent-filter>
