@@ -14,4 +14,9 @@
     <string name="registro_registrarse_google">Registrarse con Google</string>
     <string name="registro_correo">Correo</string>
     <string name="registro_ubicacion">Ubicación</string>
+    <string name="opciones_prompt">Datos opcionales</string>
+    <string-array name="opciones_arrays">
+        <item>Correo</item>
+        <item>Ubicación</item>
+    </string-array>
 </resources>

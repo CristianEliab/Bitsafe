@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/dropdown_menu1"
+        android:title="@string/registro_correo"
+        android:icon="@drawable/registro_ic_correo"
+        android:visible="true" />
+    <item
+        android:id="@+id/dropdown_menu2"
+        android:title="@string/registro_ubicacion"
+        android:icon="@drawable/registro_ic_house"
+        android:visible="true" />
+
+</menu>

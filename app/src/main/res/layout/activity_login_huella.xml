@@ -82,7 +82,7 @@
             <Button
                 android:id="@+id/uno_login_huella"
                 android:layout_margin="2dp"
-                android:background="@drawable/texto_redondo"
+                android:background="@drawable/figura_texto_redondo"
                 android:text="1"
                 android:textColor="@color/colorBitsafeBlue"
                 android:textSize="20dp" />
@@ -90,7 +90,7 @@
             <Button
                 android:id="@+id/dos_login_huella"
                 android:layout_margin="2dp"
-                android:background="@drawable/texto_redondo"
+                android:background="@drawable/figura_texto_redondo"
                 android:text="2"
                 android:textColor="@color/colorBitsafeBlue"
                 android:textSize="20dp" />
@@ -99,7 +99,7 @@
             <Button
                 android:id="@+id/tres_login_huella"
                 android:layout_margin="2dp"
-                android:background="@drawable/texto_redondo"
+                android:background="@drawable/figura_texto_redondo"
                 android:text="3"
                 android:textColor="@color/colorBitsafeBlue"
                 android:textSize="20dp" />
@@ -107,7 +107,7 @@
             <Button
                 android:id="@+id/cuatro_login_huella"
                 android:layout_margin="2dp"
-                android:background="@drawable/texto_redondo"
+                android:background="@drawable/figura_texto_redondo"
                 android:text="4"
                 android:textColor="@color/colorBitsafeBlue"
                 android:textSize="20dp" />
@@ -115,7 +115,7 @@
             <Button
                 android:id="@+id/cinco_login_huella"
                 android:layout_margin="2dp"
-                android:background="@drawable/texto_redondo"
+                android:background="@drawable/figura_texto_redondo"
                 android:text="5"
                 android:textColor="@color/colorBitsafeBlue"
                 android:textSize="20dp" />
@@ -123,7 +123,7 @@
             <Button
                 android:id="@+id/seis_login_huella"
                 android:layout_margin="2dp"
-                android:background="@drawable/texto_redondo"
+                android:background="@drawable/figura_texto_redondo"
                 android:text="6"
                 android:textColor="@color/colorBitsafeBlue"
                 android:textSize="20dp" />
@@ -131,7 +131,7 @@
             <Button
                 android:id="@+id/siete_login_huella"
                 android:layout_margin="2dp"
-                android:background="@drawable/texto_redondo"
+                android:background="@drawable/figura_texto_redondo"
                 android:text="7"
                 android:textColor="@color/colorBitsafeBlue"
                 android:textSize="20dp" />
@@ -140,7 +140,7 @@
             <Button
                 android:id="@+id/ocho_login_huella"
                 android:layout_margin="2dp"
-                android:background="@drawable/texto_redondo"
+                android:background="@drawable/figura_texto_redondo"
                 android:text="8"
                 android:textColor="@color/colorBitsafeBlue"
                 android:textSize="20dp" />
@@ -148,7 +148,7 @@
             <Button
                 android:id="@+id/nueve_login_huella"
                 android:layout_margin="2dp"
-                android:background="@drawable/texto_redondo"
+                android:background="@drawable/figura_texto_redondo"
                 android:text="9"
                 android:textColor="@color/colorBitsafeBlue"
                 android:textSize="20dp" />
@@ -167,7 +167,7 @@
             <Button
                 android:id="@+id/cero_login_huella"
                 android:layout_margin="2dp"
-                android:background="@drawable/texto_redondo"
+                android:background="@drawable/figura_texto_redondo"
                 android:text="0"
                 android:textColor="@color/colorBitsafeBlue"
                 android:textSize="20dp" />
