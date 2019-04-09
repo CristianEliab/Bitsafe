@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">BitSafe</string>
+    <string name="start">Empezar</string>
     <string name="login_celular_registro">Registrarme</string>
     <string name="login_huella_registro">Registrarme</string>
     <string name="login_huella_introduce">INTRODUCE LA CONTRASEÑA</string>
@@ -19,4 +20,16 @@
         <item>Correo</item>
         <item>Ubicación</item>
     </string-array>
+    <string name="home_admin_clientes">Clientes</string>
+    <string name="home_admin_estadisticas">Estadísticas</string>
+    <string name="home_admin_transacciones">Transacciones</string>
+    <string name="home_admin_cargar">Cargar</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragment_carga_toolbar">Cargar Información</string>
+    <string name="fragment_clientes_toolbar">Clientes</string>
+    <string name="fragment_estadisticas_toolbar">Estadísticas</string>
+    <string name="fragment_transacciones_toolbar">Transacciones</string>
+    <string name="fragment_clientes_filtro">Buscar clientes ...</string>
 </resources>

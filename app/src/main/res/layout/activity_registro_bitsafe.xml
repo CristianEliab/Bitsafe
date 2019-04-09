@@ -10,122 +10,130 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/panel_icon_registro"
-            android:layout_width="414dp"
-            android:layout_height="161dp"
+            android:id="@+id/rl_registro_icon_bitsafe"
+            android:layout_width="@dimen/login_rl_panel_w"
+            android:layout_height="@dimen/login_rl_panel_h"
             android:background="@color/colorBitsafeBlue">
 
             <ImageView
-                android:id="@+id/iv_icon_bitsafe_registro"
-                android:layout_width="300dp"
-                android:layout_height="70dp"
+                android:id="@+id/iv_login_icon_bitsafe"
+                android:layout_width="@dimen/login_iv_icon_w"
+                android:layout_height="@dimen/login_iv_icon_h"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/ic_bitsafe_icon" />
+                android:background="@drawable/aplicacion_ic_bitsafe_icon" />
 
         </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/panel_icon_registro"
+            android:layout_below="@+id/rl_registro_icon_bitsafe"
             android:layout_centerHorizontal="true">
 
             <TextView
-                android:id="@+id/tv_registro"
+                android:id="@+id/tv_registro_texto_registro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:text="@string/registro_registro"
                 android:textColor="@color/colorBitsafeBlue"
+                android:textStyle="italic"
                 android:textSize="20dp" />
 
             <EditText
-                android:id="@+id/et_nombre_registro"
-                android:layout_width="230dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/tv_registro"
+                android:id="@+id/et_registro_nombre"
+                android:layout_width="@dimen/registro_et_campos_registro_w"
+                android:layout_height="@dimen/registro_et_campos_registro_h"
+                android:layout_below="@+id/tv_registro_texto_registro"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/figura_texto_redondo_registro"
+                android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_nombre"
                 android:gravity="center"
                 android:hint="@string/registro_nombre"
+                android:textSize="@dimen/registro_et_tamanio_campos"
                 android:textColorHint="@color/colorBitsafeRegistro" />
 
             <EditText
-                android:id="@+id/et_cedula_registro"
-                android:layout_width="225dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/et_nombre_registro"
+                android:id="@+id/et_registro_cedula"
+                android:layout_width="@dimen/registro_et_campos_registro_w"
+                android:layout_height="@dimen/registro_et_campos_registro_h"
+                android:layout_below="@+id/et_registro_nombre"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/figura_texto_redondo_registro"
+                android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_cedula"
                 android:gravity="center"
                 android:hint="@string/registro_cedula"
+                android:textSize="@dimen/registro_et_tamanio_campos"
                 android:textColorHint="@color/colorBitsafeRegistro" />
 
             <EditText
-                android:id="@+id/et_celular_registro"
-                android:layout_width="225dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/et_cedula_registro"
+                android:id="@+id/et_registro_celular"
+                android:layout_width="@dimen/registro_et_campos_registro_w"
+                android:layout_height="@dimen/registro_et_campos_registro_h"
+                android:layout_below="@+id/et_registro_cedula"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/figura_texto_redondo_registro"
+                android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_smartphone"
                 android:gravity="center"
                 android:hint="@string/registro_celular"
+                android:textSize="@dimen/registro_et_tamanio_campos"
                 android:textColorHint="@color/colorBitsafeRegistro" />
 
 
             <EditText
-                android:id="@+id/et_correo_registro"
-                android:layout_width="225dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/et_celular_registro"
+                android:id="@+id/et_registro_correo"
+                android:layout_width="@dimen/registro_et_campos_registro_w"
+                android:layout_height="@dimen/registro_et_campos_registro_h"
+                android:layout_below="@+id/et_registro_celular"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/figura_texto_redondo_registro"
+                android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_correo"
                 android:gravity="center"
                 android:hint="@string/registro_correo"
+                android:textSize="@dimen/registro_et_tamanio_campos"
                 android:textColorHint="@color/colorBitsafeRegistro" />
 
             <EditText
-                android:id="@+id/et_ubicacion_registro"
-                android:layout_width="225dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/et_correo_registro"
+                android:id="@+id/et_registro_ubicacion"
+                android:layout_width="@dimen/registro_et_campos_registro_w"
+                android:layout_height="@dimen/registro_et_campos_registro_h"
+                android:layout_below="@+id/et_registro_correo"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/figura_texto_redondo_registro"
+                android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_house"
                 android:gravity="center"
                 android:hint="@string/registro_ubicacion"
+                android:textSize="@dimen/registro_et_tamanio_campos"
                 android:textColorHint="@color/colorBitsafeRegistro" />
 
             <EditText
-                android:id="@+id/et_datos_registro"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/et_ubicacion_registro"
+                android:id="@+id/et_registro_datos_opcionales"
+                android:layout_width="@dimen/registro_et_campos_opcionales_registro_w"
+                android:layout_height="@dimen/registro_et_campos_opcionales_registro_h"
+                android:layout_below="@+id/et_registro_ubicacion"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/figura_texto_redondo_opciones"
+                android:background="@drawable/registro_figura_texto_redondo_opciones"
                 android:drawableRight="@drawable/registro_ic_down_arrow"
                 android:gravity="center"
+                android:textSize="@dimen/registro_et_tamanio_campos"
                 android:hint="@string/registro_datos_opcionales"
                 android:textColorHint="@color/colorBitsafeRegistro" />
 
 
             <Button
-                android:id="@+id/btn_registrarse_registro"
-                android:layout_width="185dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/et_datos_registro"
+                android:id="@+id/btn_registro_registrarse"
+                android:layout_width="@dimen/registro_btn_registrarse_w"
+                android:layout_height="@dimen/registro_btn_registrarse_h"
+                android:layout_below="@+id/et_registro_datos_opcionales"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/registro_boton_registrarse"
@@ -134,10 +142,10 @@
 
 
             <RelativeLayout
-                android:id="@+id/panel_facebook_registro"
+                android:id="@+id/rl_registro_panel_facebook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/btn_registrarse_registro"
+                android:layout_below="@+id/btn_registro_registrarse"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
@@ -151,7 +159,7 @@
                     android:background="@drawable/registro_ic_facebook" />
 
                 <Button
-                    android:id="@+id/btn_registrarse_facebook"
+                    android:id="@+id/btn_registro_facebook"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -167,10 +175,10 @@
 
 
             <RelativeLayout
-                android:id="@+id/panel_google_registro"
+                android:id="@+id/rl_registro_panel_google"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/panel_facebook_registro"
+                android:layout_below="@+id/rl_registro_panel_facebook"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
@@ -186,7 +194,7 @@
                     android:background="@drawable/registro_ic_google" />
 
                 <Button
-                    android:id="@+id/btn_registrarse_google"
+                    android:id="@+id/btn_registro_google"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"

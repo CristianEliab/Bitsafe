@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/home_admin_clientes"
+        android:icon="@drawable/home_admin_ic_clientes_admin"
+        android:id="@+id/menubar_clientes"/>
+
+    <item android:title="@string/home_admin_estadisticas"
+        android:icon="@drawable/home_admin_ic_estadisticas_admin"
+        android:id="@+id/menubar_estadisticas"/>
+
+    <item android:title="@string/home_admin_transacciones"
+        android:icon="@drawable/home_admin_ic_transacciones_admin"
+        android:id="@+id/menubar_transacciones"/>
+
+    <item android:title="@string/home_admin_cargar"
+        android:icon="@drawable/home_admin_ic_cargar_ar_admin"
+        android:id="@+id/menubar_cargar"/>
+
+</menu>

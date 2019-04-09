@@ -5,11 +5,23 @@
     android:background="@color/colorWhite">
 
     <ImageView
-        android:id="@+id/splash_screen"
-        android:layout_width="330dp"
-        android:layout_height="150dp"
+        android:id="@+id/iv_splash_screen"
+        android:layout_width="@dimen/splash_iv_icono_w"
+        android:layout_height="@dimen/splash_iv_icono_h"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/Bitsafe" />
+        android:background="@drawable/aplicacion_bitsafe" />
+
+    <Button
+        android:id="@+id/btn_splash_empesar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/start"
+        android:background="@drawable/registro_figura_texto_redondo_registro"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/colorBitsafeBlue"/>
 
 </RelativeLayout>
