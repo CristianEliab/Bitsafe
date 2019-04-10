@@ -6,6 +6,7 @@
     tools:context=".ClientesFragment">
 
     <RelativeLayout
+        android:id="@+id/rl_fragment_clientes_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -25,6 +26,7 @@
                 android:visibility="gone" />
 
             <TextView
+                android:id="@+id/tv_fragment_texto_actividad"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
@@ -36,14 +38,14 @@
                 android:id="@+id/iv_fragment_cargar_perfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="200dp"
+                android:layout_marginStart="200dp"
                 android:background="@drawable/fragment_ic_perfil_cliente" />
 
             <ImageView
                 android:id="@+id/iv_fragment_cargar_notificaciones"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:background="@drawable/fragment_ic_notificaciones_cliente" />
 
         </android.support.v7.widget.Toolbar>
@@ -54,20 +56,21 @@
             android:layout_width="@dimen/fragment_clientes_filtro_w"
             android:layout_height="@dimen/fragment_clientes_filtro_h"
             android:layout_below="@+id/tb_fragment_clientes_toolbar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:autofillHints=""
+            android:background="@drawable/fragment_clientes_figura_filtro"
             android:drawableRight="@drawable/fragment_clientes_ic_buscar_clientes"
             android:hint="@string/fragment_clientes_filtro"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/fragment_clientes_figura_filtro"
-            android:layout_centerHorizontal="true"
-            android:textSize="@dimen/fragment_clientes_filtro_texto"
-            />
+            android:inputType=""
+            android:textSize="@dimen/fragment_clientes_filtro_texto" />
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/lista_clientes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
             android:layout_below="@+id/et_fragment_clientes_filtro"
-            android:id="@+id/lista_clientes">
+            android:layout_marginTop="20dp">
 
         </android.support.v7.widget.RecyclerView>
 

@@ -10,5 +10,5 @@
     <color name="colorBitsafeRegistro">#828282</color>
     <color name="colorBarraNavegacion">#F3F3F3</color>
     <color name="colorBarraFiltro">#F2F2F2</color>
-
+    <color name="colorBlack">#000</color>
 </resources>

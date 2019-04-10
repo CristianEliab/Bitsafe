@@ -23,7 +23,7 @@
         android:layout_alignLeft="@+id/iv_cliente_registro_foto"
         android:layout_marginLeft="20dp"
         android:text="Nohra Villega"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <!--

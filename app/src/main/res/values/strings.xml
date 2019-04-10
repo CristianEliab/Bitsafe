@@ -24,12 +24,19 @@
     <string name="home_admin_estadisticas">Estadísticas</string>
     <string name="home_admin_transacciones">Transacciones</string>
     <string name="home_admin_cargar">Cargar</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fragment_carga_toolbar">Cargar Información</string>
     <string name="fragment_clientes_toolbar">Clientes</string>
     <string name="fragment_estadisticas_toolbar">Estadísticas</string>
     <string name="fragment_transacciones_toolbar">Transacciones</string>
     <string name="fragment_clientes_filtro">Buscar clientes ...</string>
+    <string name="fragment_estadisticas_descripcion">Descripción ...</string>
+    <string name="fragment_transacciones_ingresar_monto">Ingresar monto:</string>
+    <string name="fragment_transacciones_ingresar_clientes">Ingresar clientes:</string>
+    <string name="fragment_transacciones_agregar_monto">Agrega monto</string>
+    <string name="fragment_transacciones_cliente_origen">Cliente Origen</string>
+    <string name="fragment_transacciones_cliente_destino">Cliente Destino</string>
+    <string name="fragment_transacciones_ingresar_fecha">Ingresar fecha:</string>
+    <string name="fragment_transacciones_agregar_fecha">Agregar una fecha</string>
+    <string name="fragment_transacciones_descripcion">Descripción:</string>
+    <string name="fragment_transacciones_agregar_descripcion">Agrega una descripción</string>
 </resources>

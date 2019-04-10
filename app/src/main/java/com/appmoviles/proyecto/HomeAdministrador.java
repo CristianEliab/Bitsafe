@@ -23,6 +23,8 @@ public class HomeAdministrador extends FragmentActivity {
 
         clientesFragment = new ClientesFragment();
         cargarDatosFragment = new CargarDatosFragment();
+        estadisticasFragment = new EstadisticasFragment();
+        transaccionesFragment = new TransaccionesFragment();
 
         BottomNavigationView navigation = findViewById(R.id.home_admin_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -39,8 +41,15 @@ public class HomeAdministrador extends FragmentActivity {
                         transaction.replace(R.id.contenido, cargarDatosFragment);
                         transaction.commit();
                         break;
+                    case R.id.menubar_estadisticas:
+                        transaction.replace(R.id.contenido, estadisticasFragment);
+                        transaction.commit();
+                        break;
+                    case R.id.menubar_transacciones:
+                        transaction.replace(R.id.contenido, transaccionesFragment);
+                        transaction.commit();
+                        break;
                 }
-
                 return true;
             }
         });

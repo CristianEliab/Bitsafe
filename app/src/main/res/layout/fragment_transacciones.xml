@@ -1,14 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TransaccionesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/tb_fragment_transacciones_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBitsafeBlue"
+                android:elevation="4dp">
+
+                <ImageView
+                    android:id="@+id/iv_fragment_transacciones_return"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/fragment_ic_return"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/fragment_transacciones_toolbar"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/fragments_toolbar" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_transacciones_perfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="140dp"
+                    android:background="@drawable/fragment_ic_perfil_cliente" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_transacciones_notificaciones"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/fragment_ic_notificaciones_cliente" />
+
+            </android.support.v7.widget.Toolbar>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_fragment_transacciones_panel_transacciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tb_fragment_transacciones_toolbar"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:id="@+id/tv_fragment_transacciones_ingresar_monto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment_transacciones_ingresar_monto"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+            <EditText
+                android:id="@+id/tv_fragment_transacciones_agregar_monto"
+                android:layout_width="@dimen/fragment_transacciones_campos_w"
+                android:layout_height="@dimen/fragment_transacciones_campos_h"
+                android:layout_below="@+id/tv_fragment_transacciones_ingresar_monto"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/fragment_transacciones_campo_ingresar"
+                android:drawableLeft="@drawable/fragment_transacciones_ic_monto"
+                android:gravity="center"
+                android:hint="@string/fragment_transacciones_agregar_monto"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+            <TextView
+                android:id="@+id/tv_fragment_transacciones_ingresar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_fragment_transacciones_agregar_monto"
+                android:layout_marginTop="20dp"
+                android:text="@string/fragment_transacciones_ingresar_clientes"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+            <RelativeLayout
+                android:id="@+id/tv_fragment_transacciones_panel_ingresar_clientes"
+                android:layout_width="@dimen/fragment_transacciones_panel_w"
+                android:layout_height="@dimen/fragment_transacciones_panel_h"
+                android:layout_below="@+id/tv_fragment_transacciones_ingresar">
+
+                <ImageView
+                    android:id="@+id/tv_fragment_transacciones_icon_sent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/fragment_transacciones_ic_sent" />
+
+                <RelativeLayout
+                    android:id="@+id/tv_fragment_transacciones_panel_ingresar_clientes_o"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/tv_fragment_transacciones_icon_sent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="50dp">
+
+                    <ImageView
+                        android:id="@+id/tv_fragment_transacciones_icon_origen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/fragment_transacciones_ic_cliente_o_d" />
+
+                    <EditText
+                        android:id="@+id/tv_fragment_transacciones_clientes_origen"
+                        android:layout_width="@dimen/fragment_transacciones_campos_clientes_w"
+                        android:layout_height="@dimen/fragment_transacciones_campos_h"
+                        android:layout_below="@+id/tv_fragment_transacciones_icon_origen"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/fragment_transacciones_campo_ingresar"
+                        android:drawableRight="@drawable/fragment_transacciones_buscar_clientes"
+                        android:gravity="center"
+                        android:hint="@string/fragment_transacciones_cliente_origen"
+                        android:textColorHint="@color/colorWhite"
+                        android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/tv_fragment_transacciones_panel_ingresar_clientes_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tv_fragment_transacciones_icon_sent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50dp">
+
+                    <ImageView
+                        android:id="@+id/tv_fragment_transacciones_icon_destino"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/fragment_transacciones_ic_cliente_o_d" />
+
+                    <EditText
+                        android:id="@+id/tv_fragment_transacciones_clientes_destino"
+                        android:layout_width="@dimen/fragment_transacciones_campos_clientes_w"
+                        android:layout_height="@dimen/fragment_transacciones_campos_h"
+                        android:layout_below="@+id/tv_fragment_transacciones_icon_destino"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/fragment_transacciones_campo_ingresar"
+                        android:drawableRight="@drawable/fragment_transacciones_buscar_clientes"
+                        android:gravity="center"
+                        android:hint="@string/fragment_transacciones_cliente_destino"
+                        android:textColorHint="@color/colorWhite"
+                        android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_fragment_transacciones_ingresar_fecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_fragment_transacciones_panel_ingresar_clientes"
+                android:layout_marginTop="20dp"
+                android:text="@string/fragment_transacciones_ingresar_fecha"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+            <EditText
+                android:id="@+id/tv_fragment_transacciones_agregar_fecha"
+                android:layout_width="@dimen/fragment_transacciones_campos_w"
+                android:layout_height="@dimen/fragment_transacciones_campos_h"
+                android:layout_below="@+id/tv_fragment_transacciones_ingresar_fecha"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/fragment_transacciones_campo_ingresar"
+                android:drawableLeft="@drawable/fragment_transacciones_ic_fecha"
+                android:gravity="center"
+                android:hint="@string/fragment_transacciones_agregar_fecha"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+            <TextView
+                android:id="@+id/tv_fragment_transacciones_ingresar_clientes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_fragment_transacciones_agregar_fecha"
+                android:layout_marginTop="20dp"
+                android:text="@string/fragment_transacciones_descripcion"
+                android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+
+            <EditText
+                android:id="@+id/tv_fragment_transacciones_descripcion_clientes"
+                android:layout_width="@dimen/fragment_transacciones_campos_w"
+                android:layout_height="@dimen/fragment_transacciones_campos_h"
+                android:layout_below="@+id/tv_fragment_transacciones_ingresar_clientes"
+                android:background="@drawable/fragment_transacciones_campo_ingresar"
+                android:drawableLeft="@drawable/fragment_transacciones_ic_description"
+                android:gravity="center"
+                android:hint="@string/fragment_estadisticas_descripcion"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </FrameLayout>
