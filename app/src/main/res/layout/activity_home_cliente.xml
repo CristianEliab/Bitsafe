@@ -5,31 +5,31 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/ll_home_admin_panel"
+        android:id="@+id/ll_home_clientes_panel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/home_admin_navigation">
+        android:layout_above="@+id/home_clientes_navigation">
 
         <FrameLayout
             android:id="@+id/contenido"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignStart="@+id/ll_home_admin_panel" />
+            android:layout_alignStart="@+id/ll_home_clientes_panel" />
     </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/home_admin_navigation"
+        android:id="@+id/home_clientes_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorBarraNavegacion"
-        app:itemIconTint="@drawable/home_admin_selector"
-        app:itemTextColor="@drawable/home_admin_selector"
+        app:itemIconTint="@drawable/home_cliente_selector"
+        app:itemTextColor="@drawable/home_cliente_selector"
         app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_administrador">
+        app:menu="@menu/menu_cliente">
 
     </android.support.design.widget.BottomNavigationView>
 

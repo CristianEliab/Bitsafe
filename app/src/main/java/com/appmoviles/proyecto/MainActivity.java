@@ -23,7 +23,15 @@ public class MainActivity extends AppCompatActivity {
         iv_main_admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, HomeAdministrador.class);
+                Intent i = new Intent(MainActivity.this, Login.class);
+                startActivity(i);
+            }
+        });
+
+        iv_main_cliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, Login_huella.class);
                 startActivity(i);
             }
         });

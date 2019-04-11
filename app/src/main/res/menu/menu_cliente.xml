@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/home_clientes_finanzas"
+        android:icon="@drawable/home_cliente_ic_finanzas"
+        android:id="@+id/menubar_finanzas"/>
+
+    <item android:title="@string/home_clientes_planes"
+        android:icon="@drawable/home_cliente_ic_planes"
+        android:id="@+id/menubar_planes"/>
+
+    <item android:title="@string/home_clientes_cuentas"
+        android:icon="@drawable/home_cliente_ic_cuentas"
+        android:id="@+id/menubar_cuentas"/>
+
+</menu>

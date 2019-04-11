@@ -39,4 +39,13 @@
     <string name="fragment_transacciones_agregar_fecha">Agregar una fecha</string>
     <string name="fragment_transacciones_descripcion">Descripción:</string>
     <string name="fragment_transacciones_agregar_descripcion">Agrega una descripción</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragment_finanzas_toolbar">Mis Finanzas</string>
+    <string name="fragment_planes_toolbar">Planes de Ahorro</string>
+    <string name="fragment_cuentas_toolbar">Cuentas Bancarias</string>
+    <string name="home_clientes_finanzas">Finanzas</string>
+    <string name="home_clientes_planes">Planes</string>
+    <string name="home_clientes_cuentas">Cuentas</string>
 </resources>
