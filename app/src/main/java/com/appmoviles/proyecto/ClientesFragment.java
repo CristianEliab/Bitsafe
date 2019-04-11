@@ -1,7 +1,5 @@
 package com.appmoviles.proyecto;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +15,7 @@ import java.util.ArrayList;
 public class ClientesFragment extends Fragment {
 
     private RecyclerView libreta;
-    private AdapterTemplate adapter;
+    private AdapterTemplate_Clientes adapter;
     private ArrayList<Cliente> clientes;
 
     public ClientesFragment() {
@@ -53,7 +51,7 @@ public class ClientesFragment extends Fragment {
 
 
         libreta = v.findViewById(R.id.lista_clientes);
-        adapter = new AdapterTemplate();
+        adapter = new AdapterTemplate_Clientes();
         libreta.setHasFixedSize(true);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         libreta.setLayoutManager(manager);

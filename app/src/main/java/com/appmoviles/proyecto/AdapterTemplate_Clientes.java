@@ -10,7 +10,7 @@ import com.appmoviles.proyecto.modelo.Cliente;
 
 import java.util.ArrayList;
 
-public class AdapterTemplate extends RecyclerView.Adapter<AdapterTemplate.CustomViewHolder>{
+public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTemplate_Clientes.CustomViewHolder>{
 
     //Los datos que vamos a mostrar (View)
     private ArrayList<Cliente> data;
@@ -24,7 +24,7 @@ public class AdapterTemplate extends RecyclerView.Adapter<AdapterTemplate.Custom
         }
     }
 
-    public AdapterTemplate(){
+    public AdapterTemplate_Clientes(){
         data = new ArrayList<>();
     }
 

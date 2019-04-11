@@ -27,6 +27,13 @@ public class HomeAdministrador extends FragmentActivity {
         transaccionesFragment = new TransaccionesFragment();
 
         BottomNavigationView navigation = findViewById(R.id.home_admin_navigation);
+
+        navigation.setSelectedItemId(R.id.menubar_clientes);
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.contenido, clientesFragment);
+        transaction.commit();
+
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

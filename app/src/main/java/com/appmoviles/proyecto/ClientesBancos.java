@@ -1,24 +1,20 @@
 package com.appmoviles.proyecto;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.appmoviles.proyecto.modelo.Banco;
-import com.appmoviles.proyecto.modelo.Cliente;
 
 import java.util.ArrayList;
 
 public class ClientesBancos extends Fragment {
 
     private RecyclerView lista_clientes_view;
-    private AdapterTemplate adapter;
+    private AdapterTemplate_Clientes adapter;
     private ArrayList<Banco> bancos;
 
     public ClientesBancos() {
