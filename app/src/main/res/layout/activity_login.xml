@@ -62,7 +62,7 @@
                 android:textSize="@dimen/login_btn_tamanio_numeros" />
 
             <Button
-                android:id="@+id/btn_login_dos_celular"
+                    android:id="@+id/btn_login_dos_celular"
                 android:layout_margin="2dp"
                 android:background="@drawable/registro_figura_texto_redondo"
                 android:text="2"

@@ -10,10 +10,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.Toolbar
+        <RelativeLayout
             android:id="@+id/tb_fragment_finanzas_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/aplicacion_toolbar_opciones"
             android:background="@color/colorBitsafeBlue"
             android:elevation="4dp">
 
@@ -21,7 +21,9 @@
                 android:id="@+id/iv_fragment_finanzas_return"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
                 android:background="@drawable/fragment_ic_return"
                 android:visibility="gone" />
 
@@ -29,7 +31,10 @@
                 android:id="@+id/tv_fragment_finanzas_actividad"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
+                android:gravity="center"
                 android:text="@string/fragment_finanzas_toolbar"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/fragments_toolbar" />
@@ -38,18 +43,21 @@
                 android:id="@+id/iv_fragment_finanzas_perfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="200dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
                 android:background="@drawable/fragment_ic_perfil_cliente" />
 
             <ImageView
                 android:id="@+id/iv_fragment_finanzas_notificaciones"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
                 android:background="@drawable/fragment_ic_notificaciones_cliente" />
 
-        </android.support.v7.widget.Toolbar>
-
+        </RelativeLayout>
     </RelativeLayout>
 
 

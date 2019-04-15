@@ -38,4 +38,9 @@
     <dimen name="fragment_transacciones_campos_h">40dp</dimen>
     <dimen name="fragment_transacciones_panel_w">400dp</dimen>
     <dimen name="fragment_transacciones_panel_h">200dp</dimen>
+    <dimen name="aplicacion_toolbar_opciones">60dp</dimen>
+    <dimen name="aplicacion_margin_right_btn_perfil">60dp</dimen>
+    <dimen name="aplicacion_margin_right_btn_notificaciones">20dp</dimen>
+    <dimen name="aplicacion_margin_left_text_fragment">30dp</dimen>
+    <dimen name="aplicacion_margin_left_btn_return">10dp</dimen>
 </resources>
