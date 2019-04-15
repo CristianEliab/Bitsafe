@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ClientesFragment">
+    tools:context=".SeleccionarClienteOrigenFragment">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -16,36 +17,35 @@
             android:layout_height="wrap_content">
 
             <RelativeLayout
-                android:id="@+id/tb_fragment_clientes_toolbar"
+                android:id="@+id/tb_fragment_sl_clientes_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/aplicacion_toolbar_opciones"
                 android:background="@color/colorBitsafeBlue"
                 android:elevation="4dp">
 
                 <ImageView
-                    android:id="@+id/iv_fragment_clientes_return"
+                    android:id="@+id/iv_fragment_sl_clientes_return"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
-                    android:background="@drawable/fragment_ic_return"
-                    android:visibility="gone" />
+                    android:background="@drawable/fragment_ic_return" />
 
                 <TextView
-                    android:id="@+id/tv_fragment_clientes_texto_actividad"
+                    android:id="@+id/tv_fragment_sl_clientes_texto_actividad"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
                     android:gravity="center"
-                    android:text="@string/fragment_clientes_toolbar"
+                    android:text="@string/fragment_sl_clientes_toolbar"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/fragments_toolbar" />
 
                 <ImageView
-                    android:id="@+id/iv_fragment_clientes_perfil"
+                    android:id="@+id/iv_fragment_sl_clientes_perfil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -54,7 +54,7 @@
                     android:background="@drawable/fragment_ic_perfil_cliente" />
 
                 <ImageView
-                    android:id="@+id/iv_fragment_clientes_notificaciones"
+                    android:id="@+id/iv_fragment_sl_clientes_notificaciones"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -66,10 +66,10 @@
 
 
             <EditText
-                android:id="@+id/et_fragment_clientes_filtro"
+                android:id="@+id/et_fragment_sl_clientes_filtro"
                 android:layout_width="@dimen/fragment_clientes_filtro_w"
                 android:layout_height="@dimen/fragment_clientes_filtro_h"
-                android:layout_below="@+id/tb_fragment_clientes_toolbar"
+                android:layout_below="@+id/tb_fragment_sl_clientes_toolbar"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:autofillHints=""
@@ -80,13 +80,25 @@
                 android:textSize="@dimen/fragment_clientes_filtro_texto" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/lista_clientes"
+                android:id="@+id/lista_sl_clientes"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/et_fragment_clientes_filtro"
+                android:layout_below="@+id/et_fragment_sl_clientes_filtro"
                 android:layout_marginTop="20dp">
 
             </android.support.v7.widget.RecyclerView>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fb_fragment_sl_cliente_agregar_cliente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/fragment_sl_clientes_ic_agregar_cliente"
+                app:backgroundTint="@color/colorBitsafeBlue" />
+
 
         </RelativeLayout>
 

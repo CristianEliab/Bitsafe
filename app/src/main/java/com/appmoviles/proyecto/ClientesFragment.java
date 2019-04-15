@@ -64,7 +64,7 @@ public class ClientesFragment extends Fragment {
 
     private void agregarClientes() {
         for (Cliente cliente : clientes) {
-            adapter.agregarPersona(cliente);
+            adapter.agregarCliente(cliente);
         }
     }
 }

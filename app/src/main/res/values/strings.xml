@@ -48,4 +48,15 @@
     <string name="home_clientes_finanzas">Finanzas</string>
     <string name="home_clientes_planes">Planes</string>
     <string name="home_clientes_cuentas">Cuentas</string>
+    <string name="fragment_agregar_monto_toolbar">Agregar Monto</string>
+    <string name="fragment_agregar_monto_monto">0</string>
+    <string name="fragment_agregar_monto_guardar_monto">Guardar Monto</string>
+    <string name="fragment_sl_clientes_toolbar">Seleccionar Cliente</string>
+    <string name="fragment_agregar_fecha_toolbar">Fecha de Transacción</string>
+    <string name="fragment_agregar_fecha">Fecha: </string>
+    <string name="fragment_agregar_fecha_guardar_fecha">Guardar Fecha</string>
+    <string name="fragment_agregar_fecha_min_day">01/10/2019</string>
+    <string name="fragment_dt_clientes_toolbar">Cuenta:</string>
+    <string name="fragment_dt_clientes_guardarInfo">Guardar Info</string>
+
 </resources>

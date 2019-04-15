@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DatosClienteFragment">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+
+        <RelativeLayout
+            android:id="@+id/rl_fragment_clientes_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/tb_fragment_dt_clientes_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/aplicacion_toolbar_opciones"
+                android:background="@color/colorBitsafeBlue"
+                android:elevation="4dp">
+
+                <ImageView
+                    android:id="@+id/iv_fragment_dt_clientes_return"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
+                    android:background="@drawable/fragment_ic_return" />
+
+                <TextView
+                    android:id="@+id/tv_fragment_dt_clientes_texto_actividad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
+                    android:gravity="center"
+                    android:text="@string/fragment_dt_clientes_toolbar"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/fragments_toolbar" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_dt_clientes_perfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
+                    android:background="@drawable/fragment_ic_perfil_cliente" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_dt_clientes_notificaciones"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
+                    android:background="@drawable/fragment_ic_notificaciones_cliente" />
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_fragment_sl_clientes_registro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tb_fragment_dt_clientes_toolbar"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/fragment_clientes_bordes_registros"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_sl_cliente_registro_foto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/fragment_cliente_ic_foto_cliente" />
+
+                <TextView
+                    android:id="@+id/tv_sl_cliente_registro_nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/iv_cliente_registro_foto"
+                    android:layout_marginLeft="20dp"
+                    android:text="Nohra Villega"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_fragment_dt_clientes_bancos"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_below="@+id/ll_fragment_sl_clientes_registro"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="10dp">
+
+                <Spinner
+                    android:id="@+id/sp_datos_cliente_bancos"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.502"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.498"></Spinner>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_fragment_dt_clientes_cuentas"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_below="@+id/rl_fragment_dt_clientes_bancos"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="10dp">
+
+                <Spinner
+                    android:id="@+id/sp_datos_cliente_cuentas"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.502"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.498"></Spinner>
+
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_fragment_dt_cliente_guardar"
+                android:layout_width="@dimen/fragment_dt_cliente_guardar_w"
+                android:layout_height="@dimen/fragment_dt_cliente_guardar_h"
+                android:layout_below="@+id/rl_fragment_dt_clientes_cuentas"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/fragment_agregar_monto_figura_btn_guardar"
+                android:text="@string/fragment_dt_clientes_guardarInfo"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/fragment_agregar_fecha_guarda" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</FrameLayout>

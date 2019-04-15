@@ -13,8 +13,8 @@ public class Banco {
         this.icono = icono;
     }
 
-    public Banco(String icono) {
-        this.icono = icono;
+    public Banco(String nombre) {
+        this.nombre = nombre;
     }
 
 }

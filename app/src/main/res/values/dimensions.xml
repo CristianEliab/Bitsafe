@@ -8,6 +8,9 @@
     <dimen name="login_iv_icon_h">70dp</dimen>
     <dimen name="login_et_numero_celular_w">300dp</dimen>
     <dimen name="login_et_numero_celular_h">50dp</dimen>
+    <dimen name="fragment_agregar_monto_guardar_w">150dp</dimen>
+    <dimen name="fragment_agregar_monto_guardar_h">50dp</dimen>
+    <dimen name="fragment_agregar_monto_guarda">15sp</dimen>
     <dimen name="login_icon_borrar_w">60dp</dimen>
     <dimen name="login_icon_borrar_h">50dp</dimen>
     <dimen name="login_tv_registrarse_h">46dp</dimen>
@@ -41,6 +44,15 @@
     <dimen name="aplicacion_toolbar_opciones">60dp</dimen>
     <dimen name="aplicacion_margin_right_btn_perfil">60dp</dimen>
     <dimen name="aplicacion_margin_right_btn_notificaciones">20dp</dimen>
-    <dimen name="aplicacion_margin_left_text_fragment">30dp</dimen>
-    <dimen name="aplicacion_margin_left_btn_return">10dp</dimen>
+    <dimen name="aplicacion_margin_left_text_fragment">50dp</dimen>
+    <dimen name="aplicacion_margin_left_btn_return">20dp</dimen>
+    <dimen name="fragment_agregar_monto_et_agregar_monto_w">300dp</dimen>
+    <dimen name="fragment_agregar_monto_et_agregar_monto_h">50dp</dimen>
+    <dimen name="fragment_agregar_fecha_guardar_w">150dp</dimen>
+    <dimen name="fragment_agregar_fecha_guardar_h">50dp</dimen>
+    <dimen name="fragment_agregar_fecha_guarda">15sp</dimen>
+    <dimen name="fragment_dt_cliente_guardar_w">150dp</dimen>
+    <dimen name="fragment_dt_cliente_guardar_h">40dp</dimen>
+
+
 </resources>

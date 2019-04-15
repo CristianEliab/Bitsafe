@@ -46,7 +46,7 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
         return data.size();
     }
 
-    public void agregarPersona(Cliente cliente){
+    public void agregarCliente(Cliente cliente){
         data.add(cliente);
         notifyDataSetChanged();
     }
