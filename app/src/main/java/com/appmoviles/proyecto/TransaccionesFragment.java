@@ -1,6 +1,8 @@
 package com.appmoviles.proyecto;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -25,11 +27,17 @@ public class TransaccionesFragment extends Fragment {
     private SeleccionarClienteDestinoFragment seleccionarClienteDestinoFragment;
     private AgregarFechaFragment agregarFechaFragment;
 
+    private String monto;
+    private String nombre_cliente_origen;
+    private String nombre_cliente_destino;
+    private String fecha;
+
+    private SharedPreferences myPreferences;
+
 
     public TransaccionesFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,11 +56,37 @@ public class TransaccionesFragment extends Fragment {
         seleccionarClienteDestinoFragment = new SeleccionarClienteDestinoFragment();
         agregarFechaFragment = new AgregarFechaFragment();
 
+
         btn_fragment_transacciones_agregar_monto = v.findViewById(R.id.btn_fragment_transacciones_agregar_monto);
         btn_fragment_transacciones_clientes_origen = v.findViewById(R.id.btn_fragment_transacciones_clientes_origen);
         btn_fragment_transacciones_clientes_destino = v.findViewById(R.id.btn_fragment_transacciones_clientes_destino);
         btn_fragment_transacciones_agregar_fecha = v.findViewById(R.id.btn_fragment_transacciones_agregar_fecha);
         btn_fragment_transacciones_descripcion_clientes = v.findViewById(R.id.btn_fragment_transacciones_descripcion_clientes);
+
+        // Con el método getArguments() obtengo la información enviada por parametro.
+        savedInstanceState = this.getArguments();
+        if (savedInstanceState != null) {
+
+            myPreferences
+                    = (SharedPreferences) PreferenceManager.getDefaultSharedPreferences(getContext());
+
+            monto = savedInstanceState.getString(Constantes.MONTO_KEY, "" + monto);
+            nombre_cliente_origen = savedInstanceState.getString(Constantes.CLIENTE_ORIGEN_KEY_NOMBRE, "" + nombre_cliente_origen);
+            nombre_cliente_destino = savedInstanceState.getString(Constantes.CLIENTE_DESTINO_KEY_NOMBRE, ""+ nombre_cliente_destino);
+            fecha = savedInstanceState.getString(Constantes.FECHA_KEY, "" + fecha);
+        } else {
+            monto = Constantes.MONTO_DEFAULT;
+            nombre_cliente_origen = Constantes.CLIENTE_ORIGEN_DEFAULT_NOMBRE;
+            nombre_cliente_destino = Constantes.CLIENTE_DESTINO_DEFAULT_NOMBRE;
+            fecha = Constantes.FECHA_DEFAULT;
+        }
+
+
+        btn_fragment_transacciones_agregar_monto.setHint(monto);
+        btn_fragment_transacciones_clientes_origen.setHint(nombre_cliente_origen);
+        btn_fragment_transacciones_clientes_destino.setHint(nombre_cliente_destino);
+        btn_fragment_transacciones_agregar_fecha.setHint(fecha);
+
 
         btn_fragment_transacciones_clientes_origen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,43 +128,7 @@ public class TransaccionesFragment extends Fragment {
             }
         });
 
-        actualizarVariebles();
-
         return v;
-    }
-
-    private void actualizarVariebles() {
-        // Con el método getArguments() obtengo la información enviada por parametro.
-        String monto = "";
-        String cliente_origen = "";
-        String cliente_destino = "";
-        String fecha = "";
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            // monto
-            monto = bundle.getString(Constantes.MONTO_KEY);
-            // Cliente Origen
-            cliente_origen = bundle.getString(Constantes.CLIENTE_ORIGEN_KEY_NOMBRE);
-            // Cliente Destino
-            cliente_destino = bundle.getString(Constantes.CLIENTE_DESTINO_KEY_NOMBRE);
-            // Fecha
-            fecha = bundle.getString(Constantes.FECHA_KEY);
-        }
-        if (monto != null && !monto.trim().equals("")) {
-            btn_fragment_transacciones_agregar_monto.setHint(monto);
-        }
-
-        if (cliente_origen != null && !cliente_origen.equals("")) {
-            btn_fragment_transacciones_clientes_origen.setHint(cliente_origen);
-        }
-
-        if (cliente_destino != null && !cliente_destino.equals("")) {
-            btn_fragment_transacciones_clientes_destino.setHint(cliente_destino);
-        }
-
-        if (fecha != null && !fecha.equals("")) {
-            btn_fragment_transacciones_agregar_fecha.setHint(fecha);
-        }
     }
 
 }

@@ -1,8 +1,10 @@
 package com.appmoviles.proyecto;
 
+import android.content.SharedPreferences;
 import android.icu.text.DecimalFormat;
 import android.icu.text.NumberFormat;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -39,6 +41,8 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
 
     private TransaccionesFragment transaccionesFragment;
 
+    private SharedPreferences myPreferences;
+
 
     public AgregarMontoFragment() {
         // Required empty public constructor
@@ -55,6 +59,9 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_agregar_monto, container, false);
+
+        myPreferences
+                = (SharedPreferences) PreferenceManager.getDefaultSharedPreferences(getContext());
 
         iv_fragment_agregar_monto_return = v.findViewById(R.id.iv_fragment_agregar_monto_return);
         btn_fragment_agregar_monto_guardar_monto = v.findViewById(R.id.btn_fragment_agregar_monto_guardar_monto);
@@ -77,6 +84,10 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
                 transaccionesFragment = new TransaccionesFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
+                //Guardar el monto en la app.
+                SharedPreferences.Editor myEditor = myPreferences.edit();
+                myEditor.putString(Constantes.MONTO_KEY, monto_transaccion);
+                myEditor.commit();
                 // Utilizado para enviar variables entre dos fragments
                 Bundle parametro = new Bundle();
                 parametro.putString(Constantes.MONTO_KEY, monto_transaccion);

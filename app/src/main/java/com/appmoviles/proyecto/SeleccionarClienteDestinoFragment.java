@@ -1,9 +1,11 @@
 package com.appmoviles.proyecto;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -32,6 +34,9 @@ public class SeleccionarClienteDestinoFragment extends Fragment implements Adapt
 
     private ImageView iv_fragment_sl_clientes_return;
 
+    private SharedPreferences myPreferences;
+
+
     public SeleccionarClienteDestinoFragment() {
         // Required empty public constructor
     }
@@ -46,7 +51,8 @@ public class SeleccionarClienteDestinoFragment extends Fragment implements Adapt
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_seleccionar_cliente_destino, container, false);
-
+        myPreferences
+                = (SharedPreferences) PreferenceManager.getDefaultSharedPreferences(getContext());
 
         clientes = new ArrayList<>();
 
