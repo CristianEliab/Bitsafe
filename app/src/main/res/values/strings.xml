@@ -9,7 +9,8 @@
     <string name="registro_nombre">Nombre</string>
     <string name="registro_cedula">Cédula</string>
     <string name="registro_celular">Celular</string>
-    <string name="registro_datos_opcionales">Datos opcionales</string>
+    <string name="registro_contrasenia">Contraseña</string>
+    <string name="registro_contrasenia_confirmar">Confirmar contraseña</string>
     <string name="registro_registrarse">Registrarse</string>
     <string name="registro_registrarse_facebook">Registrarse con Facebook</string>
     <string name="registro_registrarse_google">Registrarse con Google</string>

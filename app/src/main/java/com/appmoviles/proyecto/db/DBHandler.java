@@ -135,21 +135,22 @@ public class DBHandler extends SQLiteOpenHelper {
     // ---------------------------------------------------------------------------------------------
     //TABLA PLAN_AHORRO
 
-    /*public static final String TABLA_USUARIOS = "usuarios";
-    public static final String USUARIO_ID = "userid";
-    public static final String USUARIO_NOMBRE = "nombre";
-    public static final String USUARIO_FECHA = "fecha";
-    public static final String USUARIO_GENERO = "genero";
-    public static final String USUARIO_TELEFONO = "telefono";
-    public static final String USUARIO_ESTADO_ID = "estadoid";
-    public static final String USUARIO_LOGIN_ID = "loginid";
-    public static final String USUARIO_CONFIGURACION_ID = "configuracionid";
-    public static final String CREATE_TABLA_USUARIOS = "CREATE TABLE " +
-            "" + TABLA_USUARIOS + " (" + USUARIO_ID + " TEXT PRIMARY KEY, " +
-            "" + USUARIO_NOMBRE + " TEXT, " + USUARIO_FECHA + " TEXT, " +
-            "" + USUARIO_GENERO + " TEXT, " + USUARIO_TELEFONO + " TEXT, " +
-            "" + USUARIO_ESTADO_ID + " TEXT, " + USUARIO_LOGIN_ID + "TEXT, " +
-            "" + USUARIO_CONFIGURACION_ID + "TEXT)";*/
+    public static final String TABLA_PLAN_AHORRO = "planahorro";
+    public static final String PLAN_AHORRO_ID = "planAhorroid";
+    public static final String PLAN_AHORRO_USUARIO_ID = "usuarioahorro";
+    public static final String PLAN_AHORRO_FECHA_FINAL = "fechafinal";
+    public static final String PLAN_AHORRO_FECHA_INICIO = "fechainicio";
+    public static final String PLAN_AHORRO_CUOTAS = "cuotas";
+    public static final String PLAN_AHORRO_MONTO = "monto";
+    public static final String PLAN_AHORRO_PERIODO = "periodo";
+    public static final String PLAN_AHORRO_DESCRIPCION = "descripcion";
+    public static final String PLAN_AHORRO_ESTADO = "estadoplan";
+    public static final String CREATE_TABLA_PLAN_AHORRO = "CREATE TABLE " +
+            "" + TABLA_PLAN_AHORRO + " (" + PLAN_AHORRO_ID + " TEXT PRIMARY KEY, " +
+            "" + PLAN_AHORRO_USUARIO_ID + " TEXT, " + PLAN_AHORRO_FECHA_FINAL + " TEXT, " +
+            "" + PLAN_AHORRO_FECHA_INICIO + " TEXT, " + PLAN_AHORRO_CUOTAS + " TEXT, " +
+            "" + PLAN_AHORRO_MONTO + " TEXT, " + PLAN_AHORRO_PERIODO + "TEXT, " +
+            "" + PLAN_AHORRO_DESCRIPCION + "TEXT, " + PLAN_AHORRO_ESTADO + "TEXT)";
 
     // ---------------------------------------------------------------------------------------------
     //TABLA ROLES
@@ -214,21 +215,21 @@ public class DBHandler extends SQLiteOpenHelper {
     // ---------------------------------------------------------------------------------------------
     //TRANSACCION
 
-        /*public static final String TABLA_USUARIOS = "usuarios";
-    public static final String USUARIO_ID = "userid";
-    public static final String USUARIO_NOMBRE = "nombre";
-    public static final String USUARIO_FECHA = "fecha";
-    public static final String USUARIO_GENERO = "genero";
-    public static final String USUARIO_TELEFONO = "telefono";
-    public static final String USUARIO_ESTADO_ID = "estadoid";
-    public static final String USUARIO_LOGIN_ID = "loginid";
-    public static final String USUARIO_CONFIGURACION_ID = "configuracionid";
-    public static final String CREATE_TABLA_USUARIOS = "CREATE TABLE " +
-            "" + TABLA_USUARIOS + " (" + USUARIO_ID + " TEXT PRIMARY KEY, " +
-            "" + USUARIO_NOMBRE + " TEXT, " + USUARIO_FECHA + " TEXT, " +
-            "" + USUARIO_GENERO + " TEXT, " + USUARIO_TELEFONO + " TEXT, " +
-            "" + USUARIO_ESTADO_ID + " TEXT, " + USUARIO_LOGIN_ID + "TEXT, " +
-            "" + USUARIO_CONFIGURACION_ID + "TEXT)";*/
+    public static final String TABLA_TRANSACCION = "transaccion";
+    public static final String TRANSACCION_ID = "transaccionid";
+    public static final String TRANSACCION_CUENTA_ORIGEN_ID = "cuentaorigenid";
+    public static final String TRANSACCION_CUENTA_DESTINO_ID = "cuentadestinoid";
+    public static final String TRANSACCION_TIPO_TRANSACCION_ID = "tipotransaccionid";
+    public static final String TRANSACCION_CATEGORIA_ID = "categoriaid";
+    public static final String TRANSACCION_DESCRIPCION = "descripcion";
+    public static final String TRANSACCION_MONTO_TRANSACCION = "montotransaccion";
+    public static final String TRANSACCION_FECHA_TRANSACCION = "fechatransaccion";
+    public static final String CREATE_TABLA_TRANSACCION = "CREATE TABLE " +
+            "" + TABLA_TRANSACCION + " (" + TRANSACCION_ID + " TEXT PRIMARY KEY, " +
+            "" + TRANSACCION_CUENTA_ORIGEN_ID + " TEXT, " + TRANSACCION_CUENTA_DESTINO_ID + " TEXT, " +
+            "" + TRANSACCION_TIPO_TRANSACCION_ID + " TEXT, " + TRANSACCION_CATEGORIA_ID + " TEXT, " +
+            "" + TRANSACCION_DESCRIPCION + " TEXT, " + TRANSACCION_MONTO_TRANSACCION + "TEXT, " +
+            "" + TRANSACCION_FECHA_TRANSACCION + "TEXT)";
 
 
     public static synchronized DBHandler getInstance(Context context) {

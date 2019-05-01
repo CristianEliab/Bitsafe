@@ -11,6 +11,12 @@ public class Usuario {
     private String loginID;
     private String configuracionID;
 
+    //
+    private String cedula;
+    private String ubicacion;
+    private String correo;
+    private String contrasenia;
+
     public Usuario(String usuarioID, String nombre, String fecha_nacimiento, String telefono, String genero, String estadoUsuarioID, String loginID, String configuracionID) {
         this.usuarioID = usuarioID;
         this.nombre = nombre;
@@ -20,6 +26,15 @@ public class Usuario {
         this.estadoUsuarioID = estadoUsuarioID;
         this.loginID = loginID;
         this.configuracionID = configuracionID;
+    }
+
+    public Usuario(String usuarioID, String nombre, String cedula, String telefono, String correo, String ubicacion) {
+        this.usuarioID = usuarioID;
+        this.nombre = nombre;
+        this.cedula = cedula;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.ubicacion = ubicacion;
     }
 
     public Usuario() {
@@ -87,5 +102,29 @@ public class Usuario {
 
     public void setConfiguracionID(String configuracionID) {
         this.configuracionID = configuracionID;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 }

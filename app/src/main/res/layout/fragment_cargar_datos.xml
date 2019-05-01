@@ -6,70 +6,79 @@
     android:layout_height="match_parent"
     tools:context=".CargarDatosFragment">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
 
         <RelativeLayout
-            android:id="@+id/tb_fragment_carga_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/aplicacion_toolbar_opciones"
-            android:background="@color/colorBitsafeBlue"
-            android:elevation="4dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/tb_fragment_carga_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/aplicacion_toolbar_opciones"
+                android:background="@color/colorBitsafeBlue"
+                android:elevation="4dp">
+
+                <ImageView
+                    android:id="@+id/iv_fragment_carga_return"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
+                    android:background="@drawable/fragment_ic_return"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_fragment_carga_actividad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
+                    android:gravity="center"
+                    android:text="@string/fragment_carga_toolbar"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/fragments_toolbar" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_carga_perfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
+                    android:background="@drawable/fragment_ic_perfil_cliente" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_carga_notificaciones"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
+                    android:background="@drawable/fragment_ic_notificaciones_cliente" />
+
+            </RelativeLayout>
+
 
             <ImageView
-                android:id="@+id/iv_fragment_carga_return"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/tb_fragment_carga_toolbar"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
-                android:background="@drawable/fragment_ic_return"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/tv_fragment_carga_actividad"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
-                android:gravity="center"
-                android:text="@string/fragment_carga_toolbar"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/fragments_toolbar" />
-
-            <ImageView
-                android:id="@+id/iv_fragment_carga_perfil"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
-                android:background="@drawable/fragment_ic_perfil_cliente" />
-
-            <ImageView
-                android:id="@+id/iv_fragment_carga_notificaciones"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
-                android:background="@drawable/fragment_ic_notificaciones_cliente" />
+                android:layout_marginTop="300dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/fragment_carga_ic_upload" />
 
         </RelativeLayout>
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tb_fragment_carga_toolbar"
-            android:layout_alignParentTop="true"
-            android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="300dp"
-            android:background="@drawable/fragment_carga_ic_upload" />
-    </RelativeLayout>
+    </ScrollView>
 
 </FrameLayout>

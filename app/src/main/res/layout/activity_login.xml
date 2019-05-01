@@ -1,170 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <RelativeLayout
-        android:id="@+id/rl_login_icon_bitsafe"
-        android:layout_width="@dimen/login_rl_panel_w"
-        android:layout_height="@dimen/login_rl_panel_h"
-        android:background="@color/colorBitsafeBlue">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/iv_login_icon_bitsafe"
-            android:layout_width="@dimen/login_iv_icon_w"
-            android:layout_height="@dimen/login_iv_icon_h"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/aplicacion_ic_bitsafe_icon" />
+        <RelativeLayout
+            android:id="@+id/rl_login_icon_bitsafe"
+            android:layout_width="@dimen/login_rl_panel_w"
+            android:layout_height="@dimen/login_rl_panel_h"
+            android:background="@color/colorBitsafeBlue">
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_login_icon_bitsafe"
+                android:layout_width="@dimen/login_iv_icon_w"
+                android:layout_height="@dimen/login_iv_icon_h"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/aplicacion_ic_bitsafe_icon" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rl_login_icon_bitsafe">
+        </RelativeLayout>
 
-        <EditText
-            android:id="@+id/et_login_numero_celular"
-            android:layout_width="@dimen/login_et_numero_celular_w"
-            android:layout_height="@dimen/login_et_numero_celular_h"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/registro_figura_texto_redondo"
-            android:digits="1234567890"
-            android:enabled="false"
-            android:gravity="center"
-            android:hint="@string/login_celular_numero"
-            android:imeOptions="actionDone"
-            android:inputType="phone"
-            android:singleLine="true"
-            android:textColorHint="@color/colorBitsafeBlue" />
-
-        <GridLayout
-            android:id="@+id/gl_login_teclado"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/et_login_numero_celular"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:columnCount="3"
-            android:orientation="horizontal">
+            android:layout_below="@+id/rl_login_icon_bitsafe">
 
-
-            <Button
-                android:id="@+id/btn_login_uno_celular"
-                android:layout_margin="2dp"
-                android:background="@drawable/registro_figura_texto_redondo"
-                android:text="1"
-                android:textColor="@color/colorBitsafeBlue"
-                android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-            <Button
-                    android:id="@+id/btn_login_dos_celular"
-                android:layout_margin="2dp"
-                android:background="@drawable/registro_figura_texto_redondo"
-                android:text="2"
-                android:textColor="@color/colorBitsafeBlue"
-                android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-
-            <Button
-                android:id="@+id/btn_login_tres_celular"
-                android:layout_margin="2dp"
-                android:background="@drawable/registro_figura_texto_redondo"
-                android:text="3"
-                android:textColor="@color/colorBitsafeBlue"
-                android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-            <Button
-                android:id="@+id/btn_login_cuatro_celular"
-                android:layout_margin="2dp"
-                android:background="@drawable/registro_figura_texto_redondo"
-                android:text="4"
-                android:textColor="@color/colorBitsafeBlue"
-                android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-            <Button
-                android:id="@+id/btn_login_cinco_celular"
-                android:layout_margin="2dp"
-                android:background="@drawable/registro_figura_texto_redondo"
-                android:text="5"
-                android:textColor="@color/colorBitsafeBlue"
-                android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-            <Button
-                android:id="@+id/btn_login_seis_celular"
-                android:layout_margin="2dp"
-                android:background="@drawable/registro_figura_texto_redondo"
-                android:text="6"
-                android:textColor="@color/colorBitsafeBlue"
-                android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-            <Button
-                android:id="@+id/btn_login_siete_celular"
-                android:layout_margin="2dp"
-                android:background="@drawable/registro_figura_texto_redondo"
-                android:text="7"
-                android:textColor="@color/colorBitsafeBlue"
-                android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-
-            <Button
-                android:id="@+id/btn_login_ocho_celular"
-                android:layout_margin="2dp"
-                android:background="@drawable/registro_figura_texto_redondo"
-                android:text="8"
-                android:textColor="@color/colorBitsafeBlue"
-                android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-            <Button
-                android:id="@+id/btn_login_nueve_celular"
-                android:layout_margin="2dp"
-                android:background="@drawable/registro_figura_texto_redondo"
-                android:text="9"
-                android:textColor="@color/colorBitsafeBlue"
-                android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-            <Button
-                android:id="@+id/btn_login_emply_celular"
-                android:enabled="false"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/btn_login_cero_celular"
-                android:layout_margin="2dp"
-                android:background="@drawable/registro_figura_texto_redondo"
-                android:text="0"
-                android:textColor="@color/colorBitsafeBlue"
-                android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-            <Button
-                android:id="@+id/btn_login_borrar_celular"
-                android:layout_width="@dimen/login_icon_borrar_w"
-                android:layout_height="@dimen/login_icon_borrar_h"
-                android:layout_row="0"
+            <EditText
+                android:id="@+id/et_login_numero_celular"
+                android:layout_width="@dimen/login_et_numero_celular_w"
+                android:layout_height="@dimen/login_et_numero_celular_h"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
-                android:background="@mipmap/ic_delete"
-                android:gravity="center|right"
-                android:textColor="@color/colorBitsafeBlue" />
+                android:layout_marginTop="100dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/registro_figura_texto_redondo"
+                android:digits="1234567890"
+                android:enabled="false"
+                android:gravity="center"
+                android:hint="@string/login_celular_numero"
+                android:imeOptions="actionDone"
+                android:inputType="phone"
+                android:singleLine="true"
+                android:textColorHint="@color/colorBitsafeBlue" />
 
-        </GridLayout>
+            <GridLayout
+                android:id="@+id/gl_login_teclado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_login_numero_celular"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:columnCount="3"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_login_registrarse"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/login_tv_registrarse_h"
-            android:layout_alignBottom="@+id/gl_login_teclado"
-            android:layout_alignParentBottom="true"
-            android:alpha="0.60"
-            android:background="@color/colorBitsafeBlue"
-            android:gravity="center"
-            android:text="@string/login_celular_registro"
-            android:textColor="@color/colorWhite" />
 
+                <Button
+                    android:id="@+id/btn_login_uno_celular"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/registro_figura_texto_redondo"
+                    android:text="1"
+                    android:textColor="@color/colorBitsafeBlue"
+                    android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+                <Button
+                    android:id="@+id/btn_login_dos_celular"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/registro_figura_texto_redondo"
+                    android:text="2"
+                    android:textColor="@color/colorBitsafeBlue"
+                    android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+
+                <Button
+                    android:id="@+id/btn_login_tres_celular"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/registro_figura_texto_redondo"
+                    android:text="3"
+                    android:textColor="@color/colorBitsafeBlue"
+                    android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+                <Button
+                    android:id="@+id/btn_login_cuatro_celular"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/registro_figura_texto_redondo"
+                    android:text="4"
+                    android:textColor="@color/colorBitsafeBlue"
+                    android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+                <Button
+                    android:id="@+id/btn_login_cinco_celular"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/registro_figura_texto_redondo"
+                    android:text="5"
+                    android:textColor="@color/colorBitsafeBlue"
+                    android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+                <Button
+                    android:id="@+id/btn_login_seis_celular"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/registro_figura_texto_redondo"
+                    android:text="6"
+                    android:textColor="@color/colorBitsafeBlue"
+                    android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+                <Button
+                    android:id="@+id/btn_login_siete_celular"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/registro_figura_texto_redondo"
+                    android:text="7"
+                    android:textColor="@color/colorBitsafeBlue"
+                    android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+
+                <Button
+                    android:id="@+id/btn_login_ocho_celular"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/registro_figura_texto_redondo"
+                    android:text="8"
+                    android:textColor="@color/colorBitsafeBlue"
+                    android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+                <Button
+                    android:id="@+id/btn_login_nueve_celular"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/registro_figura_texto_redondo"
+                    android:text="9"
+                    android:textColor="@color/colorBitsafeBlue"
+                    android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+                <Button
+                    android:id="@+id/btn_login_emply_celular"
+                    android:enabled="false"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btn_login_cero_celular"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/registro_figura_texto_redondo"
+                    android:text="0"
+                    android:textColor="@color/colorBitsafeBlue"
+                    android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+                <Button
+                    android:id="@+id/btn_login_borrar_celular"
+                    android:layout_width="@dimen/login_icon_borrar_w"
+                    android:layout_height="@dimen/login_icon_borrar_h"
+                    android:layout_row="0"
+                    android:layout_marginLeft="20dp"
+                    android:background="@mipmap/ic_delete"
+                    android:gravity="center|right"
+                    android:textColor="@color/colorBitsafeBlue" />
+
+            </GridLayout>
+
+            <TextView
+                android:id="@+id/tv_login_registrarse"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/login_tv_registrarse_h"
+                android:layout_alignBottom="@+id/gl_login_teclado"
+                android:layout_alignParentBottom="true"
+                android:alpha="0.60"
+                android:background="@color/colorBitsafeBlue"
+                android:gravity="center"
+                android:text="@string/login_celular_registro"
+                android:textColor="@color/colorWhite" />
+
+
+        </RelativeLayout>
 
     </RelativeLayout>
-
-</RelativeLayout>
+</ScrollView>

@@ -6,119 +6,129 @@
     android:layout_height="match_parent"
     tools:context=".EstadisticasFragment">
 
-    <RelativeLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <RelativeLayout
-            android:id="@+id/tb_fragment_estadisticas_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/aplicacion_toolbar_opciones"
-            android:background="@color/colorBitsafeBlue"
-            android:elevation="4dp">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/iv_fragment_estadisticas_return"
+            <RelativeLayout
+                android:id="@+id/tb_fragment_estadisticas_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/aplicacion_toolbar_opciones"
+                android:background="@color/colorBitsafeBlue"
+                android:elevation="4dp">
+
+                <ImageView
+                    android:id="@+id/iv_fragment_estadisticas_return"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
+                    android:background="@drawable/fragment_ic_return"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_fragment_clientes_texto_actividad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
+                    android:gravity="center"
+                    android:text="@string/fragment_estadisticas_toolbar"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/fragments_toolbar" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_estadisticas_perfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
+                    android:background="@drawable/fragment_ic_perfil_cliente" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_estadisticas_notificaciones"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
+                    android:background="@drawable/fragment_ic_notificaciones_cliente" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_fragment_estadisticas_panel_estadisticas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
-                android:background="@drawable/fragment_ic_return"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/tv_fragment_clientes_texto_actividad"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
-                android:gravity="center"
-                android:layout_centerVertical="true"
-                android:text="@string/fragment_estadisticas_toolbar"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/fragments_toolbar" />
-
-            <ImageView
-                android:id="@+id/iv_fragment_estadisticas_perfil"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
-                android:background="@drawable/fragment_ic_perfil_cliente" />
-
-            <ImageView
-                android:id="@+id/iv_fragment_estadisticas_notificaciones"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
-                android:background="@drawable/fragment_ic_notificaciones_cliente" />
-
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/rl_fragment_estadisticas_panel_estadisticas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tb_fragment_estadisticas_toolbar"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginRight="10dp">
-
-            <ImageView
-                android:id="@+id/iv_fragment_estadisticas_est"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/tb_fragment_estadisticas_toolbar"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="50dp"
-                android:background="@drawable/fragment_estadisticas_ic_estadisticas"
-                android:padding="5dp" />
+                android:layout_marginRight="10dp">
 
-            <ImageView
-                android:id="@+id/iv_fragment_estadisticas_back_est"
+                <ImageView
+                    android:id="@+id/iv_fragment_estadisticas_est"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/fragment_estadisticas_ic_estadisticas"
+                    android:padding="5dp" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_estadisticas_back_est"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/iv_fragment_estadisticas_est"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/fragment_estadisticas_ic_back" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_estadisticas_next_est"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/iv_fragment_estadisticas_est"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/fragment_estadisticas_ic_right_arrow" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_fragment_estadisticas_panel_descripcion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/iv_fragment_estadisticas_est"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/fragment_estadisticas_ic_back" />
+                android:layout_below="@+id/rl_fragment_estadisticas_panel_estadisticas"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginRight="20dp">
 
-            <ImageView
-                android:id="@+id/iv_fragment_estadisticas_next_est"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_alignRight="@+id/iv_fragment_estadisticas_est"
-                android:background="@drawable/fragment_estadisticas_ic_right_arrow" />
+                <EditText
+                    android:id="@+id/et_fragment_estadisticas_descripcion_grafica"
+                    android:layout_width="@dimen/fragment_estadisticas_descripcion_w"
+                    android:layout_height="@dimen/fragment_estadisticas_descripcion_h"
+                    android:background="@drawable/fragment_estadisticas_texto_descripcion"
+                    android:gravity="left"
+                    android:hint="@string/fragment_estadisticas_descripcion"
+                    android:textColorHint="@color/colorWhite"
+                    android:textSize="@dimen/fragment_estadisticas_descripcion" />
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl_fragment_estadisticas_panel_descripcion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_fragment_estadisticas_panel_estadisticas"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="20dp">
-
-            <EditText
-                android:id="@+id/et_fragment_estadisticas_descripcion_grafica"
-                android:layout_width="@dimen/fragment_estadisticas_descripcion_w"
-                android:layout_height="@dimen/fragment_estadisticas_descripcion_h"
-                android:background="@drawable/fragment_estadisticas_texto_descripcion"
-                android:gravity="left"
-                android:hint="@string/fragment_estadisticas_descripcion"
-                android:textColorHint="@color/colorWhite"
-                android:textSize="@dimen/fragment_estadisticas_descripcion" />
+            </RelativeLayout>
 
         </RelativeLayout>
+    </ScrollView>
 
-    </RelativeLayout>
 
 </FrameLayout>

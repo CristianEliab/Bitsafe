@@ -5,209 +5,217 @@
     android:layout_height="match_parent"
     tools:context=".AgregarMontoFragment">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <RelativeLayout
-            android:id="@+id/tb_fragment_agregar_monto_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/aplicacion_toolbar_opciones"
-            android:background="@color/colorBitsafeBlue"
-            android:elevation="4dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/iv_fragment_agregar_monto_return"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
-                android:background="@drawable/fragment_ic_return" />
+            <RelativeLayout
+                android:id="@+id/tb_fragment_agregar_monto_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/aplicacion_toolbar_opciones"
+                android:background="@color/colorBitsafeBlue"
+                android:elevation="4dp">
 
-            <TextView
-                android:id="@+id/tv_fragment_agregar_monto_texto_actividad"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/iv_fragment_agregar_monto_return"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
+                    android:background="@drawable/fragment_ic_return" />
+
+                <TextView
+                    android:id="@+id/tv_fragment_agregar_monto_texto_actividad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
+                    android:gravity="center"
+                    android:text="@string/fragment_agregar_monto_toolbar"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/fragments_toolbar" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_agregar_monto_perfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
+                    android:background="@drawable/fragment_ic_perfil_cliente" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_agregar_monto_notificaciones"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
+                    android:background="@drawable/fragment_ic_notificaciones_cliente" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
-                android:gravity="center"
-                android:text="@string/fragment_agregar_monto_toolbar"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/fragments_toolbar" />
+                android:layout_below="@+id/tb_fragment_agregar_monto_toolbar">
 
-            <ImageView
-                android:id="@+id/iv_fragment_agregar_monto_perfil"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
-                android:background="@drawable/fragment_ic_perfil_cliente" />
-
-            <ImageView
-                android:id="@+id/iv_fragment_agregar_monto_notificaciones"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
-                android:background="@drawable/fragment_ic_notificaciones_cliente" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/tb_fragment_agregar_monto_toolbar">
-
-            <EditText
-                android:id="@+id/et_agregar_monto_monto"
-                android:layout_width="@dimen/fragment_agregar_monto_et_agregar_monto_w"
-                android:layout_height="@dimen/fragment_agregar_monto_et_agregar_monto_h"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="100dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/registro_figura_texto_redondo"
-                android:digits="1234567890"
-                android:enabled="false"
-                android:gravity="center"
-                android:hint="@string/fragment_agregar_monto_monto"
-                android:imeOptions="actionDone"
-                android:inputType="numberDecimal"
-                android:singleLine="true"
-                android:textColorHint="@color/colorBitsafeBlue"
-                android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-            <GridLayout
-                android:id="@+id/gl_agregar_monto_teclado"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/et_agregar_monto_monto"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
-                android:columnCount="3"
-                android:orientation="horizontal">
-
-
-                <Button
-                    android:id="@+id/btn_agregar_monto_uno"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/registro_figura_texto_redondo"
-                    android:text="1"
-                    android:textColor="@color/colorBitsafeBlue"
-                    android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-                <Button
-                    android:id="@+id/btn_agregar_monto_dos"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/registro_figura_texto_redondo"
-                    android:text="2"
-                    android:textColor="@color/colorBitsafeBlue"
-                    android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-
-                <Button
-                    android:id="@+id/btn_agregar_monto_tres"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/registro_figura_texto_redondo"
-                    android:text="3"
-                    android:textColor="@color/colorBitsafeBlue"
-                    android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-                <Button
-                    android:id="@+id/btn_agregar_monto_cuatro"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/registro_figura_texto_redondo"
-                    android:text="4"
-                    android:textColor="@color/colorBitsafeBlue"
-                    android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-                <Button
-                    android:id="@+id/btn_agregar_monto_cinco"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/registro_figura_texto_redondo"
-                    android:text="5"
-                    android:textColor="@color/colorBitsafeBlue"
-                    android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-                <Button
-                    android:id="@+id/btn_agregar_monto_seis"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/registro_figura_texto_redondo"
-                    android:text="6"
-                    android:textColor="@color/colorBitsafeBlue"
-                    android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-                <Button
-                    android:id="@+id/btn_agregar_monto_siete"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/registro_figura_texto_redondo"
-                    android:text="7"
-                    android:textColor="@color/colorBitsafeBlue"
-                    android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-
-                <Button
-                    android:id="@+id/btn_agregar_monto_ocho"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/registro_figura_texto_redondo"
-                    android:text="8"
-                    android:textColor="@color/colorBitsafeBlue"
-                    android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-                <Button
-                    android:id="@+id/btn_agregar_monto_nueve"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/registro_figura_texto_redondo"
-                    android:text="9"
-                    android:textColor="@color/colorBitsafeBlue"
-                    android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-                <Button
-                    android:id="@+id/btn_agregar_monto_emply"
-                    android:enabled="false"
-                    android:visibility="gone" />
-
-                <Button
-                    android:id="@+id/btn_agregar_monto_cero"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/registro_figura_texto_redondo"
-                    android:text="0"
-                    android:textColor="@color/colorBitsafeBlue"
-                    android:textSize="@dimen/login_btn_tamanio_numeros" />
-
-                <Button
-                    android:id="@+id/btn_agregar_monto_borrar"
-                    android:layout_width="@dimen/login_icon_borrar_w"
-                    android:layout_height="@dimen/login_icon_borrar_h"
-                    android:layout_row="0"
+                <EditText
+                    android:id="@+id/et_agregar_monto_monto"
+                    android:layout_width="@dimen/fragment_agregar_monto_et_agregar_monto_w"
+                    android:layout_height="@dimen/fragment_agregar_monto_et_agregar_monto_h"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginLeft="20dp"
-                    android:background="@mipmap/ic_delete"
-                    android:gravity="center|right"
-                    android:textColor="@color/colorBitsafeBlue" />
+                    android:layout_marginTop="100dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/registro_figura_texto_redondo"
+                    android:digits="1234567890"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:hint="@string/fragment_agregar_monto_monto"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true"
+                    android:textColorHint="@color/colorBitsafeBlue"
+                    android:textSize="@dimen/login_btn_tamanio_numeros" />
 
-            </GridLayout>
+                <GridLayout
+                    android:id="@+id/gl_agregar_monto_teclado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/et_agregar_monto_monto"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp"
+                    android:columnCount="3"
+                    android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_fragment_agregar_monto_guardar_monto"
-                android:layout_width="@dimen/fragment_agregar_monto_guardar_w"
-                android:layout_height="@dimen/fragment_agregar_monto_guardar_h"
-                android:layout_below="@+id/gl_agregar_monto_teclado"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/fragment_agregar_monto_figura_btn_guardar"
-                android:text="@string/fragment_agregar_monto_guardar_monto"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/fragment_agregar_monto_guarda" />
+
+                    <Button
+                        android:id="@+id/btn_agregar_monto_uno"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/registro_figura_texto_redondo"
+                        android:text="1"
+                        android:textColor="@color/colorBitsafeBlue"
+                        android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+                    <Button
+                        android:id="@+id/btn_agregar_monto_dos"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/registro_figura_texto_redondo"
+                        android:text="2"
+                        android:textColor="@color/colorBitsafeBlue"
+                        android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+
+                    <Button
+                        android:id="@+id/btn_agregar_monto_tres"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/registro_figura_texto_redondo"
+                        android:text="3"
+                        android:textColor="@color/colorBitsafeBlue"
+                        android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+                    <Button
+                        android:id="@+id/btn_agregar_monto_cuatro"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/registro_figura_texto_redondo"
+                        android:text="4"
+                        android:textColor="@color/colorBitsafeBlue"
+                        android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+                    <Button
+                        android:id="@+id/btn_agregar_monto_cinco"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/registro_figura_texto_redondo"
+                        android:text="5"
+                        android:textColor="@color/colorBitsafeBlue"
+                        android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+                    <Button
+                        android:id="@+id/btn_agregar_monto_seis"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/registro_figura_texto_redondo"
+                        android:text="6"
+                        android:textColor="@color/colorBitsafeBlue"
+                        android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+                    <Button
+                        android:id="@+id/btn_agregar_monto_siete"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/registro_figura_texto_redondo"
+                        android:text="7"
+                        android:textColor="@color/colorBitsafeBlue"
+                        android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+
+                    <Button
+                        android:id="@+id/btn_agregar_monto_ocho"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/registro_figura_texto_redondo"
+                        android:text="8"
+                        android:textColor="@color/colorBitsafeBlue"
+                        android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+                    <Button
+                        android:id="@+id/btn_agregar_monto_nueve"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/registro_figura_texto_redondo"
+                        android:text="9"
+                        android:textColor="@color/colorBitsafeBlue"
+                        android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+                    <Button
+                        android:id="@+id/btn_agregar_monto_emply"
+                        android:enabled="false"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/btn_agregar_monto_cero"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/registro_figura_texto_redondo"
+                        android:text="0"
+                        android:textColor="@color/colorBitsafeBlue"
+                        android:textSize="@dimen/login_btn_tamanio_numeros" />
+
+                    <Button
+                        android:id="@+id/btn_agregar_monto_borrar"
+                        android:layout_width="@dimen/login_icon_borrar_w"
+                        android:layout_height="@dimen/login_icon_borrar_h"
+                        android:layout_row="0"
+                        android:layout_marginLeft="20dp"
+                        android:background="@mipmap/ic_delete"
+                        android:gravity="center|right"
+                        android:textColor="@color/colorBitsafeBlue" />
+
+                </GridLayout>
+
+                <Button
+                    android:id="@+id/btn_fragment_agregar_monto_guardar_monto"
+                    android:layout_width="@dimen/fragment_agregar_monto_guardar_w"
+                    android:layout_height="@dimen/fragment_agregar_monto_guardar_h"
+                    android:layout_below="@+id/gl_agregar_monto_teclado"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="50dp"
+                    android:background="@drawable/fragment_agregar_monto_figura_btn_guardar"
+                    android:text="@string/fragment_agregar_monto_guardar_monto"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/fragment_agregar_monto_guarda" />
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
+    </ScrollView>
 
-
-    </RelativeLayout>
 
 </FrameLayout>

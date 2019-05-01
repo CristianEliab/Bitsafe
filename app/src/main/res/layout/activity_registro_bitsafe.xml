@@ -115,17 +115,31 @@
                 android:textColorHint="@color/colorBitsafeRegistro" />
 
             <EditText
-                android:id="@+id/et_registro_datos_opcionales"
+                android:id="@+id/et_registro_contrasenia"
                 android:layout_width="@dimen/registro_et_campos_opcionales_registro_w"
                 android:layout_height="@dimen/registro_et_campos_opcionales_registro_h"
                 android:layout_below="@+id/et_registro_ubicacion"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/registro_figura_texto_redondo_opciones"
-                android:drawableRight="@drawable/registro_ic_down_arrow"
+                android:drawableRight="@drawable/registro_ic_password"
                 android:gravity="center"
                 android:textSize="@dimen/registro_et_tamanio_campos"
-                android:hint="@string/registro_datos_opcionales"
+                android:hint="@string/registro_contrasenia"
+                android:textColorHint="@color/colorBitsafeRegistro" />
+
+            <EditText
+                android:id="@+id/et_registro_confirmar_contrasenia"
+                android:layout_width="@dimen/registro_et_campos_opcionales_registro_w"
+                android:layout_height="@dimen/registro_et_campos_opcionales_registro_h"
+                android:layout_below="@+id/et_registro_contrasenia"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/registro_figura_texto_redondo_opciones"
+                android:drawableRight="@drawable/registro_ic_password"
+                android:gravity="center"
+                android:textSize="@dimen/registro_et_tamanio_campos"
+                android:hint="@string/registro_contrasenia_confirmar"
                 android:textColorHint="@color/colorBitsafeRegistro" />
 
 
@@ -133,7 +147,7 @@
                 android:id="@+id/btn_registro_registrarse"
                 android:layout_width="@dimen/registro_btn_registrarse_w"
                 android:layout_height="@dimen/registro_btn_registrarse_h"
-                android:layout_below="@+id/et_registro_datos_opcionales"
+                android:layout_below="@+id/et_registro_confirmar_contrasenia"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/registro_boton_registrarse"
