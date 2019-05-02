@@ -30,12 +30,26 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/rl_login_huella_icon">
 
+            <Button
+                android:id="@+id/btn_login_huella_emply_celular"
+                android:layout_width="@dimen/login_huella_btn_emply_celular_w"
+                android:layout_height="@dimen/login_huella_btn_emply_celular_h"
+                android:layout_row="0"
+                android:layout_marginLeft="20dp"
+                android:background="@mipmap/ic_finger_print"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:enabled="false"
+                android:gravity="center|right"
+                android:textColor="@color/colorBitsafeBlue" />
+
             <TextView
                 android:id="@+id/tv_login_huella_contrasenia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="100dp"
+                android:layout_below="@+id/btn_login_huella_emply_celular"
+                android:layout_marginTop="30dp"
                 android:text="@string/login_huella_introduce"
                 android:textColor="@color/colorBitsafeBlue" />
 
@@ -81,6 +95,7 @@
                 android:layout_below="@+id/panel_pin"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
+                android:layout_marginBottom="25dp"
                 android:columnCount="3"
                 android:orientation="horizontal">
 
@@ -159,15 +174,9 @@
                     android:textSize="@dimen/login_btn_tamanio_numeros" />
 
                 <Button
-                    android:id="@+id/btn_login_huella_emply_celular"
-                    android:layout_width="@dimen/login_huella_btn_emply_celular_w"
-                    android:layout_height="@dimen/login_huella_btn_emply_celular_h"
-                    android:layout_row="0"
-                    android:layout_marginLeft="20dp"
-                    android:background="@mipmap/ic_finger_print"
+                    android:id="@+id/btn_login_emply_celular"
                     android:enabled="false"
-                    android:gravity="center|right"
-                    android:textColor="@color/colorBitsafeBlue" />
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/btn_login_huella_cero_celular"
@@ -189,11 +198,22 @@
 
             </GridLayout>
 
+            <Button
+                android:id="@+id/btn_login_huella_loguearse"
+                android:layout_width="@dimen/registro_btn_registrarse_w"
+                android:layout_height="@dimen/registro_btn_registrarse_h"
+                android:layout_below="@+id/teclado_numerico_login_huella"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/registro_boton_registrarse"
+                android:hint="@string/login_loguearse"
+                android:layout_marginBottom="100dp"
+                android:textColorHint="@color/colorWhite" />
+
             <TextView
                 android:id="@+id/tv_login_huella_registrarse"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_huella_tv_registrarse_h"
-                android:layout_alignBottom="@+id/teclado_numerico_login_huella"
+                android:layout_alignBottom="@+id/btn_login_huella_loguearse"
                 android:layout_alignParentBottom="true"
                 android:alpha="0.60"
                 android:background="@color/colorBitsafeBlue"
