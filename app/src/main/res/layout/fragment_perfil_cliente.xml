@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PerfilCliente">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:id="@+id/rl_fragment_perfil_cliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+        <RelativeLayout
+            android:id="@+id/tb_fragment_perfil_cliente"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/aplicacion_toolbar_opciones"
+            android:background="@color/colorBitsafeBlue"
+            android:elevation="4dp">
+
+            <ImageView
+                android:id="@+id/iv_fragment_perfil_clientes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
+                android:background="@drawable/fragment_ic_return" />
+
+            <TextView
+                android:id="@+id/tv_fragment_perfil_cliente_texto_actividad"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
+                android:gravity="center"
+                android:text="@string/fragment_perfil_clientes"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/fragments_toolbar" />
+
+
+
+
+
+        </RelativeLayout>
+
+        </RelativeLayout>
+
+
+
+
+
+    </ScrollView>
+
+</FrameLayout>
