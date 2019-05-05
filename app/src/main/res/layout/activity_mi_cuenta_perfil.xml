@@ -173,6 +173,17 @@
                     android:layout_marginStart="13dp"
                     android:src="@drawable/registro_ic_house" />
 
+                <ImageView
+                    android:id="@+id/iv_micuenta_ubicacion_flecha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="299dp"
+                    android:layout_marginTop="9dp"
+                    android:src="@drawable/ic_flecha_next" />
+
+
                 <TextView
                     android:id="@+id/tv_micuenta_ubicacion_pregunta"
                     android:layout_width="wrap_content"
@@ -218,7 +229,17 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="13dp"
-                    android:src="@drawable/registro_ic_house" />
+                    android:src="@drawable/ic_portfolio" />
+
+                <ImageView
+                    android:id="@+id/iv_micuenta_trabajo_flecha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="299dp"
+                    android:layout_marginTop="9dp"
+                    android:src="@drawable/ic_flecha_next" />
 
                 <TextView
                     android:id="@+id/tv_micuenta_trabajo_pregunta"
