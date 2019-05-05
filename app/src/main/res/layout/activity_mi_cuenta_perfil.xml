@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/tb_fragment_micuenta"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/aplicacion_toolbar_opciones"
+                android:background="@color/colorBitsafeBlue"
+                android:elevation="4dp">
+
+                <ImageView
+                    android:id="@+id/iv_fragment_micuenta_clientes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
+                    android:background="@drawable/fragment_ic_return" />
+
+                <TextView
+                    android:id="@+id/tv_fragment_micuenta_texto_actividad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
+                    android:gravity="center"
+                    android:text="@string/fragment_micuenta_clientes"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/fragments_toolbar" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_micuenta_clientes_perfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
+                    android:background="@drawable/fragment_ic_perfil_cliente" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_dt_micuenta_notificaciones"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
+                    android:background="@drawable/fragment_ic_notificaciones_cliente" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_micuenta_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/registro_figura_texto_redondo_opciones"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_below="@+id/tb_fragment_micuenta">
+
+                <ImageView
+                    android:id="@+id/iv_micuenta_nombre"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="13dp"
+                    android:src="@drawable/registro_ic_nombre" />
+
+                <TextView
+                    android:id="@+id/tv_micuenta_nombre_nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/iv_micuenta_nombre"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="82dp"
+                    android:layout_marginTop="-1dp"
+                    android:text="Alejandra Ramos Vélez"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/tv_micuenta_nombre_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_micuenta_nombre_nombre"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="95dp"
+                    android:layout_marginTop="7dp"
+                    android:text="Cedula: 1144103804"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18dp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_micuenta_telefono"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/registro_figura_texto_redondo_opciones"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_below="@+id/rl_micuenta_nombre">
+
+                <ImageView
+                    android:id="@+id/iv_micuenta_telefono"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="13dp"
+                    android:src="@drawable/registro_ic_smartphone" />
+
+                <TextView
+                    android:id="@+id/tv_micuenta_telefono_numero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/iv_micuenta_telefono"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="82dp"
+                    android:layout_marginTop="-1dp"
+                    android:text="+57 3045840096"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/tv_micuenta_telefono_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_micuenta_telefono_numero"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="85dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Tu cuenta de Bitsafe está vinculada a este dispositivo"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="11dp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_micuenta_ubicacion"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/registro_figura_texto_redondo_opciones"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_below="@+id/rl_micuenta_telefono">
+
+                <ImageView
+                    android:id="@+id/iv_micuenta_ubicacion"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="13dp"
+                    android:src="@drawable/registro_ic_house" />
+
+                <TextView
+                    android:id="@+id/tv_micuenta_ubicacion_pregunta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/iv_micuenta_ubicacion"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="82dp"
+                    android:layout_marginTop="-1dp"
+                    android:text="¿En dónde vivo?"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/tv_micuenta_ubicacion_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_micuenta_ubicacion_pregunta"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="85dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Agregar información de tu ubicación."
+                    android:textColor="@color/colorBlack"
+                    android:textSize="11dp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_micuenta_trabajo"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/registro_figura_texto_redondo_opciones"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/rl_micuenta_ubicacion">
+
+                <ImageView
+                    android:id="@+id/iv_micuenta_trabajo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="13dp"
+                    android:src="@drawable/registro_ic_house" />
+
+                <TextView
+                    android:id="@+id/tv_micuenta_trabajo_pregunta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/iv_micuenta_trabajo"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="82dp"
+                    android:layout_marginTop="-1dp"
+                    android:text="¿A qué me dedico?"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/tv_micuenta_trabajo_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_micuenta_trabajo_pregunta"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="85dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Agregar información de tu desarrollo profesional."
+                    android:textColor="@color/colorBlack"
+                    android:textSize="11dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_micuenta_trabajo"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/registro_boton_registrarse"
+                android:layout_centerHorizontal="true">
+
+                <ImageView
+                    android:id="@+id/iv_micuenta_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="13dp"
+                    android:src="@drawable/ic_delete" />
+
+                <TextView
+                    android:id="@+id/tv_micuenta_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/iv_micuenta_delete"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="58dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Eliminar esta cuenta"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20dp" />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+
+    </ScrollView>
+
+
+
+
+</RelativeLayout>

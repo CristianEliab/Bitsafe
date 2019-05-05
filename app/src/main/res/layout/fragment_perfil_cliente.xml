@@ -132,7 +132,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_opciones_micuenta_perfil_cliente"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp">
+                    android:layout_height="70dp">
 
                     <ImageView
                         android:id="@+id/iv_micuenta_perfil_cliente"
@@ -159,7 +159,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_opciones_ajustes_perfil_cliente"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp">
+                    android:layout_height="70dp">
 
                     <ImageView
                         android:id="@+id/iv_ajustes_perfil_cliente"
@@ -186,7 +186,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_opciones_ayuda_perfil_cliente"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp">
+                    android:layout_height="70dp">
 
                     <ImageView
                         android:id="@+id/iv_ayuda_perfil_cliente"
@@ -213,7 +213,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_opciones_informacion_perfil_cliente"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp">
+                    android:layout_height="70dp">
 
                     <ImageView
                         android:id="@+id/iv_informacion_perfil_cliente"
@@ -240,7 +240,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_opciones_cerrar_perfil_cliente"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp">
+                    android:layout_height="70dp">
 
                     <ImageView
                         android:id="@+id/iv_cerrar_perfil_cliente"
