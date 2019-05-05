@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".MiCuentaPerfil"></activity>
+        <activity android:name=".MiCuentaPerfil" />
+        <activity android:name=".AjuestesContrasena"></activity>
     </application>
 
 </manifest>
