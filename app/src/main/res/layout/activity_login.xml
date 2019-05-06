@@ -179,7 +179,7 @@
                 android:id="@+id/tv_login_registrarse"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_tv_registrarse_h"
-                android:layout_alignBottom="@+id/btn_loguearse"
+                android:layout_alignBottom="@+id/btn_login_loguearse"
                 android:layout_alignParentBottom="true"
                 android:alpha="0.60"
                 android:background="@color/colorBitsafeBlue"

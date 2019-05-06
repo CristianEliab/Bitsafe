@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:fillViewport="true"
+    android:focusableInTouchMode="false"
+    android:windowSoftInputMode="stateAlwaysHidden">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/rl_login_correo_icon_bitsafe"
+            android:layout_width="@dimen/login_rl_panel_w"
+            android:layout_height="@dimen/login_rl_panel_h"
+            android:background="@color/colorBitsafeBlue">
+
+            <ImageView
+                android:id="@+id/iv_login_correo_icon_bitsafe"
+                android:layout_width="@dimen/login_iv_icon_w"
+                android:layout_height="@dimen/login_iv_icon_h"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/aplicacion_ic_bitsafe_icon" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_login_correo_icon_bitsafe"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="120dp">
+
+
+            <EditText
+                android:id="@+id/et_login_correo_contrasenia"
+                android:layout_width="@dimen/registro_et_campos_opcionales_registro_w"
+                android:layout_height="@dimen/registro_et_campos_opcionales_registro_h"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/registro_figura_texto_redondo_opciones"
+                android:drawableRight="@drawable/registro_ic_password"
+                android:gravity="center"
+                android:hint="@string/registro_contrasenia"
+                android:inputType="textVisiblePassword"
+                android:textColorHint="@color/colorBitsafeRegistro"
+                android:textSize="@dimen/registro_et_tamanio_campos" />
+
+            <EditText
+                android:id="@+id/et_login_correo_confirmar_contrasenia"
+                android:layout_width="@dimen/registro_et_campos_opcionales_registro_w"
+                android:layout_height="@dimen/registro_et_campos_opcionales_registro_h"
+                android:layout_below="@+id/et_login_correo_contrasenia"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/registro_figura_texto_redondo_opciones"
+                android:drawableRight="@drawable/registro_ic_password"
+                android:gravity="center"
+                android:hint="@string/registro_contrasenia_confirmar"
+                android:inputType="textVisiblePassword"
+                android:textColorHint="@color/colorBitsafeRegistro"
+                android:textSize="@dimen/registro_et_tamanio_campos" />
+
+
+            <Button
+                android:id="@+id/btn_login_correo_iniciar"
+                android:layout_width="@dimen/registro_btn_registrarse_w"
+                android:layout_height="@dimen/registro_btn_registrarse_h"
+                android:layout_below="@+id/et_login_correo_confirmar_contrasenia"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/registro_boton_registrarse"
+                android:hint="@string/login_correo"
+                android:textColorHint="@color/colorWhite" />
+
+            <TextView
+                android:id="@+id/tv_login_correo_registrarse"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/login_tv_registrarse_h"
+                android:layout_alignBottom="@+id/btn_login_correo_iniciar"
+                android:layout_alignParentBottom="true"
+                android:alpha="0.60"
+                android:background="@color/colorBitsafeBlue"
+                android:gravity="center"
+                android:text="@string/login_celular_registro"
+                android:textColor="@color/colorWhite" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</ScrollView>

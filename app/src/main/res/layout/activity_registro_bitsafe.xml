@@ -134,6 +134,7 @@
                 android:drawableRight="@drawable/registro_ic_password"
                 android:gravity="center"
                 android:hint="@string/registro_contrasenia"
+                android:inputType="textVisiblePassword"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />
 
@@ -147,6 +148,7 @@
                 android:background="@drawable/registro_figura_texto_redondo_opciones"
                 android:drawableRight="@drawable/registro_ic_password"
                 android:gravity="center"
+                android:inputType="textVisiblePassword"
                 android:hint="@string/registro_contrasenia_confirmar"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />

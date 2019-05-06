@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeCliente"></activity>
+        <activity android:name=".LoginCorreo"></activity>
+        <activity android:name=".HomeCliente" />
         <activity android:name=".HomeAdministrador" />
         <activity android:name=".Registro_Bitsafe" />
         <activity android:name=".Login_huella" />
@@ -21,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
