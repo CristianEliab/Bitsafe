@@ -50,37 +50,42 @@ public class LoginCorreo extends AppCompatActivity {
                 String correo = et_login_correo_contrasenia.getText().toString().trim();
                 String pass = et_login_correo_confirmar_contrasenia.getText().toString().trim();
 
-                auth.signInWithEmailAndPassword(correo, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        rtdb.getReference().child("admin")
-                                .addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        //Respuesta de firebase
-                                        for (DataSnapshot hijo : dataSnapshot.getChildren()) {
-                                            //Si es admin, loguearse
+                if (!correo.trim().equals("") || !pass.trim().equals("")) {
+                    auth.signInWithEmailAndPassword(correo, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            rtdb.getReference().child("admin")
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            //Respuesta de firebase
+                                            for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                                                //Si es admin, loguearse
                                             /*if () {
 
                                             }else{}*/
+                                            }
+                                            Intent i = new Intent(LoginCorreo.this, HomeAdministrador.class);
+                                            startActivity(i);
+                                            finish();
                                         }
-                                        Intent i = new Intent(LoginCorreo.this, HomeAdministrador.class);
-                                        startActivity(i);
-                                        finish();
-                                    }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    }
-                                });
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        }
+                                    });
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(LoginCorreo.this, "No se pudo ingresar" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(LoginCorreo.this, "No se pudo ingresar" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(LoginCorreo.this, "Ingrese el correo y contraseña", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });

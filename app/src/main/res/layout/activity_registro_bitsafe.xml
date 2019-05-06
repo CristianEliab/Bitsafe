@@ -2,10 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     android:descendantFocusability="beforeDescendants"
-    android:windowSoftInputMode="stateAlwaysHidden"
-    android:focusableInTouchMode="false">
+    android:fillViewport="true"
+    android:focusableInTouchMode="false"
+    android:windowSoftInputMode="stateAlwaysHidden">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -55,8 +55,8 @@
                 android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_nombre"
                 android:editable="true"
-                android:gravity="left|center"
                 android:freezesText="true"
+                android:gravity="left|center"
                 android:hint="@string/registro_nombre"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />
@@ -86,12 +86,12 @@
                 android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_smartphone"
                 android:gravity="left|center"
-                android:tooltipText="@string/login_et_celular"
                 android:hint="@string/registro_celular"
-                android:maxLength="10"
                 android:inputType="phone"
+                android:maxLength="10"
                 android:textColorHint="@color/colorBitsafeRegistro"
-                android:textSize="@dimen/registro_et_tamanio_campos" />
+                android:textSize="@dimen/registro_et_tamanio_campos"
+                android:tooltipText="@string/login_et_celular" />
 
 
             <EditText
@@ -104,8 +104,8 @@
                 android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_correo"
                 android:gravity="left|center"
-                android:inputType="textEmailAddress"
                 android:hint="@string/registro_correo"
+                android:inputType="textEmailAddress"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />
 
@@ -148,8 +148,8 @@
                 android:background="@drawable/registro_figura_texto_redondo_opciones"
                 android:drawableRight="@drawable/registro_ic_password"
                 android:gravity="center"
-                android:inputType="textVisiblePassword"
                 android:hint="@string/registro_contrasenia_confirmar"
+                android:inputType="textVisiblePassword"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />
 

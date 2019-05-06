@@ -7,6 +7,8 @@
     <string name="login_celular_numero">número de celular</string>
     <string name="login_loguearse">Iniciar Sesión</string>
     <string name="login_correo">Iniciar Sesión</string>
+    <string name="login_correo_ingresar">Correo</string>
+    <string name="login_correo_ingresar_contrasenia">Contraseña</string>
     <string name="registro_registro">Registro</string>
     <string name="registro_nombre">Nombre</string>
     <string name="registro_cedula">Cédula</string>

@@ -31,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Para mantener la sesión
-                if (auth.getCurrentUser() != null) {
+                //if (auth.getCurrentUser() != null) {
                     Intent i = new Intent(MainActivity.this, LoginCorreo.class);
                     startActivity(i);
-                }
+                //}
             }
         });
 

@@ -181,7 +181,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="299dp"
                     android:layout_marginTop="9dp"
-                    android:src="@drawable/ic_flecha_next" />
+                    android:src="@drawable/ic_fecha_next" />
 
 
                 <TextView
@@ -229,7 +229,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="13dp"
-                    android:src="@drawable/ic_portfolio" />
+                    android:src="@drawable/ic_portafolio" />
 
                 <ImageView
                     android:id="@+id/iv_micuenta_trabajo_flecha"
@@ -239,7 +239,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="299dp"
                     android:layout_marginTop="9dp"
-                    android:src="@drawable/ic_flecha_next" />
+                    android:src="@drawable/ic_fecha_next" />
 
                 <TextView
                     android:id="@+id/tv_micuenta_trabajo_pregunta"

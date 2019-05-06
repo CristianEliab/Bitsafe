@@ -44,7 +44,9 @@
                 android:background="@drawable/registro_figura_texto_redondo_opciones"
                 android:drawableRight="@drawable/registro_ic_password"
                 android:gravity="center"
-                android:hint="@string/registro_contrasenia"
+                android:editable="true"
+                android:freezesText="true"
+                android:hint="@string/login_correo_ingresar"
                 android:inputType="textVisiblePassword"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />
@@ -59,7 +61,7 @@
                 android:background="@drawable/registro_figura_texto_redondo_opciones"
                 android:drawableRight="@drawable/registro_ic_password"
                 android:gravity="center"
-                android:hint="@string/registro_contrasenia_confirmar"
+                android:hint="@string/login_correo_ingresar_contrasenia"
                 android:inputType="textVisiblePassword"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />
