@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".LoginCorreo"></activity>
+=======
+>>>>>>> 7a075408e928305cb7fb0d9ccc0be15ae7b78852
         <activity android:name=".HomeCliente" />
         <activity android:name=".HomeAdministrador" />
         <activity android:name=".Registro_Bitsafe" />
@@ -23,6 +26,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+<<<<<<< HEAD
+=======
+        <activity android:name=".MiCuentaPerfil" />
+        <activity android:name=".AjuestesContrasena"></activity>
+>>>>>>> 7a075408e928305cb7fb0d9ccc0be15ae7b78852
     </application>
 
 </manifest>

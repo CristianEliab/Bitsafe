@@ -62,5 +62,7 @@
     <string name="fragment_dt_clientes_toolbar">Cuenta:</string>
     <string name="fragment_dt_clientes_guardarInfo">Guardar Info</string>
     <string name="login_et_celular">Se verificará la existencia del número</string>
+    <string name="fragment_perfil_clientes">Mi Perfil</string>
+    <string name="fragment_micuenta_clientes">Mi Cuenta</string>
 
 </resources>

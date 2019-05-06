@@ -32,5 +32,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
 }
+<<<<<<< HEAD
 
 apply plugin: 'com.google.gms.google-services'
+=======
+>>>>>>> 7a075408e928305cb7fb0d9ccc0be15ae7b78852
