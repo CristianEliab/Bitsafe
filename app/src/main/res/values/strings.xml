@@ -67,4 +67,15 @@
     <string name="fragment_perfil_clientes">Mi Perfil</string>
     <string name="fragment_micuenta_clientes">Mi Cuenta</string>
 
+
+    <!--HECHO POR MURIEL-->
+    <string name="fragment_finanzas_ingresos">Resumen Ingresos</string>
+    <string name="fragment_finanzas_gastos">Resumen Gastos</string>
+    <string name="fragment_finanzas_ingresos_toolbar">Ingresos</string>
+    <string name="fragment_finanzas_gastos_toolbar">Gastos</string>
+    <string name="fragment_finanzas_ingresos_gastos_nombre_banco">Ingresar nombre del banco</string>
+    <string name="fragment_finanzas_ingresos_gastos_monto">Monto:</string>
+    <string name="fragment_finanzas_ingresos_gastos_categoria">Categoría:</string>
+    <string name="fragment_finanzas_ingresos_gastos_descripcion">Descripción:</string>
+
 </resources>

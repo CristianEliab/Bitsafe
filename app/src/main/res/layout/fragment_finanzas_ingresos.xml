@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FinanzasFragment">
+    tools:context=".FinanzasIngresosFragment">
 
     <RelativeLayout
         android:id="@+id/rl_fragment_finanzas_toolbar"
@@ -35,7 +35,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
                 android:gravity="center"
-                android:text="@string/fragment_finanzas_toolbar"
+                android:text="@string/fragment_finanzas_ingresos_toolbar"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/fragments_toolbar" />
 
@@ -71,71 +71,22 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="15dp"
+                android:gravity="center"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="400dp"
+
+                <EditText
+                    android:id="@+id/et_fragment_finanzas_ingresos_nombre_banco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:hint="@string/fragment_finanzas_ingresos_gastos_nombre_banco" />
 
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fragment_finanzas_ingresos"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-
-
-                    <com.github.mikephil.charting.charts.LineChart
-                        android:id="@+id/lc_fragment_finanzas_ingresos"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_fragment_finanzas_ingresos_lista_transacciones"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content" />
 
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fragment_finanzas_gastos"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-
-
-                    <com.github.mikephil.charting.charts.BarChart
-                        android:id="@+id/bc_fragment_finanzas_gastos"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fragment_finanzas_gastos"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-
-                    <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/pc_fragment_finanzas_gastos"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                </LinearLayout>
 
             </LinearLayout>
 

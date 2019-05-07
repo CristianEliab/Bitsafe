@@ -11,7 +11,7 @@
         android:layout_above="@+id/home_clientes_navigation">
 
         <FrameLayout
-            android:id="@+id/contenido"
+            android:id="@+id/contenido_cliente"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignStart="@+id/ll_home_clientes_panel" />
