@@ -5,7 +5,10 @@
     android:layout_height="wrap_content"
     android:background="@drawable/fragment_clientes_bordes_registros"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
 
     <ImageView
         android:id="@+id/iv_cliente_registro_foto"

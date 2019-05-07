@@ -1,6 +1,5 @@
 package com.appmoviles.proyecto;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -13,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.appmoviles.proyecto.modelo.Cliente;
+import com.appmoviles.proyecto.util.AdapterTemplate_SlClientes;
 import com.appmoviles.proyecto.util.Constantes;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class SeleccionarClienteOrigenFragment extends Fragment implements AdapterTemplate_SlClientes.OnItemClickListener {
 
-    private FloatingActionButton fb_fragment_sl_cliente_agregar_cliente;
+    private ImageView fb_fragment_sl_cliente_agregar_cliente;
     private RecyclerView libreta;
     private AdapterTemplate_SlClientes adapter;
     private ArrayList<Cliente> clientes;
@@ -114,10 +114,10 @@ public class SeleccionarClienteOrigenFragment extends Fragment implements Adapte
         cliente = amigo;
         if (cliente != null) {
             fb_fragment_sl_cliente_agregar_cliente.setEnabled(true);
-            fb_fragment_sl_cliente_agregar_cliente.setBackgroundColor(Color.parseColor("#076AAD"));
+            fb_fragment_sl_cliente_agregar_cliente.setBackgroundResource(R.drawable.fragment_cliente_circular_seleccion);
         } else {
             fb_fragment_sl_cliente_agregar_cliente.setEnabled(false);
-            fb_fragment_sl_cliente_agregar_cliente.setBackgroundColor(Color.GRAY);
+            fb_fragment_sl_cliente_agregar_cliente.setBackgroundResource(R.drawable.fragment_cliente_circular);
         }
     }
 }

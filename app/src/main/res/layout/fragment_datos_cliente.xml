@@ -86,7 +86,7 @@
                     android:background="@drawable/fragment_cliente_ic_foto_cliente" />
 
                 <TextView
-                    android:id="@+id/tv_sl_cliente_registro_nombre"
+                    android:id="@+id/tv_datos_cliente_registro_nombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/iv_cliente_registro_foto"
@@ -112,6 +112,10 @@
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    android:scrollbars="vertical"
+                    android:scrollbarSize="20dp"
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintVertical_bias="0.498"></Spinner>
 
 

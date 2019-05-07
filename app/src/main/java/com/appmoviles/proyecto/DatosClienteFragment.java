@@ -10,9 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appmoviles.proyecto.modelo.Banco;
 import com.appmoviles.proyecto.modelo.Cliente;
+import com.appmoviles.proyecto.modelo.Cuenta;
+import com.appmoviles.proyecto.util.AdapterDatosBancos;
+import com.appmoviles.proyecto.util.AdapterDatosCuentas;
 import com.appmoviles.proyecto.util.Constantes;
 
 import java.util.ArrayList;
@@ -21,10 +26,12 @@ import java.util.List;
 
 public class DatosClienteFragment extends Fragment {
 
+    private TextView tv_datos_cliente_registro_nombre;
+    private TextView tv_fragment_dt_clientes_texto_actividad;
     private Spinner sp_datos_cliente_bancos;
     private Spinner sp_datos_cliente_cuentas;
-    private List<String> listaBancos;
-    private List<String> listaCuentas;
+    private ArrayList<Banco> listaBancos;
+    private ArrayList<Cuenta> listaCuentas;
     private Cliente cliente;
     private Button btn_fragment_dt_cliente_guardar;
     private String cliente_origen = "";
@@ -49,39 +56,42 @@ public class DatosClienteFragment extends Fragment {
 
         sp_datos_cliente_bancos = v.findViewById(R.id.sp_datos_cliente_bancos);
         sp_datos_cliente_cuentas = v.findViewById(R.id.sp_datos_cliente_cuentas);
+        tv_fragment_dt_clientes_texto_actividad = v.findViewById(R.id.tv_fragment_dt_clientes_texto_actividad);
+        tv_datos_cliente_registro_nombre = v.findViewById(R.id.tv_datos_cliente_registro_nombre);
         btn_fragment_dt_cliente_guardar = v.findViewById(R.id.btn_fragment_dt_cliente_guardar);
 
-        //Banco bc1 = new Banco("Bancolombia");
-        //Banco bc2 = new Banco("Banco Bogota");
-        //Banco bc3 = new Banco("Davivienda");
 
-        //Cuenta cb1 = new Cuenta("1234-1456-2345-4668");
-        //Cuenta cb2 = new Cuenta("1234-1456-2345-4568");
-        //Cuenta cb3 = new Cuenta("1234-1456-2345-4468");
-        //Cuenta cb4 = new Cuenta("1234-1456-2345-4768");
+        listaBancos = new ArrayList<Banco>();
+        Banco b1 = new Banco();
+        b1.setNombreBanco("Bancolombia");
+        Banco b2 = new Banco();
+        b2.setNombreBanco("Banco Bogota");
+        Banco b3 = new Banco();
+        b3.setNombreBanco("Davivienda");
+        listaBancos.add(b1);
+        listaBancos.add(b2);
+        listaBancos.add(b3);
 
-        listaBancos = new ArrayList<String>();
-        listaBancos.add("Bancolombia");
-        listaBancos.add("Banco Bogota");
-        listaBancos.add("Davivienda");
+        listaCuentas = new ArrayList<Cuenta>();
+        Cuenta c1 = new Cuenta();
+        c1.setNumeroCuenta("2222-3333-4444-5555");
+        Cuenta c2 = new Cuenta();
+        c2.setNumeroCuenta("1234-1456-2345-4668");
+        Cuenta c3 = new Cuenta();
+        c3.setNumeroCuenta("5555-1231-5357-4564");
+        Cuenta c4 = new Cuenta();
+        c4.setNumeroCuenta("8888-1231-5357-4564");
+        listaCuentas.add(c1);
+        listaCuentas.add(c2);
+        listaCuentas.add(c3);
+        listaCuentas.add(c4);
 
-        listaCuentas = new ArrayList<String>();
-        listaCuentas.add("1234-1456-2345-4668");
-        listaCuentas.add("1234-1456-2345-4568");
-        listaCuentas.add("1234-1456-2345-4468");
-        listaCuentas.add("1234-1456-2345-4768");
-
-
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),
-                R.layout.simple_spinner_item, listaBancos);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_datos_cliente_bancos.setAdapter(dataAdapter);
-
-
-        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(getContext(),
-                R.layout.simple_spinner_item, listaCuentas);
-        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_datos_cliente_cuentas.setAdapter(dataAdapter2);
+        // Adaptador bancos
+        AdapterDatosBancos adapterDatosBancos = new AdapterDatosBancos(getContext(), listaBancos);
+        sp_datos_cliente_bancos.setAdapter(adapterDatosBancos);
+        // Adaptador cuentas
+        AdapterDatosCuentas adapterDatosCuentas = new AdapterDatosCuentas(getContext(), listaCuentas);
+        sp_datos_cliente_cuentas.setAdapter(adapterDatosCuentas);
 
 
         btn_fragment_dt_cliente_guardar.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +112,9 @@ public class DatosClienteFragment extends Fragment {
         });
 
         actualizarInfo();
+
+        tv_datos_cliente_registro_nombre.setText(cliente_origen);
+        tv_fragment_dt_clientes_texto_actividad.setText(Constantes.CLIENTE_CUENTA + cliente_origen);
 
         return v;
     }

@@ -13,5 +13,6 @@ public class Constantes {
     public final static String CLIENTE_DESTINO_KEY_NOMBRE = "CLIENTE_DESTINO_KEY_NOMBRE";
     public final static String CLIENTE_DESTINO_DEFAULT_NOMBRE = "Cliente Destino";
     public final static String PUNTO = ",";
+    public final static String CLIENTE_CUENTA = "Cuenta: ";
 
 }

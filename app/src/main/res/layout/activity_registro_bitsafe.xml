@@ -54,7 +54,6 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_nombre"
-                android:editable="true"
                 android:freezesText="true"
                 android:gravity="left|center"
                 android:hint="@string/registro_nombre"
@@ -72,6 +71,8 @@
                 android:drawableLeft="@drawable/registro_ic_cedula"
                 android:gravity="left|center"
                 android:hint="@string/registro_cedula"
+                android:inputType="phone"
+                android:maxLength="10"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />
 
@@ -134,7 +135,7 @@
                 android:drawableRight="@drawable/registro_ic_password"
                 android:gravity="center"
                 android:hint="@string/registro_contrasenia"
-                android:inputType="textVisiblePassword"
+                android:inputType="textWebPassword"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />
 
@@ -149,7 +150,7 @@
                 android:drawableRight="@drawable/registro_ic_password"
                 android:gravity="center"
                 android:hint="@string/registro_contrasenia_confirmar"
-                android:inputType="textVisiblePassword"
+                android:inputType="textWebPassword"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />
 

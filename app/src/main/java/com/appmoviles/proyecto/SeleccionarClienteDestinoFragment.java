@@ -1,9 +1,7 @@
 package com.appmoviles.proyecto;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.appmoviles.proyecto.modelo.Cliente;
+import com.appmoviles.proyecto.util.AdapterTemplate_SlClientes;
 import com.appmoviles.proyecto.util.Constantes;
 
 import java.util.ArrayList;
