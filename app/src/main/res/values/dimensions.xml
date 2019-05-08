@@ -54,5 +54,7 @@
     <dimen name="fragment_dt_cliente_guardar_w">150dp</dimen>
     <dimen name="fragment_dt_cliente_guardar_h">40dp</dimen>
 
+    <!--Muriel-->
+    <dimen name="fragment_btn_finanzas_transacciones_btn_agregar">60dp</dimen>
 
 </resources>

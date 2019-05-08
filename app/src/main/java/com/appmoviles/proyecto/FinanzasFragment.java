@@ -49,9 +49,7 @@ public class FinanzasFragment extends Fragment implements View.OnClickListener {
     PieChart pieChart;
 
     //Para navegar a otros fragments
-    FinanzasIngresosFragment finanzasIngresosFragment;
-    FinanzasGastosFragment finanzasGastosFragment;
-
+    FinanzasBancosFragment finanzasBancosFragment;
 
     public FinanzasFragment() {
         // Required empty public constructor
@@ -232,22 +230,19 @@ public class FinanzasFragment extends Fragment implements View.OnClickListener {
 
 
             case R.id.lc_fragment_finanzas_ingresos:
-                finanzasIngresosFragment = new FinanzasIngresosFragment();
-                transaction.replace(R.id.contenido_cliente, finanzasIngresosFragment);
+                finanzasBancosFragment = new FinanzasBancosFragment();
+                transaction.replace(R.id.contenido_cliente, finanzasBancosFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
 
             case R.id.bc_fragment_finanzas_gastos:
-                finanzasGastosFragment = new FinanzasGastosFragment();
-                transaction.replace(R.id.contenido_cliente, finanzasGastosFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                mostrarMensaje("Bar chart ");
                 break;
 
             //Por alguna razón el Piechart no sirve así
             case R.id.pc_fragment_finanzas_gastos:
-                mostrarMensaje("Pie chart listener");
+                mostrarMensaje("Pie chart ");
                 break;
         }
 

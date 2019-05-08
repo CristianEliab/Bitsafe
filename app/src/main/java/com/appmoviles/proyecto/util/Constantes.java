@@ -14,4 +14,7 @@ public class Constantes {
     public final static String CLIENTE_DESTINO_DEFAULT_NOMBRE = "Cliente Destino";
     public final static String PUNTO = ",";
 
+    //Muriel
+    public final static String BUNDLE_ID_BANCO = "BUNDLE_ID_BANCO";
+
 }

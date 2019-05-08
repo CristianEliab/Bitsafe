@@ -6,10 +6,13 @@
 
 
     <RelativeLayout
+        android:id="@+id/rl_renglon_relative_marco_transaccion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/registro_figura_texto_redondo">
 
         <LinearLayout
             android:id="@+id/ly_renglon_transaccion_monto"
@@ -20,7 +23,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_finanzas_ingresos_gastos_monto" />
+                android:text="@string/fragment_transacciones_agregar_monto"
+                android:textColor="@color/colorBitsafeBlue"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_renglon_transaccion_monto"
@@ -39,7 +44,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_finanzas_ingresos_gastos_categoria" />
+                android:text="@string/fragment_finanzas_transacciones_categoria"
+                android:textColor="@color/colorBitsafeBlue"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_renglon_transaccion_categoria"
@@ -57,7 +64,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_finanzas_ingresos_gastos_descripcion" />
+                android:text="@string/fragment_transacciones_descripcion"
+                android:textColor="@color/colorBitsafeBlue"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_renglon_transaccion_descripcion"
@@ -73,9 +82,18 @@
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorAccent"
-            android:src="@drawable/common_full_open_on_phone" />
+            android:layout_marginRight="20dp"
+            android:background="@drawable/icon_banco_bogota" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_renglon_transaccion_imagen_banco"
+            android:layout_toLeftOf="@+id/tv_renglon_transaccion_fecha"
+            android:text="@string/fragment_finanzas_transacciones_fecha"
+            android:textColor="@color/colorBitsafeBlue"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_renglon_transaccion_fecha"

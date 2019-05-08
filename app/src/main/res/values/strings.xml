@@ -71,11 +71,17 @@
     <!--HECHO POR MURIEL-->
     <string name="fragment_finanzas_ingresos">Resumen Ingresos</string>
     <string name="fragment_finanzas_gastos">Resumen Gastos</string>
-    <string name="fragment_finanzas_ingresos_toolbar">Ingresos</string>
-    <string name="fragment_finanzas_gastos_toolbar">Gastos</string>
-    <string name="fragment_finanzas_ingresos_gastos_nombre_banco">Ingresar nombre del banco</string>
-    <string name="fragment_finanzas_ingresos_gastos_monto">Monto:</string>
-    <string name="fragment_finanzas_ingresos_gastos_categoria">Categoría:</string>
-    <string name="fragment_finanzas_ingresos_gastos_descripcion">Descripción:</string>
+    <!-- TRANSACCIONES -->
+    <string name="fragment_finanzas_transacciones_toolbar">Transacciones</string>
+    <string name="fragment_finanzas_transacciones_monto">Monto:</string>
+    <string name="fragment_finanzas_transacciones_categoria">Categoría:</string>
+    <string name="fragment_finanzas_transacciones_descripcion">Descripción:</string>
+    <string name="fragment_finanzas_transacciones_fecha">Fecha:</string>
+    <string name="fragment_finanzas_transacciones_historial_transacciones">Historial de transacciones</string>
+    <!-- BANCOS -->
+    <string name="fragment_finanzas_bancos_toolbar">Bancos</string>
+    <string name="fragment_finanzas_bancos_nombre_busqueda">Ingresar nombre del banco</string>
+    <string name="fragment_finanzas_bancos_monto_total">Monto Total:</string>
+    <string name="fragment_finanzas_bancos_nombre_banco">Nombre</string>
 
 </resources>
