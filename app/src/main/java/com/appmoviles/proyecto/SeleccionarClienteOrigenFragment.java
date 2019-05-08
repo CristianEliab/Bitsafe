@@ -1,7 +1,6 @@
 package com.appmoviles.proyecto;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -48,7 +47,7 @@ public class SeleccionarClienteOrigenFragment extends Fragment implements Adapte
         clientes = new ArrayList<>();
 
         // Pruba de la vista de los clientes
-        Cliente cliente_p_1 = new Cliente("Cristian");
+        final Cliente cliente_p_1 = new Cliente("Cristian");
         Cliente cliente_p_2 = new Cliente("Steven");
         Cliente cliente_p_3 = new Cliente("Alejandra");
         Cliente cliente_p_4 = new Cliente("Johan");
@@ -86,7 +85,9 @@ public class SeleccionarClienteOrigenFragment extends Fragment implements Adapte
         fb_fragment_sl_cliente_agregar_cliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 datosClienteFragment = new DatosClienteFragment();
+                //listener.onPassClickClienteOrigen(cliente);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 // Utilizado para enviar variables entre dos fragments
                 Bundle parametro = new Bundle();
@@ -119,5 +120,16 @@ public class SeleccionarClienteOrigenFragment extends Fragment implements Adapte
             fb_fragment_sl_cliente_agregar_cliente.setEnabled(false);
             fb_fragment_sl_cliente_agregar_cliente.setBackgroundResource(R.drawable.fragment_cliente_circular);
         }
+    }
+
+
+    //OBSERVER
+    public interface OnItemPassClienteOrigen {
+        void onPassClickClienteOrigen(String monto);
+    }
+    private OnItemPassClienteOrigen listener;
+
+    public void setListener(OnItemPassClienteOrigen listener) {
+        this.listener = listener;
     }
 }

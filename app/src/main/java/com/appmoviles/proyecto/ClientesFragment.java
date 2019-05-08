@@ -43,12 +43,22 @@ public class ClientesFragment extends Fragment {
         Cliente cliente_p_3 = new Cliente("Alejandra");
         Cliente cliente_p_4 = new Cliente("Johan");
         Cliente cliente_p_5 = new Cliente("Toto");
+        Cliente cliente_p_6 = new Cliente("Cristian");
+        Cliente cliente_p_7 = new Cliente("Steven");
+        Cliente cliente_p_8 = new Cliente("Alejandra");
+        Cliente cliente_p_9 = new Cliente("Johan");
+        Cliente cliente_p_10 = new Cliente("Toto");
 
         clientes.add(cliente_p_1);
         clientes.add(cliente_p_2);
         clientes.add(cliente_p_3);
         clientes.add(cliente_p_4);
         clientes.add(cliente_p_5);
+        clientes.add(cliente_p_6);
+        clientes.add(cliente_p_7);
+        clientes.add(cliente_p_8);
+        clientes.add(cliente_p_9);
+        clientes.add(cliente_p_10);
 
 
         libreta = v.findViewById(R.id.lista_clientes);

@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_datos_lista"
-    android:layout_width="match_parent"
+    android:id="@+id/ll_banco_lista"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:layout_marginTop="5dp"
+    android:layout_marginLeft="3dp"
+    android:layout_marginTop="3dp"
     android:layout_marginRight="5dp"
     android:background="@drawable/fragment_datos_lista"
-    android:orientation="horizontal"
-    android:padding="5dp">
+    android:orientation="vertical"
+    android:padding="2dp">
 
-    <TextView
-        android:id="@+id/tv_datos_lista"
+    <ImageView
+        android:id="@+id/iv_icon_bancos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:text="Nohra Villega"
         android:textSize="18sp"
         android:textStyle="bold" />
 

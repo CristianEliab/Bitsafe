@@ -44,6 +44,7 @@
                 android:background="@drawable/registro_figura_texto_redondo_opciones"
                 android:drawableRight="@drawable/registro_ic_password"
                 android:gravity="center"
+                android:cursorVisible="false"
                 android:freezesText="true"
                 android:hint="@string/login_correo_ingresar"
                 android:inputType="textVisiblePassword"

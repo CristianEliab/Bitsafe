@@ -99,8 +99,8 @@ public class LoginCorreo extends AppCompatActivity {
                 String correo = et_login_correo_contrasenia.getText().toString().trim();
                 String pass = et_login_correo_confirmar_contrasenia.getText().toString().trim();
 
-                if (!correo.trim().equals("") || !pass.trim().equals("")) {
-                    loguearUsuario(correo,pass);
+                if (!correo.trim().equals("") && !pass.trim().equals("") && correo != null && pass != null) {
+                    loguearUsuario(correo, pass);
 
                 } else {
                     Toast.makeText(LoginCorreo.this, "Ingrese el correo y contraseña", Toast.LENGTH_SHORT).show();
@@ -120,7 +120,7 @@ public class LoginCorreo extends AppCompatActivity {
 
         correo_guardado = myPreferences.getString(EMAIL_USER, "Correo");
         et_login_correo_contrasenia.setText(correo_guardado);
-        et_login_correo_contrasenia.setTextColor(Color.rgb(130,130,130));
+        et_login_correo_contrasenia.setTextColor(Color.rgb(130, 130, 130));
     }
 
     private void loguearUsuario(final String correo, String pass) {

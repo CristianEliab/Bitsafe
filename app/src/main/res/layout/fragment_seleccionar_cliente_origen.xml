@@ -90,8 +90,8 @@
 
             <ImageView
                 android:id="@+id/fb_fragment_sl_cliente_agregar_cliente"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:clickable="true"

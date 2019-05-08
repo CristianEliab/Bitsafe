@@ -1,54 +1,81 @@
 package com.appmoviles.proyecto.util;
 
-import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.appmoviles.proyecto.R;
 import com.appmoviles.proyecto.modelo.Banco;
+import com.appmoviles.proyecto.modelo.Cliente;
 
 import java.util.ArrayList;
 
-public class AdapterDatosBancos extends ArrayAdapter<Banco> {
+public class AdapterDatosBancos extends RecyclerView.Adapter<AdapterDatosBancos.CustomViewHolder> {
 
-    public AdapterDatosBancos(Context context, ArrayList<Banco> bancos) {
-        super(context, 0, bancos);
-    }
+    private ArrayList<Banco> data;
+    int index = -1;
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
-        Banco banco = getItem(position);
-        // Check if an existing view is being reused, otherwise inflate the view
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.renglon_bancos, parent, false);
+    //Renglon y construccion
+    public static class CustomViewHolder extends RecyclerView.ViewHolder {
+        public LinearLayout root;
+
+        public CustomViewHolder(LinearLayout v) {
+            super(v);
+            root = v;
         }
-        // Lookup view for data population
+    }
 
-        TextView tvNombre = (TextView) convertView.findViewById(R.id.tv_datos_banco_nombre);
-        // Populate the data into the template view using the data object
-        tvNombre.setText(banco.getNombreBanco());
-
-
-        // Return the completed view to render on screen
-        return convertView;
+    public AdapterDatosBancos() {
+        this.data = new ArrayList<>();
     }
 
     @Override
-    public View getDropDownView(int position, View convertView,
-                                ViewGroup parent) {
-        return initView(position, convertView);
+    public AdapterDatosBancos.CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.renglon_list, parent, false);
+        AdapterDatosBancos.CustomViewHolder vh = new AdapterDatosBancos.CustomViewHolder(v);
+        return vh;
     }
 
-    private View initView(int position, View convertView) {
-        if (convertView == null)
-            convertView = View.inflate(getContext(), R.layout.renglon_list,
-                    null);
-        TextView tvText1 = (TextView) convertView.findViewById(R.id.tv_datos_banco_lista);
-        tvText1.setText(getItem(position).getNombreBanco());
-        return convertView;
+    @Override
+    public void onBindViewHolder(final AdapterDatosBancos.CustomViewHolder holder, final int position) {
+        ((TextView) holder.root.findViewById(R.id.tv_datos_lista)).setText(data.get(position).getNombreBanco());
+        holder.root.findViewById(R.id.ll_datos_lista).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                index = position;
+                listener.onItemClick(data.get(position));
+                notifyDataSetChanged();
+            }
+        });
+
+        if (index == position) {
+            holder.root.findViewById(R.id.ll_datos_lista).setBackgroundResource(R.drawable.fragment_datos_cuentas_bordes);
+        } else {
+            holder.root.findViewById(R.id.ll_datos_lista).setBackgroundResource(R.drawable.fragment_clientes_bordes_registros);
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return data.size();
+    }
+
+    //OBSERVER
+    public interface OnItemClickListener {
+        void onItemClick(Banco banco);
+    }
+
+    private OnItemClickListener listener;
+
+    public void setListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public void agregarBanco(Banco banco) {
+        data.add(banco);
+        notifyDataSetChanged();
     }
 }
