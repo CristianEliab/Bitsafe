@@ -39,7 +39,6 @@ public class AdaptadorIconsBancos extends RecyclerView.Adapter<AdaptadorIconsBan
 
     @Override
     public void onBindViewHolder(final AdaptadorIconsBancos.CustomViewHolder holder, final int position) {
-
         if(data.get(position).getIcono().equals("banco_davivienda")){
             ((ImageView) holder.root.findViewById(R.id.iv_icon_bancos)).setBackgroundResource(R.drawable.banco_davivienda);
         }

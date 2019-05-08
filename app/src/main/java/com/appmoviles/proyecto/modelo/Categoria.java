@@ -4,12 +4,12 @@ public class Categoria {
 
     private String categoriaID;
     private String nombre;
-    private String subCategoria;
+    private Categoria subCategoriaID;
 
-    public Categoria(String categoriaID, String nombre, String subCategoria) {
+    public Categoria(String categoriaID, String nombre, Categoria subCategoria) {
         this.categoriaID = categoriaID;
         this.nombre = nombre;
-        this.subCategoria = subCategoria;
+        this.subCategoriaID = subCategoria;
     }
 
     public Categoria() {
@@ -31,11 +31,11 @@ public class Categoria {
         this.nombre = nombre;
     }
 
-    public String getSubCategoria() {
-        return subCategoria;
+    public Categoria getSubCategoria() {
+        return subCategoriaID;
     }
 
-    public void setSubCategoria(String idCategoria) {
-        this.subCategoria = idCategoria;
+    public void setSubCategoria(Categoria idCategoria) {
+        this.subCategoriaID = idCategoria;
     }
 }
