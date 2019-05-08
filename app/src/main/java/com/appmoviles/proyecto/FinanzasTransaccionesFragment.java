@@ -3,6 +3,7 @@ package com.appmoviles.proyecto;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,6 +39,8 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
     private TextView tv_fragment_finanzas_transacciones_titulo;
 
     private Banco bancoSeleccionado;
+
+    private FinanzasCrearTransaccionFragment finanzasCrearTransaccionFragment;
 
 
     public FinanzasTransaccionesFragment() {
@@ -192,14 +195,19 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
     @Override
     public void onItemClick(Transaccion transaccion) {
         mostrarMensaje(transaccion.getMontoTransaccion());
-
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_fragment_finanzas_transacciones_agregar_transaccion:
-                mostrarMensaje("Agregar transacción");
+                finanzasCrearTransaccionFragment = new FinanzasCrearTransaccionFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.contenido_cliente, finanzasCrearTransaccionFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                break;
+
         }
     }
 

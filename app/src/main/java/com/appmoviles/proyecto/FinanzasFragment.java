@@ -51,6 +51,7 @@ public class FinanzasFragment extends Fragment implements View.OnClickListener {
     //Para navegar a otros fragments
     FinanzasBancosFragment finanzasBancosFragment;
 
+
     public FinanzasFragment() {
         // Required empty public constructor
     }
@@ -237,7 +238,11 @@ public class FinanzasFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.bc_fragment_finanzas_gastos:
-                mostrarMensaje("Bar chart ");
+
+                FinanzasCuentasFragment finanzasCuentasFragment = new FinanzasCuentasFragment();
+                transaction.replace(R.id.contenido_cliente, finanzasCuentasFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
                 break;
 
             //Por alguna razón el Piechart no sirve así

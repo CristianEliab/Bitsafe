@@ -54,7 +54,14 @@
     <dimen name="fragment_dt_cliente_guardar_w">150dp</dimen>
     <dimen name="fragment_dt_cliente_guardar_h">40dp</dimen>
 
+    <dimen name="fragment_finanzas_crear_transaccion_descripcion_w">420dp</dimen>
+    <dimen name="fragment_finanzas_crear_transaccion_descripcion_h">70dp</dimen>
+
     <!--Muriel-->
     <dimen name="fragment_btn_finanzas_transacciones_btn_agregar">60dp</dimen>
+    <dimen name="fragment_btn_finanzas_crear_transaccion_cancelar_guardar_w">130dp</dimen>
+    <dimen name="fragment_finanzas_cuentas_icon_fecha_w_h">20dp</dimen>
+    <dimen name="fragment_finanzas_cuentas_icon_saldo_w_h">20dp</dimen>
+
 
 </resources>
