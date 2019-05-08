@@ -138,7 +138,8 @@
                 android:background="@drawable/registro_figura_texto_redondo"
                 android:text="3"
                 android:textColor="@color/colorBitsafeBlue"
-                android:textSize="@dimen/login_btn_tamanio_numeros" />
+                android:textSize="@dimen/login_btn_tamanio_numeros"
+                />
 
             <Button
                 android:id="@+id/btn_login_huella_cuatro_celular"
