@@ -5,10 +5,6 @@
     <string name="login_huella_registro">Registrarme</string>
     <string name="login_huella_introduce">INTRODUCE LA CONTRASEÑA</string>
     <string name="login_celular_numero">número de celular</string>
-    <string name="login_loguearse">Iniciar Sesión</string>
-    <string name="login_correo">Iniciar Sesión</string>
-    <string name="login_correo_ingresar">Correo</string>
-    <string name="login_correo_ingresar_contrasenia">Contraseña</string>
     <string name="registro_registro">Registro</string>
     <string name="registro_nombre">Nombre</string>
     <string name="registro_cedula">Cédula</string>
@@ -63,8 +59,5 @@
     <string name="fragment_agregar_fecha_min_day">01/10/2019</string>
     <string name="fragment_dt_clientes_toolbar">Cuenta:</string>
     <string name="fragment_dt_clientes_guardarInfo">Guardar Info</string>
-    <string name="login_et_celular">Se verificará la existencia del número</string>
-    <string name="fragment_perfil_clientes">Mi Perfil</string>
-    <string name="fragment_micuenta_clientes">Mi Cuenta</string>
 
 </resources>
