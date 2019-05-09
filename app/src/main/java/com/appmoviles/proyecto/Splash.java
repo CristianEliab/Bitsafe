@@ -37,7 +37,6 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         myPreferences = PreferenceManager.getDefaultSharedPreferences(Splash.this);
-        myPreferences.edit().clear().commit();
         cargodb = myPreferences.getBoolean(GUARDO, true);
 
         // Carga la base de datos la primera vez.
