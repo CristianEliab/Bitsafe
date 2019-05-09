@@ -28,6 +28,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class Registro_Bitsafe extends AppCompatActivity {

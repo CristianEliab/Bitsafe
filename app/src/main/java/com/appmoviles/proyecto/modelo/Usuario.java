@@ -17,7 +17,7 @@ public class Usuario {
     private String correo;
     private String contrasenia;
 
-    public Usuario(String usuarioID, String nombre, String fecha_nacimiento, String telefono, String genero, String estadoUsuarioID, String loginID, String configuracionID) {
+    public Usuario(String usuarioID, String nombre, String fecha_nacimiento, String telefono, String genero, String estadoUsuarioID, String loginID, String configuracionID, String cedula, String ubicacion, String correo) {
         this.usuarioID = usuarioID;
         this.nombre = nombre;
         this.fecha_nacimiento = fecha_nacimiento;
@@ -26,6 +26,9 @@ public class Usuario {
         this.estadoUsuarioID = estadoUsuarioID;
         this.loginID = loginID;
         this.configuracionID = configuracionID;
+        this.cedula = cedula;
+        this.ubicacion = ubicacion;
+        this.correo = correo;
     }
 
     public Usuario(String usuarioID, String nombre, String cedula, String telefono, String correo, String ubicacion) {

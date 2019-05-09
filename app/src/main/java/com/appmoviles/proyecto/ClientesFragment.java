@@ -1,15 +1,27 @@
 package com.appmoviles.proyecto;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.appmoviles.proyecto.modelo.Cliente;
+import com.appmoviles.proyecto.modelo.RolUsuario;
+import com.appmoviles.proyecto.modelo.Usuario;
 import com.appmoviles.proyecto.util.AdapterTemplate_Clientes;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -17,7 +29,10 @@ public class ClientesFragment extends Fragment {
 
     private RecyclerView libreta;
     private AdapterTemplate_Clientes adapter;
-    private ArrayList<Cliente> clientes;
+
+    FirebaseAuth auth;
+    FirebaseDatabase rtdb;
+
 
     public ClientesFragment() {
         // Required empty public constructor
@@ -34,31 +49,30 @@ public class ClientesFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_clientes, container, false);
 
+        rtdb = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
 
-        clientes = new ArrayList<>();
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        // Pruba de la vista de los clientes
-        Cliente cliente_p_1 = new Cliente("Cristian");
-        Cliente cliente_p_2 = new Cliente("Steven");
-        Cliente cliente_p_3 = new Cliente("Alejandra");
-        Cliente cliente_p_4 = new Cliente("Johan");
-        Cliente cliente_p_5 = new Cliente("Toto");
-        Cliente cliente_p_6 = new Cliente("Cristian");
-        Cliente cliente_p_7 = new Cliente("Steven");
-        Cliente cliente_p_8 = new Cliente("Alejandra");
-        Cliente cliente_p_9 = new Cliente("Johan");
-        Cliente cliente_p_10 = new Cliente("Toto");
 
-        clientes.add(cliente_p_1);
-        clientes.add(cliente_p_2);
-        clientes.add(cliente_p_3);
-        clientes.add(cliente_p_4);
-        clientes.add(cliente_p_5);
-        clientes.add(cliente_p_6);
-        clientes.add(cliente_p_7);
-        clientes.add(cliente_p_8);
-        clientes.add(cliente_p_9);
-        clientes.add(cliente_p_10);
+        final ArrayList<Usuario> usuarios = new ArrayList<>();
+
+        rtdb.getReference().child("usuarios")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        //Respuesta de firebase
+                        for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                            //Si es admin, loguearse
+                            Usuario usuario = hijo.getValue(Usuario.class);
+                            adapter.agregarUsuario(usuario);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
 
 
         libreta = v.findViewById(R.id.lista_clientes);
@@ -68,14 +82,8 @@ public class ClientesFragment extends Fragment {
         libreta.setLayoutManager(manager);
         libreta.setAdapter(adapter);
 
-        agregarClientes();
 
         return v;
     }
 
-    private void agregarClientes() {
-        for (Cliente cliente : clientes) {
-            adapter.agregarCliente(cliente);
-        }
-    }
 }

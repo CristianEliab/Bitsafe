@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:fillViewport="true"
     android:focusableInTouchMode="true"
+    android:windowSoftInputMode="stateAlwaysHidden"
     tools:context=".ClientesFragment">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -75,10 +78,6 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/fragment_clientes_figura_filtro"
                 android:drawableRight="@drawable/fragment_clientes_ic_buscar_clientes"
-                android:editable="true"
-                android:enabled="true"
-                android:focusable="false"
-                android:focusableInTouchMode="true"
                 android:hint="@string/fragment_clientes_filtro"
                 android:inputType=""
                 android:textSize="@dimen/fragment_clientes_filtro_texto" />

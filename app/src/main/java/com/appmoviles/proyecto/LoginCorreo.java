@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appmoviles.proyecto.modelo.RolUsuario;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -119,25 +120,24 @@ public class LoginCorreo extends AppCompatActivity {
         });
 
         correo_guardado = myPreferences.getString(EMAIL_USER, "Correo");
-        et_login_correo_contrasenia.setText(correo_guardado);
-        et_login_correo_contrasenia.setTextColor(Color.rgb(130, 130, 130));
+        if(correo_guardado.equals("Correo")){
+            et_login_correo_contrasenia.setHint(correo_guardado);
+            et_login_correo_contrasenia.setHintTextColor(Color.rgb(130, 130, 130));
+        }else {
+            et_login_correo_contrasenia.setText(correo_guardado);
+            et_login_correo_contrasenia.setTextColor(Color.rgb(130, 130, 130));
+        }
+
     }
 
     private void loguearUsuario(final String correo, String pass) {
         auth.signInWithEmailAndPassword(correo, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                rtdb.getReference().child("admin")
+                rtdb.getReference().child("rolusuario")
                         .addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                //Respuesta de firebase
-                                for (DataSnapshot hijo : dataSnapshot.getChildren()) {
-                                    //Si es admin, loguearse
-                                            /*if () {
-
-                                            }else{}*/
-                                }
 
                                 // We need an Editor object to make preference changes.
                                 // All objects are from android.context.Context
@@ -145,9 +145,21 @@ public class LoginCorreo extends AppCompatActivity {
                                 myEditor.putString(EMAIL_USER, correo);
                                 myEditor.commit();
 
-                                Intent i = new Intent(LoginCorreo.this, HomeAdministrador.class);
-                                startActivity(i);
-                                finish();
+                                //Respuesta de firebase
+                                for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                                    //Si es admin, loguearse
+                                    RolUsuario rolUsuario = hijo.getValue(RolUsuario.class);
+                                    if (rolUsuario.getRolID().equals("02") &&
+                                            rolUsuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
+                                        Intent i = new Intent(LoginCorreo.this, HomeAdministrador.class);
+                                        startActivity(i);
+                                        finish();
+                                    } else {
+                                        Intent i = new Intent(LoginCorreo.this, HomeCliente.class);
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                }
                             }
 
                             @Override

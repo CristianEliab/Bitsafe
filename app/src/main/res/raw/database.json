@@ -1,0 +1,375 @@
+{
+  "usuarios": [
+    {
+      "usuarioID": "01",
+      "nombre": "Critian Eliab",
+      "fecha_nacimiento": "2019-01-12",
+      "telefono": "3156067465",
+      "genero": "Masculino",
+      "estadoUsuarioID": "01",
+      "cedula": "1234189967",
+      "ubicacion": "Cali",
+      "correo": "eliad97@hotmail.com",
+      "configuracionID": "01"
+    },
+    {
+      "usuarioID": "nWld7bALGag02cLzefA3U0LjV2g1",
+      "nombre": "Alejandra Ramos Velez",
+      "fecha_nacimiento": "2019-01-12",
+      "telefono": "3001112233",
+      "genero": "Femenino",
+      "estadoUsuarioID": "01",
+      "cedula": "1122335566",
+      "ubicacion": "Cali",
+      "correo": "alejandra@gmail.com",
+      "configuracionID": "01"
+    },
+    {
+      "usuarioID": "03",
+      "nombre": "Andres Urbano",
+      "fecha_nacimiento": "2019-01-12",
+      "telefono": "3121563489",
+      "genero": "Masculino",
+      "estadoUsuarioID": "01",
+      "cedula": "11448899156",
+      "ubicacion": "Cali",
+      "correo": "andres@gmail.com",
+      "configuracionID": "01"
+    },
+    {
+      "usuarioID": "6QWqRaccOWObqZOQYxpJDz5sdWi2",
+      "nombre": "Critian Eliab",
+      "fecha_nacimiento": "2019-01-12",
+      "telefono": "3156067465",
+      "genero": "Masculino",
+      "estadoUsuarioID": "01",
+      "cedula": "1234189967",
+      "ubicacion": "Cali",
+      "correo": "eliadcrist@gmail.com",
+      "configuracionID": "01"
+    }
+  ],
+  "actividad": [
+    {
+      "actividadID": "01",
+      "nombreActividad": "MainActivity"
+    },
+    {
+      "actividadID": "02",
+      "nombreActividad": "MiCuentaPerfil"
+    },
+    {
+      "actividadID": "03",
+      "nombreActividad": "PlanesFragment"
+    },
+    {
+      "actividadID": "04",
+      "nombreActividad": "Registro_Bitsafe"
+    },
+    {
+      "actividadID": "05",
+      "nombreActividad": "TransaccionesFragment"
+    }
+  ],
+  "bancos": [
+    {
+      "bancoID": "01",
+      "nombreBanco": "Davivienda",
+      "icono": "banco_davivienda"
+    },
+    {
+      "bancoID": "02",
+      "nombreBanco": "Bogota",
+      "icono": "banco_bogota"
+    },
+    {
+      "bancoID": "03",
+      "nombreBanco": "Bancolombia",
+      "icono": "banco_bancolombia"
+    },
+    {
+      "bancoID": "04",
+      "nombreBanco": "Itau",
+      "icono": "banco_itau"
+    }
+  ],
+  "categoria": [
+    {
+      "categoriaID": "01",
+      "nombre": "Cheques",
+      "subCategorias": [
+        {
+          "categoriaID": "06",
+          "nombre": "Cruzado",
+          "subCategorias": "null"
+        },
+        {
+          "categoriaID": "05",
+          "nombre": "Caja",
+          "subCategorias": "null"
+        }
+      ]
+    },
+    {
+      "categoriaID": "02",
+      "nombre": "Comunicaciones",
+      "subCategorias": [
+        {
+          "categoriaID": "03",
+          "nombre": "Internet",
+          "subCategorias": "null"
+        }
+      ]
+    },
+    {
+      "categoriaID": "03",
+      "nombre": "Internet",
+      "subCategorias": [{}]
+    },
+    {
+      "categoriaID": "04",
+      "nombre": "Compras",
+      "subCategorias": [{}]
+    },
+    {
+      "categoriaID": "05",
+      "nombre": "Caja",
+      "subCategorias": [{}]
+    },
+    {
+      "categoriaID": "06",
+      "nombre": "Cruzado",
+      "subCategorias": [{}]
+    }
+  ],
+  "configuracionseguridad": [
+    {
+      "configuracionSeguridadID": "01",
+      "pin": "1234",
+      "huella": "kradiasp",
+      "usuarioID": "01",
+      "configuracionID": "01"
+    }
+  ],
+  "cuentas": [
+    {
+      "cuentaID": "01",
+      "numeroCuenta": "1234-5678-9012-3456",
+      "usuarioID": "nWld7bALGag02cLzefA3U0LjV2g1",
+      "tipoCuentaID": "01",
+      "tipoCuentaNombre": "Cuenta Credito",
+      "bancoID": "02"
+    },
+    {
+      "cuentaID": "02",
+      "numeroCuenta": "6QWqRaccOWObqZOQYxpJDz5sdWi2",
+      "usuarioID": "nWld7bALGag02cLzefA3U0LjV2g1",
+      "tipoCuentaID": "02",
+      "tipoCuentaNombre": "Cuenta Debito",
+      "bancoID": "01"
+    },
+    {
+      "cuentaID": "03",
+      "numeroCuenta": "5678-3456-1234-3457",
+      "usuarioID": "nWld7bALGag02cLzefA3U0LjV2g1",
+      "tipoCuentaID": "01",
+      "tipoCuentaNombre": "Cuenta Credito",
+      "bancoID": "03"
+    }
+  ],
+  "estadousuario": [
+    {
+      "estadoID": "01",
+      "nombre": "INACTIVO"
+    },
+    {
+      "estadoID": "02",
+      "nombre": "ACTIVO"
+    },
+    {
+      "estadoID": "03",
+      "nombre": "DELETE"
+    }
+  ],
+  "login": [
+    {
+      "loginID": "01",
+      "correo": "eliad97@hotmail.com",
+      "contrasenia": "1234",
+      "usuarioID": "01"
+    },
+    {
+      "loginID": "01",
+      "correo": "eliadcrist@gmail.com",
+      "contrasenia": "1234",
+      "usuarioID": "02"
+    },
+    {
+      "loginID": "01",
+      "correo": "steven@hotmail.com",
+      "contrasenia": "1234",
+      "usuarioID": "03"
+    }
+  ],
+  "planesahorro": [
+    {
+      "planAhorroID": "01",
+      "usuarioID": "01",
+      "fechaFinal": "2019-07-15",
+      "fechaInicio": "2019-05-15",
+      "cuotas": "15",
+      "monto": "10000",
+      "periodo": "3",
+      "descripcion": "Pago",
+      "estadoPlanAhorroID": "01"
+    },
+    {
+      "planAhorroID": "02",
+      "usuarioID": "02",
+      "fechaFinal": "2019-12-15",
+      "fechaInicio": "2019-05-15",
+      "cuotas": "12",
+      "monto": "50000",
+      "periodo": "4",
+      "descripcion": "Viaje",
+      "estadoPlanAhorroID": "02"
+    },
+    {
+      "planAhorroID": "03",
+      "usuarioID": "03",
+      "fechaFinal": "2019-12-15",
+      "fechaInicio": "2019-08-15",
+      "cuotas": "30",
+      "monto": "1000",
+      "periodo": "6",
+      "descripcion": "Pago",
+      "estadoPlanAhorroID": "03"
+    }
+  ],
+  "roles": [
+    {
+      "rolID": "01",
+      "nombreRol": "Cliente"
+    },
+    {
+      "rolID": "02",
+      "nombreRol": "Administrador"
+    }
+  ],
+  "rolactividad": [
+    {
+      "rolID": "01",
+      "actividadID": "01"
+    },
+    {
+      "rolID": "01",
+      "actividadID": "02"
+    },
+    {
+      "rolID": "02",
+      "actividadID": "02"
+    },
+    {
+      "rolID": "01",
+      "actividadID": "03"
+    }
+  ],
+  "rolusuario": [
+    {
+      "usuarioID": "01",
+      "rolID": "01"
+    },
+    {
+      "usuarioID": "nWld7bALGag02cLzefA3U0LjV2g1",
+      "rolID": "02"
+    }
+  ],
+  "tipocuentas": [
+    {
+      "tipoCuentaID": "01",
+      "nombre": "Cuenta Credito"
+    },
+    {
+      "tipoCuentaID": "02",
+      "nombre": "Cuenta Debito"
+    }
+  ],
+  "tipoflujodinero": [
+    {
+      "tipoFlujoeDineroID": "01",
+      "flujoDinero": "P-B"
+    },
+    {
+      "tipoFlujoeDineroID": "02",
+      "flujoDinero": "P-P"
+    },
+    {
+      "tipoFlujoeDineroID": "03",
+      "flujoDinero": "B-P"
+    }
+  ],
+  "tipotransacciones": [
+    {
+      "tipoTransaccionID": "01",
+      "nombre": "ingreso",
+      "tipoFlujoDinero": "01"
+    },
+    {
+      "tipoTransaccionID": "02",
+      "nombre": "gasto",
+      "tipoFlujoDinero": "02"
+    }
+  ],
+  "transacciones": [
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "01",
+      "cuentaDestinoID": "02",
+      "tipoTransaccionID": "01",
+      "categoriaID": "01",
+      "descripcion": "Compras",
+      "montoTransaccion": "20000",
+      "fechaTransaccion": "2019-02-12"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "02",
+      "cuentaDestinoID": "03",
+      "tipoTransaccionID": "01",
+      "categoriaID": "02",
+      "descripcion": "Ropa",
+      "montoTransaccion": "10000",
+      "fechaTransaccion": "2019-01-12"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "01",
+      "cuentaDestinoID": "02",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Cuota Vehiculo",
+      "montoTransaccion": "300000",
+      "fechaTransaccion": "2019-03-12"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "02",
+      "cuentaDestinoID": "01",
+      "tipoTransaccionID": "01",
+      "categoriaID": "02",
+      "descripcion": "Más ropa",
+      "montoTransaccion": "50000",
+      "fechaTransaccion": "2019-03-13"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "01",
+      "cuentaDestinoID": "03",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Vehiculo se daño",
+      "montoTransaccion": "5000000",
+      "fechaTransaccion": "2019-03-13"
+    }
+  ]
+}
