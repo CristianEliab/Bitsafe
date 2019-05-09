@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FinanzasCrearTransaccionFragment">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/tb_fragment_transacciones_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/aplicacion_toolbar_opciones"
+                android:background="@color/colorBitsafeBlue"
+                android:elevation="4dp">
+
+                <ImageView
+                    android:id="@+id/iv_fragment_transacciones_return"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
+                    android:background="@drawable/fragment_ic_return"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_fragment_finanzas_crear_transaccion_titulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
+                    android:gravity="center"
+                    android:text="Registrar Ingreso o Gasto"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/fragments_toolbar" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_transacciones_perfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
+                    android:background="@drawable/fragment_ic_perfil_cliente" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_transacciones_notificaciones"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
+                    android:background="@drawable/fragment_ic_notificaciones_cliente" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_fragment_transacciones_panel_transacciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tb_fragment_transacciones_toolbar"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="15dp">
+
+
+                <TextView
+                    android:id="@+id/tv_fragment_transacciones_ingresar_monto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/fragment_transacciones_ingresar_monto"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+                <Button
+                    android:id="@+id/btn_fragment_finanzas_crear_transaccion_agregar_monto"
+                    android:layout_width="@dimen/fragment_transacciones_campos_w"
+                    android:layout_height="@dimen/fragment_transacciones_campos_h"
+                    android:layout_below="@+id/tv_fragment_transacciones_ingresar_monto"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/fragment_transacciones_campo_ingresar"
+                    android:drawableLeft="@drawable/fragment_transacciones_ic_monto"
+                    android:hint="@string/fragment_transacciones_agregar_monto"
+                    android:textColorHint="@color/colorWhite"
+                    android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+
+                <TextView
+                    android:id="@+id/tv_fragment_finanzas_crear_transaccion_categorias_titulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btn_fragment_finanzas_crear_transaccion_agregar_monto"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/fragment_finanzas_crear_transaccion_categorias_titulo"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+                <Button
+                    android:id="@+id/btn_fragment_finanzas_crear_transaccion_agregar_cagetoria"
+                    android:layout_width="@dimen/fragment_transacciones_campos_w"
+                    android:layout_height="@dimen/fragment_transacciones_campos_h"
+                    android:layout_below="@+id/tv_fragment_finanzas_crear_transaccion_categorias_titulo"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/fragment_transacciones_campo_ingresar"
+                    android:drawableLeft="@drawable/ic_icon_categorias"
+                    android:gravity="center"
+                    android:hint="@string/fragment_finanzas_crear_transaccion_categorias_agregar"
+                    android:textColorHint="@color/colorWhite"
+                    android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+                <TextView
+                    android:id="@+id/et_fragment_transacciones_ingresar_fecha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btn_fragment_finanzas_crear_transaccion_agregar_cagetoria"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/fragment_transacciones_ingresar_fecha"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+                <Button
+                    android:id="@+id/btn_fragment_finanzas_crear_transaccion_agregar_fecha"
+                    android:layout_width="@dimen/fragment_transacciones_campos_w"
+                    android:layout_height="@dimen/fragment_transacciones_campos_h"
+                    android:layout_below="@+id/et_fragment_transacciones_ingresar_fecha"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/fragment_transacciones_campo_ingresar"
+                    android:drawableLeft="@drawable/fragment_transacciones_ic_fecha"
+                    android:gravity="center"
+                    android:hint="@string/fragment_transacciones_agregar_fecha"
+                    android:textColorHint="@color/colorWhite"
+                    android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+
+                <TextView
+                    android:id="@+id/tv_fragment_transacciones_ingresar_clientes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btn_fragment_finanzas_crear_transaccion_agregar_fecha"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/fragment_transacciones_descripcion"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+
+                <EditText
+                    android:id="@+id/et_fragment_finanzas_crear_transaccion_descripcion"
+                    android:layout_width="@dimen/fragment_finanzas_crear_transaccion_descripcion_w"
+                    android:layout_height="@dimen/fragment_finanzas_crear_transaccion_descripcion_h"
+                    android:layout_below="@+id/tv_fragment_transacciones_ingresar_clientes"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/fragment_transacciones_campo_ingresar"
+                    android:drawableLeft="@drawable/fragment_transacciones_ic_description"
+                    android:gravity="center"
+                    android:hint="@string/fragment_estadisticas_descripcion"
+                    android:textColorHint="@color/colorWhite"
+                    android:textSize="@dimen/fragment_transacciones_tamanio" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rl_fragment_transacciones_panel_transacciones"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/btn_fragment_finanzas_crear_transaccion_cancelar"
+                    android:layout_width="@dimen/fragment_btn_finanzas_crear_transaccion_cancelar_guardar_w"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/registro_figura_texto_redondo"
+                    android:text="@string/fragment_finanzas_crear_transaccion_btn_cancelar" />
+
+                <Button
+                    android:id="@+id/btn_fragment_finanzas_crear_transaccion_guardar"
+                    android:layout_width="@dimen/fragment_btn_finanzas_crear_transaccion_cancelar_guardar_w"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/registro_figura_texto_redondo"
+                    android:text="@string/fragment_finanzas_crear_transaccion_btn_guardar" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</FrameLayout>
