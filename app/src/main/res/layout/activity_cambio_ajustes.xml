@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/tb_fragment_cambio_ajustes"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/aplicacion_toolbar_opciones"
+            android:background="@color/colorBitsafeBlue"
+            android:elevation="4dp">
+
+            <ImageView
+                android:id="@+id/iv_fragment_cambio_ajustes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
+                android:background="@drawable/fragment_ic_return" />
+
+            <TextView
+                android:id="@+id/tv_fragment_cambio_ajustes_texto_actividad"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
+                android:gravity="center"
+                android:text="Ajustes"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/fragments_toolbar" />
+
+            <ImageView
+                android:id="@+id/iv_fragment_cambio_ajustes_clientes_perfil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
+                android:background="@drawable/fragment_ic_perfil_cliente" />
+
+            <ImageView
+                android:id="@+id/iv_fragment_dt_cambio_ajustes_notificaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
+                android:background="@drawable/fragment_ic_notificaciones_cliente" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_cambio_ajustes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tb_fragment_cambio_ajustes">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/registro_figura_texto_redondo_opciones"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</ScrollView>
