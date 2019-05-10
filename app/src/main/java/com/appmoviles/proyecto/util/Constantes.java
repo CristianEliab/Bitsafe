@@ -17,5 +17,7 @@ public class Constantes {
 
     //Muriel
     public final static String BUNDLE_ID_BANCO = "BUNDLE_ID_BANCO";
+    public final static String BUNDLE_ID_CUENTA = "BUNDLE_ID_CUENTA";
+    public final static String BUNDLE_ID_TRANSACCION = "BUNDLE_ID_TRANSACCION";
 
 }
