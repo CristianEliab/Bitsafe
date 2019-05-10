@@ -19,11 +19,20 @@ public class HomeCliente  extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_cliente);
 
-        cuentasFragment = new CuentasFragment();
-        planesFragment = new PlanesFragment();
         finanzasFragment = new FinanzasFragment();
+        planesFragment = new PlanesFragment();
+        cuentasFragment = new CuentasFragment();
+
 
         BottomNavigationView navigation = findViewById(R.id.home_clientes_navigation);
+
+        navigation.setSelectedItemId(R.id.menubar_finanzas);
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.contenido_cliente, finanzasFragment);
+        transaction.commit();
+
+
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -31,15 +40,15 @@ public class HomeCliente  extends FragmentActivity {
                 FragmentTransaction transaction = manager.beginTransaction();
                 switch (menuItem.getItemId()){
                     case R.id.menubar_finanzas:
-                        transaction.replace(R.id.contenido, finanzasFragment);
+                        transaction.replace(R.id.contenido_cliente, finanzasFragment);
                         transaction.commit();
                         break;
                     case R.id.menubar_planes:
-                        transaction.replace(R.id.contenido, planesFragment);
+                        transaction.replace(R.id.contenido_cliente, planesFragment);
                         transaction.commit();
                         break;
                     case R.id.menubar_cuentas:
-                        transaction.replace(R.id.contenido, cuentasFragment);
+                        transaction.replace(R.id.contenido_cliente, cuentasFragment);
                         transaction.commit();
                         break;
                 }

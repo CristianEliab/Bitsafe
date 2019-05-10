@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_renglon_relative_marco_cuenta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/registro_figura_texto_redondo">
+
+
+        <ImageView
+            android:id="@+id/iv_renglon_cuenta_imagen_banco"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/icon_banco_bogota" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/iv_renglon_cuenta_imagen_banco"
+            android:text="Cuenta de Ahorro Example"
+            android:textColor="@color/colorBitsafeBlue" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_renglon_cuenta_imagen_banco"
+            android:layout_marginTop="15dp">
+
+            <RelativeLayout
+                android:id="@+id/rl_renglon_cuenta_relative_marco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_renglon_cuenta_icono_fecha"
+                    android:layout_width="@dimen/fragment_finanzas_cuentas_icon_fecha_w_h"
+                    android:layout_height="@dimen/fragment_finanzas_cuentas_icon_fecha_w_h"
+                    android:src="@drawable/ic_fecha" />
+
+                <TextView
+                    android:id="@+id/tv_renglon_cuenta_fecha_vinculacion_titulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/iv_renglon_cuenta_icono_fecha"
+                    android:text="@string/fragment_finanzas_cuentas_fecha_vinculacion"
+                    android:textColor="@color/colorBitsafeBlue"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/tv_renglon_cuenta_fecha_vinculacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/tv_renglon_cuenta_fecha_vinculacion_titulo"
+                    android:text="****************" />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_renglon_cuenta_relative_marco"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_renglon_cuenta_icono_saldo"
+                    android:layout_width="@dimen/fragment_finanzas_cuentas_icon_saldo_w_h"
+                    android:layout_height="@dimen/fragment_finanzas_cuentas_icon_saldo_w_h"
+                    android:src="@drawable/ic_saldo" />
+
+                <TextView
+                    android:id="@+id/tv_renglon_cuenta_saldo_titulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/iv_renglon_cuenta_icono_saldo"
+                    android:text="@string/fragment_finanzas_cuentas_saldo"
+                    android:textColor="@color/colorBitsafeBlue"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_renglon_cuenta_saldo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/tv_renglon_cuenta_saldo_titulo"
+                    android:text="****************" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -2,8 +2,10 @@ package com.appmoviles.proyecto;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 public class MiCuentaPerfil extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

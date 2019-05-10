@@ -9,14 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.QuickContactBadge;
 import android.widget.Toast;
-
 import com.appmoviles.proyecto.util.JsonParse;
 import com.google.firebase.FirebaseApp;
-
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -37,7 +33,6 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         myPreferences = PreferenceManager.getDefaultSharedPreferences(Splash.this);
-        myPreferences.edit().clear().commit();
         cargodb = myPreferences.getBoolean(GUARDO, true);
 
         // Carga la base de datos la primera vez.

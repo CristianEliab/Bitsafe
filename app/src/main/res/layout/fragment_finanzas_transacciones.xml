@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FinanzasTransaccionesFragment">
+
+    <RelativeLayout
+        android:id="@+id/rl_fragment_transacciones_global"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_fragment_transacciones_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/tb_fragment_transacciones_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/aplicacion_toolbar_opciones"
+                    android:background="@color/colorBitsafeBlue"
+                    android:elevation="4dp">
+
+                    <ImageView
+                        android:id="@+id/iv_fragment_transacciones_return"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
+                        android:background="@drawable/fragment_ic_return"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tv_fragment_transacciones_actividad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
+                        android:gravity="center"
+                        android:text="@string/fragment_transacciones_toolbar"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/fragments_toolbar" />
+
+                    <ImageView
+                        android:id="@+id/iv_fragment_finanzas_perfil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
+                        android:background="@drawable/fragment_ic_perfil_cliente" />
+
+                    <ImageView
+                        android:id="@+id/iv_fragment_finanzas_notificaciones"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
+                        android:background="@drawable/fragment_ic_notificaciones_cliente" />
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tb_fragment_transacciones_toolbar"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/tv_fragment_finanzas_transacciones_titulo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:text="Pertenecientes al número de cuenta ********"
+                        android:textColor="@color/colorBitsafeBlue"
+                        android:textSize="20dp"
+                        android:textStyle="italic" />
+
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/lc_fragment_finanzas_transacciones"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/fragment_finanzas_transacciones_historial_transacciones"
+                        android:textColor="@color/colorBitsafeBlue"
+                        android:textSize="20dp"
+                        android:textStyle="italic" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_fragment_finanzas_transacciones_lista"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="35dp" />
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btn_fragment_finanzas_transacciones_agregar_transaccion"
+            android:layout_width="@dimen/fragment_btn_finanzas_transacciones_btn_agregar"
+            android:layout_height="@dimen/fragment_btn_finanzas_transacciones_btn_agregar"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/icon_agregar_transaccion" />
+    </RelativeLayout>
+
+</FrameLayout>
