@@ -93,5 +93,8 @@
     <string name="login_correo_ingresar_contrasenia">Contraseña</string>
     <string name="login_correo">Iniciar Sesión</string>
 
+    <string name="fragment_perfil_clientes">Perfil</string>
+    <string name="fragment_micuenta_clientes">Editar Perfil</string>
+
 
 </resources>

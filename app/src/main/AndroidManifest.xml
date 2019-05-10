@@ -14,11 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".HomeCliente"></activity>
+        <activity android:name=".CambioAjustes"></activity>
+        <activity android:name=".LoginCorreo" />
         <activity android:name=".HomeAdministrador" />
         <activity android:name=".Registro_Bitsafe" />
         <activity android:name=".Login_huella" />
         <activity android:name=".Login" />
-        <activity android:name=".LoginCorreo" />
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
