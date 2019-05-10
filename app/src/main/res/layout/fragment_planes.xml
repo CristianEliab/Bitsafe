@@ -3,12 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlanesFragment">
+    tools:context=".PlanesFragment"
+    android:id="@+id/main">
 
     <RelativeLayout
         android:id="@+id/rl_fragment_planes_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/btn_crear_ahorro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_crear_ahorro"
+            android:translationZ="100dp"/>
 
         <RelativeLayout
             android:id="@+id/tb_fragment_planes_toolbar"
@@ -16,6 +29,7 @@
             android:layout_height="@dimen/aplicacion_toolbar_opciones"
             android:background="@color/colorBitsafeBlue"
             android:elevation="4dp">
+
 
             <ImageView
                 android:id="@+id/iv_fragment_planes_return"
@@ -58,6 +72,121 @@
                 android:background="@drawable/fragment_ic_notificaciones_cliente" />
 
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:background="#FFFF"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <EditText
+                android:id="@+id/et_searcher"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:height="40dp"
+                android:background="@drawable/rounded_edittext"
+                android:drawableLeft="@drawable/ic_search"
+                android:hint="    busca entre tus planes..."
+                android:paddingLeft="20dip"
+                android:paddingTop="5dip"
+                android:paddingRight="20dip"
+                android:paddingBottom="5dip" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/white_shadowed_shape"
+                android:orientation="vertical"
+                android:padding="20dip">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Computadora"
+                        android:textColor="#076AAD"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="8dp"
+                        android:background="#FFFFFF"
+                        android:src="@drawable/ic_edit" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_calendar" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Finaliza el 5 de Junio de 2019"
+                        android:textColor="#4F4F4F"
+                        android:textSize="13dp" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="$ 2´000.000"
+                        android:textColor="#4F4F4F"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="$ 3´000.000"
+                        android:textColor="#4F4F4F"
+                        android:textSize="13dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_marginTop="1dp"
+                        android:src="@drawable/unloaded_bar" />
+
+                    <ImageView
+                        android:layout_width="100dip"
+                        android:layout_height="6dp"
+                        android:src="@drawable/load_bar" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
 
     </RelativeLayout>
 

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:descendantFocusability="beforeDescendants"
-    android:fillViewport="true"
-    android:focusableInTouchMode="false"
-    android:windowSoftInputMode="stateAlwaysHidden">
+    android:fillViewport="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -69,7 +67,7 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_cedula"
-                android:gravity="left|center"
+                android:gravity="center|left"
                 android:hint="@string/registro_cedula"
                 android:inputType="phone"
                 android:maxLength="10"
@@ -86,13 +84,10 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_smartphone"
-                android:gravity="left|center"
+                android:gravity="center|left"
                 android:hint="@string/registro_celular"
-                android:inputType="phone"
-                android:maxLength="10"
                 android:textColorHint="@color/colorBitsafeRegistro"
-                android:textSize="@dimen/registro_et_tamanio_campos"
-                android:tooltipText="@string/login_et_celular" />
+                android:textSize="@dimen/registro_et_tamanio_campos" />
 
 
             <EditText
@@ -104,9 +99,8 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_correo"
-                android:gravity="left|center"
+                android:gravity="center|left"
                 android:hint="@string/registro_correo"
-                android:inputType="textEmailAddress"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />
 
@@ -119,7 +113,7 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_house"
-                android:gravity="left|center"
+                android:gravity="center"
                 android:hint="@string/registro_ubicacion"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />

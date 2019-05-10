@@ -23,10 +23,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String TABLA_USUARIOS = "usuarios";
     public static final String USUARIO_ID = "userid";
     public static final String USUARIO_NOMBRE = "nombre";
-    public static final String USUARIO_CEDULA = "cedula";
     public static final String USUARIO_FECHA = "fecha";
-    public static final String USUARIO_CORREO = "correo";
-    public static final String USUARIO_UBICACION = "ubicacion";
     public static final String USUARIO_GENERO = "genero";
     public static final String USUARIO_TELEFONO = "telefono";
     public static final String USUARIO_ESTADO_ID = "estadoid";
@@ -34,9 +31,10 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String USUARIO_CONFIGURACION_ID = "configuracionid";
     public static final String CREATE_TABLA_USUARIOS = "CREATE TABLE " +
             "" + TABLA_USUARIOS + " (" + USUARIO_ID + " TEXT PRIMARY KEY, " +
-            "" + USUARIO_NOMBRE + " TEXT, " + USUARIO_CEDULA + " TEXT, " +
-            "" + USUARIO_TELEFONO + " TEXT, " + USUARIO_CORREO + " TEXT, " +
-            "" + USUARIO_UBICACION + "TEXT)";
+            "" + USUARIO_NOMBRE + " TEXT, " + USUARIO_FECHA + " TEXT, " +
+            "" + USUARIO_GENERO + " TEXT, " + USUARIO_TELEFONO + " TEXT, " +
+            "" + USUARIO_ESTADO_ID + " TEXT, " + USUARIO_LOGIN_ID + "TEXT, " +
+            "" + USUARIO_CONFIGURACION_ID + "TEXT)";
 
     // ---------------------------------------------------------------------------------------------
     //TABLA ACTIVIDADES
@@ -262,14 +260,17 @@ public class DBHandler extends SQLiteOpenHelper {
     //CREATE
     public void createUsuario(Usuario usuario) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("INSERT INTO " + TABLA_USUARIOS + " (" + USUARIO_ID + ", " + USUARIO_NOMBRE + ", " + USUARIO_CEDULA + ", " +
-                "" + USUARIO_TELEFONO + ", " + USUARIO_CORREO + ", " + USUARIO_UBICACION + ") VALUES ('" +
+        db.execSQL("INSERT INTO " + TABLA_USUARIOS + " (" + USUARIO_ID + ", " + USUARIO_NOMBRE + ", " + USUARIO_FECHA + ", " +
+                "" + USUARIO_GENERO + ", " + USUARIO_TELEFONO + ", " + USUARIO_ESTADO_ID + ", " + USUARIO_LOGIN_ID + ", " +
+                "" + USUARIO_CONFIGURACION_ID + ") VALUES ('" +
                 "" + usuario.getUsuarioID() + "','" +
                 "" + usuario.getNombre() + "','" +
-                "" + usuario.getCedula() + "','" +
-                "" + usuario.getTelefono() + "','" +
-                "" + usuario.getCorreo() + "', '" +
-                "" + usuario.getUbicacion() + "')");
+                "" + usuario.getFecha_nacimiento() + "','" +
+                "" + usuario.getGenero() + "','" +
+                "" + usuario.getTelefono() + "', '" +
+                "" + usuario.getEstadoUsuarioID() + "', '" +
+                "" + usuario.getLoginID() + "', '" +
+                "" + usuario.getConfiguracionID() + "')");
         db.close();
     }
 
@@ -284,12 +285,9 @@ public class DBHandler extends SQLiteOpenHelper {
                 Usuario usuario = new Usuario();
                 usuario.setUsuarioID(cursor.getString(cursor.getColumnIndex(USUARIO_ID)));
                 usuario.setNombre(cursor.getString(cursor.getColumnIndex(USUARIO_NOMBRE)));
-                usuario.setCedula(cursor.getString(cursor.getColumnIndex(USUARIO_CEDULA)));
                 usuario.setFecha_nacimiento(cursor.getString(cursor.getColumnIndex(USUARIO_FECHA)));
                 usuario.setGenero(cursor.getString(cursor.getColumnIndex(USUARIO_GENERO)));
                 usuario.setTelefono(cursor.getString(cursor.getColumnIndex(USUARIO_TELEFONO)));
-                usuario.setCorreo(cursor.getString(cursor.getColumnIndex(USUARIO_CORREO)));
-                usuario.setUbicacion(cursor.getString(cursor.getColumnIndex(USUARIO_UBICACION)));
                 usuario.setEstadoUsuarioID(cursor.getString(cursor.getColumnIndex(USUARIO_ESTADO_ID)));
                 usuario.setLoginID(cursor.getString(cursor.getColumnIndex(USUARIO_LOGIN_ID)));
                 usuario.setConfiguracionID(cursor.getString(cursor.getColumnIndex(USUARIO_CONFIGURACION_ID)));

@@ -9,14 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.QuickContactBadge;
 import android.widget.Toast;
-
 import com.appmoviles.proyecto.util.JsonParse;
 import com.google.firebase.FirebaseApp;
-
 import java.io.IOException;
 import java.io.InputStream;
 
