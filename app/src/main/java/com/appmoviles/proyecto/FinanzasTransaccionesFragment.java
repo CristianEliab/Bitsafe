@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appmoviles.proyecto.modelo.Banco;
+import com.appmoviles.proyecto.modelo.Cuenta;
 import com.appmoviles.proyecto.modelo.Transaccion;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.appmoviles.proyecto.util.Constantes.BUNDLE_ID_BANCO;
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_ID_CUENTA;
 
 
 public class FinanzasTransaccionesFragment extends Fragment implements AdapterTemplate_Transacciones.OnItemClickListener, View.OnClickListener {
@@ -38,7 +40,7 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
     private Button btn_fragment_finanzas_transacciones_agregar_transaccion;
     private TextView tv_fragment_finanzas_transacciones_titulo;
 
-    private Banco bancoSeleccionado;
+    private Cuenta cuentaSeleccionada;
 
     private FinanzasCrearTransaccionFragment finanzasCrearTransaccionFragment;
 
@@ -63,15 +65,15 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
         lineChartTransacciones = v.findViewById(R.id.lc_fragment_finanzas_transacciones);
         tv_fragment_finanzas_transacciones_titulo = v.findViewById(R.id.tv_fragment_finanzas_transacciones_titulo);
 
-        if(this.getArguments() != null){
-            String id_banco = (String)getArguments().get(BUNDLE_ID_BANCO);
-            //SIMULO QUE : --> SE VA A BUSCAR EL ID DEL BANCO EN LA BASE DE DATOS
-            bancoSeleccionado = new Banco();
-            bancoSeleccionado.setNombreBanco("banco" + id_banco);
-            bancoSeleccionado.setBancoID(id_banco);
+        if (this.getArguments() != null) {
+            String id_cuenta = (String) getArguments().get(BUNDLE_ID_CUENTA);
+            //SIMULO QUE : --> SE VA A BUSCAR EL ID DE LA CUENTA EN LA BASE DE DATOS
+            cuentaSeleccionada = new Cuenta();
+            cuentaSeleccionada.setNumeroCuenta(id_cuenta);
+
+            tv_fragment_finanzas_transacciones_titulo.setText("Pertenecientes al número de cuenta " + cuentaSeleccionada.getNumeroCuenta());
         }
 
-        tv_fragment_finanzas_transacciones_titulo.setText("Pertenecientes al " + bancoSeleccionado.getBancoID());
 
         //Linechart
 

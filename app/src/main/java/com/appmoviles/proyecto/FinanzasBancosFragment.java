@@ -21,8 +21,6 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
 
     private RecyclerView rv_fragment_finanzas_bancos_lista_;
     private AdapterTemplate_Bancos adapterTemplate_bancos;
-    private FinanzasTransaccionesFragment finanzasTransaccionesFragment;
-
 
     public FinanzasBancosFragment() {
         // Required empty public constructor
@@ -107,12 +105,13 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
         Bundle bundle = new Bundle();
         bundle.putString(BUNDLE_ID_BANCO, banco.getBancoID());
 
-        finanzasTransaccionesFragment = new FinanzasTransaccionesFragment();
-        finanzasTransaccionesFragment.setArguments(bundle);
+        FinanzasCuentasFragment finanzasCuentasFragment = new FinanzasCuentasFragment();
+        finanzasCuentasFragment.setArguments(bundle);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.contenido_cliente, finanzasTransaccionesFragment);
+        transaction.replace(R.id.contenido_cliente, finanzasCuentasFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+
     }
 
 

@@ -77,12 +77,14 @@
 
 
                 <TextView
+                    android:id="@+id/tv_fragment_finanzas_cuentas_titulo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="@string/fragment_finanzas_cuentas_titulo_tus_cuentas"
+                    android:text="Pertenecientes al Banco ********"
                     android:textColor="@color/colorBitsafeBlue"
-                    android:textStyle="bold" />
+                    android:textStyle="italic"
+                    android:textSize="20dp"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_fragment_finanzas_cuentas_lista"

@@ -4,19 +4,29 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appmoviles.proyecto.modelo.Banco;
 import com.appmoviles.proyecto.modelo.Cuenta;
+
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_ID_BANCO;
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_ID_CUENTA;
 
 public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate_Cuentas.OnItemClickListener {
 
     private RecyclerView rv_fragment_finanzas_cuentas_lista;
     private AdapterTemplate_Cuentas adapterTemplate_cuentas;
+    private FinanzasTransaccionesFragment finanzasTransaccionesFragment;
+    private TextView tv_fragment_finanzas_cuentas_titulo;
+
+    private Banco bancoSeleccionado;
 
     public FinanzasCuentasFragment() {
         // Required empty public constructor
@@ -32,6 +42,8 @@ public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_finanzas_cuentas, container, false);
 
+        tv_fragment_finanzas_cuentas_titulo = v.findViewById(R.id.tv_fragment_finanzas_cuentas_titulo);
+
 
         rv_fragment_finanzas_cuentas_lista = v.findViewById(R.id.rv_fragment_finanzas_cuentas_lista);
         adapterTemplate_cuentas = new AdapterTemplate_Cuentas();
@@ -39,6 +51,16 @@ public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate
         rv_fragment_finanzas_cuentas_lista.setHasFixedSize(true);
         rv_fragment_finanzas_cuentas_lista.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_fragment_finanzas_cuentas_lista.setAdapter(adapterTemplate_cuentas);
+
+
+        if (this.getArguments() != null) {
+            String id_banco = (String) getArguments().get(BUNDLE_ID_BANCO);
+            //SIMULO QUE : --> SE VA A BUSCAR EL ID DEL BANCO EN LA BASE DE DATOS
+            bancoSeleccionado = new Banco();
+            bancoSeleccionado.setBancoID(id_banco);
+
+            tv_fragment_finanzas_cuentas_titulo.setText("Perteneciente al Banco: " + bancoSeleccionado.getBancoID());
+        }
 
 
         Cuenta c1 = new Cuenta();
@@ -97,7 +119,16 @@ public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate
 
     @Override
     public void onItemClick(Cuenta cuenta) {
-        mostrarMensaje(cuenta.getUsuarioID());
+
+        Bundle bundle = new Bundle();
+        bundle.putString(BUNDLE_ID_CUENTA, cuenta.getNumeroCuenta());
+
+        finanzasTransaccionesFragment = new FinanzasTransaccionesFragment();
+        finanzasTransaccionesFragment.setArguments(bundle);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.contenido_cliente, finanzasTransaccionesFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void mostrarMensaje(String texto) {
