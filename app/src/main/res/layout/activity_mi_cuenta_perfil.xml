@@ -2,7 +2,8 @@
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -272,6 +273,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rl_micuenta_trabajo"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/registro_boton_registrarse"
                 android:layout_centerHorizontal="true">
 
@@ -305,6 +307,22 @@
 
 
     </ScrollView>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/home_clientes_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorBarraNavegacion"
+        app:itemIconTint="@drawable/home_cliente_selector"
+        app:itemTextColor="@drawable/home_cliente_selector"
+        app:labelVisibilityMode="selected"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_cliente">
+
+    </android.support.design.widget.BottomNavigationView>
 
 
 
