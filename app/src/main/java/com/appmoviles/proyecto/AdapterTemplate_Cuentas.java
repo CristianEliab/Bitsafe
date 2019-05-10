@@ -2,6 +2,7 @@ package com.appmoviles.proyecto;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,6 +38,12 @@ public class AdapterTemplate_Cuentas  extends RecyclerView.Adapter<AdapterTempla
     public void onBindViewHolder(AdapterTemplate_Cuentas.CustomViewHolder holder, final int position) {
         ((TextView) holder.root.findViewById(R.id.tv_renglon_cuenta_fecha_vinculacion)).setText(data.get(position).getUsuarioID());
         ((TextView) holder.root.findViewById(R.id.tv_renglon_cuenta_saldo)).setText(data.get(position).getNumeroCuenta());
+        holder.root.findViewById(R.id.rl_renglon_relative_marco_cuenta).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(data.get(position));
+            }
+        });
 
     }
 
