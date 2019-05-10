@@ -59,6 +59,15 @@ public class PerfilCliente extends Fragment {
             }
         });
 
+        tv_ajustes_perfil_cliente = v.findViewById(R.id.tv_ajustes_perfil_cliente);
+        tv_ajustes_perfil_cliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(contexto, AjuestesContrasena.class);
+                startActivity(i);
+            }
+        });
+
 
 
 
