@@ -4,11 +4,16 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 public class FinanzasFragment extends Fragment {
+
+    private ImageView iv_fragment_finanzas_perfil;
 
     public FinanzasFragment() {
         // Required empty public constructor
@@ -24,6 +29,21 @@ public class FinanzasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_finanzas, container, false);
+        View v= inflater.inflate(R.layout.fragment_finanzas, container, false);
+
+        iv_fragment_finanzas_perfil = v.findViewById(R.id.iv_fragment_finanzas_perfil);
+        iv_fragment_finanzas_perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PerfilCliente perfilCliente = new PerfilCliente();
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.contenido, perfilCliente);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+        return v;
     }
 }
