@@ -9,10 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.appmoviles.proyecto.modelo.Cuenta;
 
-public class FinanzasCuentasFragment extends Fragment {
+public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate_Cuentas.OnItemClickListener {
 
     private RecyclerView rv_fragment_finanzas_cuentas_lista;
     private AdapterTemplate_Cuentas adapterTemplate_cuentas;
@@ -34,6 +35,7 @@ public class FinanzasCuentasFragment extends Fragment {
 
         rv_fragment_finanzas_cuentas_lista = v.findViewById(R.id.rv_fragment_finanzas_cuentas_lista);
         adapterTemplate_cuentas = new AdapterTemplate_Cuentas();
+        adapterTemplate_cuentas.setListener(this);
         rv_fragment_finanzas_cuentas_lista.setHasFixedSize(true);
         rv_fragment_finanzas_cuentas_lista.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_fragment_finanzas_cuentas_lista.setAdapter(adapterTemplate_cuentas);
@@ -91,5 +93,14 @@ public class FinanzasCuentasFragment extends Fragment {
         adapterTemplate_cuentas.agregarCuenta(c10);
 
         return v;
+    }
+
+    @Override
+    public void onItemClick(Cuenta cuenta) {
+        mostrarMensaje(cuenta.getUsuarioID());
+    }
+
+    public void mostrarMensaje(String texto) {
+        Toast.makeText(getActivity(), texto, Toast.LENGTH_LONG).show();
     }
 }
