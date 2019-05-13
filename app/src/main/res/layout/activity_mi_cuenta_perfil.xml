@@ -80,7 +80,8 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="13dp"
-                    android:src="@drawable/registro_ic_nombre" />
+                    android:src="@drawable/registro_ic_nombre"
+                    />
 
                 <TextView
                     android:id="@+id/tv_micuenta_nombre_nombre"
@@ -274,7 +275,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rl_micuenta_trabajo"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="100dp"
                 android:background="@drawable/registro_boton_registrarse"
                 android:layout_centerHorizontal="true">
 
