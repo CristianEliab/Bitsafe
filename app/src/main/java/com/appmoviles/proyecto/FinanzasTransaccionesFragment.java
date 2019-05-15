@@ -2,6 +2,7 @@ package com.appmoviles.proyecto;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,15 +25,24 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.appmoviles.proyecto.util.Constantes.BUNDLE_ID_BANCO;
 import static com.appmoviles.proyecto.util.Constantes.BUNDLE_ID_CUENTA;
+import static com.appmoviles.proyecto.util.Constantes.CHILD_TRANSACCIONES;
 
 
 public class FinanzasTransaccionesFragment extends Fragment implements AdapterTemplate_Transacciones.OnItemClickListener, View.OnClickListener {
+
+    FirebaseDatabase database;
+    FirebaseAuth auth;
 
     private RecyclerView rv_fragment_finanzas_transacciones_lista;
     private AdapterTemplate_Transacciones adapterTemplate_transacciones;
@@ -43,6 +53,7 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
     private Cuenta cuentaSeleccionada;
 
     private FinanzasCrearTransaccionFragment finanzasCrearTransaccionFragment;
+
 
 
     public FinanzasTransaccionesFragment() {
@@ -57,6 +68,10 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+
         View v = inflater.inflate(R.layout.fragment_finanzas_transacciones, container, false);
 
         rv_fragment_finanzas_transacciones_lista = v.findViewById(R.id.rv_fragment_finanzas_transacciones_lista);
@@ -125,7 +140,9 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
         rv_fragment_finanzas_transacciones_lista.setAdapter(adapterTemplate_transacciones);
         adapterTemplate_transacciones.setListener(this);
 
+        cargarTransacciones();
 
+        /**
         Transaccion t1 = new Transaccion();
         t1.setMontoTransaccion("monto 1");
         t1.setCategoriaID("categoria 1");
@@ -189,7 +206,7 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
         adapterTemplate_transacciones.agregarTransaccion(t7);
         adapterTemplate_transacciones.agregarTransaccion(t8);
         adapterTemplate_transacciones.agregarTransaccion(t9);
-
+         */
 
         return v;
     }
@@ -212,6 +229,27 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
 
         }
     }
+
+
+    public void cargarTransacciones(){
+    database.getReference().child(CHILD_TRANSACCIONES).addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            Transaccion transaccionTmp;
+            for (DataSnapshot hijo: dataSnapshot.getChildren()){
+                transaccionTmp = hijo.getValue(Transaccion.class);
+                adapterTemplate_transacciones.agregarTransaccion(transaccionTmp);
+            }
+
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    });
+    }
+
 
     public void mostrarMensaje(String texto) {
         Toast.makeText(getActivity(), texto, Toast.LENGTH_LONG).show();

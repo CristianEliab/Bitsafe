@@ -36,8 +36,9 @@ public class AdapterTemplate_Cuentas  extends RecyclerView.Adapter<AdapterTempla
 
     @Override
     public void onBindViewHolder(AdapterTemplate_Cuentas.CustomViewHolder holder, final int position) {
-        ((TextView) holder.root.findViewById(R.id.tv_renglon_cuenta_fecha_vinculacion)).setText(data.get(position).getUsuarioID());
-        ((TextView) holder.root.findViewById(R.id.tv_renglon_cuenta_saldo)).setText(data.get(position).getNumeroCuenta());
+        ((TextView) holder.root.findViewById(R.id.tv_renglon_cuenta_numero_cuenta)).setText(data.get(position).getNumeroCuenta());
+        ((TextView) holder.root.findViewById(R.id.tv_renglon_cuenta_fecha_vinculacion)).setText(data.get(position).getBancoID());
+        ((TextView) holder.root.findViewById(R.id.tv_renglon_cuenta_saldo)).setText("CEROS PESOS");
         holder.root.findViewById(R.id.rl_renglon_relative_marco_cuenta).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

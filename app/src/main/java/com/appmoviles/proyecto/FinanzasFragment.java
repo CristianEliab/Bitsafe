@@ -249,7 +249,6 @@ public class FinanzasFragment extends Fragment implements View.OnClickListener {
 
     }
 
-
     public void mostrarMensaje(String texto) {
         Toast.makeText(getActivity(), texto, Toast.LENGTH_LONG).show();
     }
