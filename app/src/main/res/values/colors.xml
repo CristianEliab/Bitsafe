@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#076AAD</color>
     <color name="colorPrimaryDark">#076AAD</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#076AAD</color>
     <color name="colorWhite">#FFFF</color>
     <color name="colorBitsafeBlue">#076AAD</color>
     <color name="colorBitsafeGray">#E0E0E0</color>

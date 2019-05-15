@@ -39,16 +39,10 @@
                 android:layout_marginRight="20dp"
                 android:background="@drawable/registro_figura_texto_redondo"
                 android:digits="1234567890"
-                android:drawableLeft="@drawable/login_ic_57"
-                android:editable="false"
                 android:enabled="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:textSize="@dimen/login_btn_tamanio_numeros"
                 android:gravity="center"
                 android:hint="@string/login_celular_numero"
                 android:imeOptions="actionDone"
-                android:maxLength="10"
                 android:inputType="phone"
                 android:singleLine="true"
                 android:textColorHint="@color/colorBitsafeBlue" />
@@ -60,7 +54,7 @@
                 android:layout_below="@+id/et_login_numero_celular"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
-                android:layout_marginBottom="25dp"
+                android:layout_marginBottom="50dp"
                 android:columnCount="3"
                 android:orientation="horizontal">
 
@@ -164,22 +158,11 @@
 
             </GridLayout>
 
-            <Button
-                android:id="@+id/btn_login_loguearse"
-                android:layout_width="@dimen/registro_btn_registrarse_w"
-                android:layout_height="@dimen/registro_btn_registrarse_h"
-                android:layout_below="@+id/gl_login_teclado"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/registro_boton_registrarse"
-                android:hint="@string/login_loguearse"
-                android:layout_marginBottom="100dp"
-                android:textColorHint="@color/colorWhite" />
-
             <TextView
                 android:id="@+id/tv_login_registrarse"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_tv_registrarse_h"
-                android:layout_alignBottom="@+id/btn_login_loguearse"
+                android:layout_alignBottom="@+id/gl_login_teclado"
                 android:layout_alignParentBottom="true"
                 android:alpha="0.60"
                 android:background="@color/colorBitsafeBlue"

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -51,6 +52,7 @@ public class FinanzasFragment extends Fragment implements View.OnClickListener {
     //Para navegar a otros fragments
     FinanzasBancosFragment finanzasBancosFragment;
 
+    private ImageView iv_fragment_finanzas_perfil;
 
     public FinanzasFragment() {
         // Required empty public constructor
@@ -245,6 +247,13 @@ public class FinanzasFragment extends Fragment implements View.OnClickListener {
             case R.id.pc_fragment_finanzas_gastos:
                 mostrarMensaje("Pie chart ");
                 break;
+            case R.id.iv_fragment_finanzas_perfil:
+                PerfilCliente perfilCliente = new PerfilCliente();
+                transaction.replace(R.id.contenido_cliente, perfilCliente);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                break;
+
         }
 
     }

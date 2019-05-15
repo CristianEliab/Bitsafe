@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_below="@+id/tb_fragment_perfil_cliente"
-                android:background="#04edba">
+                android:background="#a6edc3">
 
                 <TextView
                     android:id="@+id/iv_nombre_perfil_cliente"
@@ -94,7 +94,7 @@
                     android:layout_marginTop="42dp"
                     android:layout_marginEnd="25dp"
                     android:text="ALEJANDRA RAMOS"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="#42423f"
                     android:textSize="20dp" />
 
                 <TextView
@@ -116,7 +116,7 @@
                     android:layout_alignEnd="@+id/tv_cuenta_bitsafe_perfil_cliente"
                     android:layout_marginTop="-53dp"
                     android:text="3045840096"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="#42423f"
                     android:textSize="20dp" />
 
 
@@ -136,8 +136,8 @@
 
                     <ImageView
                         android:id="@+id/iv_micuenta_perfil_cliente"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:src="@drawable/ic_cuenta_user"
@@ -151,8 +151,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="52dp"
                         android:text="Mi cuenta"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="24dp" />
+                        android:textColor="#42423f"
+                        android:textSize="@dimen/fragments_toolbar" />
 
                 </RelativeLayout>
 
@@ -163,12 +163,12 @@
 
                     <ImageView
                         android:id="@+id/iv_ajustes_perfil_cliente"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentBottom="true"
                         android:layout_marginLeft="10dp"
-                        android:src="@drawable/ic_repairing_service"
-                        />
+                        android:layout_marginBottom="18dp"
+                        android:src="@drawable/ic_repairing_service" />
 
                     <TextView
                         android:id="@+id/tv_ajustes_perfil_cliente"
@@ -178,8 +178,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="52dp"
                         android:text="Ajustes"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="24dp" />
+                        android:textColor="#42423f"
+                        android:textSize="@dimen/fragments_toolbar" />
 
                 </RelativeLayout>
 
@@ -190,8 +190,8 @@
 
                     <ImageView
                         android:id="@+id/iv_ayuda_perfil_cliente"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:src="@drawable/ic_question"
@@ -205,8 +205,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="52dp"
                         android:text="Ayuda"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="24dp" />
+                        android:textColor="#42423f"
+                        android:textSize="@dimen/fragments_toolbar" />
 
                 </RelativeLayout>
 
@@ -217,8 +217,8 @@
 
                     <ImageView
                         android:id="@+id/iv_informacion_perfil_cliente"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:src="@drawable/ic_information"
@@ -232,8 +232,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="52dp"
                         android:text="Terminos y condiciones"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="24dp" />
+                        android:textColor="#42423f"
+                        android:textSize="@dimen/fragments_toolbar" />
 
                 </RelativeLayout>
 
@@ -244,8 +244,8 @@
 
                     <ImageView
                         android:id="@+id/iv_cerrar_perfil_cliente"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:src="@drawable/ic_logout"
@@ -260,7 +260,7 @@
                         android:layout_marginStart="52dp"
                         android:text="Cerrar sesión"
                         android:textColor="#d80d17"
-                        android:textSize="24dp" />
+                        android:textSize="@dimen/fragments_toolbar" />
 
                 </RelativeLayout>
 

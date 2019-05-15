@@ -76,6 +76,7 @@
                 android:layout_below="@+id/tb_fragment_clientes_toolbar"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
+                android:autofillHints=""
                 android:background="@drawable/fragment_clientes_figura_filtro"
                 android:drawableRight="@drawable/fragment_clientes_ic_buscar_clientes"
                 android:hint="@string/fragment_clientes_filtro"
