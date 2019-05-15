@@ -50,6 +50,7 @@
                 android:layout_below="@+id/tv_registro_texto_registro"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
+                android:allowUndo="true"
                 android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_nombre"
                 android:freezesText="true"
@@ -65,6 +66,7 @@
                 android:layout_below="@+id/et_registro_nombre"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
+                android:allowUndo="true"
                 android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_cedula"
                 android:gravity="center|left"
@@ -82,10 +84,12 @@
                 android:layout_below="@+id/et_registro_cedula"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
+                android:allowUndo="true"
                 android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_smartphone"
                 android:gravity="center|left"
                 android:hint="@string/registro_celular"
+                android:inputType="phone"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />
 
@@ -97,10 +101,12 @@
                 android:layout_below="@+id/et_registro_celular"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
+                android:allowUndo="true"
                 android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_correo"
                 android:gravity="center|left"
                 android:hint="@string/registro_correo"
+                android:justificationMode="inter_word"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />
 
@@ -111,18 +117,48 @@
                 android:layout_below="@+id/et_registro_correo"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
+                android:allowUndo="true"
                 android:background="@drawable/registro_figura_texto_redondo_registro"
                 android:drawableLeft="@drawable/registro_ic_house"
-                android:gravity="center"
+                android:gravity="center|left"
                 android:hint="@string/registro_ubicacion"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />
+
+            <Button
+                android:id="@+id/et_registro_fecha_nacimiento"
+                android:layout_width="@dimen/registro_et_campos_registro_w"
+                android:layout_height="@dimen/registro_et_campos_registro_h"
+                android:layout_below="@+id/et_registro_ubicacion"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/registro_figura_texto_redondo_registro"
+                android:drawableLeft="@drawable/registro_ic_fecha"
+                android:gravity="center|left"
+                android:hint="@string/registro_fecha_nacimiento"
+                android:textColorHint="@color/colorBitsafeRegistro"
+                android:textSize="@dimen/registro_et_tamanio_campos" />
+
+            <Spinner
+                android:id="@+id/sp_registro_genero"
+                android:layout_width="@dimen/registro_et_campos_registro_w"
+                android:layout_height="@dimen/registro_et_campos_registro_h"
+                android:layout_below="@+id/et_registro_fecha_nacimiento"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/registro_figura_texto_redondo_registro"
+                android:entries="@array/gener_array"
+                android:gravity="center|left"
+                android:hint="@string/registro_genero"
+                android:textColorHint="@color/colorBitsafeRegistro"
+                android:textSize="@dimen/registro_et_tamanio_campos" />
+
 
             <EditText
                 android:id="@+id/et_registro_contrasenia"
                 android:layout_width="@dimen/registro_et_campos_opcionales_registro_w"
                 android:layout_height="@dimen/registro_et_campos_opcionales_registro_h"
-                android:layout_below="@+id/et_registro_ubicacion"
+                android:layout_below="@+id/sp_registro_genero"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/registro_figura_texto_redondo_opciones"

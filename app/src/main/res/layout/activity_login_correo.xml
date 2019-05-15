@@ -42,12 +42,11 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/registro_figura_texto_redondo_opciones"
-                android:drawableRight="@drawable/registro_ic_password"
+                android:drawableRight="@drawable/registro_ic_email"
                 android:gravity="center"
-                android:cursorVisible="false"
                 android:freezesText="true"
                 android:hint="@string/login_correo_ingresar"
-                android:inputType="textVisiblePassword"
+                android:inputType="textEmailAddress"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />
 

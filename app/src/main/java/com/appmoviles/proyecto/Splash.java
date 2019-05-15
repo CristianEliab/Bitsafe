@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import com.appmoviles.proyecto.util.JsonParse;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -26,6 +28,7 @@ public class Splash extends AppCompatActivity {
 
     private boolean cargodb;
     private SharedPreferences myPreferences;
+    FirebaseDatabase rtdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,11 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         myPreferences = PreferenceManager.getDefaultSharedPreferences(Splash.this);
+        myPreferences.edit().clear().commit();
         cargodb = myPreferences.getBoolean(GUARDO, true);
+
+        rtdb = FirebaseDatabase.getInstance();
+        rtdb.getReference().removeValue();
 
         // Carga la base de datos la primera vez.
         if (cargodb) {
@@ -51,10 +58,8 @@ public class Splash extends AppCompatActivity {
                 myEditor.commit();
             } catch (IOException e) {
                 Toast.makeText(Splash.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
             } catch (Exception e) {
                 Toast.makeText(Splash.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
             }
         }
 

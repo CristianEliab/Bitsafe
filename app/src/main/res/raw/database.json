@@ -1,19 +1,19 @@
 {
   "usuarios": [
     {
-      "usuarioID": "01",
+      "usuarioID": "le3DREcuWuV9PtiImpXORaMMNVH3",
       "nombre": "Critian Eliab",
-      "fecha_nacimiento": "2019-01-12",
+      "fecha_nacimiento": "1997-12-15",
       "telefono": "3156067465",
       "genero": "Masculino",
       "estadoUsuarioID": "01",
-      "cedula": "1234189967",
+      "cedula": "3156067465",
       "ubicacion": "Cali",
-      "correo": "eliad97@hotmail.com",
+      "correo": "eliadcrist@gmail.com",
       "configuracionID": "01"
     },
     {
-      "usuarioID": "nWld7bALGag02cLzefA3U0LjV2g1",
+      "usuarioID": "VmYXVfTQFEf3rdtZtjfFyg2xNdu1",
       "nombre": "Alejandra Ramos Velez",
       "fecha_nacimiento": "2019-01-12",
       "telefono": "3001112233",
@@ -25,27 +25,27 @@
       "configuracionID": "01"
     },
     {
-      "usuarioID": "03",
-      "nombre": "Andres Urbano",
+      "usuarioID": "A295owdX7mTiwVYOx1PW2XcUlk53",
+      "nombre": "Steven Muriel",
       "fecha_nacimiento": "2019-01-12",
       "telefono": "3121563489",
       "genero": "Masculino",
       "estadoUsuarioID": "01",
       "cedula": "11448899156",
       "ubicacion": "Cali",
-      "correo": "andres@gmail.com",
+      "correo": "steven@gmail.com",
       "configuracionID": "01"
     },
     {
-      "usuarioID": "6QWqRaccOWObqZOQYxpJDz5sdWi2",
-      "nombre": "Critian Eliab",
+      "usuarioID": "KErt3qoS59QyupH045HTA8L5jYx1",
+      "nombre": "Johan Medina",
       "fecha_nacimiento": "2019-01-12",
-      "telefono": "3156067465",
+      "telefono": "3124598374",
       "genero": "Masculino",
       "estadoUsuarioID": "01",
       "cedula": "1234189967",
       "ubicacion": "Cali",
-      "correo": "eliadcrist@gmail.com",
+      "correo": "johan@gmail.com",
       "configuracionID": "01"
     }
   ],
@@ -155,15 +155,15 @@
     {
       "cuentaID": "01",
       "numeroCuenta": "1234-5678-9012-3456",
-      "usuarioID": "nWld7bALGag02cLzefA3U0LjV2g1",
+      "usuarioID": "le3DREcuWuV9PtiImpXORaMMNVH3",
       "tipoCuentaID": "01",
       "tipoCuentaNombre": "Cuenta Credito",
       "bancoID": "02"
     },
     {
       "cuentaID": "02",
-      "numeroCuenta": "6QWqRaccOWObqZOQYxpJDz5sdWi2",
-      "usuarioID": "nWld7bALGag02cLzefA3U0LjV2g1",
+      "numeroCuenta": "5678-3456-1234-3457",
+      "usuarioID": "le3DREcuWuV9PtiImpXORaMMNVH3",
       "tipoCuentaID": "02",
       "tipoCuentaNombre": "Cuenta Debito",
       "bancoID": "01"
@@ -171,7 +171,7 @@
     {
       "cuentaID": "03",
       "numeroCuenta": "5678-3456-1234-3457",
-      "usuarioID": "nWld7bALGag02cLzefA3U0LjV2g1",
+      "usuarioID": "A295owdX7mTiwVYOx1PW2XcUlk53",
       "tipoCuentaID": "01",
       "tipoCuentaNombre": "Cuenta Credito",
       "bancoID": "03"
@@ -276,11 +276,15 @@
   ],
   "rolusuario": [
     {
-      "usuarioID": "01",
+      "usuarioID": "VmYXVfTQFEf3rdtZtjfFyg2xNdu1",
       "rolID": "01"
     },
     {
-      "usuarioID": "nWld7bALGag02cLzefA3U0LjV2g1",
+      "usuarioID": "le3DREcuWuV9PtiImpXORaMMNVH3",
+      "rolID": "02"
+    },
+    {
+      "usuarioID": "KErt3qoS59QyupH045HTA8L5jYx1",
       "rolID": "02"
     }
   ],

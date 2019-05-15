@@ -41,6 +41,7 @@ public class LoginCorreo extends AppCompatActivity {
     private EditText et_login_correo_confirmar_contrasenia;
     private Button btn_login_correo_iniciar;
     private TextView tv_login_correo_registrarse;
+    private boolean admin;
 
     FirebaseAuth auth;
     FirebaseDatabase rtdb;
@@ -97,12 +98,42 @@ public class LoginCorreo extends AppCompatActivity {
         btn_login_correo_iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String correo = et_login_correo_contrasenia.getText().toString().trim();
+                final String correo = et_login_correo_contrasenia.getText().toString().trim();
                 String pass = et_login_correo_confirmar_contrasenia.getText().toString().trim();
+
 
                 if (!correo.trim().equals("") && !pass.trim().equals("") && correo != null && pass != null) {
                     loguearUsuario(correo, pass);
+                    rtdb.getReference().child("rolusuario")
+                            .addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    admin = false;
+                                    for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                                        //Si es admin, loguearse
+                                        RolUsuario rolUsuario = hijo.getValue(RolUsuario.class);
+                                        if (rolUsuario.getRolID().equals("02") &&
+                                                rolUsuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
+                                           admin = true;
+                                        }
+                                    }
 
+                                    if(admin){
+                                        Intent i = new Intent(LoginCorreo.this, HomeAdministrador.class);
+                                        startActivity(i);
+                                        finish();
+                                    }else{
+                                        Intent i = new Intent(LoginCorreo.this, HomeCliente.class);
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
                 } else {
                     Toast.makeText(LoginCorreo.this, "Ingrese el correo y contraseña", Toast.LENGTH_SHORT).show();
                 }
@@ -120,10 +151,10 @@ public class LoginCorreo extends AppCompatActivity {
         });
 
         correo_guardado = myPreferences.getString(EMAIL_USER, "Correo");
-        if(correo_guardado.equals("Correo")){
+        if (correo_guardado.equals("Correo")) {
             et_login_correo_contrasenia.setHint(correo_guardado);
             et_login_correo_contrasenia.setHintTextColor(Color.rgb(130, 130, 130));
-        }else {
+        } else {
             et_login_correo_contrasenia.setText(correo_guardado);
             et_login_correo_contrasenia.setTextColor(Color.rgb(130, 130, 130));
         }
@@ -134,46 +165,15 @@ public class LoginCorreo extends AppCompatActivity {
         auth.signInWithEmailAndPassword(correo, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                rtdb.getReference().child("rolusuario")
-                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                // We need an Editor object to make preference changes.
-                                // All objects are from android.context.Context
-                                SharedPreferences.Editor myEditor = myPreferences.edit();
-                                myEditor.putString(EMAIL_USER, correo);
-                                myEditor.commit();
-
-                                //Respuesta de firebase
-                                for (DataSnapshot hijo : dataSnapshot.getChildren()) {
-                                    //Si es admin, loguearse
-                                    RolUsuario rolUsuario = hijo.getValue(RolUsuario.class);
-                                    if (rolUsuario.getRolID().equals("02") &&
-                                            rolUsuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
-                                        Intent i = new Intent(LoginCorreo.this, HomeAdministrador.class);
-                                        startActivity(i);
-                                        finish();
-                                    } else {
-                                        Intent i = new Intent(LoginCorreo.this, HomeCliente.class);
-                                        startActivity(i);
-                                        finish();
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                            }
-                        });
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(LoginCorreo.this, "No se pudo ingresar" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                et_login_correo_confirmar_contrasenia.setError("No se pudo ingresar.");
             }
         });
+
     }
 
 

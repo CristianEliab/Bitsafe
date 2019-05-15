@@ -209,4 +209,10 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
     public void setListener(OnItemPassListener listener) {
         this.listener = listener;
     }
+
+
+    public interface OnBackPressedListener {
+        public void doBack();
+    }
+
 }

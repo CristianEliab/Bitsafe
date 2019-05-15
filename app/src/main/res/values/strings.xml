@@ -16,6 +16,8 @@
     <string name="registro_registrarse_google">Registrarse con Google</string>
     <string name="registro_correo">Correo</string>
     <string name="registro_ubicacion">Ubicación</string>
+    <string name="registro_fecha_nacimiento">Fecha de nacimiento</string>
+    <string name="registro_genero">Genero</string>
     <string name="opciones_prompt">Datos opcionales</string>
     <string-array name="opciones_arrays">
         <item>Correo</item>
@@ -95,6 +97,14 @@
 
     <string name="fragment_perfil_clientes">Perfil</string>
     <string name="fragment_micuenta_clientes">Editar Perfil</string>
+
+    <string name="gener_prompt">Genero</string>
+    <string-array name="gener_array">
+        <item>Masculino</item>
+        <item>Femenino</item>
+        <item>Otro</item>
+        <item>Prefiereo no mencionarlo</item>
+    </string-array>
 
 
 </resources>

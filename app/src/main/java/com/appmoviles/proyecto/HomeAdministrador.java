@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-public class HomeAdministrador extends FragmentActivity {
+public class HomeAdministrador extends FragmentActivity{
 
     private ClientesFragment clientesFragment;
     private EstadisticasFragment estadisticasFragment;
@@ -32,6 +32,7 @@ public class HomeAdministrador extends FragmentActivity {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.contenido, clientesFragment);
+        transaction.addToBackStack("");
         transaction.commit();
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -61,4 +62,18 @@ public class HomeAdministrador extends FragmentActivity {
             }
         });
     }
+
+
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 0) {
+            super.onBackPressed();
+            //additional code
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+    }
+
+
 }
