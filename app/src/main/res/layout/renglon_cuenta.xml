@@ -24,12 +24,13 @@
             android:background="@drawable/icon_banco_bogota" />
 
         <TextView
+            android:id="@+id/tv_renglon_cuenta_numero_cuenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_toRightOf="@+id/iv_renglon_cuenta_imagen_banco"
-            android:text="Cuenta de Ahorro Example"
+            android:text="No cuenta: ***********"
             android:textColor="@color/colorBitsafeBlue" />
 
 
