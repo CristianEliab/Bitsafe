@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="40dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="30dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selecciona una frecuencia de Pago"
+            android:textColor="#4F4F4F"
+            android:textSize="18dp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:layout_marginBottom="60dp"
+            />
+        <Spinner
+            android:id="@+id/spinner_diario"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/momentos_dia"
+            tools:ignore="MissingConstraints"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/white_shadowed_shape"/>
+        <Spinner
+            android:id="@+id/spinner_semanal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/dias_semana"
+            tools:ignore="MissingConstraints"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/white_shadowed_shape"/>
+        <Spinner
+            android:id="@+id/spinner_2semanas"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/dias_semana_2"
+            tools:ignore="MissingConstraints"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/white_shadowed_shape"/>
+        <Spinner
+            android:id="@+id/spinner_mensual"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/calendario"
+            tools:ignore="MissingConstraints"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/white_shadowed_shape"/>
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

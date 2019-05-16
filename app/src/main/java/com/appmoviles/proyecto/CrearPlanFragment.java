@@ -2,6 +2,7 @@ package com.appmoviles.proyecto;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,13 @@ public class CrearPlanFragment extends Fragment {
                  showDatePicker();
             }
         });
+        ly_agregar_frecuencia_pago.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                showPaymentFrequencyDialog();
+            }
+        });
 
         return v;
     }
@@ -85,4 +93,12 @@ public class CrearPlanFragment extends Fragment {
                     + "-" + String.valueOf(year));
         }
     };
+
+    private void showPaymentFrequencyDialog(){
+
+        FragmentManager fm = getFragmentManager();
+        FrecuenciaPago frecuanciaPagoDialog = new FrecuenciaPago();
+        frecuanciaPagoDialog.show(fm, "fragment_payment_frequency");
+
+    }
 }
