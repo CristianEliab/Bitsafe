@@ -86,15 +86,14 @@
                     android:textColor="@color/colorBitsafeBlue"
                     android:textSize="23dp" />
 
-                <View
-                    android:id="@+id/view"
+                <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/tv_cambio_ajustes_mis_claves"
-                    android:layout_marginTop="10dp"
-                    android:outlineAmbientShadowColor="#42423f">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_cambio_ajustes_mis_claves"
+                    android:id="@+id/view"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/ic_linea"/>
 
-                </View>
 
                 <TextView
                     android:id="@+id/tv_cambiar_pin"
@@ -113,7 +112,7 @@
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="89dp"
                     android:layout_marginEnd="27dp"
                     android:src="@drawable/ic_fecha_next" />
 
@@ -134,10 +133,10 @@
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="139dp"
+                    android:layout_marginTop="155dp"
                     android:layout_marginEnd="27dp"
-                    android:src="@drawable/ic_fecha_next"
-                    android:layout_marginBottom="20dp"/>
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/ic_fecha_next" />
 
             </RelativeLayout>
 
@@ -160,15 +159,13 @@
                     android:textColor="@color/colorBitsafeBlue"
                     android:textSize="23dp" />
 
-                <View
-                    android:id="@+id/view_datos"
+                <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/tv_cambio_ajustes_mis_datos"
-                    android:layout_marginTop="10dp"
-                    android:outlineAmbientShadowColor="#42423f">
-
-                </View>
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_cambio_ajustes_mis_datos"
+                    android:id="@+id/view_datos"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/ic_linea"/>
 
                 <TextView
                     android:id="@+id/tv_cambiar_nombre"
@@ -187,7 +184,7 @@
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="100dp"
                     android:layout_marginEnd="27dp"
                     android:src="@drawable/ic_fecha_next" />
 
@@ -208,7 +205,7 @@
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="131dp"
+                    android:layout_marginTop="166dp"
                     android:layout_marginEnd="27dp"
                     android:src="@drawable/ic_fecha_next" />
 
@@ -229,7 +226,7 @@
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="205dp"
+                    android:layout_marginTop="233dp"
                     android:layout_marginEnd="27dp"
                     android:src="@drawable/ic_fecha_next" />
 
@@ -250,7 +247,7 @@
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="270dp"
+                    android:layout_marginTop="299dp"
                     android:layout_marginEnd="27dp"
                     android:src="@drawable/ic_fecha_next" />
 
@@ -271,7 +268,7 @@
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="335dp"
+                    android:layout_marginTop="365dp"
                     android:layout_marginEnd="27dp"
                     android:src="@drawable/ic_fecha_next" />
 
@@ -292,10 +289,10 @@
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="394dp"
+                    android:layout_marginTop="439dp"
                     android:layout_marginEnd="27dp"
-                    android:src="@drawable/ic_fecha_next"
-                    android:layout_marginBottom="20dp"/>
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/ic_fecha_next" />
 
             </RelativeLayout>
 
