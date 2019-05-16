@@ -8,30 +8,37 @@ public class Cuenta {
     private String tipoCuentaID;
     private String tipoCuentaNombre;
     private String bancoID;
-    public String nombre;
-    public String numero;
-    public String[] bancos;
+    private String saldo;
+    private String fechaVinculacion;
 
     public Cuenta() {
     }
 
-    public Cuenta(String nombre, String numero, String[] bancos) {
-        this.nombre = nombre;
-        this.numero = numero;
-        this.bancos = bancos;
-    }
-
-    public Cuenta(String numero) {
-        this.numero = numero;
-    }
-
-    public Cuenta(String cuentaID, String numeroCuenta, String usuarioID, String tipoCuentaID, String tipoCuentaNombre, String bancoID) {
+    public Cuenta(String cuentaID, String numeroCuenta, String usuarioID, String tipoCuentaID, String tipoCuentaNombre, String bancoID, String saldo, String fechaVinculacion) {
         this.cuentaID = cuentaID;
         this.numeroCuenta = numeroCuenta;
         this.usuarioID = usuarioID;
         this.tipoCuentaID = tipoCuentaID;
         this.tipoCuentaNombre = tipoCuentaNombre;
         this.bancoID = bancoID;
+        this.saldo = saldo;
+        this.fechaVinculacion = fechaVinculacion;
+    }
+
+    public String getFechaVinculacion() {
+        return fechaVinculacion;
+    }
+
+    public void setFechaVinculacion(String fechaVinculacion) {
+        this.fechaVinculacion = fechaVinculacion;
+    }
+
+    public String getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(String saldo) {
+        this.saldo = saldo;
     }
 
     public String getCuentaID() {

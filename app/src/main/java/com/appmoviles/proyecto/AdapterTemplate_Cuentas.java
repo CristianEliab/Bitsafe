@@ -4,12 +4,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.appmoviles.proyecto.modelo.Cuenta;
 
 import java.util.ArrayList;
+
+import static com.appmoviles.proyecto.util.Constantes.ICON_BANCO_BANCOLOMBIA;
+import static com.appmoviles.proyecto.util.Constantes.ICON_BANCO_BOGOTA;
+import static com.appmoviles.proyecto.util.Constantes.ICON_BANCO_DAVIVIENDA;
+import static com.appmoviles.proyecto.util.Constantes.ICON_BANCO_ITAU;
 
 public class AdapterTemplate_Cuentas  extends RecyclerView.Adapter<AdapterTemplate_Cuentas.CustomViewHolder> {
 
@@ -37,8 +43,9 @@ public class AdapterTemplate_Cuentas  extends RecyclerView.Adapter<AdapterTempla
     @Override
     public void onBindViewHolder(AdapterTemplate_Cuentas.CustomViewHolder holder, final int position) {
         ((TextView) holder.root.findViewById(R.id.tv_renglon_cuenta_numero_cuenta)).setText(data.get(position).getNumeroCuenta());
-        ((TextView) holder.root.findViewById(R.id.tv_renglon_cuenta_fecha_vinculacion)).setText(data.get(position).getBancoID());
-        ((TextView) holder.root.findViewById(R.id.tv_renglon_cuenta_saldo)).setText("CEROS PESOS");
+        ((TextView) holder.root.findViewById(R.id.tv_renglon_cuenta_fecha_vinculacion)).setText(data.get(position).getFechaVinculacion());
+        ((TextView) holder.root.findViewById(R.id.tv_renglon_cuenta_saldo)).setText(data.get(position).getSaldo());
+
         holder.root.findViewById(R.id.rl_renglon_relative_marco_cuenta).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

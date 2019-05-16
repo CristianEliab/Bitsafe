@@ -22,7 +22,7 @@
       "cedula": "1122335566",
       "ubicacion": "Cali",
       "correo": "alejandra@gmail.com",
-      "configuracionID": "01"
+      "configuracionID": "02"
     },
     {
       "usuarioID": "A295owdX7mTiwVYOx1PW2XcUlk53",
@@ -34,7 +34,7 @@
       "cedula": "11448899156",
       "ubicacion": "Cali",
       "correo": "steven@gmail.com",
-      "configuracionID": "01"
+      "configuracionID": "02"
     },
     {
       "usuarioID": "KErt3qoS59QyupH045HTA8L5jYx1",
@@ -46,7 +46,7 @@
       "cedula": "1234189967",
       "ubicacion": "Cali",
       "correo": "johan@gmail.com",
-      "configuracionID": "01"
+      "configuracionID": "02"
     }
   ],
   "actividad": [
@@ -75,22 +75,26 @@
     {
       "bancoID": "01",
       "nombreBanco": "Davivienda",
-      "icono": "banco_davivienda"
+      "icono": "banco_davivienda",
+      "saldo": "100000"
     },
     {
       "bancoID": "02",
       "nombreBanco": "Bogota",
-      "icono": "banco_bogota"
+      "icono": "banco_bogota",
+      "saldo": "200000"
     },
     {
       "bancoID": "03",
       "nombreBanco": "Bancolombia",
-      "icono": "banco_bancolombia"
+      "icono": "banco_bancolombia",
+      "saldo": "300000"
     },
     {
       "bancoID": "04",
       "nombreBanco": "Itau",
-      "icono": "banco_itau"
+      "icono": "banco_itau",
+      "saldo": "400000"
     }
   ],
   "categoria": [
@@ -158,7 +162,9 @@
       "usuarioID": "le3DREcuWuV9PtiImpXORaMMNVH3",
       "tipoCuentaID": "01",
       "tipoCuentaNombre": "Cuenta Credito",
-      "bancoID": "02"
+      "bancoID": "02",
+      "saldo": "200000",
+      "fechaVinculacion": "2019-02-10"
     },
     {
       "cuentaID": "02",
@@ -166,15 +172,29 @@
       "usuarioID": "le3DREcuWuV9PtiImpXORaMMNVH3",
       "tipoCuentaID": "02",
       "tipoCuentaNombre": "Cuenta Debito",
-      "bancoID": "01"
+      "bancoID": "01",
+      "saldo": "20000",
+      "fechaVinculacion": "2019-05-22"
     },
     {
       "cuentaID": "03",
+      "numeroCuenta": "4378-6243-1344-7242",
+      "usuarioID": "le3DREcuWuV9PtiImpXORaMMNVH3",
+      "tipoCuentaID": "02",
+      "tipoCuentaNombre": "Cuenta Debito",
+      "bancoID": "01",
+      "saldo": "80000",
+      "fechaVinculacion": "2019-05-20"
+    },
+    {
+      "cuentaID": "04",
       "numeroCuenta": "5678-3456-1234-3457",
       "usuarioID": "A295owdX7mTiwVYOx1PW2XcUlk53",
       "tipoCuentaID": "01",
       "tipoCuentaNombre": "Cuenta Credito",
-      "bancoID": "03"
+      "bancoID": "03",
+      "saldo": "300000",
+      "fechaVinculacion": "2019-01-15"
     }
   ],
   "estadousuario": [
@@ -337,43 +357,43 @@
     },
     {
       "transaccionID": "12345",
-      "cuentaOrigenID": "02",
+      "cuentaOrigenID": "04",
       "cuentaDestinoID": "03",
       "tipoTransaccionID": "01",
       "categoriaID": "02",
       "descripcion": "Ropa",
-      "montoTransaccion": "10000",
+      "montoTransaccion": "70000",
       "fechaTransaccion": "2019-01-12"
     },
     {
       "transaccionID": "12345",
-      "cuentaOrigenID": "01",
-      "cuentaDestinoID": "02",
+      "cuentaOrigenID": "04",
+      "cuentaDestinoID": "03",
       "tipoTransaccionID": "01",
       "categoriaID": "03",
       "descripcion": "Cuota Vehiculo",
-      "montoTransaccion": "300000",
+      "montoTransaccion": "10000",
       "fechaTransaccion": "2019-03-12"
     },
     {
       "transaccionID": "12345",
-      "cuentaOrigenID": "02",
+      "cuentaOrigenID": "04",
       "cuentaDestinoID": "01",
       "tipoTransaccionID": "01",
       "categoriaID": "02",
       "descripcion": "Más ropa",
-      "montoTransaccion": "50000",
-      "fechaTransaccion": "2019-03-13"
+      "montoTransaccion": "120000",
+      "fechaTransaccion": "2019-04-13"
     },
     {
       "transaccionID": "12345",
-      "cuentaOrigenID": "01",
-      "cuentaDestinoID": "03",
+      "cuentaOrigenID": "04",
+      "cuentaDestinoID": "01",
       "tipoTransaccionID": "01",
       "categoriaID": "03",
       "descripcion": "Vehiculo se daño",
-      "montoTransaccion": "5000000",
-      "fechaTransaccion": "2019-03-13"
+      "montoTransaccion": "80000",
+      "fechaTransaccion": "2019-02-16"
     }
   ]
 }

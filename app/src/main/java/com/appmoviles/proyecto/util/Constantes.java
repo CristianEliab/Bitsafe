@@ -26,4 +26,10 @@ public class Constantes {
     public final static String CHILD_CUENTAS = "cuentas";
     public final static String CHILD_TRANSACCIONES = "transacciones";
 
+    //PARA LAS IMÁGENES
+    public final static String ICON_BANCO_DAVIVIENDA = "banco_davivienda";
+    public final static String ICON_BANCO_BOGOTA = "banco_bogota";
+    public final static String ICON_BANCO_BANCOLOMBIA = "banco_bancolombia";
+    public final static String ICON_BANCO_ITAU = "banco_itau";
+
 }

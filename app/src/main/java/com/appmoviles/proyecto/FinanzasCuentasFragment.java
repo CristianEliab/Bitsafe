@@ -81,59 +81,6 @@ public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate
 
         cargarCuentas();
 
-        /**
-        Cuenta c1 = new Cuenta();
-        c1.setUsuarioID("usuario 1");
-        c1.setNumeroCuenta("numero 1");
-
-        Cuenta c2 = new Cuenta();
-        c2.setUsuarioID("usuario 2");
-        c2.setNumeroCuenta("numero 2");
-
-        Cuenta c3 = new Cuenta();
-        c3.setUsuarioID("usuario 3");
-        c3.setNumeroCuenta("numero 3");
-
-        Cuenta c4 = new Cuenta();
-        c4.setUsuarioID("usuario 4");
-        c4.setNumeroCuenta("numero 4");
-
-        Cuenta c5 = new Cuenta();
-        c5.setUsuarioID("usuario 5");
-        c5.setNumeroCuenta("numero 5");
-
-        Cuenta c6 = new Cuenta();
-        c6.setUsuarioID("usuario 6");
-        c6.setNumeroCuenta("numero 6");
-
-        Cuenta c7 = new Cuenta();
-        c7.setUsuarioID("usuario 7");
-        c7.setNumeroCuenta("numero 7");
-
-        Cuenta c8 = new Cuenta();
-        c8.setUsuarioID("usuario 8");
-        c8.setNumeroCuenta("numero 8");
-
-        Cuenta c9 = new Cuenta();
-        c9.setUsuarioID("usuario 9");
-        c9.setNumeroCuenta("numero 9");
-
-        Cuenta c10 = new Cuenta();
-        c10.setUsuarioID("usuario 10");
-        c10.setNumeroCuenta("numero 10");
-
-        adapterTemplate_cuentas.agregarCuenta(c1);
-        adapterTemplate_cuentas.agregarCuenta(c2);
-        adapterTemplate_cuentas.agregarCuenta(c3);
-        adapterTemplate_cuentas.agregarCuenta(c4);
-        adapterTemplate_cuentas.agregarCuenta(c5);
-        adapterTemplate_cuentas.agregarCuenta(c6);
-        adapterTemplate_cuentas.agregarCuenta(c7);
-        adapterTemplate_cuentas.agregarCuenta(c8);
-        adapterTemplate_cuentas.agregarCuenta(c9);
-        adapterTemplate_cuentas.agregarCuenta(c10);
-         */
-
         return v;
     }
 
@@ -141,7 +88,7 @@ public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate
     public void onItemClick(Cuenta cuenta) {
 
         Bundle bundle = new Bundle();
-        bundle.putString(BUNDLE_ID_CUENTA, cuenta.getNumeroCuenta());
+        bundle.putString(BUNDLE_ID_CUENTA, cuenta.getCuentaID());
 
         finanzasTransaccionesFragment = new FinanzasTransaccionesFragment();
         finanzasTransaccionesFragment.setArguments(bundle);
@@ -155,15 +102,19 @@ public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate
         Toast.makeText(getActivity(), texto, Toast.LENGTH_LONG).show();
     }
 
-    public void cargarCuentas(){
+    public void cargarCuentas() {
         database.getReference().child(CHILD_CUENTAS).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Cuenta cuentaTmp;
-                for (DataSnapshot hijo: dataSnapshot.getChildren()){
+                for (DataSnapshot hijo : dataSnapshot.getChildren()) {
                     cuentaTmp = hijo.getValue(Cuenta.class);
-                    cuentaTmp.setNumeroCuenta("Cuenta #: " + cuentaTmp.getNumeroCuenta());
-                    adapterTemplate_cuentas.agregarCuenta(cuentaTmp);
+                    //Solo se agregan las cuentas del banco seleccionado
+                    if (cuentaTmp.getBancoID().equals(bancoSeleccionado.getBancoID())) {
+                        cuentaTmp.setNumeroCuenta("Cuenta #: " + cuentaTmp.getNumeroCuenta());
+                        adapterTemplate_cuentas.agregarCuenta(cuentaTmp);
+                    }
+
                 }
 
             }

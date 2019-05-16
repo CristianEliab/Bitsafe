@@ -62,60 +62,6 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
 
         cargarBancos();
 
-        /**
-        Banco b1 = new Banco();
-        b1.setNombreBanco("Banco 1");
-        b1.setBancoID(" ID 1");
-
-        Banco b2 = new Banco();
-        b2.setNombreBanco("Banco 2");
-        b2.setBancoID(" ID 2");
-
-        Banco b3 = new Banco();
-        b3.setNombreBanco("Banco 3");
-        b3.setBancoID(" ID 3");
-
-        Banco b4 = new Banco();
-        b4.setNombreBanco("Banco 4");
-        b4.setBancoID(" ID 4");
-
-        Banco b5 = new Banco();
-        b5.setNombreBanco("Banco 5");
-        b5.setBancoID(" ID 5");
-
-        Banco b6 = new Banco();
-        b6.setNombreBanco("Banco 6");
-        b6.setBancoID(" ID 6");
-
-        Banco b7 = new Banco();
-        b7.setNombreBanco("Banco 7");
-        b7.setBancoID(" ID 7");
-
-        Banco b8 = new Banco();
-        b8.setNombreBanco("Banco 8");
-        b8.setBancoID(" ID 8");
-
-        Banco b9 = new Banco();
-        b9.setNombreBanco("Banco 9");
-        b9.setBancoID(" ID 9");
-
-        Banco b10 = new Banco();
-        b10.setNombreBanco("Banco 10");
-        b10.setBancoID(" ID 10");
-
-        adapterTemplate_bancos.agregarBanco(b1);
-        adapterTemplate_bancos.agregarBanco(b2);
-        adapterTemplate_bancos.agregarBanco(b3);
-        adapterTemplate_bancos.agregarBanco(b4);
-        adapterTemplate_bancos.agregarBanco(b5);
-        adapterTemplate_bancos.agregarBanco(b6);
-        adapterTemplate_bancos.agregarBanco(b7);
-        adapterTemplate_bancos.agregarBanco(b8);
-        adapterTemplate_bancos.agregarBanco(b9);
-        adapterTemplate_bancos.agregarBanco(b10);
-
-         */
-
         return v;
     }
 
