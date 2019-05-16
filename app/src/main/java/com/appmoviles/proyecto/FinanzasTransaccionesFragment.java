@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appmoviles.proyecto.modelo.Banco;
 import com.appmoviles.proyecto.modelo.Cuenta;
 import com.appmoviles.proyecto.modelo.Transaccion;
 import com.github.mikephil.charting.charts.LineChart;
@@ -24,7 +23,6 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,8 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.appmoviles.proyecto.util.Constantes.BUNDLE_ID_BANCO;
-import static com.appmoviles.proyecto.util.Constantes.BUNDLE_ID_CUENTA;
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_CUENTA;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_TRANSACCIONES;
 
 
@@ -80,10 +77,7 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
         tv_fragment_finanzas_transacciones_titulo = v.findViewById(R.id.tv_fragment_finanzas_transacciones_titulo);
 
         if (this.getArguments() != null) {
-            String id_cuenta = (String) getArguments().get(BUNDLE_ID_CUENTA);
-            //SIMULO QUE : --> SE VA A BUSCAR EL ID DE LA CUENTA EN LA BASE DE DATOS
-            cuentaSeleccionada = new Cuenta();
-            cuentaSeleccionada.setCuentaID(id_cuenta);
+            cuentaSeleccionada = (Cuenta) getArguments().get(BUNDLE_CUENTA);
 
             tv_fragment_finanzas_transacciones_titulo.setText("Pertenecientes al número de cuenta " + cuentaSeleccionada.getNumeroCuenta());
         }

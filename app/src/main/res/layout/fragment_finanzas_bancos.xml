@@ -80,10 +80,10 @@
 
                 <EditText
                     android:id="@+id/et_fragment_finanzas_bancos_nombre_banco"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/registro_figura_texto_redondo_registro"
-                    android:drawableRight="@drawable/fragment_ic_finanzas_busqueda_filtro"
+                    android:layout_width="@dimen/fragment_clientes_filtro_w"
+                    android:layout_height="@dimen/fragment_clientes_filtro_h"
+                    android:background="@drawable/fragment_clientes_figura_filtro"
+                    android:drawableRight="@drawable/fragment_clientes_ic_buscar_clientes"
                     android:gravity="center"
                     android:hint="@string/fragment_finanzas_bancos_nombre_busqueda" />
 

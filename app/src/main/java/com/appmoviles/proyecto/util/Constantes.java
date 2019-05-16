@@ -15,10 +15,10 @@ public class Constantes {
     public final static String PUNTO = ",";
     public final static String CLIENTE_CUENTA = "Cuenta: ";
 
-    //Muriel
-    public final static String BUNDLE_ID_BANCO = "BUNDLE_ID_BANCO";
-    public final static String BUNDLE_ID_CUENTA = "BUNDLE_ID_CUENTA";
-    public final static String BUNDLE_ID_TRANSACCION = "BUNDLE_ID_TRANSACCION";
+    //Muriel - Para pasar de un fragment a otro objetos tipo banco, cuenta, etc
+    public final static String BUNDLE_BANCO = "BUNDLE_BANCO";
+    public final static String BUNDLE_CUENTA = "BUNDLE_CUENTA";
+    public final static String BUNDLE_TRANSACCION = "BUNDLE_TRANSACCION";
 
     //PARA LA BASE DE DATOS --> getReference().child(constante)
     public final static String CHILD_USUARIOS = "usuarios";

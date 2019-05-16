@@ -20,7 +20,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-import static com.appmoviles.proyecto.util.Constantes.BUNDLE_ID_BANCO;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_BANCO;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_BANCOS;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_CUENTAS;
 
@@ -32,6 +35,7 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
 
     private RecyclerView rv_fragment_finanzas_bancos_lista_;
     private AdapterTemplate_Bancos adapterTemplate_bancos;
+    private List<Cuenta> listaCuentas;
 
     public FinanzasBancosFragment() {
         // Required empty public constructor
@@ -60,6 +64,7 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
         rv_fragment_finanzas_bancos_lista_.setAdapter(adapterTemplate_bancos);
         adapterTemplate_bancos.setListener(this);
 
+        cargarCuentas();
         cargarBancos();
 
         return v;
@@ -69,7 +74,7 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
     public void onItemClick(Banco banco) {
 
         Bundle bundle = new Bundle();
-        bundle.putString(BUNDLE_ID_BANCO, banco.getBancoID());
+        bundle.putSerializable(BUNDLE_BANCO, banco);
 
         FinanzasCuentasFragment finanzasCuentasFragment = new FinanzasCuentasFragment();
         finanzasCuentasFragment.setArguments(bundle);
@@ -85,16 +90,47 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
         Toast.makeText(getActivity(), texto, Toast.LENGTH_LONG).show();
     }
 
-    public void cargarBancos(){
+    public void cargarBancos() {
         database.getReference().child(CHILD_BANCOS).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Banco bancoTmp;
-                for (DataSnapshot hijo: dataSnapshot.getChildren()){
-                    bancoTmp = hijo.getValue(Banco.class);
-                    adapterTemplate_bancos.agregarBanco(bancoTmp);
-                }
 
+                for (int i = 0; i < listaCuentas.size(); i++) {
+
+                    String bancoID = listaCuentas.get(i).getBancoID();
+                    Banco bancoTmp;
+
+                    for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                        bancoTmp = hijo.getValue(Banco.class);
+                        //Solo los bancos que tienen cuentas del usuario registrado
+                        if (bancoTmp.getBancoID().equals(bancoID)) {
+                            adapterTemplate_bancos.agregarBanco(bancoTmp);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void cargarCuentas() {
+
+        listaCuentas = new ArrayList<Cuenta>();
+        database.getReference().child(CHILD_CUENTAS).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Cuenta cuentaTmp;
+                for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                    cuentaTmp = hijo.getValue(Cuenta.class);
+                    //Solo las cuentas que pertenezcan al usuario logueado
+                    if (cuentaTmp.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
+                        listaCuentas.add(cuentaTmp);
+                    }
+                }
             }
 
             @Override

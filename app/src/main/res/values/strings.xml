@@ -77,7 +77,7 @@
     <string name="fragment_finanzas_bancos_toolbar">Bancos</string>
     <string name="fragment_finanzas_bancos_nombre_busqueda">Ingresar nombre del banco</string>
     <string name="fragment_finanzas_bancos_monto_total">Monto Total:</string>
-    <string name="fragment_finanzas_bancos_nombre_banco">Nombre</string>
+    <string name="fragment_finanzas_bancos_nombre_banco">Nombre:</string>
 
     <!-- Crear Transaccion -->
     <string name="fragment_finanzas_crear_transaccion_categorias_titulo">Categorías:</string>

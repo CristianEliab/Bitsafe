@@ -24,8 +24,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import static com.appmoviles.proyecto.util.Constantes.BUNDLE_ID_BANCO;
-import static com.appmoviles.proyecto.util.Constantes.BUNDLE_ID_CUENTA;
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_BANCO;
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_CUENTA;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_CUENTAS;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_TRANSACCIONES;
 
@@ -71,12 +71,9 @@ public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate
 
 
         if (this.getArguments() != null) {
-            String id_banco = (String) getArguments().get(BUNDLE_ID_BANCO);
-            //SIMULO QUE : --> SE VA A BUSCAR EL ID DEL BANCO EN LA BASE DE DATOS
-            bancoSeleccionado = new Banco();
-            bancoSeleccionado.setBancoID(id_banco);
+            bancoSeleccionado  = (Banco) getArguments().get(BUNDLE_BANCO);
 
-            tv_fragment_finanzas_cuentas_titulo.setText("Perteneciente al Banco: " + bancoSeleccionado.getBancoID());
+            tv_fragment_finanzas_cuentas_titulo.setText("Perteneciente al Banco: " + bancoSeleccionado.getNombreBanco());
         }
 
         cargarCuentas();
@@ -88,7 +85,7 @@ public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate
     public void onItemClick(Cuenta cuenta) {
 
         Bundle bundle = new Bundle();
-        bundle.putString(BUNDLE_ID_CUENTA, cuenta.getCuentaID());
+        bundle.putSerializable(BUNDLE_CUENTA, cuenta);
 
         finanzasTransaccionesFragment = new FinanzasTransaccionesFragment();
         finanzasTransaccionesFragment.setArguments(bundle);
@@ -109,8 +106,8 @@ public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate
                 Cuenta cuentaTmp;
                 for (DataSnapshot hijo : dataSnapshot.getChildren()) {
                     cuentaTmp = hijo.getValue(Cuenta.class);
-                    //Solo se agregan las cuentas del banco seleccionado
-                    if (cuentaTmp.getBancoID().equals(bancoSeleccionado.getBancoID())) {
+                    //Solo se agregan las cuentas del banco seleccionado y que pertenezcan al usuario logueado
+                    if (cuentaTmp.getBancoID().equals(bancoSeleccionado.getBancoID()) && cuentaTmp.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
                         cuentaTmp.setNumeroCuenta("Cuenta #: " + cuentaTmp.getNumeroCuenta());
                         adapterTemplate_cuentas.agregarCuenta(cuentaTmp);
                     }

@@ -1,6 +1,8 @@
 package com.appmoviles.proyecto.modelo;
 
-public class Banco {
+import java.io.Serializable;
+
+public class Banco implements Serializable {
 
     private String bancoID;
     private String nombreBanco;

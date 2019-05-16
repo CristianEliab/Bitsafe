@@ -18,11 +18,19 @@
             android:id="@+id/ly_renglon_transaccion_monto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true">
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="@dimen/fragment_finanzas_cuentas_icon_saldo_w_h"
+                android:layout_height="@dimen/fragment_finanzas_cuentas_icon_saldo_w_h"
+                android:src="@drawable/registro_ic_nombre" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:text="@string/fragment_finanzas_bancos_nombre_banco"
                 android:textColor="@color/colorBitsafeBlue"
                 android:textStyle="bold" />
@@ -39,11 +47,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ly_renglon_transaccion_monto">
+            android:layout_below="@+id/ly_renglon_transaccion_monto"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:layout_width="@dimen/fragment_finanzas_cuentas_icon_saldo_w_h"
+                android:layout_height="@dimen/fragment_finanzas_cuentas_icon_saldo_w_h"
+                android:src="@drawable/ic_saldo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:text="@string/fragment_finanzas_bancos_monto_total"
                 android:textColor="@color/colorBitsafeBlue"
                 android:textStyle="bold" />
@@ -64,7 +81,6 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/icon_banco_bogota" />
-
 
 
     </RelativeLayout>
