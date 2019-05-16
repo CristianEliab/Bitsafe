@@ -19,6 +19,7 @@
         <activity android:name=".HomeAdministrador" />
         <activity android:name=".Registro_Bitsafe" />
         <activity android:name=".Login_huella" />
+        <activity android:name=".MiCuentaPerfil"></activity>
         <activity android:name=".Login" />
         <activity android:name=".Splash">
             <intent-filter>

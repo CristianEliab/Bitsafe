@@ -30,8 +30,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 
-public class PerfilCliente extends Fragment {
+
+public class PerfilCliente extends Fragment implements Serializable {
 
     private TextView tv_nombre_iniciales;
     private TextView tv_nombre;
@@ -99,8 +101,14 @@ public class PerfilCliente extends Fragment {
             public void onClick(View v) {
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.contenido, fragment);
-                transaction.commit();
+                if(volver_a.equals(Constantes.FINANZAS)){
+                    transaction.replace(R.id.contenido_cliente, fragment);
+                    transaction.commit();
+                }else{
+                    transaction.replace(R.id.contenido, fragment);
+                    transaction.commit();
+                }
+
 
             }
         });
@@ -110,6 +118,10 @@ public class PerfilCliente extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(contexto, MiCuentaPerfil.class);
+                Bundle clave = new Bundle();
+                clave.putString(Constantes.GO_TO_PERFIL, Constantes.FINANZAS);
+                clave.putSerializable(Constantes.FRAGMENT, PerfilCliente.this);
+                i.putExtra(Constantes.GO_TO_PERFIL, clave);
                 startActivity(i);
                 getActivity().finish();
             }
@@ -119,7 +131,7 @@ public class PerfilCliente extends Fragment {
         tv_micuenta_perfil_cliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(contexto, MiCuentaPerfil.class);
+                Intent i = new Intent(getActivity(), MiCuentaPerfil.class);
                 startActivity(i);
                 getActivity().finish();
             }

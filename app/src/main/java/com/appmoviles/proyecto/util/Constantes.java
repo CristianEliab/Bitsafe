@@ -51,6 +51,7 @@ public class Constantes {
 
     //Para mostrar Datos
     public final static String USUARIO = "USUARIO";
+    public final static String FINANZAS = "FINANZAS";
     public final static String DATOS_FRAGMENT = "DATOS_FRAGMENT";
     public final static String TRANSACCIONES_DATOS = "TRANSACCIONES_DATOS";
     public final static String DONDE_VIENE = "DONDE_VIENE";

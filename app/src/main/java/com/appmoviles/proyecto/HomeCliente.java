@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
+import com.appmoviles.proyecto.util.Constantes;
+
 public class HomeCliente extends FragmentActivity implements FinanzasFragment.OnViewPerfil {
 
     private CuentasFragment cuentasFragment;
@@ -64,6 +66,12 @@ public class HomeCliente extends FragmentActivity implements FinanzasFragment.On
     public void onViewPerfil() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
+
+        Bundle clave = new Bundle();
+        clave.putString(Constantes.GO_TO_PERFIL, Constantes.FINANZAS);
+        clave.putSerializable(Constantes.FRAGMENT, finanzasFragment);
+        perfilCliente.setArguments(clave);
+
         transaction.replace(R.id.contenido_cliente, perfilCliente);
         transaction.commit();
 
