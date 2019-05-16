@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.appmoviles.proyecto.modelo.Cliente;
 import com.appmoviles.proyecto.modelo.RolUsuario;
@@ -29,6 +30,8 @@ public class ClientesFragment extends Fragment {
 
     private RecyclerView libreta;
     private AdapterTemplate_Clientes adapter;
+    private ImageView iv_fragment_clientes_perfil;
+
 
     FirebaseAuth auth;
     FirebaseDatabase rtdb;
@@ -48,15 +51,14 @@ public class ClientesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_clientes, container, false);
+        iv_fragment_clientes_perfil = v.findViewById(R.id.iv_fragment_clientes_perfil);
 
         rtdb = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-
         final ArrayList<Usuario> usuarios = new ArrayList<>();
-
         rtdb.getReference().child("usuarios")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -68,12 +70,10 @@ public class ClientesFragment extends Fragment {
                             adapter.agregarUsuario(usuario);
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
-
 
         libreta = v.findViewById(R.id.lista_clientes);
         adapter = new AdapterTemplate_Clientes();
@@ -83,7 +83,29 @@ public class ClientesFragment extends Fragment {
         libreta.setAdapter(adapter);
 
 
+        iv_fragment_clientes_perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onViewPerfil("Perfil");
+            }
+        });
+
+
+
         return v;
     }
+
+
+    //OBSERVER
+    public interface OnItemViewPerfil {
+        void onViewPerfil(String monto);
+    }
+    private OnItemViewPerfil listener;
+
+    public void setListener(OnItemViewPerfil listener) {
+        this.listener = listener;
+    }
+
+
 
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,9 +12,15 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.appmoviles.proyecto.modelo.RolUsuario;
 import com.appmoviles.proyecto.util.JsonParse;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,24 +32,31 @@ public class Splash extends AppCompatActivity {
     private ImageView iv_splash_screen;
     private Animation transicion;
     private JsonParse jsonParse;
+    private boolean admin;
+
 
     private boolean cargodb;
     private SharedPreferences myPreferences;
     FirebaseDatabase rtdb;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+
+        // Conectar con la base de datos
+        rtdb = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
+
         myPreferences = PreferenceManager.getDefaultSharedPreferences(Splash.this);
-        myPreferences.edit().clear().commit();
+        //myPreferences.edit().clear().commit();
         cargodb = myPreferences.getBoolean(GUARDO, true);
 
-        rtdb = FirebaseDatabase.getInstance();
-        rtdb.getReference().removeValue();
+        //rtdb.getReference().removeValue();
 
-        // Carga la base de datos la primera vez.
+        /*// Carga la base de datos la primera vez.
         if (cargodb) {
             // Obtener el fichero desdes la carpeta raw
             InputStream in = getResources().openRawResource(R.raw.database);
@@ -61,7 +75,7 @@ public class Splash extends AppCompatActivity {
             } catch (Exception e) {
                 Toast.makeText(Splash.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        }
+        }*/
 
         FirebaseApp.initializeApp(this);
 
@@ -73,6 +87,48 @@ public class Splash extends AppCompatActivity {
         iv_splash_screen.setBackgroundResource(R.drawable.animacion_item);
         animacion = (AnimationDrawable) iv_splash_screen.getBackground();
         goToMain();
+
+        if (auth.getCurrentUser() == null) {
+
+            Intent i = new Intent(this, LoginCorreo.class);
+            startActivity(i);
+            finish();
+
+            return;
+        }
+
+
+        rtdb.getReference().child("rolusuario")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        admin = false;
+                        for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                            //Si es admin, loguearse
+                            RolUsuario rolUsuario = hijo.getValue(RolUsuario.class);
+                            if (rolUsuario.getRolID().equals("02") &&
+                                    rolUsuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
+                                admin = true;
+                            }
+                        }
+
+                        if (admin) {
+                            Intent i = new Intent(Splash.this, HomeAdministrador.class);
+                            startActivity(i);
+                            finish();
+                        } else {
+                            Intent i = new Intent(Splash.this, HomeCliente.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
     }
 
     private void goToMain() {

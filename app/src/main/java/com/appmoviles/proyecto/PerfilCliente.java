@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class PerfilCliente extends Fragment {
 
@@ -25,6 +28,11 @@ public class PerfilCliente extends Fragment {
     private TextView tv_ajustes_perfil_cliente;
     private TextView tv_ayuda_perfil_cliente;
     private TextView tv_informacion_perfil_cliente;
+    private ImageView iv_cerrar_perfil_cliente;
+
+
+    FirebaseAuth auth;
+    FirebaseDatabase rtdb;
 
     Context contexto;
 
@@ -45,10 +53,14 @@ public class PerfilCliente extends Fragment {
         View v= inflater.inflate(R.layout.fragment_perfil_cliente, container, false);
         contexto = v.getContext();
 
+        rtdb = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
+
         tv_nombre_iniciales = v.findViewById(R.id.iv_nombre_perfil_cliente);
         tv_nombre= v.findViewById(R.id.tv_nombre_cliente_perfil_cliente);
         tv_telefono= v.findViewById(R.id.tv_numero_telefono_perfil_cliente);
         image_atras = v.findViewById(R.id.iv_fragment_perfil_clientes);
+        iv_cerrar_perfil_cliente = v.findViewById(R.id.iv_cerrar_perfil_cliente);
 
         tv_micuenta_perfil_cliente = v.findViewById(R.id.tv_micuenta_perfil_cliente);
         tv_micuenta_perfil_cliente.setOnClickListener(new View.OnClickListener() {
@@ -60,8 +72,14 @@ public class PerfilCliente extends Fragment {
         });
 
 
-
-
+        iv_cerrar_perfil_cliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                auth.signOut();
+                Intent intent = new Intent(getActivity(), Splash.class);
+                startActivity(intent);
+            }
+        });
 
         return v;
     }

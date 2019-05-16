@@ -56,7 +56,7 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
     }
 
     @Override
-    public void onBindViewHolder(CustomViewHolder holder, int position) {
+    public void onBindViewHolder(CustomViewHolder holder, final int position) {
         ((TextView) holder.root.findViewById(R.id.tv_cliente_registro_nombre)).setText(data.get(position).getNombre());
         ((RecyclerView) holder.root.findViewById(R.id.lista_bancos_icons)).setHasFixedSize(true);
         ((RecyclerView) holder.root.findViewById(R.id.lista_bancos_icons)).setLayoutManager(this.manage);
@@ -66,14 +66,15 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
         final ArrayList<String> listaIdBancos = new ArrayList<>();
 
         rtdb.getReference().child("cuentas")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         //Respuesta de firebase
                         for (DataSnapshot hijo : dataSnapshot.getChildren()) {
                             //Si es admin, loguearse
                             Cuenta cuenta = hijo.getValue(Cuenta.class);
-                            if(cuenta.getUsuarioID().equals(auth.getCurrentUser().getUid())){
+                            Usuario usuarionItem = data.get(position);
+                            if(cuenta.getUsuarioID().equals(usuarionItem.getUsuarioID())){
                                 String bancoID = cuenta.getBancoID();
                                 listaIdBancos.add(bancoID);
                             }
@@ -86,7 +87,7 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
                 });
 
         rtdb.getReference().child("bancos")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         //Respuesta de firebase
@@ -105,6 +106,7 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
+        listaIdBancos.clear();
 
     }
 
