@@ -20,7 +20,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-import static com.appmoviles.proyecto.util.Constantes.BUNDLE_ID_BANCO;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_BANCO;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_BANCOS;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_CUENTAS;
 
@@ -32,6 +35,7 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
 
     private RecyclerView rv_fragment_finanzas_bancos_lista_;
     private AdapterTemplate_Bancos adapterTemplate_bancos;
+    private List<Cuenta> listaCuentas;
 
     public FinanzasBancosFragment() {
         // Required empty public constructor
@@ -60,61 +64,8 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
         rv_fragment_finanzas_bancos_lista_.setAdapter(adapterTemplate_bancos);
         adapterTemplate_bancos.setListener(this);
 
+        cargarCuentas();
         cargarBancos();
-
-        /**
-        Banco b1 = new Banco();
-        b1.setNombreBanco("Banco 1");
-        b1.setBancoID(" ID 1");
-
-        Banco b2 = new Banco();
-        b2.setNombreBanco("Banco 2");
-        b2.setBancoID(" ID 2");
-
-        Banco b3 = new Banco();
-        b3.setNombreBanco("Banco 3");
-        b3.setBancoID(" ID 3");
-
-        Banco b4 = new Banco();
-        b4.setNombreBanco("Banco 4");
-        b4.setBancoID(" ID 4");
-
-        Banco b5 = new Banco();
-        b5.setNombreBanco("Banco 5");
-        b5.setBancoID(" ID 5");
-
-        Banco b6 = new Banco();
-        b6.setNombreBanco("Banco 6");
-        b6.setBancoID(" ID 6");
-
-        Banco b7 = new Banco();
-        b7.setNombreBanco("Banco 7");
-        b7.setBancoID(" ID 7");
-
-        Banco b8 = new Banco();
-        b8.setNombreBanco("Banco 8");
-        b8.setBancoID(" ID 8");
-
-        Banco b9 = new Banco();
-        b9.setNombreBanco("Banco 9");
-        b9.setBancoID(" ID 9");
-
-        Banco b10 = new Banco();
-        b10.setNombreBanco("Banco 10");
-        b10.setBancoID(" ID 10");
-
-        adapterTemplate_bancos.agregarBanco(b1);
-        adapterTemplate_bancos.agregarBanco(b2);
-        adapterTemplate_bancos.agregarBanco(b3);
-        adapterTemplate_bancos.agregarBanco(b4);
-        adapterTemplate_bancos.agregarBanco(b5);
-        adapterTemplate_bancos.agregarBanco(b6);
-        adapterTemplate_bancos.agregarBanco(b7);
-        adapterTemplate_bancos.agregarBanco(b8);
-        adapterTemplate_bancos.agregarBanco(b9);
-        adapterTemplate_bancos.agregarBanco(b10);
-
-         */
 
         return v;
     }
@@ -123,7 +74,7 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
     public void onItemClick(Banco banco) {
 
         Bundle bundle = new Bundle();
-        bundle.putString(BUNDLE_ID_BANCO, banco.getBancoID());
+        bundle.putSerializable(BUNDLE_BANCO, banco);
 
         FinanzasCuentasFragment finanzasCuentasFragment = new FinanzasCuentasFragment();
         finanzasCuentasFragment.setArguments(bundle);
@@ -139,16 +90,47 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
         Toast.makeText(getActivity(), texto, Toast.LENGTH_LONG).show();
     }
 
-    public void cargarBancos(){
+    public void cargarBancos() {
         database.getReference().child(CHILD_BANCOS).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Banco bancoTmp;
-                for (DataSnapshot hijo: dataSnapshot.getChildren()){
-                    bancoTmp = hijo.getValue(Banco.class);
-                    adapterTemplate_bancos.agregarBanco(bancoTmp);
-                }
 
+                for (int i = 0; i < listaCuentas.size(); i++) {
+
+                    String bancoID = listaCuentas.get(i).getBancoID();
+                    Banco bancoTmp;
+
+                    for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                        bancoTmp = hijo.getValue(Banco.class);
+                        //Solo los bancos que tienen cuentas del usuario registrado
+                        if (bancoTmp.getBancoID().equals(bancoID)) {
+                            adapterTemplate_bancos.agregarBanco(bancoTmp);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void cargarCuentas() {
+
+        listaCuentas = new ArrayList<Cuenta>();
+        database.getReference().child(CHILD_CUENTAS).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Cuenta cuentaTmp;
+                for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                    cuentaTmp = hijo.getValue(Cuenta.class);
+                    //Solo las cuentas que pertenezcan al usuario logueado
+                    if (cuentaTmp.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
+                        listaCuentas.add(cuentaTmp);
+                    }
+                }
             }
 
             @Override

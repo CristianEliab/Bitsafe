@@ -1,6 +1,8 @@
 package com.appmoviles.proyecto.modelo;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
 
     private String usuarioID;
     private String nombre;

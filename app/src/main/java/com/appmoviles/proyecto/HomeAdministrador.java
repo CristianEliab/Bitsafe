@@ -12,7 +12,10 @@ import android.view.MenuItem;
 
 import com.appmoviles.proyecto.util.Constantes;
 
-public class HomeAdministrador extends FragmentActivity implements ClientesFragment.OnViewPerfilCliente, EstadisticasFragment.OnViewPerfilEstadisticas, CargarDatosFragment.OnViewPerfilCargar, TransaccionesFragment.OnViewPerfiltransaccion {
+public class HomeAdministrador extends FragmentActivity implements ClientesFragment.OnViewPerfilCliente,
+        EstadisticasFragment.OnViewPerfilEstadisticas,
+        CargarDatosFragment.OnViewPerfilCargar,
+        TransaccionesFragment.OnViewPerfiltransaccion {
 
     private ClientesFragment clientesFragment;
     private EstadisticasFragment estadisticasFragment;

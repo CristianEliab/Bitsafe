@@ -2,6 +2,8 @@ package com.appmoviles.proyecto.util;
 
 import com.appmoviles.proyecto.Splash;
 
+import java.io.Serializable;
+
 public class Constantes {
 
     public final static String MONTO_KEY = "MONTO_KEY";
@@ -17,10 +19,10 @@ public class Constantes {
     public final static String PUNTO = ",";
     public final static String CLIENTE_CUENTA = "Cuenta: ";
 
-    //Muriel
-    public final static String BUNDLE_ID_BANCO = "BUNDLE_ID_BANCO";
-    public final static String BUNDLE_ID_CUENTA = "BUNDLE_ID_CUENTA";
-    public final static String BUNDLE_ID_TRANSACCION = "BUNDLE_ID_TRANSACCION";
+    //Muriel - Para pasar de un fragment a otro objetos tipo banco, cuenta, etc
+    public final static String BUNDLE_BANCO = "BUNDLE_BANCO";
+    public final static String BUNDLE_CUENTA = "BUNDLE_CUENTA";
+    public final static String BUNDLE_TRANSACCION = "BUNDLE_TRANSACCION";
 
     //PARA LA BASE DE DATOS --> getReference().child(constante)
     public final static String CHILD_USUARIOS = "usuarios";
@@ -34,5 +36,21 @@ public class Constantes {
     public final static String CARGAR = "CARGAR";
     public final static String TRANSACCIONES = "TRANSACCIONES";
     public final static String FRAGMENT = "FRAGMENT";
+
+    //PARA LAS IMÁGENES
+    public final static String ICON_BANCO_DAVIVIENDA = "banco_davivienda";
+    public final static String ICON_BANCO_BOGOTA = "banco_bogota";
+    public final static String ICON_BANCO_BANCOLOMBIA = "banco_bancolombia";
+    public final static String ICON_BANCO_ITAU = "banco_itau";
+
+
+    //Para mostrar Datos
+    public final static String USUARIO = "USUARIO";
+    public final static String DATOS_FRAGMENT = "DATOS_FRAGMENT";
+    public final static String TRANSACCIONES_DATOS = "TRANSACCIONES_DATOS";
+    public final static String DONDE_VIENE = "DONDE_VIENE";
+    public final static String FRAGMENT_CLIENTE = "FRAGMENT_CLIENTE";
+    public final static String USUARIO_DESTINO = "USUARIO_DESTINO";
+    public final static String USUARIO_ORIGEN = "USUARIO_ORIGEN";
 
 }

@@ -3,6 +3,7 @@ package com.appmoviles.proyecto;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,15 +22,17 @@ import android.widget.Toast;
 import com.appmoviles.proyecto.modelo.Banco;
 import com.appmoviles.proyecto.modelo.Cliente;
 import com.appmoviles.proyecto.modelo.Cuenta;
+import com.appmoviles.proyecto.modelo.Usuario;
 import com.appmoviles.proyecto.util.AdapterDatosBancos;
 import com.appmoviles.proyecto.util.AdapterDatosCuentas;
 import com.appmoviles.proyecto.util.Constantes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class DatosClienteFragment extends Fragment implements AdapterDatosCuentas.OnItemClickListener, AdapterDatosBancos.OnItemClickListener, View.OnClickListener {
+public class DatosClienteFragment extends Fragment implements Serializable, AdapterDatosCuentas.OnItemClickListener, AdapterDatosBancos.OnItemClickListener, View.OnClickListener {
 
     private RelativeLayout rl_fragment_clientes_toolbar;
     private EditText et_cuenta_seleccionado;
@@ -41,6 +44,8 @@ public class DatosClienteFragment extends Fragment implements AdapterDatosCuenta
     private RecyclerView lista_cuentas_cliente;
     private ImageView iv_down_bancos;
     private ImageView iv_down_cuentas;
+    private ImageView iv_fragment_dt_clientes_return;
+    private ImageView iv_fragment_dt_clientes_perfil;
     private ArrayList<Banco> listaBancos;
     private ArrayList<Cuenta> listaCuentas;
     private Cliente cliente;
@@ -50,10 +55,14 @@ public class DatosClienteFragment extends Fragment implements AdapterDatosCuenta
     private boolean selecciono_cuenta;
     private boolean down_bancos;
     private boolean down_cuentas;
+    private Usuario usuario;
+    private Fragment fragment;
+    private String donde_viene;
 
-    private TransaccionesFragment transaccionesFragment;
+    private Fragment transaccionesFragment;
     private AdapterDatosCuentas adapterDatosCuentas;
     private AdapterDatosBancos adapterDatosBancos;
+    private PerfilCliente perfilCliente;
 
     public DatosClienteFragment() {
         // Required empty public constructor
@@ -68,6 +77,14 @@ public class DatosClienteFragment extends Fragment implements AdapterDatosCuenta
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        if (getArguments() != null) {
+            usuario = (Usuario) getArguments().getSerializable(Constantes.USUARIO);
+            fragment = (Fragment) getArguments().getSerializable(Constantes.CLIENTES);
+            transaccionesFragment = (Fragment) getArguments().getSerializable(Constantes.TRANSACCIONES_DATOS);
+            donde_viene = getArguments().getString(Constantes.DONDE_VIENE);
+        }
+
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_datos_cliente, container, false);
 
@@ -82,7 +99,8 @@ public class DatosClienteFragment extends Fragment implements AdapterDatosCuenta
         tv_datos_cliente_registro_nombre = v.findViewById(R.id.tv_datos_cliente_registro_nombre);
         btn_fragment_dt_cliente_guardar = v.findViewById(R.id.btn_fragment_dt_cliente_guardar);
         tv_fragment_dt_clientes_texto_nombre_cliente = v.findViewById(R.id.tv_fragment_dt_clientes_texto_nombre_cliente);
-
+        iv_fragment_dt_clientes_return = v.findViewById(R.id.iv_fragment_dt_clientes_return);
+        iv_fragment_dt_clientes_perfil = v.findViewById(R.id.iv_fragment_dt_clientes_perfil);
 
         listaBancos = new ArrayList<Banco>();
         Banco b1 = new Banco();
@@ -125,23 +143,27 @@ public class DatosClienteFragment extends Fragment implements AdapterDatosCuenta
         lista_cuentas_cliente.setLayoutManager(manager2);
         lista_cuentas_cliente.setAdapter(adapterDatosCuentas);
 
+
         btn_fragment_dt_cliente_guardar.setFocusable(false);
         btn_fragment_dt_cliente_guardar.setClickable(false);
         btn_fragment_dt_cliente_guardar.setKeyListener(null);
         btn_fragment_dt_cliente_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                transaccionesFragment = new TransaccionesFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                /*transaccionesFragment = new TransaccionesFragment();*//*
+
                 // Utilizado para enviar variables entre dos fragments
                 Bundle parametro = new Bundle();
                 if (cliente_origen != null) {
                     parametro.putString(Constantes.CLIENTE_ORIGEN_KEY_NOMBRE, cliente_origen);
                     transaccionesFragment.setArguments(parametro);
+                }*/
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (transaccionesFragment != null) {
+                    transaction.replace(R.id.contenido, (TransaccionesFragment) transaccionesFragment);
+                    transaction.commit();
                 }
-                transaction.replace(R.id.contenido, transaccionesFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                //getActivity().onBackPressed();
             }
         });
 
@@ -149,7 +171,15 @@ public class DatosClienteFragment extends Fragment implements AdapterDatosCuenta
         iv_down_bancos.setBackgroundResource(R.drawable.cuenta_informacion_ic_plus);
         iv_down_bancos.setOnClickListener(this);
         iv_down_cuentas.setOnClickListener(this);
+        iv_fragment_dt_clientes_return.setOnClickListener(this);
+        iv_fragment_dt_clientes_perfil.setOnClickListener(this);
 
+        // Visualización si viene del FragmentClientes
+        if (donde_viene != null) {
+            if (donde_viene.equals(Constantes.FRAGMENT_CLIENTE)) {
+                btn_fragment_dt_cliente_guardar.setVisibility(View.INVISIBLE);
+            }
+        }
 
         actualizarInfo();
         agregarDatos();
@@ -177,7 +207,11 @@ public class DatosClienteFragment extends Fragment implements AdapterDatosCuenta
         // Con el método getArguments() obtengo la información enviada por parametro.
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            cliente_origen = bundle.getString(Constantes.CLIENTE_ORIGEN_KEY_NOMBRE);
+            if (usuario != null) {
+                cliente_origen = usuario.getNombre();
+            } else {
+                cliente_origen = bundle.getString(Constantes.CLIENTE_ORIGEN_KEY_NOMBRE);
+            }
         }
     }
 
@@ -224,6 +258,7 @@ public class DatosClienteFragment extends Fragment implements AdapterDatosCuenta
 
     @Override
     public void onClick(View v) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
         switch (v.getId()) {
             case R.id.iv_down_bancos:
                 if (down_bancos) {
@@ -251,6 +286,19 @@ public class DatosClienteFragment extends Fragment implements AdapterDatosCuenta
                     rl_fragment_clientes_toolbar.invalidate();
                     iv_down_cuentas.setBackgroundResource(R.drawable.cuenta_informacion_ic_minus);
                 }
+                break;
+            case R.id.iv_fragment_dt_clientes_return:
+                transaction.replace(R.id.contenido, fragment);
+                transaction.commit();
+                break;
+            case R.id.iv_fragment_dt_clientes_perfil:
+                perfilCliente = new PerfilCliente();
+                Bundle clave = new Bundle();
+                clave.putString(Constantes.GO_TO_PERFIL, Constantes.DATOS_FRAGMENT);
+                clave.putSerializable(Constantes.FRAGMENT, this);
+                perfilCliente.setArguments(clave);
+                transaction.replace(R.id.contenido, perfilCliente);
+                transaction.commit();
                 break;
         }
     }

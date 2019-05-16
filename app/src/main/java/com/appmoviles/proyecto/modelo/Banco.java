@@ -1,29 +1,30 @@
 package com.appmoviles.proyecto.modelo;
 
-public class Banco {
+import java.io.Serializable;
+
+public class Banco implements Serializable {
 
     private String bancoID;
     private String nombreBanco;
-    private String IdBanco;
-    public String nombre;
-    public String icono;
+    private String icono;
+    private String saldo;
 
     public Banco() {
     }
 
-    public Banco(String nombre, String icono) {
-        this.nombre = nombre;
-        this.icono = icono;
-    }
-
-    public Banco(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Banco(String bancoID, String nombreBanco, String icono) {
+    public Banco(String bancoID, String nombreBanco, String icono, String saldo) {
         this.bancoID = bancoID;
         this.nombreBanco = nombreBanco;
         this.icono = icono;
+        this.saldo = saldo;
+    }
+
+    public String getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(String saldo) {
+        this.saldo = saldo;
     }
 
     public String getBancoID() {
@@ -42,15 +43,6 @@ public class Banco {
         this.nombreBanco = nombreBanco;
     }
 
-    public String getIdBanco() {
-        return IdBanco;
-    }
-
-    public void setIdBanco(String idBanco) {
-        IdBanco = idBanco;
-    }
-
-
     public String getIcono() {
         return icono;
     }
@@ -58,4 +50,6 @@ public class Banco {
     public void setIcono(String icono) {
         this.icono = icono;
     }
+
+
 }

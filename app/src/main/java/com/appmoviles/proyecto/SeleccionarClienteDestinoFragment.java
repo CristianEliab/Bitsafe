@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.appmoviles.proyecto.modelo.Cliente;
+import com.appmoviles.proyecto.modelo.Usuario;
 import com.appmoviles.proyecto.util.AdapterTemplate_SlClientes;
 import com.appmoviles.proyecto.util.Constantes;
 
@@ -29,7 +30,7 @@ public class SeleccionarClienteDestinoFragment extends Fragment implements Adapt
     private AdapterTemplate_SlClientes adapter;
     private ArrayList<Cliente> clientes;
     private TransaccionesFragment transaccionesFragment;
-    private Cliente cliente;
+    private Usuario cliente;
 
     private ImageView iv_fragment_sl_clientes_return;
 
@@ -98,26 +99,20 @@ public class SeleccionarClienteDestinoFragment extends Fragment implements Adapt
                 // Utilizado para enviar variables entre dos fragments
                 Bundle parametro = new Bundle();
                 if (cliente != null) {
-                    parametro.putString(Constantes.CLIENTE_DESTINO_KEY_NOMBRE, cliente.nombre);
+                    parametro.putString(Constantes.CLIENTE_DESTINO_KEY_NOMBRE, cliente.getNombre());
                     transaccionesFragment.setArguments(parametro);
                 }
                 transaction.replace(R.id.contenido, transaccionesFragment);
                 transaction.commit();
             }
         });
-        agregarClientes();
 
         return v;
     }
 
-    private void agregarClientes() {
-        for (Cliente cliente : clientes) {
-            adapter.agregarCliente(cliente);
-        }
-    }
 
     @Override
-    public void onItemClick(Cliente amigo) {
+    public void onItemClick(Usuario amigo) {
         cliente = amigo;
         if (cliente != null) {
             fb_fragment_sl_cliente_agregar_cliente.setEnabled(true);

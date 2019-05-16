@@ -88,14 +88,12 @@
                     android:id="@+id/tv_nombre_cliente_perfil_cliente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="10dp"
+                    android:layout_alignLeft="@+id/iv_nombre_perfil_cliente"
+                    android:layout_marginLeft="220dp"
                     android:layout_marginTop="42dp"
-                    android:layout_marginEnd="25dp"
-                    android:text="ALEJANDRA RAMOS"
+                    android:text="Usuario"
                     android:textColor="#42423f"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tv_cuenta_bitsafe_perfil_cliente"
@@ -240,8 +238,8 @@
 
                     <ImageView
                         android:id="@+id/iv_cerrar_perfil_cliente"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:src="@drawable/ic_logout" />
@@ -252,8 +250,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="52dp"
+                        android:layout_alignLeft="@+id/iv_cerrar_perfil_cliente"
                         android:text="Cerrar sesión"
+                        android:layout_marginLeft="60dp"
                         android:textColor="#d80d17"
                         android:textSize="@dimen/fragments_toolbar" />
 

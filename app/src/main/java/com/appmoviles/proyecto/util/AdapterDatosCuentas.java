@@ -13,9 +13,10 @@ import com.appmoviles.proyecto.R;
 import com.appmoviles.proyecto.modelo.Cliente;
 import com.appmoviles.proyecto.modelo.Cuenta;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class AdapterDatosCuentas extends RecyclerView.Adapter<AdapterDatosCuentas.CustomViewHolder> {
+public class AdapterDatosCuentas extends RecyclerView.Adapter<AdapterDatosCuentas.CustomViewHolder> implements Serializable {
 
     private ArrayList<Cuenta> data;
     int index = -1;

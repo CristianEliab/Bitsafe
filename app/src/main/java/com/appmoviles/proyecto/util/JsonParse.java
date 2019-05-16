@@ -568,6 +568,8 @@ public class JsonParse {
         String tipoCuentaID = null;
         String tipoCuentaNombre = null;
         String bancoID = null;
+        String saldo = null;
+        String fechaVinculacion = null;
         reader.beginArray();
         while (reader.hasNext()) {
             reader.beginObject();
@@ -592,12 +594,18 @@ public class JsonParse {
                     case "bancoID":
                         bancoID = reader.nextString();
                         break;
+                    case "saldo":
+                        saldo = reader.nextString();
+                        break;
+                    case "fechaVinculacion":
+                        fechaVinculacion = reader.nextString();
+                        break;
                     default:
                         reader.skipValue();
                         break;
                 }
             }
-            this.cuentaArrayList.add(new Cuenta(cuentaID, numeroCuenta, usuarioID, tipoCuentaID, tipoCuentaNombre, bancoID));
+            this.cuentaArrayList.add(new Cuenta(cuentaID, numeroCuenta, usuarioID, tipoCuentaID, tipoCuentaNombre, bancoID, saldo, fechaVinculacion));
             reader.endObject();
         }
 
@@ -732,6 +740,7 @@ public class JsonParse {
         String bancoID = null;
         String nombreBanco = null;
         String icono = null;
+        String saldo = null;
         reader.beginArray();
         while (reader.hasNext()) {
             reader.beginObject();
@@ -747,12 +756,15 @@ public class JsonParse {
                     case "icono":
                         icono = reader.nextString();
                         break;
+                    case "saldo":
+                        saldo = reader.nextString();
+                        break;
                     default:
                         reader.skipValue();
                         break;
                 }
             }
-            this.bancoArrayList.add(new Banco(bancoID, nombreBanco, icono));
+            this.bancoArrayList.add(new Banco(bancoID, nombreBanco, icono, saldo));
             reader.endObject();
         }
     }

@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +21,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.appmoviles.proyecto.util.Constantes.CHILD_BANCOS;
+import static com.appmoviles.proyecto.util.Constantes.CHILD_CUENTAS;
 
 public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTemplate_Clientes.CustomViewHolder> {
 
@@ -27,7 +32,8 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
     private ArrayList<Usuario> data;
     private LinearLayoutManager manage;
     private AdaptadorIconsBancos adaptadorIconsBancos;
-    private ArrayList<String> listaIdBancos;
+    private List<Cuenta> listaCuentas;
+    int index = -1;
 
     FirebaseAuth auth;
     FirebaseDatabase rtdb;
@@ -46,6 +52,8 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
         rtdb = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
         data = new ArrayList<>();
+        listaCuentas = new ArrayList<>();
+
     }
 
     @Override
@@ -59,64 +67,88 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
     @Override
     public void onBindViewHolder(CustomViewHolder holder, final int position) {
         ((TextView) holder.root.findViewById(R.id.tv_cliente_registro_nombre)).setText(data.get(position).getNombre());
-        ((RecyclerView) holder.root.findViewById(R.id.lista_bancos_icons)).setHasFixedSize(true);
-        ((RecyclerView) holder.root.findViewById(R.id.lista_bancos_icons)).setLayoutManager(this.manage);
         adaptadorIconsBancos = new AdaptadorIconsBancos();
         ((RecyclerView) holder.root.findViewById(R.id.lista_bancos_icons)).setHasFixedSize(true);
         ((RecyclerView) holder.root.findViewById(R.id.lista_bancos_icons)).setAdapter(adaptadorIconsBancos);
 
-        listaIdBancos = new ArrayList<>();
-        cargarCuentas(position);
-        cargarBancos();
-        listaIdBancos.clear();
+        holder.root.findViewById(R.id.ll_fragment_clientes_registro).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                index = position;
+                listener.onItemUsuario(data.get(position));
+                notifyDataSetChanged();
+            }
+        });
+
+        /*cargarCuentas(position);
+        cargarBancos();*/
+
+        Banco banco = new Banco();
+        banco.setIcono(Constantes.ICON_BANCO_DAVIVIENDA);
+        adaptadorIconsBancos.agregarBanco(banco);
 
     }
 
-    private void cargarCuentas(final int position) {
-        rtdb.getReference().child(Constantes.CHILD_CUENTAS)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        //Respuesta de firebase
-                        for (DataSnapshot hijo : dataSnapshot.getChildren()) {
-                            //Si es admin, loguearse
-                            Cuenta cuenta = hijo.getValue(Cuenta.class);
-                            Usuario usuarionItem = data.get(position);
-                            if (cuenta.getUsuarioID().equals(usuarionItem.getUsuarioID())) {
-                                String bancoID = cuenta.getBancoID();
-                                listaIdBancos.add(bancoID);
-                            }
+    public void cargarBancos() {
+        rtdb.getReference().child(CHILD_BANCOS).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                final ArrayList<Banco> bancos = new ArrayList<>();
+                for (int i = 0; i < listaCuentas.size(); i++) {
+                    String bancoID = listaCuentas.get(i).getBancoID();
+                    Banco bancoTmp;
+                    for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                        bancoTmp = hijo.getValue(Banco.class);
+                        //Solo los bancos que tienen cuentas del usuario registrado
+                        if (bancoTmp.getBancoID().equals(bancoID) && !bancos.contains(bancoTmp)) {
+                            bancos.add(bancoTmp);
                         }
                     }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    for (Banco banco: bancos) {
+                        adaptadorIconsBancos.agregarBanco(banco);
                     }
-                });
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
-    private void cargarBancos() {
-        rtdb.getReference().child(Constantes.CHILD_BANCOS)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        //Respuesta de firebase
-                        for (DataSnapshot hijo : dataSnapshot.getChildren()) {
-                            //Si es admin, loguearse
-                            Banco banco = hijo.getValue(Banco.class);
-                            for (String idBanco : listaIdBancos) {
-                                if (banco.getBancoID().equals(idBanco)) {
-                                    adaptadorIconsBancos.agregarBanco(banco);
-                                }
-                            }
-                        }
+    public void cargarCuentas(final int position) {
+        listaCuentas = new ArrayList<Cuenta>();
+        rtdb.getReference().child(CHILD_CUENTAS).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Cuenta cuentaTmp;
+                for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                    cuentaTmp = hijo.getValue(Cuenta.class);
+                    //Solo las cuentas que pertenezcan al usuario logueado
+                    if (cuentaTmp.getUsuarioID().equals(data.get(position).getUsuarioID())) {
+                        listaCuentas.add(cuentaTmp);
                     }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
+            }
+        });
     }
+
+    //OBSERVER
+    public interface OnItemClickUsuario {
+        void onItemUsuario(Usuario usuario);
+    }
+
+    private OnItemClickUsuario listener;
+
+    public void setListener(OnItemClickUsuario listener) {
+        this.listener = listener;
+    }
+
 
 
     @Override

@@ -11,6 +11,11 @@ import com.appmoviles.proyecto.modelo.Banco;
 
 import java.util.ArrayList;
 
+import static com.appmoviles.proyecto.util.Constantes.ICON_BANCO_BANCOLOMBIA;
+import static com.appmoviles.proyecto.util.Constantes.ICON_BANCO_BOGOTA;
+import static com.appmoviles.proyecto.util.Constantes.ICON_BANCO_DAVIVIENDA;
+import static com.appmoviles.proyecto.util.Constantes.ICON_BANCO_ITAU;
+
 public class AdaptadorIconsBancos extends RecyclerView.Adapter<AdaptadorIconsBancos.CustomViewHolder>{
 
     private ArrayList<Banco> data;
@@ -39,16 +44,16 @@ public class AdaptadorIconsBancos extends RecyclerView.Adapter<AdaptadorIconsBan
 
     @Override
     public void onBindViewHolder(final AdaptadorIconsBancos.CustomViewHolder holder, final int position) {
-        if(data.get(position).getIcono().equals("banco_davivienda")){
+        if(data.get(position).getIcono().equals(ICON_BANCO_DAVIVIENDA)){
             ((ImageView) holder.root.findViewById(R.id.iv_icon_bancos)).setBackgroundResource(R.drawable.banco_davivienda);
         }
-        if(data.get(position).getIcono().equals("banco_bogota")){
+        else if(data.get(position).getIcono().equals(ICON_BANCO_BOGOTA)){
             ((ImageView) holder.root.findViewById(R.id.iv_icon_bancos)).setBackgroundResource(R.drawable.banco_bogota);
         }
-        if(data.get(position).getIcono().equals("banco_bancolombia")){
+        else if(data.get(position).getIcono().equals(ICON_BANCO_BANCOLOMBIA)){
             ((ImageView) holder.root.findViewById(R.id.iv_icon_bancos)).setBackgroundResource(R.drawable.banco_bancolombia);
         }
-        if(data.get(position).getIcono().equals("banco_itau")){
+        else if(data.get(position).getIcono().equals(ICON_BANCO_ITAU)){
             ((ImageView) holder.root.findViewById(R.id.iv_icon_bancos)).setBackgroundResource(R.drawable.banco_itau);
         }
     }
@@ -61,6 +66,10 @@ public class AdaptadorIconsBancos extends RecyclerView.Adapter<AdaptadorIconsBan
     public void agregarBanco(Banco banco) {
         data.add(banco);
         notifyDataSetChanged();
+    }
+
+    public boolean contains(Banco banco){
+        return data.contains(banco);
     }
 
 }
