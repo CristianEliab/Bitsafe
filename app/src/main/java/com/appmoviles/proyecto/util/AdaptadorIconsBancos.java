@@ -68,4 +68,8 @@ public class AdaptadorIconsBancos extends RecyclerView.Adapter<AdaptadorIconsBan
         notifyDataSetChanged();
     }
 
+    public boolean contains(Banco banco){
+        return data.contains(banco);
+    }
+
 }

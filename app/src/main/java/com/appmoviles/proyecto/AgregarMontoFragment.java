@@ -14,8 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.appmoviles.proyecto.modelo.Banco;
-import com.appmoviles.proyecto.util.AdapterDatosBancos;
 import com.appmoviles.proyecto.util.Constantes;
 
 import java.util.Locale;
@@ -40,10 +38,9 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
     private Button btn_agregar_monto_borrar;
 
     private String monto_transaccion;
-
     private TransaccionesFragment transaccionesFragment;
-
     private SharedPreferences myPreferences;
+    private Fragment fragment;
 
 
     public AgregarMontoFragment() {
@@ -62,6 +59,10 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_agregar_monto, container, false);
 
+        if (getArguments() != null) {
+            fragment = (Fragment) getArguments().getSerializable(Constantes.TRANSACCIONES);
+        }
+
         myPreferences
                 = (SharedPreferences) PreferenceManager.getDefaultSharedPreferences(getContext());
 
@@ -72,31 +73,26 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
         iv_fragment_agregar_monto_return.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                transaccionesFragment = new TransaccionesFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.contenido, transaccionesFragment);
-                transaction.addToBackStack(null);
+                transaction.replace(R.id.contenido, fragment);
                 transaction.commit();
+
             }
         });
 
         btn_fragment_agregar_monto_guardar_monto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                transaccionesFragment = new TransaccionesFragment();
-
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-                // Put information
-                listener.onPassClickValue(monto_transaccion);
-
-                //Guardar el monto en la app.
+                /*getActivity().onBackPressed();*/
                 SharedPreferences.Editor myEditor = myPreferences.edit();
                 myEditor.putString(Constantes.MONTO_KEY, monto_transaccion);
                 myEditor.commit();
-
-                transaction.replace(R.id.contenido, transaccionesFragment);
-                transaction.addToBackStack(null);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+               /* transaccionesFragment = new TransaccionesFragment();
+                // Put information
+                listener.onPassClickValue(monto_transaccion);*/
+                //Guardar el monto en la app.
+                transaction.replace(R.id.contenido, fragment);
                 transaction.commit();
 
 
@@ -200,6 +196,7 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
         settings.commit();
     }
 
+
     //OBSERVER
     public interface OnItemPassListener {
         void onPassClickValue(String monto);
@@ -210,9 +207,5 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
         this.listener = listener;
     }
 
-
-    public interface OnBackPressedListener {
-        public void doBack();
-    }
 
 }

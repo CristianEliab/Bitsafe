@@ -1,6 +1,7 @@
 package com.appmoviles.proyecto;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,9 +12,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.appmoviles.proyecto.modelo.Cliente;
+import com.appmoviles.proyecto.modelo.Usuario;
 import com.appmoviles.proyecto.util.AdapterTemplate_SlClientes;
 import com.appmoviles.proyecto.util.Constantes;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -24,9 +32,15 @@ public class SeleccionarClienteOrigenFragment extends Fragment implements Adapte
     private AdapterTemplate_SlClientes adapter;
     private ArrayList<Cliente> clientes;
     private DatosClienteFragment datosClienteFragment;
-    private Cliente cliente;
+    private Usuario cliente;
+    private ImageView iv_fragment_sl_clientes_perfil;
 
     private ImageView iv_fragment_sl_clientes_return;
+
+    FirebaseAuth auth;
+    FirebaseDatabase rtdb;
+    private Fragment fragment;
+
 
     public SeleccionarClienteOrigenFragment() {
         // Required empty public constructor
@@ -41,23 +55,20 @@ public class SeleccionarClienteOrigenFragment extends Fragment implements Adapte
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        if (getArguments() != null) {
+            fragment = (Fragment) getArguments().getSerializable(Constantes.TRANSACCIONES);
+        }
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_seleccionar_cliente_origen, container, false);
 
-        clientes = new ArrayList<>();
+        iv_fragment_sl_clientes_perfil = v.findViewById(R.id.iv_fragment_sl_clientes_perfil);
 
-        // Pruba de la vista de los clientes
-        final Cliente cliente_p_1 = new Cliente("Cristian");
-        Cliente cliente_p_2 = new Cliente("Steven");
-        Cliente cliente_p_3 = new Cliente("Alejandra");
-        Cliente cliente_p_4 = new Cliente("Johan");
-        Cliente cliente_p_5 = new Cliente("Toto");
 
-        clientes.add(cliente_p_1);
-        clientes.add(cliente_p_2);
-        clientes.add(cliente_p_3);
-        clientes.add(cliente_p_4);
-        clientes.add(cliente_p_5);
+        rtdb = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
+
+
 
         libreta = v.findViewById(R.id.lista_sl_clientes);
         adapter = new AdapterTemplate_SlClientes();
@@ -68,6 +79,23 @@ public class SeleccionarClienteOrigenFragment extends Fragment implements Adapte
 
         adapter.setListener(this);
 
+        rtdb.getReference().child(Constantes.CHILD_USUARIOS)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        //Respuesta de firebase
+                        for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                            //Si es admin, loguearse
+                            Usuario usuario = hijo.getValue(Usuario.class);
+                            adapter.agregarUsuario(usuario);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+
 
         iv_fragment_sl_clientes_return = v.findViewById(R.id.iv_fragment_sl_clientes_return);
         iv_fragment_sl_clientes_return.setOnClickListener(new View.OnClickListener() {
@@ -75,8 +103,10 @@ public class SeleccionarClienteOrigenFragment extends Fragment implements Adapte
             public void onClick(View v) {
                 datosClienteFragment = new DatosClienteFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                Bundle parametro = new Bundle();
+                parametro.putSerializable(Constantes.TRANSACCIONES_DATOS, (TransaccionesFragment) fragment);
+                datosClienteFragment.setArguments(parametro);
                 transaction.replace(R.id.contenido, datosClienteFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
@@ -85,33 +115,27 @@ public class SeleccionarClienteOrigenFragment extends Fragment implements Adapte
         fb_fragment_sl_cliente_agregar_cliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 datosClienteFragment = new DatosClienteFragment();
                 //listener.onPassClickClienteOrigen(cliente);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 // Utilizado para enviar variables entre dos fragments
                 Bundle parametro = new Bundle();
                 if (cliente != null) {
-                    parametro.putString(Constantes.CLIENTE_ORIGEN_KEY_NOMBRE, cliente.nombre);
+                    parametro.putString(Constantes.CLIENTE_ORIGEN_KEY_NOMBRE, cliente.getNombre());
+                    parametro.putSerializable(Constantes.TRANSACCIONES_DATOS, (TransaccionesFragment) fragment);
                     datosClienteFragment.setArguments(parametro);
                 }
                 transaction.replace(R.id.contenido, datosClienteFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
-        agregarClientes();
+
         return v;
     }
 
-    private void agregarClientes() {
-        for (Cliente cliente : clientes) {
-            adapter.agregarCliente(cliente);
-        }
-    }
 
     @Override
-    public void onItemClick(Cliente amigo) {
+    public void onItemClick(Usuario amigo) {
         cliente = amigo;
         if (cliente != null) {
             fb_fragment_sl_cliente_agregar_cliente.setEnabled(true);
@@ -127,6 +151,7 @@ public class SeleccionarClienteOrigenFragment extends Fragment implements Adapte
     public interface OnItemPassClienteOrigen {
         void onPassClickClienteOrigen(String monto);
     }
+
     private OnItemPassClienteOrigen listener;
 
     public void setListener(OnItemPassClienteOrigen listener) {

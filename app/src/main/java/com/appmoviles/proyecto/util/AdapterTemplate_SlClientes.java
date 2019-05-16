@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.appmoviles.proyecto.R;
 import com.appmoviles.proyecto.modelo.Cliente;
+import com.appmoviles.proyecto.modelo.Usuario;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 public class AdapterTemplate_SlClientes extends RecyclerView.Adapter<AdapterTemplate_SlClientes.CustomViewHolder> {
 
     //Los datos que vamos a mostrar (View)
-    private ArrayList<Cliente> data;
+    private ArrayList<Usuario> data;
     int index = -1;
 
     //Renglon y construccion
@@ -42,7 +43,7 @@ public class AdapterTemplate_SlClientes extends RecyclerView.Adapter<AdapterTemp
 
     @Override
     public void onBindViewHolder(final AdapterTemplate_SlClientes.CustomViewHolder holder, final int position) {
-        ((TextView) holder.root.findViewById(R.id.tv_sl_datos_nombre)).setText(data.get(position).nombre);
+        ((TextView) holder.root.findViewById(R.id.tv_sl_datos_nombre)).setText(data.get(position).getNombre());
         holder.root.findViewById(R.id.ll_fragment_sl_datos).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +61,7 @@ public class AdapterTemplate_SlClientes extends RecyclerView.Adapter<AdapterTemp
 
     //OBSERVER
     public interface OnItemClickListener {
-        void onItemClick(Cliente amigo);
+        void onItemClick(Usuario usuario);
     }
 
     private OnItemClickListener listener;
@@ -74,8 +75,8 @@ public class AdapterTemplate_SlClientes extends RecyclerView.Adapter<AdapterTemp
         return data.size();
     }
 
-    public void agregarCliente(Cliente cliente) {
-        data.add(cliente);
+    public void agregarUsuario(Usuario usuario) {
+        data.add(usuario);
         notifyDataSetChanged();
     }
 }

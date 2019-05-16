@@ -22,6 +22,7 @@ public class Login_huella extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Login_huella.this, HomeCliente.class);
                 startActivity(i);
+                finish();
             }
         });
     }

@@ -6,10 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
 
     <!-- Theme.AppCompat.Light is not a dialog theme -->
     <style name="DialogTheme" parent="Theme.AppCompat.Light">
         <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <style name="BaseAppTheme" parent="android:Theme.Material">
+        <!-- enable window content transitions -->
+        <item name="android:windowActivityTransitions">true</item>
     </style>
 </resources>

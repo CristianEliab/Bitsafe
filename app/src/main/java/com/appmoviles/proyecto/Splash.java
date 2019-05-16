@@ -88,17 +88,17 @@ public class Splash extends AppCompatActivity {
         animacion = (AnimationDrawable) iv_splash_screen.getBackground();
         goToMain();
 
-        if (auth.getCurrentUser() == null) {
+       /* if (auth.getCurrentUser() == null) {
 
             Intent i = new Intent(this, LoginCorreo.class);
             startActivity(i);
             finish();
 
             return;
-        }
+        }*/
 
 
-        rtdb.getReference().child("rolusuario")
+        /*rtdb.getReference().child("rolusuario")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -127,7 +127,7 @@ public class Splash extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
-                });
+                });*/
 
     }
 

@@ -1,5 +1,9 @@
 package com.appmoviles.proyecto.util;
 
+import com.appmoviles.proyecto.Splash;
+
+import java.io.Serializable;
+
 public class Constantes {
 
     public final static String MONTO_KEY = "MONTO_KEY";
@@ -31,10 +35,27 @@ public class Constantes {
     public final static String CHILD_CUENTAS = "cuentas";
     public final static String CHILD_TRANSACCIONES = "transacciones";
 
+    public final static String GO_TO_PERFIL = "GO_TO_PERFIL";
+    public final static String CLIENTES = "CLIENTE";
+    public final static String ESTADISTICAS = "ESTADISTICAS";
+    public final static String CARGAR = "CARGAR";
+    public final static String TRANSACCIONES = "TRANSACCIONES";
+    public final static String FRAGMENT = "FRAGMENT";
+
     //PARA LAS IMÁGENES
     public final static String ICON_BANCO_DAVIVIENDA = "banco_davivienda";
     public final static String ICON_BANCO_BOGOTA = "banco_bogota";
     public final static String ICON_BANCO_BANCOLOMBIA = "banco_bancolombia";
     public final static String ICON_BANCO_ITAU = "banco_itau";
+
+
+    //Para mostrar Datos
+    public final static String USUARIO = "USUARIO";
+    public final static String DATOS_FRAGMENT = "DATOS_FRAGMENT";
+    public final static String TRANSACCIONES_DATOS = "TRANSACCIONES_DATOS";
+    public final static String DONDE_VIENE = "DONDE_VIENE";
+    public final static String FRAGMENT_CLIENTE = "FRAGMENT_CLIENTE";
+    public final static String USUARIO_DESTINO = "USUARIO_DESTINO";
+    public final static String USUARIO_ORIGEN = "USUARIO_ORIGEN";
 
 }

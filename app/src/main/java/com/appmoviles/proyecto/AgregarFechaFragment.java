@@ -71,7 +71,6 @@ public class AgregarFechaFragment extends Fragment {
                 transaccionesFragment = new TransaccionesFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.contenido, transaccionesFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
@@ -97,7 +96,6 @@ public class AgregarFechaFragment extends Fragment {
                     listener.onPassFechaValue(date);
                 }
                 transaction.replace(R.id.contenido, transaccionesFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
