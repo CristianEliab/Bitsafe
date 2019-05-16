@@ -34,6 +34,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             public void onClick(View v) {
                 Intent i = new Intent(Login.this, Registro_Bitsafe.class);
                 startActivity(i);
+                finish();
             }
         });
 

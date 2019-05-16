@@ -50,7 +50,6 @@ public class PlanesFragment extends Fragment {
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.replace(R.id.contenido, perfilCliente);
-                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });

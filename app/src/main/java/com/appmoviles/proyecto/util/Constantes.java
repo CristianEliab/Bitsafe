@@ -1,5 +1,7 @@
 package com.appmoviles.proyecto.util;
 
+import com.appmoviles.proyecto.Splash;
+
 public class Constantes {
 
     public final static String MONTO_KEY = "MONTO_KEY";
@@ -25,5 +27,12 @@ public class Constantes {
     public final static String CHILD_BANCOS = "bancos";
     public final static String CHILD_CUENTAS = "cuentas";
     public final static String CHILD_TRANSACCIONES = "transacciones";
+
+    public final static String GO_TO_PERFIL = "GO_TO_PERFIL";
+    public final static String CLIENTES = "CLIENTE";
+    public final static String ESTADISTICAS = "ESTADISTICAS";
+    public final static String CARGAR = "CARGAR";
+    public final static String TRANSACCIONES = "TRANSACCIONES";
+    public final static String FRAGMENT = "FRAGMENT";
 
 }

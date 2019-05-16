@@ -14,8 +14,10 @@ import android.widget.ImageView;
 
 import com.appmoviles.proyecto.util.Constantes;
 
+import java.io.Serializable;
 
-public class TransaccionesFragment extends Fragment implements View.OnClickListener {
+
+public class TransaccionesFragment extends Fragment implements View.OnClickListener, Serializable {
 
     public static final String TRANSACCION = "TRANSACCION";
     private Button btn_fragment_transacciones_agregar_monto;
@@ -25,6 +27,7 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
     private EditText btn_fragment_transacciones_descripcion_clientes;
     private ImageView tv_fragment_transacciones_foto_origen;
     private ImageView tv_fragment_transacciones_foto_destino;
+    private ImageView iv_fragment_transacciones_perfil;
 
     private AgregarMontoFragment agregarMontoFragment;
     private SeleccionarClienteOrigenFragment seleccionarClienteOrigenFragment;
@@ -68,6 +71,7 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
         btn_fragment_transacciones_descripcion_clientes = v.findViewById(R.id.btn_fragment_transacciones_descripcion_clientes);
         tv_fragment_transacciones_foto_origen = v.findViewById(R.id.tv_fragment_transacciones_foto_origen);
         tv_fragment_transacciones_foto_destino = v.findViewById(R.id.tv_fragment_transacciones_foto_destino);
+        iv_fragment_transacciones_perfil = v.findViewById(R.id.iv_fragment_transacciones_perfil);
 
         // Pedir la información
         myPreferences
@@ -103,6 +107,7 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
         btn_fragment_transacciones_clientes_destino.setOnClickListener(this);
         btn_fragment_transacciones_agregar_monto.setOnClickListener(this);
         btn_fragment_transacciones_agregar_fecha.setOnClickListener(this);
+        iv_fragment_transacciones_perfil.setOnClickListener(this);
 
         return v;
     }
@@ -116,26 +121,25 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
             case R.id.btn_fragment_transacciones_clientes_origen:
                 editor.putString(Constantes.CLIENTE_ORIGEN_KEY_NOMBRE, Constantes.CLIENTE_ORIGEN_DEFAULT_NOMBRE);
                 transaction.replace(R.id.contenido, seleccionarClienteOrigenFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case R.id.btn_fragment_transacciones_clientes_destino:
                 editor.putString(Constantes.CLIENTE_DESTINO_KEY_NOMBRE, Constantes.CLIENTE_DESTINO_DEFAULT_NOMBRE);
                 transaction.replace(R.id.contenido, seleccionarClienteDestinoFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case R.id.btn_fragment_transacciones_agregar_monto:
                 editor.putString(Constantes.MONTO_KEY, Constantes.MONTO_DEFAULT);
                 transaction.replace(R.id.contenido, agregarMontoFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case R.id.btn_fragment_transacciones_agregar_fecha:
                 editor.putString(Constantes.FECHA_KEY, Constantes.FECHA_DEFAULT);
                 transaction.replace(R.id.contenido, agregarFechaFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
+                break;
+            case R.id.iv_fragment_transacciones_perfil:
+                listener.onViewPerfiltransaccion();
                 break;
         }
     }
@@ -176,5 +180,17 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
         // Commit the edits!
         editor.commit();
     }
+
+    //OBSERVER
+    public interface OnViewPerfiltransaccion {
+        void onViewPerfiltransaccion();
+    }
+    private OnViewPerfiltransaccion listener;
+
+    public void setListener(OnViewPerfiltransaccion listener) {
+        this.listener = listener;
+    }
+
+
 
 }

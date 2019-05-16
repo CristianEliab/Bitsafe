@@ -24,9 +24,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ClientesFragment extends Fragment {
+public class ClientesFragment extends Fragment implements Serializable {
 
     private RecyclerView libreta;
     private AdapterTemplate_Clientes adapter;
@@ -86,7 +87,7 @@ public class ClientesFragment extends Fragment {
         iv_fragment_clientes_perfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onViewPerfil("Perfil");
+                listener.onViewPerfilCliente();
             }
         });
 
@@ -97,12 +98,12 @@ public class ClientesFragment extends Fragment {
 
 
     //OBSERVER
-    public interface OnItemViewPerfil {
-        void onViewPerfil(String monto);
+    public interface OnViewPerfilCliente {
+        void onViewPerfilCliente();
     }
-    private OnItemViewPerfil listener;
+    private OnViewPerfilCliente listener;
 
-    public void setListener(OnItemViewPerfil listener) {
+    public void setListener(OnViewPerfilCliente listener) {
         this.listener = listener;
     }
 

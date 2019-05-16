@@ -117,6 +117,7 @@ public class LoginCorreo extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(LoginCorreo.this, Registro_Bitsafe.class);
                 startActivity(i);
+                finish();
             }
         });
 

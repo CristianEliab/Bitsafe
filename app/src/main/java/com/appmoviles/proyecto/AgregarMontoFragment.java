@@ -75,7 +75,6 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
                 transaccionesFragment = new TransaccionesFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.contenido, transaccionesFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
@@ -96,7 +95,6 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
                 myEditor.commit();
 
                 transaction.replace(R.id.contenido, transaccionesFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
 
 

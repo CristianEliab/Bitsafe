@@ -27,6 +27,7 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
     private ArrayList<Usuario> data;
     private LinearLayoutManager manage;
     private AdaptadorIconsBancos adaptadorIconsBancos;
+    private ArrayList<String> listaIdBancos;
 
     FirebaseAuth auth;
     FirebaseDatabase rtdb;
@@ -61,11 +62,18 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
         ((RecyclerView) holder.root.findViewById(R.id.lista_bancos_icons)).setHasFixedSize(true);
         ((RecyclerView) holder.root.findViewById(R.id.lista_bancos_icons)).setLayoutManager(this.manage);
         adaptadorIconsBancos = new AdaptadorIconsBancos();
+        ((RecyclerView) holder.root.findViewById(R.id.lista_bancos_icons)).setHasFixedSize(true);
         ((RecyclerView) holder.root.findViewById(R.id.lista_bancos_icons)).setAdapter(adaptadorIconsBancos);
 
-        final ArrayList<String> listaIdBancos = new ArrayList<>();
+        listaIdBancos = new ArrayList<>();
+        cargarCuentas(position);
+        cargarBancos();
+        listaIdBancos.clear();
 
-        rtdb.getReference().child("cuentas")
+    }
+
+    private void cargarCuentas(final int position) {
+        rtdb.getReference().child(Constantes.CHILD_CUENTAS)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -74,7 +82,7 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
                             //Si es admin, loguearse
                             Cuenta cuenta = hijo.getValue(Cuenta.class);
                             Usuario usuarionItem = data.get(position);
-                            if(cuenta.getUsuarioID().equals(usuarionItem.getUsuarioID())){
+                            if (cuenta.getUsuarioID().equals(usuarionItem.getUsuarioID())) {
                                 String bancoID = cuenta.getBancoID();
                                 listaIdBancos.add(bancoID);
                             }
@@ -85,8 +93,10 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
+    }
 
-        rtdb.getReference().child("bancos")
+    private void cargarBancos() {
+        rtdb.getReference().child(Constantes.CHILD_BANCOS)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -94,8 +104,8 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
                         for (DataSnapshot hijo : dataSnapshot.getChildren()) {
                             //Si es admin, loguearse
                             Banco banco = hijo.getValue(Banco.class);
-                            for (String idBanco: listaIdBancos ) {
-                                if(banco.getBancoID().equals(idBanco)){
+                            for (String idBanco : listaIdBancos) {
+                                if (banco.getBancoID().equals(idBanco)) {
                                     adaptadorIconsBancos.agregarBanco(banco);
                                 }
                             }
@@ -106,8 +116,6 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
-        listaIdBancos.clear();
-
     }
 
 

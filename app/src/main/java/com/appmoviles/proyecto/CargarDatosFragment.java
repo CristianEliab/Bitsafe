@@ -15,11 +15,13 @@ import android.widget.Toast;
 import com.appmoviles.proyecto.util.FileChooser;
 
 import java.io.File;
+import java.io.Serializable;
 
 
-public class CargarDatosFragment extends Fragment implements View.OnClickListener {
+public class CargarDatosFragment extends Fragment implements View.OnClickListener, Serializable {
 
     private ImageView iv_fragment_carga_seleccion_file;
+    private ImageView iv_fragment_carga_perfil;
 
 
     public CargarDatosFragment() {
@@ -38,7 +40,16 @@ public class CargarDatosFragment extends Fragment implements View.OnClickListene
         View v = inflater.inflate(R.layout.fragment_cargar_datos, container, false);
 
         iv_fragment_carga_seleccion_file = v.findViewById(R.id.iv_fragment_carga_seleccion_file);
+        iv_fragment_carga_perfil = v.findViewById(R.id.iv_fragment_carga_perfil);
         iv_fragment_carga_seleccion_file.setOnClickListener(this);
+
+
+        iv_fragment_carga_perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onViewPerfilCargar();
+            }
+        });
 
         return v;
     }
@@ -68,6 +79,15 @@ public class CargarDatosFragment extends Fragment implements View.OnClickListene
                 processFile();
                 break;
         }
+    }
 
+    //OBSERVER
+    public interface OnViewPerfilCargar {
+        void onViewPerfilCargar();
+    }
+    private OnViewPerfilCargar listener;
+
+    public void setListener(OnViewPerfilCargar listener) {
+        this.listener = listener;
     }
 }

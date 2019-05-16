@@ -76,7 +76,6 @@ public class SeleccionarClienteOrigenFragment extends Fragment implements Adapte
                 datosClienteFragment = new DatosClienteFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.contenido, datosClienteFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
@@ -96,7 +95,6 @@ public class SeleccionarClienteOrigenFragment extends Fragment implements Adapte
                     datosClienteFragment.setArguments(parametro);
                 }
                 transaction.replace(R.id.contenido, datosClienteFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });

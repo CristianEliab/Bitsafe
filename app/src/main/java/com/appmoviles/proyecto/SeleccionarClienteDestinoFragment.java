@@ -85,7 +85,6 @@ public class SeleccionarClienteDestinoFragment extends Fragment implements Adapt
                 transaccionesFragment = new TransaccionesFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.contenido, transaccionesFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
@@ -103,7 +102,6 @@ public class SeleccionarClienteDestinoFragment extends Fragment implements Adapt
                     transaccionesFragment.setArguments(parametro);
                 }
                 transaction.replace(R.id.contenido, transaccionesFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
