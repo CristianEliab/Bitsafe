@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.appmoviles.proyecto">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/aplicacion_ic_icono_app"
@@ -9,10 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".HomeCliente"></activity>
         <activity android:name=".CambioAjustes"></activity>
-        <activity android:name=".AjuestesContrasena" />
         <activity android:name=".LoginCorreo" />
-        <activity android:name=".HomeCliente" />
         <activity android:name=".HomeAdministrador" />
         <activity android:name=".Registro_Bitsafe" />
         <activity android:name=".Login_huella" />
@@ -24,8 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".MiCuentaPerfil" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

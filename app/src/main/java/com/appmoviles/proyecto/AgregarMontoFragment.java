@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.appmoviles.proyecto.modelo.Banco;
+import com.appmoviles.proyecto.util.AdapterDatosBancos;
 import com.appmoviles.proyecto.util.Constantes;
 
 import java.util.Locale;
@@ -82,19 +84,22 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
             @Override
             public void onClick(View v) {
                 transaccionesFragment = new TransaccionesFragment();
+
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                // Put information
+                listener.onPassClickValue(monto_transaccion);
 
                 //Guardar el monto en la app.
                 SharedPreferences.Editor myEditor = myPreferences.edit();
                 myEditor.putString(Constantes.MONTO_KEY, monto_transaccion);
                 myEditor.commit();
-                // Utilizado para enviar variables entre dos fragments
-                Bundle parametro = new Bundle();
-                parametro.putString(Constantes.MONTO_KEY, monto_transaccion);
-                transaccionesFragment.setArguments(parametro);
+
                 transaction.replace(R.id.contenido, transaccionesFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
+
+
             }
         });
 
@@ -182,5 +187,26 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
 
         et_agregar_monto_monto.setHint(monto_transaccion);
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // We need an Editor object to make preference changes.
+        // All objects are from android.context.Context
+        SharedPreferences.Editor settings = myPreferences.edit();
+        settings.putString(Constantes.MONTO_KEY, monto_transaccion);
+        // Commit the edits!
+        settings.commit();
+    }
+
+    //OBSERVER
+    public interface OnItemPassListener {
+        void onPassClickValue(String monto);
+    }
+    private OnItemPassListener listener;
+
+    public void setListener(OnItemPassListener listener) {
+        this.listener = listener;
     }
 }

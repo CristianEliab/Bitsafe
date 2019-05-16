@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
-
 
         <RelativeLayout
             android:id="@+id/rl_fragment_clientes_toolbar"
@@ -45,6 +43,19 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/fragments_toolbar" />
 
+                <TextView
+                    android:id="@+id/tv_fragment_dt_clientes_texto_nombre_cliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/aplicacion_margin_left_text_nombre_cliente"
+                    android:gravity="center"
+                    android:text="@string/fragment_dt_clientes_toolbar"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/fragments_toolbar_nombre_cliente" />
+
                 <ImageView
                     android:id="@+id/iv_fragment_dt_clientes_perfil"
                     android:layout_width="wrap_content"
@@ -71,7 +82,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tb_fragment_dt_clientes_toolbar"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/fragment_clientes_bordes_registros"
                 android:orientation="horizontal"
                 android:padding="10dp">
@@ -86,7 +99,7 @@
                     android:background="@drawable/fragment_cliente_ic_foto_cliente" />
 
                 <TextView
-                    android:id="@+id/tv_sl_cliente_registro_nombre"
+                    android:id="@+id/tv_datos_cliente_registro_nombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/iv_cliente_registro_foto"
@@ -99,20 +112,39 @@
             <RelativeLayout
                 android:id="@+id/rl_fragment_dt_clientes_bancos"
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/ll_fragment_sl_clientes_registro"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="50dp">
 
-                <Spinner
-                    android:id="@+id/sp_datos_cliente_bancos"
-                    android:layout_width="fill_parent"
+                <EditText
+                    android:id="@+id/et_banco_seleccionado"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="50dp"
+                    android:background="@drawable/fragment_clientes_figura_filtro"
+                    android:enabled="false"
+                    android:textColor="@color/colorBlack" />
+
+                <ImageView
+                    android:id="@+id/iv_down_bancos"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignRight="@+id/et_banco_seleccionado"
+                    android:layout_marginLeft="10dp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/lista_bancos_cliente"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.502"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.498"></Spinner>
+                    android:layout_below="@+id/et_banco_seleccionado"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="80dp"
+                    android:visibility="gone">
+
+                </android.support.v7.widget.RecyclerView>
 
 
             </RelativeLayout>
@@ -120,34 +152,59 @@
             <RelativeLayout
                 android:id="@+id/rl_fragment_dt_clientes_cuentas"
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/rl_fragment_dt_clientes_bancos"
-                android:layout_marginLeft="80dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="60dp">
 
-                <Spinner
-                    android:id="@+id/sp_datos_cliente_cuentas"
-                    android:layout_width="fill_parent"
+                <EditText
+                    android:id="@+id/et_cuenta_seleccionado"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="80dp"
+                    android:background="@drawable/fragment_clientes_figura_filtro"
+                    android:enabled="false"
+                    android:textColor="@color/colorBlack" />
+
+                <ImageView
+                    android:id="@+id/iv_down_cuentas"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignRight="@+id/et_cuenta_seleccionado"
+                    android:layout_marginLeft="10dp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/lista_cuentas_cliente"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.502"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.498"></Spinner>
+                    android:layout_below="@+id/et_cuenta_seleccionado"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="80dp"
+                    android:visibility="gone">
 
+                </android.support.v7.widget.RecyclerView>
 
             </RelativeLayout>
 
-            <Button
+            <EditText
                 android:id="@+id/btn_fragment_dt_cliente_guardar"
                 android:layout_width="@dimen/fragment_dt_cliente_guardar_w"
                 android:layout_height="@dimen/fragment_dt_cliente_guardar_h"
                 android:layout_below="@+id/rl_fragment_dt_clientes_cuentas"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginBottom="50dp"
                 android:background="@drawable/fragment_agregar_monto_figura_btn_guardar"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:enabled="false"
+                android:focusableInTouchMode="false"
+                android:gravity="center"
                 android:text="@string/fragment_dt_clientes_guardarInfo"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/fragment_agregar_fecha_guarda" />

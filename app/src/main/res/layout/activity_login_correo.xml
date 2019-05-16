@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:descendantFocusability="beforeDescendants"
     android:fillViewport="true"
-    android:focusableInTouchMode="false"
+    android:focusableInTouchMode="true"
     android:windowSoftInputMode="stateAlwaysHidden">
 
     <RelativeLayout
@@ -44,7 +44,7 @@
                 android:background="@drawable/registro_figura_texto_redondo_opciones"
                 android:drawableRight="@drawable/registro_ic_password"
                 android:gravity="center"
-                android:editable="true"
+                android:cursorVisible="false"
                 android:freezesText="true"
                 android:hint="@string/login_correo_ingresar"
                 android:inputType="textVisiblePassword"
@@ -62,7 +62,7 @@
                 android:drawableRight="@drawable/registro_ic_password"
                 android:gravity="center"
                 android:hint="@string/login_correo_ingresar_contrasenia"
-                android:inputType="textVisiblePassword"
+                android:inputType="textWebPassword"
                 android:textColorHint="@color/colorBitsafeRegistro"
                 android:textSize="@dimen/registro_et_tamanio_campos" />
 
@@ -74,6 +74,7 @@
                 android:layout_below="@+id/et_login_correo_confirmar_contrasenia"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
+                android:layout_marginBottom="180dp"
                 android:background="@drawable/registro_boton_registrarse"
                 android:hint="@string/login_correo"
                 android:textColorHint="@color/colorWhite" />

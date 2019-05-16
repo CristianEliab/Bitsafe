@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CrearPlanFragment"
+    android:id="@+id/main">
+
+    <RelativeLayout
+        android:id="@+id/rl_fragment_planes_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:id="@+id/tb_fragment_planes_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/aplicacion_toolbar_opciones"
+            android:background="@color/colorBitsafeBlue"
+            android:elevation="4dp">
+
+
+            <ImageView
+                android:id="@+id/iv_fragment_planes_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
+                android:background="@drawable/fragment_ic_return"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_fragment_planes_actividad"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
+                android:gravity="center"
+                android:text="Crear un ahorro"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/fragments_toolbar" />
+
+            <ImageView
+                android:id="@+id/iv_fragment_planes_perfil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
+                android:background="@drawable/fragment_ic_perfil_cliente" />
+
+            <ImageView
+                android:id="@+id/iv_fragment_planes_notificaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
+                android:background="@drawable/fragment_ic_notificaciones_cliente" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:background="#FFF"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/white_shadowed_shape"
+            android:orientation="vertical"
+            android:padding="20dip">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:orientation="vertical">
+                    <EditText
+                        android:layout_width="wrap_content" 
+                        android:layout_height="wrap_content"
+                        android:background="#00000000"
+                        android:hint="Nombre de tu ahorro"
+                        android:layout_marginBottom="10dp"/>
+                    <ImageView
+                        android:layout_width="270dp"
+                        android:layout_height="4dp"
+                        android:layout_marginTop="1dp"
+                        android:src="@drawable/unloaded_bar"
+                        android:layout_marginBottom="10dp"/>
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="$0.0"
+                        android:textColor="#076AAD"
+                        android:background="#00000000"/>
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_ahorro"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Define una fecha meta:"
+                android:textColor="#4F4F4F"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginTop="40dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_rounded_layout"
+                android:padding="7dp"
+                android:orientation="horizontal"
+                android:gravity="left"
+                android:layout_marginTop="15dp"
+                android:id="@+id/ly_agregar_fecha">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_date"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Agregar una fecha"
+                    android:textColor="#FFF"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/et_date"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Define una cuota:"
+                android:textColor="#4F4F4F"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginTop="40dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_rounded_layout"
+                android:padding="7dp"
+                android:orientation="horizontal"
+                android:gravity="left"
+                android:layout_marginTop="15dp"
+                android:id="@+id/ly_agregar_frecuencia_pago">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_payment_time"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Agregar una frecuencia de pago"
+                    android:textColor="#FFF"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancelar"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="40dp"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Guardar"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="40dp"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

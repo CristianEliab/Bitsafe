@@ -29,6 +29,7 @@
     <dimen name="registro_et_tamanio_campos">15sp</dimen>
     <dimen name="registro_tv_tamanio_campos">20sp</dimen>
     <dimen name="fragments_toolbar">20sp</dimen>
+    <dimen name="fragments_toolbar_nombre_cliente">15sp</dimen>
     <dimen name="fragment_clientes_filtro_texto">15dp</dimen>
     <dimen name="fragment_clientes_filtro_w">300dp</dimen>
     <dimen name="fragment_clientes_filtro_h">40dp</dimen>
@@ -45,6 +46,7 @@
     <dimen name="aplicacion_margin_right_btn_perfil">60dp</dimen>
     <dimen name="aplicacion_margin_right_btn_notificaciones">20dp</dimen>
     <dimen name="aplicacion_margin_left_text_fragment">50dp</dimen>
+    <dimen name="aplicacion_margin_left_text_nombre_cliente">130dp</dimen>
     <dimen name="aplicacion_margin_left_btn_return">20dp</dimen>
     <dimen name="fragment_agregar_monto_et_agregar_monto_w">300dp</dimen>
     <dimen name="fragment_agregar_monto_et_agregar_monto_h">50dp</dimen>
@@ -53,6 +55,15 @@
     <dimen name="fragment_agregar_fecha_guarda">15sp</dimen>
     <dimen name="fragment_dt_cliente_guardar_w">150dp</dimen>
     <dimen name="fragment_dt_cliente_guardar_h">40dp</dimen>
+
+    <dimen name="fragment_finanzas_crear_transaccion_descripcion_w">420dp</dimen>
+    <dimen name="fragment_finanzas_crear_transaccion_descripcion_h">70dp</dimen>
+
+    <!--Muriel-->
+    <dimen name="fragment_btn_finanzas_transacciones_btn_agregar">60dp</dimen>
+    <dimen name="fragment_btn_finanzas_crear_transaccion_cancelar_guardar_w">130dp</dimen>
+    <dimen name="fragment_finanzas_cuentas_icon_fecha_w_h">20dp</dimen>
+    <dimen name="fragment_finanzas_cuentas_icon_saldo_w_h">20dp</dimen>
 
 
 </resources>

@@ -20,10 +20,10 @@ public class Banco {
         this.nombre = nombre;
     }
 
-    public Banco(String bancoID, String nombreBanco, String idBanco) {
+    public Banco(String bancoID, String nombreBanco, String icono) {
         this.bancoID = bancoID;
         this.nombreBanco = nombreBanco;
-        IdBanco = idBanco;
+        this.icono = icono;
     }
 
     public String getBancoID() {
@@ -48,5 +48,14 @@ public class Banco {
 
     public void setIdBanco(String idBanco) {
         IdBanco = idBanco;
+    }
+
+
+    public String getIcono() {
+        return icono;
+    }
+
+    public void setIcono(String icono) {
+        this.icono = icono;
     }
 }

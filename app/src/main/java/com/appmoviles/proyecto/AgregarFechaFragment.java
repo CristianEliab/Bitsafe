@@ -94,6 +94,7 @@ public class AgregarFechaFragment extends Fragment {
                     SharedPreferences.Editor myEditor = myPreferences.edit();
                     myEditor.putString(Constantes.FECHA_KEY, date);
                     myEditor.commit();
+                    listener.onPassFechaValue(date);
                 }
                 transaction.replace(R.id.contenido, transaccionesFragment);
                 transaction.addToBackStack(null);
@@ -102,6 +103,27 @@ public class AgregarFechaFragment extends Fragment {
         });
 
         return v;
+    }
+
+    //OBSERVER
+    public interface OnItemPassFecha {
+        void onPassFechaValue(String monto);
+    }
+    private OnItemPassFecha listener;
+
+    public void setListener(OnItemPassFecha listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // We need an Editor object to make preference changes.
+        // All objects are from android.context.Context
+        SharedPreferences.Editor settings = myPreferences.edit();
+        settings.putString(Constantes.FECHA_KEY, date);
+        // Commit the edits!
+        settings.commit();
     }
 
 }

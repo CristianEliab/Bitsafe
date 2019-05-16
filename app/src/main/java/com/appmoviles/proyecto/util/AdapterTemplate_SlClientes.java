@@ -1,6 +1,5 @@
-package com.appmoviles.proyecto;
+package com.appmoviles.proyecto.util;
 
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.appmoviles.proyecto.R;
 import com.appmoviles.proyecto.modelo.Cliente;
 
 import java.util.ArrayList;
@@ -42,8 +42,8 @@ public class AdapterTemplate_SlClientes extends RecyclerView.Adapter<AdapterTemp
 
     @Override
     public void onBindViewHolder(final AdapterTemplate_SlClientes.CustomViewHolder holder, final int position) {
-        ((TextView) holder.root.findViewById(R.id.tv_sl_cliente_registro_nombre)).setText(data.get(position).nombre);
-        holder.root.findViewById(R.id.ll_fragment_sl_clientes_registro).setOnClickListener(new View.OnClickListener() {
+        ((TextView) holder.root.findViewById(R.id.tv_sl_datos_nombre)).setText(data.get(position).nombre);
+        holder.root.findViewById(R.id.ll_fragment_sl_datos).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 index = position;
@@ -52,9 +52,9 @@ public class AdapterTemplate_SlClientes extends RecyclerView.Adapter<AdapterTemp
             }
         });
         if (index == position) {
-            holder.root.findViewById(R.id.ll_fragment_sl_clientes_registro).setBackgroundColor(Color.parseColor("#076AAD"));
+            holder.root.findViewById(R.id.ll_fragment_sl_datos).setBackgroundResource(R.drawable.fragment_datos_cuentas_bordes);
         } else {
-            holder.root.findViewById(R.id.ll_fragment_sl_clientes_registro).setBackgroundColor(Color.WHITE);
+            holder.root.findViewById(R.id.ll_fragment_sl_datos).setBackgroundResource(R.drawable.fragment_clientes_bordes_registros);
         }
     }
 

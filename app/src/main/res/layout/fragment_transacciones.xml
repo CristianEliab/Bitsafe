@@ -136,6 +136,15 @@
                             android:layout_centerHorizontal="true"
                             android:background="@drawable/fragment_transacciones_ic_cliente_o_d" />
 
+                        <ImageView
+                            android:id="@+id/tv_fragment_transacciones_foto_origen"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/fragment_transacciones_ic_cliente_o_d"
+                            android:visibility="gone" />
+
                         <Button
                             android:id="@+id/btn_fragment_transacciones_clientes_origen"
                             android:layout_width="@dimen/fragment_transacciones_campos_clientes_w"
@@ -166,6 +175,15 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:background="@drawable/fragment_transacciones_ic_cliente_o_d" />
+
+                        <ImageView
+                            android:id="@+id/tv_fragment_transacciones_foto_destino"
+                            android:layout_width="60dp"
+                            android:layout_height="80dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/fragment_transacciones_ic_cliente_o_d"
+                            android:visibility="gone" />
 
                         <Button
                             android:id="@+id/btn_fragment_transacciones_clientes_destino"

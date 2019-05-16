@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.appmoviles.proyecto.modelo.Banco;
+import com.appmoviles.proyecto.util.AdapterTemplate_Clientes;
 
 import java.util.ArrayList;
 

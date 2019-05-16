@@ -67,6 +67,7 @@
 
 
             <ImageView
+                android:id="@+id/iv_fragment_carga_seleccion_file"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tb_fragment_carga_toolbar"
