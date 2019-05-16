@@ -1,5 +1,6 @@
 package com.appmoviles.proyecto;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,10 +8,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +36,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.appmoviles.proyecto.util.Constantes.BUNDLE_CUENTA;
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_TIPO_GASTOS;
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_TIPO_INGRESOS;
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_TIPO_I_O;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_TRANSACCIONES;
 
 
@@ -41,6 +47,8 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
     FirebaseDatabase database;
     FirebaseAuth auth;
 
+    private TextView tv_fragment_finanzas_transacciones_actividad;
+    private ImageView iv_fragment_finanzas_transacciones_return;
     private RecyclerView rv_fragment_finanzas_transacciones_lista;
     private AdapterTemplate_Transacciones adapterTemplate_transacciones;
     private LineChart lineChartTransacciones;
@@ -48,9 +56,12 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
     private TextView tv_fragment_finanzas_transacciones_titulo;
 
     private Cuenta cuentaSeleccionada;
+    private String tipo_ingreso_o_gasto;
 
     private FinanzasCrearTransaccionFragment finanzasCrearTransaccionFragment;
 
+
+    private ProgressDialog progressDialog;
 
     public FinanzasTransaccionesFragment() {
         // Required empty public constructor
@@ -70,61 +81,15 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
 
         View v = inflater.inflate(R.layout.fragment_finanzas_transacciones, container, false);
 
+        tv_fragment_finanzas_transacciones_actividad = v.findViewById(R.id.tv_fragment_finanzas_transacciones_actividad);
+        iv_fragment_finanzas_transacciones_return = v.findViewById(R.id.iv_fragment_finanzas_transacciones_return);
+        iv_fragment_finanzas_transacciones_return.setOnClickListener(this);
+
         rv_fragment_finanzas_transacciones_lista = v.findViewById(R.id.rv_fragment_finanzas_transacciones_lista);
         btn_fragment_finanzas_transacciones_agregar_transaccion = v.findViewById(R.id.btn_fragment_finanzas_transacciones_agregar_transaccion);
         btn_fragment_finanzas_transacciones_agregar_transaccion.setOnClickListener(this);
         lineChartTransacciones = v.findViewById(R.id.lc_fragment_finanzas_transacciones);
         tv_fragment_finanzas_transacciones_titulo = v.findViewById(R.id.tv_fragment_finanzas_transacciones_titulo);
-
-        if (this.getArguments() != null) {
-            cuentaSeleccionada = (Cuenta) getArguments().get(BUNDLE_CUENTA);
-
-            tv_fragment_finanzas_transacciones_titulo.setText("Pertenecientes al número de cuenta " + cuentaSeleccionada.getNumeroCuenta());
-        }
-
-
-        //Linechart
-
-        List<Entry> entries_1 = new ArrayList<>();
-        entries_1.add(new Entry(0f, 1000f));
-        entries_1.add(new Entry(1f, 1400f));
-        entries_1.add(new Entry(2f, 1300f));
-        entries_1.add(new Entry(3f, 800f));
-        entries_1.add(new Entry(4f, 1000f));
-        entries_1.add(new Entry(5f, 500f));
-        entries_1.add(new Entry(6f, 1500f));
-        entries_1.add(new Entry(7f, 300f));
-
-
-        LineDataSet lineDataSet_1 = new LineDataSet(entries_1, "datos 1");
-        lineDataSet_1.setColor(Color.GREEN);
-
-        LineData lineData = new LineData(lineDataSet_1);
-
-        lineChartTransacciones.setData(lineData);
-        lineChartTransacciones.invalidate(); // refresh
-
-
-        //Cambio de formato de las x Labels del lineChart
-        final String[] quarters = new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agostos"};
-
-        ValueFormatter formatter = new ValueFormatter() {
-            @Override
-            public String getAxisLabel(float value, AxisBase axis) {
-                return quarters[(int) value];
-            }
-        };
-
-        XAxis xAxis = lineChartTransacciones.getXAxis();
-        xAxis.setGranularity(1f);
-        xAxis.setValueFormatter(formatter);
-
-
-        //TODAS LAS POSIBLES INTERACCIONES TOUCH CON EL CHART
-        lineChartTransacciones.setScaleEnabled(false);
-
-        //Final de line chart
-
 
         rv_fragment_finanzas_transacciones_lista.setHasFixedSize(true);
         rv_fragment_finanzas_transacciones_lista.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -133,7 +98,25 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
         rv_fragment_finanzas_transacciones_lista.setAdapter(adapterTemplate_transacciones);
         adapterTemplate_transacciones.setListener(this);
 
-        cargarTransacciones();
+        if (this.getArguments() != null) {
+            cuentaSeleccionada = (Cuenta) getArguments().get(BUNDLE_CUENTA);
+            tipo_ingreso_o_gasto = (String) getArguments().get(BUNDLE_TIPO_I_O);
+
+            tv_fragment_finanzas_transacciones_titulo.setText("Pertenecientes al número de cuenta " + cuentaSeleccionada.getNumeroCuenta());
+            tv_fragment_finanzas_transacciones_actividad.setText("Transacciones " + tipo_ingreso_o_gasto);
+        }
+
+        progressDialog = new ProgressDialog(v.getContext());
+        progressDialog.setMessage("Por favor espere mientras se cargan los datos");
+        progressDialog.show();
+
+
+        if (tipo_ingreso_o_gasto.equals(BUNDLE_TIPO_INGRESOS)) {
+            cargarTransaccionesIngresos();
+        } else if (tipo_ingreso_o_gasto.equals(BUNDLE_TIPO_GASTOS)) {
+            cargarTransaccionesGastos();
+        }
+
 
         return v;
     }
@@ -154,14 +137,19 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
                 transaction.commit();
                 break;
 
+            case R.id.iv_fragment_finanzas_transacciones_return:
+                getFragmentManager().popBackStack();
+                break;
+
         }
     }
 
 
-    public void cargarTransacciones() {
+    public void cargarTransaccionesIngresos() {
         database.getReference().child(CHILD_TRANSACCIONES).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 Transaccion transaccionTmp;
                 for (DataSnapshot hijo : dataSnapshot.getChildren()) {
                     transaccionTmp = hijo.getValue(Transaccion.class);
@@ -169,9 +157,9 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
                     if (transaccionTmp.getCuentaDestinoID().equals(cuentaSeleccionada.getCuentaID())) {
                         adapterTemplate_transacciones.agregarTransaccion(transaccionTmp);
                     }
-
                 }
-
+                cargarLineChartTransacciones();
+                progressDialog.dismiss();
             }
 
             @Override
@@ -179,6 +167,81 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
 
             }
         });
+    }
+
+    public void cargarTransaccionesGastos() {
+        database.getReference().child(CHILD_TRANSACCIONES).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                Transaccion transaccionTmp;
+                for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                    transaccionTmp = hijo.getValue(Transaccion.class);
+                    //Solo se agregan transacciones de las cuales les llegó doinero a la cuenta seleccionada
+                    if (transaccionTmp.getCuentaOrigenID().equals(cuentaSeleccionada.getCuentaID())) {
+                        adapterTemplate_transacciones.agregarTransaccion(transaccionTmp);
+                    }
+                }
+                cargarLineChartTransacciones();
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+    private final void cargarLineChartTransacciones() {
+
+        //Linechart
+        List<Entry> entries_1 = new ArrayList<>();
+
+        List<Transaccion> listaTransacciones = adapterTemplate_transacciones.darTransacciones();
+        for (int i = 0; i < listaTransacciones.size(); i++) {
+            float monto = Float.parseFloat(listaTransacciones.get(i).getMontoTransaccion());
+            float contador = i + 1;
+            entries_1.add(new Entry(contador, monto));
+
+        }
+
+        LineDataSet lineDataSet_1 = null;
+        if (tipo_ingreso_o_gasto.equals(BUNDLE_TIPO_INGRESOS)) {
+            lineDataSet_1 = new LineDataSet(entries_1, "flujo de dinero ingresado");
+            lineDataSet_1.setColor(Color.GREEN);
+        } else if (tipo_ingreso_o_gasto.equals(BUNDLE_TIPO_GASTOS)) {
+            lineDataSet_1 = new LineDataSet(entries_1, "flujo de dinero saliente");
+            lineDataSet_1.setColor(Color.RED);
+        }
+
+        LineData lineData = new LineData(lineDataSet_1);
+
+        lineChartTransacciones.setData(lineData);
+        lineChartTransacciones.invalidate(); // refresh
+
+        //TODAS LAS POSIBLES INTERACCIONES TOUCH CON EL CHART
+        lineChartTransacciones.setScaleEnabled(false);
+
+        //Final de line chart
+
+
+        /*
+        //Cambio de formato de las x Labels del lineChart
+        final String[] quarters = new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agostos"};
+
+        ValueFormatter formatter = new ValueFormatter() {
+            @Override
+            public String getAxisLabel(float value, AxisBase axis) {
+                return quarters[(int) value];
+            }
+        };
+
+        XAxis xAxis = lineChartTransacciones.getXAxis();
+        xAxis.setGranularity(1f);
+        xAxis.setValueFormatter(formatter);
+        */
     }
 
 

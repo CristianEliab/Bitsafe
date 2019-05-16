@@ -17,6 +17,7 @@ import com.appmoviles.proyecto.modelo.Cliente;
 import com.appmoviles.proyecto.modelo.Transaccion;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AdapterTemplate_Transacciones extends RecyclerView.Adapter<AdapterTemplate_Transacciones.CustomViewHolder> {
 
@@ -66,6 +67,10 @@ public class AdapterTemplate_Transacciones extends RecyclerView.Adapter<AdapterT
     public void agregarTransaccion(Transaccion transaccion){
         data.add(transaccion);
         notifyDataSetChanged();
+    }
+
+    public List<Transaccion> darTransacciones(){
+        return data;
     }
 
     //Patrón observer para identifcar cual transacción se seleccionó

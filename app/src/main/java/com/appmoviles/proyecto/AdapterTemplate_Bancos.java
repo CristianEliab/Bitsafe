@@ -46,16 +46,13 @@ public class AdapterTemplate_Bancos extends RecyclerView.Adapter<AdapterTemplate
         ((TextView) holder.root.findViewById(R.id.tv_renglon_banco_nombre)).setText(data.get(position).getNombreBanco());
         ((TextView) holder.root.findViewById(R.id.tv_renglon_banco_monto)).setText(data.get(position).getSaldo());
 
-        if(data.get(position).getIcono().equals(ICON_BANCO_DAVIVIENDA)){
+        if (data.get(position).getIcono().equals(ICON_BANCO_DAVIVIENDA)) {
             ((ImageView) holder.root.findViewById(R.id.iv_renglon_banco_imagen)).setBackgroundResource(R.drawable.banco_davivienda);
-        }
-        else if(data.get(position).getIcono().equals(ICON_BANCO_BOGOTA)){
+        } else if (data.get(position).getIcono().equals(ICON_BANCO_BOGOTA)) {
             ((ImageView) holder.root.findViewById(R.id.iv_renglon_banco_imagen)).setBackgroundResource(R.drawable.banco_bogota);
-        }
-        else if(data.get(position).getIcono().equals(ICON_BANCO_BANCOLOMBIA)){
+        } else if (data.get(position).getIcono().equals(ICON_BANCO_BANCOLOMBIA)) {
             ((ImageView) holder.root.findViewById(R.id.iv_renglon_banco_imagen)).setBackgroundResource(R.drawable.banco_bancolombia);
-        }
-        else if(data.get(position).getIcono().equals(ICON_BANCO_ITAU)){
+        } else if (data.get(position).getIcono().equals(ICON_BANCO_ITAU)) {
             ((ImageView) holder.root.findViewById(R.id.iv_renglon_banco_imagen)).setBackgroundResource(R.drawable.banco_itau);
         }
 
@@ -71,6 +68,10 @@ public class AdapterTemplate_Bancos extends RecyclerView.Adapter<AdapterTemplate
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public boolean contains(Banco banco) {
+        return data.contains(banco);
     }
 
     public void agregarBanco(Banco banco) {

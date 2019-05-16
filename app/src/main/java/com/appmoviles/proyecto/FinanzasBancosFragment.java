@@ -1,5 +1,6 @@
 package com.appmoviles.proyecto;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appmoviles.proyecto.modelo.Banco;
@@ -24,18 +27,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.appmoviles.proyecto.util.Constantes.BUNDLE_BANCO;
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_TIPO_I_O;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_BANCOS;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_CUENTAS;
 
 
-public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_Bancos.OnItemClickListener {
+public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_Bancos.OnItemClickListener, View.OnClickListener {
 
     FirebaseDatabase database;
     FirebaseAuth auth;
 
+    private TextView tv_fragment_finanzas_bancos_actividad;
+    private ImageView iv_fragment_finanzas_bancos_return;
     private RecyclerView rv_fragment_finanzas_bancos_lista_;
     private AdapterTemplate_Bancos adapterTemplate_bancos;
     private List<Cuenta> listaCuentas;
+
+    private String tipo_ingreso_o_gasto;
+
+    private ProgressDialog progressDialog;
+
 
     public FinanzasBancosFragment() {
         // Required empty public constructor
@@ -56,6 +67,11 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
 
         View v = inflater.inflate(R.layout.fragment_finanzas_bancos, container, false);
 
+        tv_fragment_finanzas_bancos_actividad = v.findViewById(R.id.tv_fragment_finanzas_bancos_actividad);
+
+        iv_fragment_finanzas_bancos_return = v.findViewById(R.id.iv_fragment_finanzas_bancos_return);
+        iv_fragment_finanzas_bancos_return.setOnClickListener(this);
+
         rv_fragment_finanzas_bancos_lista_ = v.findViewById(R.id.rv_fragment_finanzas_bancos_lista_);
         rv_fragment_finanzas_bancos_lista_.setHasFixedSize(true);
         rv_fragment_finanzas_bancos_lista_.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -64,6 +80,17 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
         rv_fragment_finanzas_bancos_lista_.setAdapter(adapterTemplate_bancos);
         adapterTemplate_bancos.setListener(this);
 
+        if(this.getArguments() != null){
+            //Corresponde a si la ventana se comportará como INGRESOS o GASTOS (para el título)
+            tipo_ingreso_o_gasto = (String)getArguments().get(BUNDLE_TIPO_I_O);
+            tv_fragment_finanzas_bancos_actividad.setText("Bancos " + tipo_ingreso_o_gasto);
+        }
+
+        progressDialog = new ProgressDialog(v.getContext());
+        progressDialog.setMessage("Por favor espere mientras se cargan los datos");
+        progressDialog.show();
+
+        //Independientemente si quiere ver ingresos o gastos se cargan los bancos
         cargarCuentas();
         cargarBancos();
 
@@ -75,6 +102,7 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
 
         Bundle bundle = new Bundle();
         bundle.putSerializable(BUNDLE_BANCO, banco);
+        bundle.putString(BUNDLE_TIPO_I_O, tipo_ingreso_o_gasto);
 
         FinanzasCuentasFragment finanzasCuentasFragment = new FinanzasCuentasFragment();
         finanzasCuentasFragment.setArguments(bundle);
@@ -95,19 +123,21 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for (int i = 0; i < listaCuentas.size(); i++) {
+                Banco bancoTmp;
+                for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                    bancoTmp = hijo.getValue(Banco.class);
 
-                    String bancoID = listaCuentas.get(i).getBancoID();
-                    Banco bancoTmp;
+                    for (int i = 0; i < listaCuentas.size(); i++) {
 
-                    for (DataSnapshot hijo : dataSnapshot.getChildren()) {
-                        bancoTmp = hijo.getValue(Banco.class);
+                        String bancoID = listaCuentas.get(i).getBancoID();
+
                         //Solo los bancos que tienen cuentas del usuario registrado
-                        if (bancoTmp.getBancoID().equals(bancoID)) {
+                        if (bancoTmp.getBancoID().equals(bancoID) && !adapterTemplate_bancos.contains(bancoTmp)) {
                             adapterTemplate_bancos.agregarBanco(bancoTmp);
                         }
                     }
                 }
+                progressDialog.dismiss();
             }
 
             @Override
@@ -138,5 +168,15 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            case R.id.iv_fragment_finanzas_bancos_return:
+                getFragmentManager().popBackStack();
+                break;
+        }
     }
 }

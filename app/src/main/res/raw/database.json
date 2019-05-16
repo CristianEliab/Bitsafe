@@ -128,22 +128,30 @@
     {
       "categoriaID": "03",
       "nombre": "Internet",
-      "subCategorias": [{}]
+      "subCategorias": [
+        {}
+      ]
     },
     {
       "categoriaID": "04",
       "nombre": "Compras",
-      "subCategorias": [{}]
+      "subCategorias": [
+        {}
+      ]
     },
     {
       "categoriaID": "05",
       "nombre": "Caja",
-      "subCategorias": [{}]
+      "subCategorias": [
+        {}
+      ]
     },
     {
       "categoriaID": "06",
       "nombre": "Cruzado",
-      "subCategorias": [{}]
+      "subCategorias": [
+        {}
+      ]
     }
   ],
   "configuracionseguridad": [
@@ -159,7 +167,7 @@
     {
       "cuentaID": "01",
       "numeroCuenta": "1234-5678-9012-3456",
-      "usuarioID": "le3DREcuWuV9PtiImpXORaMMNVH3",
+      "usuarioID": "A295owdX7mTiwVYOx1PW2XcUlk53",
       "tipoCuentaID": "01",
       "tipoCuentaNombre": "Cuenta Credito",
       "bancoID": "02",
@@ -169,7 +177,7 @@
     {
       "cuentaID": "02",
       "numeroCuenta": "5678-3456-1234-3457",
-      "usuarioID": "le3DREcuWuV9PtiImpXORaMMNVH3",
+      "usuarioID": "A295owdX7mTiwVYOx1PW2XcUlk53",
       "tipoCuentaID": "02",
       "tipoCuentaNombre": "Cuenta Debito",
       "bancoID": "01",
@@ -179,7 +187,7 @@
     {
       "cuentaID": "03",
       "numeroCuenta": "4378-6243-1344-7242",
-      "usuarioID": "le3DREcuWuV9PtiImpXORaMMNVH3",
+      "usuarioID": "A295owdX7mTiwVYOx1PW2XcUlk53",
       "tipoCuentaID": "02",
       "tipoCuentaNombre": "Cuenta Debito",
       "bancoID": "01",
@@ -187,14 +195,24 @@
       "fechaVinculacion": "2019-05-20"
     },
     {
-      "cuentaID": "04",
-      "numeroCuenta": "5678-3456-1234-3457",
-      "usuarioID": "A295owdX7mTiwVYOx1PW2XcUlk53",
+      "cuentaID": "888",
+      "numeroCuenta": "xxxxxxxxxxxxxx",
+      "usuarioID": "xxxxxxxxxxxxxx",
       "tipoCuentaID": "01",
-      "tipoCuentaNombre": "Cuenta Credito",
-      "bancoID": "03",
-      "saldo": "300000",
-      "fechaVinculacion": "2019-01-15"
+      "tipoCuentaNombre": "xxxxxxxxxxxxxx",
+      "bancoID": "xxxxxxxxxxxxxx",
+      "saldo": "999999999999",
+      "fechaVinculacion": "xxxxxxxxxxxxxx"
+    },
+    {
+      "cuentaID": "999",
+      "numeroCuenta": "xxxxxxxxxxxxxx",
+      "usuarioID": "xxxxxxxxxxxxxx",
+      "tipoCuentaID": "01",
+      "tipoCuentaNombre": "xxxxxxxxxxxxxx",
+      "bancoID": "xxxxxxxxxxxxxx",
+      "saldo": "999999999999",
+      "fechaVinculacion": "xxxxxxxxxxxxxx"
     }
   ],
   "estadousuario": [
@@ -347,37 +365,7 @@
   "transacciones": [
     {
       "transaccionID": "12345",
-      "cuentaOrigenID": "01",
-      "cuentaDestinoID": "02",
-      "tipoTransaccionID": "01",
-      "categoriaID": "01",
-      "descripcion": "Compras",
-      "montoTransaccion": "20000",
-      "fechaTransaccion": "2019-02-12"
-    },
-    {
-      "transaccionID": "12345",
-      "cuentaOrigenID": "04",
-      "cuentaDestinoID": "03",
-      "tipoTransaccionID": "01",
-      "categoriaID": "02",
-      "descripcion": "Ropa",
-      "montoTransaccion": "70000",
-      "fechaTransaccion": "2019-01-12"
-    },
-    {
-      "transaccionID": "12345",
-      "cuentaOrigenID": "04",
-      "cuentaDestinoID": "03",
-      "tipoTransaccionID": "01",
-      "categoriaID": "03",
-      "descripcion": "Cuota Vehiculo",
-      "montoTransaccion": "10000",
-      "fechaTransaccion": "2019-03-12"
-    },
-    {
-      "transaccionID": "12345",
-      "cuentaOrigenID": "04",
+      "cuentaOrigenID": "999",
       "cuentaDestinoID": "01",
       "tipoTransaccionID": "01",
       "categoriaID": "02",
@@ -387,13 +375,193 @@
     },
     {
       "transaccionID": "12345",
-      "cuentaOrigenID": "04",
+      "cuentaOrigenID": "999",
       "cuentaDestinoID": "01",
       "tipoTransaccionID": "01",
       "categoriaID": "03",
       "descripcion": "Vehiculo se daño",
       "montoTransaccion": "80000",
       "fechaTransaccion": "2019-02-16"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "999",
+      "cuentaDestinoID": "02",
+      "tipoTransaccionID": "01",
+      "categoriaID": "01",
+      "descripcion": "Compras",
+      "montoTransaccion": "20000",
+      "fechaTransaccion": "2019-02-12"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "999",
+      "cuentaDestinoID": "03",
+      "tipoTransaccionID": "01",
+      "categoriaID": "02",
+      "descripcion": "Ropa",
+      "montoTransaccion": "70000",
+      "fechaTransaccion": "2019-01-12"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "999",
+      "cuentaDestinoID": "03",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Cuota Vehiculo",
+      "montoTransaccion": "10000",
+      "fechaTransaccion": "2019-03-12"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "01",
+      "cuentaDestinoID": "888",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Cuota Plan Teléfono",
+      "montoTransaccion": "30000",
+      "fechaTransaccion": "2019-01-12"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "01",
+      "cuentaDestinoID": "888",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Servicios Públicos",
+      "montoTransaccion": "60000",
+      "fechaTransaccion": "2019-02-23"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "01",
+      "cuentaDestinoID": "888",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Restaurante Chino",
+      "montoTransaccion": "110000",
+      "fechaTransaccion": "2019-05-05"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "01",
+      "cuentaDestinoID": "888",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Cine",
+      "montoTransaccion": "90000",
+      "fechaTransaccion": "2019-02-01"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "02",
+      "cuentaDestinoID": "888",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Compra saco",
+      "montoTransaccion": "50000",
+      "fechaTransaccion": "2019-04-29"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "02",
+      "cuentaDestinoID": "888",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Hamburguesa Corral",
+      "montoTransaccion": "30000",
+      "fechaTransaccion": "2019-10-03"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "02",
+      "cuentaDestinoID": "888",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Cine Avengers end game",
+      "montoTransaccion": "84000",
+      "fechaTransaccion": "2019-11-12"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "02",
+      "cuentaDestinoID": "888",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Uber urgencia",
+      "montoTransaccion": "15000",
+      "fechaTransaccion": "2019-05-02"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "02",
+      "cuentaDestinoID": "888",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Reparar carro",
+      "montoTransaccion": "230000",
+      "fechaTransaccion": "2019-06-10"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "03",
+      "cuentaDestinoID": "888",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Vieja Pasto",
+      "montoTransaccion": "800000",
+      "fechaTransaccion": "2019-02-07"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "03",
+      "cuentaDestinoID": "888",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Libros Universidad",
+      "montoTransaccion": "190000",
+      "fechaTransaccion": "2019-01-20"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "03",
+      "cuentaDestinoID": "888",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Computador personal",
+      "montoTransaccion": "1500000",
+      "fechaTransaccion": "2019-03-10"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "03",
+      "cuentaDestinoID": "888",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Divorcio",
+      "montoTransaccion": "300000",
+      "fechaTransaccion": "2019-07-25"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "03",
+      "cuentaDestinoID": "888",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Celular motorola",
+      "montoTransaccion": "650000",
+      "fechaTransaccion": "2019-05-29"
+    },
+    {
+      "transaccionID": "12345",
+      "cuentaOrigenID": "03",
+      "cuentaDestinoID": "888",
+      "tipoTransaccionID": "01",
+      "categoriaID": "03",
+      "descripcion": "Gasolina",
+      "montoTransaccion": "80000",
+      "fechaTransaccion": "2019-02-10"
     }
   ]
 }

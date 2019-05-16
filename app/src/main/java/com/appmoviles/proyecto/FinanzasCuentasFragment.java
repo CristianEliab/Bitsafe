@@ -1,5 +1,6 @@
 package com.appmoviles.proyecto;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,20 +28,26 @@ import com.google.firebase.database.ValueEventListener;
 
 import static com.appmoviles.proyecto.util.Constantes.BUNDLE_BANCO;
 import static com.appmoviles.proyecto.util.Constantes.BUNDLE_CUENTA;
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_TIPO_I_O;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_CUENTAS;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_TRANSACCIONES;
 
-public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate_Cuentas.OnItemClickListener {
+public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate_Cuentas.OnItemClickListener, View.OnClickListener {
 
     FirebaseDatabase database;
     FirebaseAuth auth;
 
+    private TextView tv_fragment_finanzas_cuentas_actividad;
+    private ImageView iv_fragment_finanzas_cuentas_return;
     private RecyclerView rv_fragment_finanzas_cuentas_lista;
     private AdapterTemplate_Cuentas adapterTemplate_cuentas;
     private FinanzasTransaccionesFragment finanzasTransaccionesFragment;
     private TextView tv_fragment_finanzas_cuentas_titulo;
 
     private Banco bancoSeleccionado;
+    private String tipo_ingreso_o_gasto;
+
+    private ProgressDialog progressDialog;
 
     public FinanzasCuentasFragment() {
         // Required empty public constructor
@@ -57,11 +65,14 @@ public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
-
         View v = inflater.inflate(R.layout.fragment_finanzas_cuentas, container, false);
 
-        tv_fragment_finanzas_cuentas_titulo = v.findViewById(R.id.tv_fragment_finanzas_cuentas_titulo);
+        tv_fragment_finanzas_cuentas_actividad = v.findViewById(R.id.tv_fragment_finanzas_cuentas_actividad);
 
+        iv_fragment_finanzas_cuentas_return = v.findViewById(R.id.iv_fragment_finanzas_cuentas_return);
+        iv_fragment_finanzas_cuentas_return.setOnClickListener(this);
+
+        tv_fragment_finanzas_cuentas_titulo = v.findViewById(R.id.tv_fragment_finanzas_cuentas_titulo);
         rv_fragment_finanzas_cuentas_lista = v.findViewById(R.id.rv_fragment_finanzas_cuentas_lista);
         adapterTemplate_cuentas = new AdapterTemplate_Cuentas();
         adapterTemplate_cuentas.setListener(this);
@@ -71,10 +82,17 @@ public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate
 
 
         if (this.getArguments() != null) {
-            bancoSeleccionado  = (Banco) getArguments().get(BUNDLE_BANCO);
+            bancoSeleccionado = (Banco) getArguments().get(BUNDLE_BANCO);
+            tipo_ingreso_o_gasto = (String) getArguments().get(BUNDLE_TIPO_I_O);
 
             tv_fragment_finanzas_cuentas_titulo.setText("Perteneciente al Banco: " + bancoSeleccionado.getNombreBanco());
+
+            tv_fragment_finanzas_cuentas_actividad.setText("Cuentas " + tipo_ingreso_o_gasto);
         }
+
+        progressDialog = new ProgressDialog(v.getContext());
+        progressDialog.setMessage("Por favor espere mientras se cargan los datos");
+        progressDialog.show();
 
         cargarCuentas();
 
@@ -86,6 +104,7 @@ public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate
 
         Bundle bundle = new Bundle();
         bundle.putSerializable(BUNDLE_CUENTA, cuenta);
+        bundle.putString(BUNDLE_TIPO_I_O, tipo_ingreso_o_gasto);
 
         finanzasTransaccionesFragment = new FinanzasTransaccionesFragment();
         finanzasTransaccionesFragment.setArguments(bundle);
@@ -113,7 +132,7 @@ public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate
                     }
 
                 }
-
+                progressDialog.dismiss();
             }
 
             @Override
@@ -121,5 +140,16 @@ public class FinanzasCuentasFragment extends Fragment implements AdapterTemplate
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.iv_fragment_finanzas_cuentas_return:
+                getFragmentManager().popBackStack();
+                break;
+
+        }
     }
 }

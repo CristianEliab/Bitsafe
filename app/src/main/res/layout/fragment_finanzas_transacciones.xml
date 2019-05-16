@@ -29,17 +29,17 @@
                     android:elevation="4dp">
 
                     <ImageView
-                        android:id="@+id/iv_fragment_transacciones_return"
+                        android:id="@+id/iv_fragment_finanzas_transacciones_return"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
                         android:background="@drawable/fragment_ic_return"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
 
                     <TextView
-                        android:id="@+id/tv_fragment_transacciones_actividad"
+                        android:id="@+id/tv_fragment_finanzas_transacciones_actividad"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_alignParentLeft="true"

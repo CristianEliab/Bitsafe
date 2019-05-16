@@ -18,11 +18,19 @@
             android:id="@+id/ly_renglon_transaccion_monto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true">
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="@dimen/fragment_finanzas_cuentas_icon_saldo_w_h"
+                android:layout_height="@dimen/fragment_finanzas_cuentas_icon_saldo_w_h"
+                android:src="@drawable/ic_saldo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:text="@string/fragment_transacciones_agregar_monto"
                 android:textColor="@color/colorBitsafeBlue"
                 android:textStyle="bold" />
@@ -39,11 +47,19 @@
             android:id="@+id/ly_renglon_transaccion_categoria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ly_renglon_transaccion_monto">
+            android:layout_below="@+id/ly_renglon_transaccion_monto"
+            android:layout_marginTop="5dp">
+
+            <ImageView
+                android:layout_width="@dimen/fragment_finanzas_cuentas_icon_saldo_w_h"
+                android:layout_height="@dimen/fragment_finanzas_cuentas_icon_saldo_w_h"
+                android:src="@drawable/ic_categorias_blue" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:text="@string/fragment_finanzas_transacciones_categoria"
                 android:textColor="@color/colorBitsafeBlue"
                 android:textStyle="bold" />
@@ -59,11 +75,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ly_renglon_transaccion_categoria">
+            android:layout_below="@+id/ly_renglon_transaccion_categoria"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:layout_width="@dimen/fragment_finanzas_cuentas_icon_saldo_w_h"
+                android:layout_height="@dimen/fragment_finanzas_cuentas_icon_saldo_w_h"
+                android:src="@drawable/ic_descripcion_blue" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:text="@string/fragment_transacciones_descripcion"
                 android:textColor="@color/colorBitsafeBlue"
                 android:textStyle="bold" />
@@ -92,6 +117,7 @@
             android:layout_below="@+id/iv_renglon_transaccion_imagen_banco"
             android:layout_toLeftOf="@+id/tv_renglon_transaccion_fecha"
             android:text="@string/fragment_finanzas_transacciones_fecha"
+            android:layout_marginRight="10dp"
             android:textColor="@color/colorBitsafeBlue"
             android:textStyle="bold" />
 

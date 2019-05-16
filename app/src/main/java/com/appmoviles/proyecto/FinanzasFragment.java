@@ -40,17 +40,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_TIPO_GASTOS;
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_TIPO_INGRESOS;
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_TIPO_I_O;
+
 public class FinanzasFragment extends Fragment implements View.OnClickListener {
 
     FirebaseAuth auth;
     FirebaseDatabase rtdb;
 
-    LineChart lineChart;
-    BarChart barChart;
-    PieChart pieChart;
+    private LineChart lineChart;
+    private BarChart barChart;
+    private PieChart pieChart;
 
     //Para navegar a otros fragments
-    FinanzasBancosFragment finanzasBancosFragment;
+    private FinanzasBancosFragment finanzasBancosFragment;
 
     private ImageView iv_fragment_finanzas_perfil;
 
@@ -79,6 +83,8 @@ public class FinanzasFragment extends Fragment implements View.OnClickListener {
         lineChart = v.findViewById(R.id.lc_fragment_finanzas_ingresos);
         barChart = v.findViewById(R.id.bc_fragment_finanzas_gastos);
         pieChart = v.findViewById(R.id.pc_fragment_finanzas_gastos);
+        iv_fragment_finanzas_perfil = v.findViewById(R.id.iv_fragment_finanzas_perfil);
+        iv_fragment_finanzas_perfil.setOnClickListener(this);
 
         //Linechart
 
@@ -228,19 +234,28 @@ public class FinanzasFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        Bundle bundle = null;
 
         switch (v.getId()) {
 
-
             case R.id.lc_fragment_finanzas_ingresos:
                 finanzasBancosFragment = new FinanzasBancosFragment();
+                bundle = new Bundle();
+                bundle.putString(BUNDLE_TIPO_I_O, BUNDLE_TIPO_INGRESOS);
+                finanzasBancosFragment.setArguments(bundle);
                 transaction.replace(R.id.contenido_cliente, finanzasBancosFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
 
             case R.id.bc_fragment_finanzas_gastos:
-                mostrarMensaje("Bar chart ");
+                finanzasBancosFragment = new FinanzasBancosFragment();
+                bundle = new Bundle();
+                bundle.putString(BUNDLE_TIPO_I_O, BUNDLE_TIPO_GASTOS);
+                finanzasBancosFragment.setArguments(bundle);
+                transaction.replace(R.id.contenido_cliente, finanzasBancosFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
                 break;
 
             //Por alguna razón el Piechart no sirve así
@@ -248,10 +263,8 @@ public class FinanzasFragment extends Fragment implements View.OnClickListener {
                 mostrarMensaje("Pie chart ");
                 break;
             case R.id.iv_fragment_finanzas_perfil:
-                PerfilCliente perfilCliente = new PerfilCliente();
-                transaction.replace(R.id.contenido_cliente, perfilCliente);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                //Cuando se presiona el botón perfil
+                listener.onViewPerfil();
                 break;
 
         }
@@ -260,5 +273,17 @@ public class FinanzasFragment extends Fragment implements View.OnClickListener {
 
     public void mostrarMensaje(String texto) {
         Toast.makeText(getActivity(), texto, Toast.LENGTH_LONG).show();
+    }
+
+
+    //Patrón observer
+    public interface OnViewPerfil{
+        void onViewPerfil();
+    }
+
+    private OnViewPerfil listener;
+
+    public void setListener(OnViewPerfil listener) {
+        this.listener = listener;
     }
 }

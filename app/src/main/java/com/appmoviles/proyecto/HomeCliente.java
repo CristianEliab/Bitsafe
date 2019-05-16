@@ -8,11 +8,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
-public class HomeCliente  extends FragmentActivity {
+public class HomeCliente extends FragmentActivity implements FinanzasFragment.OnViewPerfil {
 
     private CuentasFragment cuentasFragment;
     private PlanesFragment planesFragment;
     private FinanzasFragment finanzasFragment;
+    private PerfilCliente perfilCliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +21,10 @@ public class HomeCliente  extends FragmentActivity {
         setContentView(R.layout.activity_home_cliente);
 
         finanzasFragment = new FinanzasFragment();
+        finanzasFragment.setListener(this);
         planesFragment = new PlanesFragment();
         cuentasFragment = new CuentasFragment();
+        perfilCliente = new PerfilCliente();
 
 
         BottomNavigationView navigation = findViewById(R.id.home_clientes_navigation);
@@ -38,7 +41,7 @@ public class HomeCliente  extends FragmentActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.menubar_finanzas:
                         transaction.replace(R.id.contenido_cliente, finanzasFragment);
                         transaction.commit();
@@ -55,5 +58,14 @@ public class HomeCliente  extends FragmentActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    public void onViewPerfil() {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.contenido_cliente, perfilCliente);
+        transaction.commit();
+
     }
 }

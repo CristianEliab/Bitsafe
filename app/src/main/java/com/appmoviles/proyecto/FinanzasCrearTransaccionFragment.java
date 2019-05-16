@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -24,6 +25,8 @@ public class FinanzasCrearTransaccionFragment extends Fragment implements View.O
     private Button btn_fragment_finanzas_crear_transaccion_cancelar;
     private Button btn_fragment_finanzas_crear_transaccion_guardar;
 
+    private ImageView iv_fragment_finanzas_crear_transaccion_return;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,9 @@ public class FinanzasCrearTransaccionFragment extends Fragment implements View.O
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_finanzas_crear_transaccion, container, false);
+
+        iv_fragment_finanzas_crear_transaccion_return = v.findViewById(R.id.iv_fragment_finanzas_crear_transaccion_return);
+        iv_fragment_finanzas_crear_transaccion_return.setOnClickListener(this);
 
         btn_fragment_finanzas_crear_transaccion_agregar_monto = v.findViewById(R.id.btn_fragment_finanzas_crear_transaccion_agregar_monto);
         btn_fragment_finanzas_crear_transaccion_agregar_cagetoria = v.findViewById(R.id.btn_fragment_finanzas_crear_transaccion_agregar_cagetoria);
@@ -56,6 +62,10 @@ public class FinanzasCrearTransaccionFragment extends Fragment implements View.O
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+            case R.id.iv_fragment_finanzas_crear_transaccion_return:
+                getFragmentManager().popBackStack();
+                break;
 
             case R.id.btn_fragment_finanzas_crear_transaccion_agregar_monto:
                 mostrarMensaje("agregar monto");

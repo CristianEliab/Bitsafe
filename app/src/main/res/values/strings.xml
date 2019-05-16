@@ -35,7 +35,7 @@
     <string name="fragment_estadisticas_descripcion">Descripción</string>
     <string name="fragment_transacciones_ingresar_monto">Ingresar monto:</string>
     <string name="fragment_transacciones_ingresar_clientes">Ingresar clientes:</string>
-    <string name="fragment_transacciones_agregar_monto">Agrega monto</string>
+    <string name="fragment_transacciones_agregar_monto">Agrega monto:</string>
     <string name="fragment_transacciones_cliente_origen">Cliente Origen</string>
     <string name="fragment_transacciones_cliente_destino">Cliente Destino</string>
     <string name="fragment_transacciones_ingresar_fecha">Ingresar fecha:</string>

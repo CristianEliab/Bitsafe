@@ -20,6 +20,11 @@ public class Constantes {
     public final static String BUNDLE_CUENTA = "BUNDLE_CUENTA";
     public final static String BUNDLE_TRANSACCION = "BUNDLE_TRANSACCION";
 
+    public final static String BUNDLE_TIPO_I_O = "BUNDLE_TIPO_I_O";
+
+    public final static String BUNDLE_TIPO_INGRESOS = "Ingresos";
+    public final static String BUNDLE_TIPO_GASTOS = "Gastos";
+
     //PARA LA BASE DE DATOS --> getReference().child(constante)
     public final static String CHILD_USUARIOS = "usuarios";
     public final static String CHILD_BANCOS = "bancos";
