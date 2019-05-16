@@ -43,7 +43,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
-                android:background="@drawable/fragment_ic_perfil_cliente" />
+                android:background="@drawable/fragment_ic_perfil_cliente_blanco" />
 
             <ImageView
                 android:id="@+id/iv_fragment_dt_ajustes_notificaciones"
