@@ -1,5 +1,6 @@
 package com.appmoviles.proyecto;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
@@ -9,12 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-public class HomeAdministrador extends FragmentActivity{
+public class HomeAdministrador extends FragmentActivity implements ClientesFragment.OnItemViewPerfil {
 
     private ClientesFragment clientesFragment;
     private EstadisticasFragment estadisticasFragment;
     private TransaccionesFragment transaccionesFragment;
     private CargarDatosFragment cargarDatosFragment;
+    private PerfilCliente perfilCliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +24,11 @@ public class HomeAdministrador extends FragmentActivity{
         setContentView(R.layout.activity_home_administrador);
 
         clientesFragment = new ClientesFragment();
+        clientesFragment.setListener(this);
         cargarDatosFragment = new CargarDatosFragment();
         estadisticasFragment = new EstadisticasFragment();
         transaccionesFragment = new TransaccionesFragment();
+        perfilCliente = new PerfilCliente();
 
         BottomNavigationView navigation = findViewById(R.id.home_admin_navigation);
 
@@ -32,7 +36,6 @@ public class HomeAdministrador extends FragmentActivity{
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.contenido, clientesFragment);
-        transaction.addToBackStack("");
         transaction.commit();
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -66,14 +69,17 @@ public class HomeAdministrador extends FragmentActivity{
 
     @Override
     public void onBackPressed() {
-        int count = getSupportFragmentManager().getBackStackEntryCount();
-        if (count == 0) {
-            super.onBackPressed();
-            //additional code
-        } else {
-            getSupportFragmentManager().popBackStack();
-        }
+        super.onBackPressed();
     }
 
 
+    @Override
+    public void onViewPerfil(String monto) {
+        if(monto.equals("Perfil")){
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.contenido, perfilCliente);
+            transaction.commit();
+        }
+    }
 }

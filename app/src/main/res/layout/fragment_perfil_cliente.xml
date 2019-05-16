@@ -10,8 +10,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:background="@color/colorWhite">
+        android:background="@color/colorWhite"
+        android:fillViewport="true">
 
         <RelativeLayout
             android:id="@+id/rl_fragment_perfil_cliente"
@@ -120,14 +120,13 @@
                     android:textSize="20dp" />
 
 
-
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_below="@+id/rl_nombre_cliente_perfil_cliente">
+                android:layout_below="@+id/rl_nombre_cliente_perfil_cliente"
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:id="@+id/rl_opciones_micuenta_perfil_cliente"
@@ -140,8 +139,7 @@
                         android:layout_height="24dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
-                        android:src="@drawable/ic_cuenta_user"
-                        />
+                        android:src="@drawable/ic_cuenta_user" />
 
                     <TextView
                         android:id="@+id/tv_micuenta_perfil_cliente"
@@ -194,8 +192,7 @@
                         android:layout_height="24dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
-                        android:src="@drawable/ic_question"
-                        />
+                        android:src="@drawable/ic_question" />
 
                     <TextView
                         android:id="@+id/tv_ayuda_perfil_cliente"
@@ -221,8 +218,7 @@
                         android:layout_height="24dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
-                        android:src="@drawable/ic_information"
-                        />
+                        android:src="@drawable/ic_information" />
 
                     <TextView
                         android:id="@+id/tv_informacion_perfil_cliente"
@@ -244,12 +240,11 @@
 
                     <ImageView
                         android:id="@+id/iv_cerrar_perfil_cliente"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
-                        android:src="@drawable/ic_logout"
-                        />
+                        android:src="@drawable/ic_logout" />
 
                     <TextView
                         android:id="@+id/tv_cerrar_perfil_cliente"
@@ -263,9 +258,6 @@
                         android:textSize="@dimen/fragments_toolbar" />
 
                 </RelativeLayout>
-
-
-
 
 
             </LinearLayout>

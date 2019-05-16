@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,14 +50,10 @@ public class LoginCorreo extends AppCompatActivity {
     String correo_guardado;
     private SharedPreferences myPreferences;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_correo);
-
-        myPreferences
-                = PreferenceManager.getDefaultSharedPreferences(LoginCorreo.this);
 
         verificarPermisos();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -95,6 +92,9 @@ public class LoginCorreo extends AppCompatActivity {
         rtdb = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
 
+        myPreferences
+                = PreferenceManager.getDefaultSharedPreferences(LoginCorreo.this);
+
         btn_login_correo_iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,36 +104,6 @@ public class LoginCorreo extends AppCompatActivity {
 
                 if (!correo.trim().equals("") && !pass.trim().equals("") && correo != null && pass != null) {
                     loguearUsuario(correo, pass);
-                    rtdb.getReference().child("rolusuario")
-                            .addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    admin = false;
-                                    for (DataSnapshot hijo : dataSnapshot.getChildren()) {
-                                        //Si es admin, loguearse
-                                        RolUsuario rolUsuario = hijo.getValue(RolUsuario.class);
-                                        if (rolUsuario.getRolID().equals("02") &&
-                                                rolUsuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
-                                           admin = true;
-                                        }
-                                    }
-
-                                    if(admin){
-                                        Intent i = new Intent(LoginCorreo.this, HomeAdministrador.class);
-                                        startActivity(i);
-                                        finish();
-                                    }else{
-                                        Intent i = new Intent(LoginCorreo.this, HomeCliente.class);
-                                        startActivity(i);
-                                        finish();
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                }
-                            });
                 } else {
                     Toast.makeText(LoginCorreo.this, "Ingrese el correo y contraseña", Toast.LENGTH_SHORT).show();
                 }
@@ -159,13 +129,49 @@ public class LoginCorreo extends AppCompatActivity {
             et_login_correo_contrasenia.setTextColor(Color.rgb(130, 130, 130));
         }
 
+
+
     }
 
     private void loguearUsuario(final String correo, String pass) {
         auth.signInWithEmailAndPassword(correo, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
+                // We need an Editor object to make preference changes.
+                // All objects are from android.context.Context
+                SharedPreferences.Editor myEditor = myPreferences.edit();
+                myEditor.putString(EMAIL_USER, correo);
+                myEditor.commit();
 
+                rtdb.getReference().child("rolusuario")
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                admin = false;
+                                for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                                    //Si es admin, loguearse
+                                    RolUsuario rolUsuario = hijo.getValue(RolUsuario.class);
+                                    if (rolUsuario.getRolID().equals("02") &&
+                                            rolUsuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
+                                        admin = true;
+                                    }
+                                }
+
+                                if (admin) {
+                                    Intent i = new Intent(LoginCorreo.this, HomeAdministrador.class);
+                                    startActivity(i);
+                                    finish();
+                                } else {
+                                    Intent i = new Intent(LoginCorreo.this, HomeCliente.class);
+                                    startActivity(i);
+                                    finish();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
+                        });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
