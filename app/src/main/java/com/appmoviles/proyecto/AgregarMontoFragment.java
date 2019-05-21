@@ -188,12 +188,13 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        /*
         // We need an Editor object to make preference changes.
         // All objects are from android.context.Context
         SharedPreferences.Editor settings = myPreferences.edit();
         settings.putString(Constantes.MONTO_KEY, monto_transaccion);
         // Commit the edits!
-        settings.commit();
+        settings.commit();*/
     }
 
 
@@ -201,6 +202,7 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
     public interface OnItemPassListener {
         void onPassClickValue(String monto);
     }
+
     private OnItemPassListener listener;
 
     public void setListener(OnItemPassListener listener) {
