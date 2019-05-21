@@ -189,4 +189,8 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
         settings.commit();*/
     }
 
+    public void setInteractionListener(OnFragmentInteractionListener listener){
+        this.listener = listener;
+    }
+
 }

@@ -56,6 +56,12 @@ public class Constantes {
     public final static String TRANSACCIONES_DATOS = "TRANSACCIONES_DATOS";
     public final static String DONDE_VIENE = "DONDE_VIENE";
     public final static String FRAGMENT_CLIENTE = "FRAGMENT_CLIENTE";
+    public final static String FRAGMENT_ESTADISTICAS = "FRAGMENT_ESTADISTICAS";
+    public final static String FRAGMENT_TRANSACCION = "FRAGMENT_TRANSACCION";
+    public final static String FRAGMENT_FINANZAS = "FRAGMENT_FINANZAS";
+    public final static String FRAGMENT_CARGAR = "FRAGMENT_CARGAR";
+    public final static String FRAGMENT_PLANES = "FRAGMENT_PLANES";
+    public final static String FRAGMENT_CUENTAS = "FRAGMENT_CUENTAS";
     public final static String USUARIO_DESTINO = "USUARIO_DESTINO";
     public final static String USUARIO_ORIGEN = "USUARIO_ORIGEN";
     public final static String USUARIO_SERIALIZABLE = "USUARIO_SERIALIZABLE";

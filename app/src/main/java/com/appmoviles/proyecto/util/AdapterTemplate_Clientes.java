@@ -20,13 +20,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.appmoviles.proyecto.util.Constantes.CHILD_BANCOS;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_CUENTAS;
 
-public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTemplate_Clientes.CustomViewHolder> {
+public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTemplate_Clientes.CustomViewHolder> implements Serializable {
 
     //Los datos que vamos a mostrar (View)
     private ArrayList<Usuario> data;

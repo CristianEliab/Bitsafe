@@ -4,21 +4,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.transition.Slide;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,29 +25,27 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.Serializable;
 
 
-public class PerfilCliente extends Fragment implements Serializable {
+public class PerfilCliente extends AppCompatActivity implements Serializable {
 
     private TextView tv_nombre_iniciales;
     private TextView tv_nombre;
     private TextView tv_telefono;
     private ImageView image_atras;
-
     private TextView tv_micuenta_perfil_cliente;
     private TextView tv_ajustes_perfil_cliente;
     private TextView tv_ayuda_perfil_cliente;
     private TextView tv_informacion_perfil_cliente;
-    private ImageView iv_cerrar_perfil_cliente;
-    private ImageView iv_fragment_perfil_clientes;
+    private ImageView iv_fragment_perfil_clientes_return;
     private TextView tv_nombre_cliente_perfil_cliente;
     private TextView tv_numero_telefono_perfil_cliente;
-    private TextView tv_cerrar_perfil_cliente;
+    private TextView tv_cerrar_perfil_cliente_txt;
+    private ImageView iv_cerrar_perfil_cliente;
 
 
     FirebaseAuth auth;
     FirebaseDatabase rtdb;
     Fragment fragment;
 
-    Context contexto;
     private String volver_a;
 
     public PerfilCliente() {
@@ -66,91 +56,97 @@ public class PerfilCliente extends Fragment implements Serializable {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setAnimation();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        if (this.getArguments() != null) {
-            volver_a = getArguments().getString(Constantes.GO_TO_PERFIL);
-            fragment = (Fragment) getArguments().getSerializable(Constantes.FRAGMENT);
-        }
+        setContentView(R.layout.fragment_perfil_cliente);
 
         // Iniciar todos los fragmentes
-
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_perfil_cliente, container, false);
-        contexto = v.getContext();
+        Intent i = getIntent();
+        if (i != null) {
+            volver_a = i.getStringExtra(Constantes.GO_TO_PERFIL);
+            fragment = (Fragment) i.getSerializableExtra(Constantes.FRAGMENT);
+        }
 
         rtdb = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        tv_nombre_iniciales = v.findViewById(R.id.iv_nombre_perfil_cliente);
-        tv_nombre = v.findViewById(R.id.tv_nombre_cliente_perfil_cliente);
-        tv_telefono = v.findViewById(R.id.tv_numero_telefono_perfil_cliente);
-        image_atras = v.findViewById(R.id.iv_fragment_perfil_clientes);
-        iv_cerrar_perfil_cliente = v.findViewById(R.id.iv_cerrar_perfil_cliente);
-        iv_fragment_perfil_clientes = v.findViewById(R.id.iv_fragment_perfil_clientes);
-        tv_nombre_cliente_perfil_cliente = v.findViewById(R.id.tv_nombre_cliente_perfil_cliente);
-        tv_numero_telefono_perfil_cliente = v.findViewById(R.id.tv_numero_telefono_perfil_cliente);
-        tv_cerrar_perfil_cliente = v.findViewById(R.id.tv_cerrar_perfil_cliente);
 
-        iv_fragment_perfil_clientes.setOnClickListener(new View.OnClickListener() {
+        tv_nombre_iniciales = findViewById(R.id.iv_nombre_perfil_cliente);
+        tv_nombre = findViewById(R.id.tv_nombre_cliente_perfil_cliente);
+        tv_telefono = findViewById(R.id.tv_numero_telefono_perfil_cliente);
+        image_atras = findViewById(R.id.iv_cerrar_perfil_cliente);
+        iv_fragment_perfil_clientes_return = findViewById(R.id.iv_fragment_perfil_clientes_return);
+        tv_nombre_cliente_perfil_cliente = findViewById(R.id.tv_nombre_cliente_perfil_cliente);
+        tv_numero_telefono_perfil_cliente = findViewById(R.id.tv_numero_telefono_perfil_cliente);
+        tv_cerrar_perfil_cliente_txt = findViewById(R.id.tv_cerrar_perfil_cliente_txt);
+        iv_cerrar_perfil_cliente = findViewById(R.id.iv_cerrar_perfil_cliente);
+
+        iv_fragment_perfil_clientes_return.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager manager = getActivity().getSupportFragmentManager();
+                FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                if(volver_a.equals(Constantes.FINANZAS)){
-                    transaction.replace(R.id.contenido_cliente, fragment);
-                    transaction.commit();
-                }else{
-                    transaction.replace(R.id.contenido, fragment);
-                    transaction.commit();
+                if (volver_a.equals(Constantes.FRAGMENT_FINANZAS)) {
+                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_FINANZAS);
+                    startActivity(i);
+                    finish();
                 }
-
-
+                if (volver_a.equals(Constantes.FRAGMENT_PLANES)) {
+                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_PLANES);
+                    startActivity(i);
+                    finish();
+                }
+                if (volver_a.equals(Constantes.FRAGMENT_CUENTAS)) {
+                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CUENTAS);
+                    startActivity(i);
+                    finish();
+                }
+                if(volver_a.equals(Constantes.FRAGMENT_CLIENTE)){
+                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CLIENTE);
+                    startActivity(i);
+                    finish();
+                }
+                if(volver_a.equals(Constantes.FRAGMENT_ESTADISTICAS)){
+                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_ESTADISTICAS);
+                    startActivity(i);
+                    finish();
+                }
+                if(volver_a.equals(Constantes.FRAGMENT_TRANSACCION)){
+                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_TRANSACCION);
+                    startActivity(i);
+                    finish();
+                }
+                if(volver_a.equals(Constantes.FRAGMENT_CARGAR)){
+                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CARGAR);
+                    startActivity(i);
+                    finish();
+                }
             }
         });
 
-        tv_cerrar_perfil_cliente = v.findViewById(R.id.tv_cerrar_perfil_cliente);
-        tv_cerrar_perfil_cliente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(contexto, MiCuentaPerfil.class);
-                Bundle clave = new Bundle();
-                clave.putString(Constantes.GO_TO_PERFIL, Constantes.FINANZAS);
-                clave.putSerializable(Constantes.FRAGMENT, PerfilCliente.this);
-                i.putExtra(Constantes.GO_TO_PERFIL, clave);
-                startActivity(i);
-                getActivity().finish();
-            }
-        });
 
-        tv_micuenta_perfil_cliente = v.findViewById(R.id.tv_micuenta_perfil_cliente);
+        tv_micuenta_perfil_cliente = findViewById(R.id.tv_micuenta_perfil_cliente);
         tv_micuenta_perfil_cliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), MiCuentaPerfil.class);
+                Intent i = new Intent(PerfilCliente.this, MiCuentaPerfil.class);
                 startActivity(i);
-                getActivity().finish();
+                finish();
             }
         });
 
-        tv_ajustes_perfil_cliente = v.findViewById(R.id.tv_ajustes_perfil_cliente);
+        tv_ajustes_perfil_cliente = findViewById(R.id.tv_ajustes_perfil_cliente);
         tv_ajustes_perfil_cliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(contexto, AjuestesContrasena.class);
+                Intent i = new Intent(PerfilCliente.this, AjustesContrasena.class);
                 startActivity(i);
-            }
-        });
-        tv_ajustes_perfil_cliente = v.findViewById(R.id.tv_ajustes_perfil_cliente);
-        tv_ajustes_perfil_cliente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(contexto, AjuestesContrasena.class);
-                startActivity(i);
+                finish();
             }
         });
 
@@ -158,9 +154,19 @@ public class PerfilCliente extends Fragment implements Serializable {
             @Override
             public void onClick(View v) {
                 auth.signOut();
-                Intent i = new Intent(getActivity(), Splash.class);
+                Intent i = new Intent(PerfilCliente.this, Splash.class);
                 startActivity(i);
-                getActivity().finish();
+                finish();
+            }
+        });
+
+        tv_cerrar_perfil_cliente_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                auth.signOut();
+                Intent i = new Intent(PerfilCliente.this, Splash.class);
+                startActivity(i);
+                finish();
             }
         });
 
@@ -185,12 +191,13 @@ public class PerfilCliente extends Fragment implements Serializable {
                     }
                 });
 
-        tv_ayuda_perfil_cliente = v.findViewById(R.id.tv_ayuda_perfil_cliente);
+
+        tv_ayuda_perfil_cliente = findViewById(R.id.tv_ayuda_perfil_cliente);
         tv_ayuda_perfil_cliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder ayuda = new AlertDialog.Builder(contexto);
-                ayuda.setTitle("¿Necesitas ayuda?");
+                AlertDialog.Builder ayuda = new AlertDialog.Builder(getApplicationContext());
+                ayuda.setTitle(R.string.title_ayuda);
                 ayuda.setMessage("Comunicate con nuestro centro de atención 01800 6784637");
                 ayuda.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
@@ -201,11 +208,12 @@ public class PerfilCliente extends Fragment implements Serializable {
                 ayuda.show();
             }
         });
-        tv_informacion_perfil_cliente = v.findViewById(R.id.tv_informacion_perfil_cliente);
+
+        tv_informacion_perfil_cliente = findViewById(R.id.tv_informacion_perfil_cliente);
         tv_informacion_perfil_cliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder info = new AlertDialog.Builder(contexto);
+                AlertDialog.Builder info = new AlertDialog.Builder(getApplicationContext());
                 info.setTitle("Terminos y Condiciones");
                 info.setMessage(" luego de la remisión o puesta en conocimiento,\n" +
                         "o publicación del reglamento o sus modificaciones o actualizaciones en la página Web del\n" +
@@ -225,18 +233,6 @@ public class PerfilCliente extends Fragment implements Serializable {
             }
         });
 
-        return v;
     }
 
-
-    public void setAnimation() {
-        if (Build.VERSION.SDK_INT > 20) {
-            Slide slide = new Slide();
-            slide.setSlideEdge(Gravity.LEFT);
-            slide.setDuration(400);
-            slide.setInterpolator(new AccelerateDecelerateInterpolator());
-            getActivity().getWindow().setExitTransition(slide);
-            getActivity().getWindow().setEnterTransition(slide);
-        }
-    }
 }

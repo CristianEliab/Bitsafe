@@ -1,13 +1,16 @@
 package com.appmoviles.proyecto;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.appmoviles.proyecto.util.Constantes;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -40,6 +43,7 @@ public class EstadisticasFragment extends Fragment implements Serializable {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_estadisticas, container, false);
 
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         pieChart = v.findViewById(R.id.pc_fragment_finanzas_gastos);
 
@@ -47,7 +51,10 @@ public class EstadisticasFragment extends Fragment implements Serializable {
         iv_fragment_estadisticas_perfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onViewPerfilEstadisticas();
+                Intent i = new Intent(getActivity(), PerfilCliente.class);
+                i.putExtra(Constantes.GO_TO_PERFIL, Constantes.FRAGMENT_ESTADISTICAS);
+                startActivity(i);
+                getActivity().finish();
             }
         });
 
@@ -67,13 +74,4 @@ public class EstadisticasFragment extends Fragment implements Serializable {
         return v;
     }
 
-    //OBSERVER
-    public interface OnViewPerfilEstadisticas {
-        void onViewPerfilEstadisticas();
-    }
-    private OnViewPerfilEstadisticas listener;
-
-    public void setListener(OnViewPerfilEstadisticas listener) {
-        this.listener = listener;
-    }
 }

@@ -18,8 +18,10 @@
         <activity android:name=".LoginCorreo" />
         <activity android:name=".HomeAdministrador" />
         <activity android:name=".Registro_Bitsafe" />
+        <activity android:name=".PerfilCliente"></activity>
         <activity android:name=".Login_huella" />
         <activity android:name=".MiCuentaPerfil"></activity>
+        <activity android:name=".AjustesContrasena"></activity>
         <activity android:name=".Login" />
         <activity android:name=".Splash">
             <intent-filter>

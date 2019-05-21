@@ -1,6 +1,7 @@
 package com.appmoviles.proyecto;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -279,13 +280,11 @@ public class DatosClienteFragment extends Fragment implements Serializable,
                 }
                 break;
             case R.id.iv_fragment_dt_clientes_perfil:
-                perfilCliente = new PerfilCliente();
-                Bundle clave = new Bundle();
-                clave.putString(Constantes.GO_TO_PERFIL, Constantes.DATOS_FRAGMENT);
-                clave.putSerializable(Constantes.FRAGMENT, this);
-                perfilCliente.setArguments(clave);
-                transaction.replace(R.id.contenido, perfilCliente);
-                transaction.commit();
+                Intent i = new Intent(getActivity(), PerfilCliente.class);
+                i.putExtra(Constantes.GO_TO_PERFIL, Constantes.DATOS_FRAGMENT);
+                i.putExtra(Constantes.FRAGMENT, this);
+                startActivity(i);
+                getActivity().finish();
                 break;
         }
     }

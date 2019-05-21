@@ -43,6 +43,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
+                android:visibility="gone"
                 android:background="@drawable/fragment_ic_perfil_cliente_blanco" />
 
             <ImageView
@@ -50,6 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:visibility="gone"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
                 android:background="@drawable/fragment_ic_notificaciones_cliente" />

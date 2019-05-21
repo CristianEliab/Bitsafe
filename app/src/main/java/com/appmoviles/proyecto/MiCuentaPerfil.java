@@ -27,11 +27,9 @@ public class MiCuentaPerfil extends AppCompatActivity {
         iv_fragment_micuenta_clientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             /*   PerfilCliente perfilCliente = new PerfilCliente();
-                FragmentManager manager = getSupportFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.contenido_cliente, fragment);
-                transaction.commit();*/
+                Intent i = new Intent(MiCuentaPerfil.this, PerfilCliente.class);
+                startActivity(i);
+                finish();
             }
         });
     }

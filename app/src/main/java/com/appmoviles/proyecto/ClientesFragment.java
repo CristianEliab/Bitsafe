@@ -74,7 +74,10 @@ public class ClientesFragment extends Fragment implements Serializable, AdapterT
         iv_fragment_clientes_perfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onViewPerfilCliente();
+                Intent i = new Intent(getActivity(), PerfilCliente.class);
+                i.putExtra(Constantes.GO_TO_PERFIL, Constantes.FRAGMENT_CLIENTE);
+                startActivity(i);
+                getActivity().finish();
             }
         });
 
@@ -115,18 +118,5 @@ public class ClientesFragment extends Fragment implements Serializable, AdapterT
         transaction.replace(R.id.contenido, datosClienteFragment);
         transaction.commit();
     }
-
-
-    //OBSERVER
-    public interface OnViewPerfilCliente {
-        void onViewPerfilCliente();
-    }
-
-    private OnViewPerfilCliente listener;
-
-    public void setListener(OnViewPerfilCliente listener) {
-        this.listener = listener;
-    }
-
 
 }

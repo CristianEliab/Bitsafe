@@ -1,6 +1,7 @@
 package com.appmoviles.proyecto;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.appmoviles.proyecto.util.Constantes;
 import com.appmoviles.proyecto.util.FileChooser;
 
 import java.io.File;
@@ -47,7 +49,10 @@ public class CargarDatosFragment extends Fragment implements View.OnClickListene
         iv_fragment_carga_perfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onViewPerfilCargar();
+                Intent i = new Intent(getActivity(), PerfilCliente.class);
+                i.putExtra(Constantes.GO_TO_PERFIL, Constantes.FRAGMENT_CARGAR);
+                startActivity(i);
+                getActivity().finish();
             }
         });
 
@@ -81,13 +86,4 @@ public class CargarDatosFragment extends Fragment implements View.OnClickListene
         }
     }
 
-    //OBSERVER
-    public interface OnViewPerfilCargar {
-        void onViewPerfilCargar();
-    }
-    private OnViewPerfilCargar listener;
-
-    public void setListener(OnViewPerfilCargar listener) {
-        this.listener = listener;
-    }
 }

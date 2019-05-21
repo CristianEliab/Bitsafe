@@ -1,6 +1,7 @@
 package com.appmoviles.proyecto;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -33,10 +35,10 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
     private ImageView tv_fragment_transacciones_foto_destino;
     private ImageView iv_fragment_transacciones_perfil;
 
-    private String monto = "";
+    private String monto;
     private Usuario usuario_origen;
     private Usuario usuario_destino;
-    private String fecha = "";
+    private String fecha;
 
     private SharedPreferences myPreferences;
 
@@ -55,6 +57,8 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_transacciones, container, false);
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         btn_fragment_transacciones_agregar_monto = v.findViewById(R.id.btn_fragment_transacciones_agregar_monto);
         btn_fragment_transacciones_clientes_origen = v.findViewById(R.id.btn_fragment_transacciones_clientes_origen);
@@ -75,9 +79,12 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
         if (usuario_destino != null) {
             btn_fragment_transacciones_clientes_destino.setHint(usuario_destino.getNombre());
         }
-
-        btn_fragment_transacciones_agregar_monto.setHint(monto);
-        btn_fragment_transacciones_agregar_fecha.setHint(fecha);
+        if (monto != null) {
+            btn_fragment_transacciones_agregar_monto.setHint(monto);
+        }
+        if (fecha != null) {
+            btn_fragment_transacciones_agregar_fecha.setHint(fecha);
+        }
 
 
         // Acciones
@@ -119,7 +126,14 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
                 date.show(manager, "Date Picker");
                 break;
             case R.id.iv_fragment_transacciones_perfil:
-                listener.onViewPerfiltransaccion();
+                Intent i = new Intent(getActivity(), PerfilCliente.class);
+                i.putExtra(Constantes.GO_TO_PERFIL, Constantes.FRAGMENT_TRANSACCION);
+                usuario_destino = null;
+                usuario_origen = null;
+                monto = null;
+                fecha = null;
+                startActivity(i);
+                getActivity().finish();
                 break;
         }
     }
@@ -142,17 +156,6 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
         editor.putString(Constantes.FECHA_KEY, fecha);
         // Commit the edits!
         editor.commit();
-    }
-
-    //OBSERVER
-    public interface OnViewPerfiltransaccion {
-        void onViewPerfiltransaccion();
-    }
-
-    private OnViewPerfiltransaccion listener;
-
-    public void setListener(OnViewPerfiltransaccion listener) {
-        this.listener = listener;
     }
 
     DatePickerDialog.OnDateSetListener ondate = new DatePickerDialog.OnDateSetListener() {

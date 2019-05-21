@@ -1,6 +1,7 @@
 package com.appmoviles.proyecto;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,8 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.appmoviles.proyecto.modelo.PlanAhorro;
+import com.appmoviles.proyecto.util.Constantes;
 
-public class PlanesFragment extends Fragment {
+import java.io.Serializable;
+
+
+public class PlanesFragment extends Fragment implements Serializable {
 
     private ImageButton btn_crear_ahorro;
     private ImageView iv_fragment_planes_perfil;
@@ -46,11 +52,11 @@ public class PlanesFragment extends Fragment {
         iv_fragment_planes_perfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PerfilCliente perfilCliente = new PerfilCliente();
-                FragmentManager manager = getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.contenido, perfilCliente);
-                transaction.commit();
+                //Cuando se presiona el botón perfil
+                Intent i = new Intent(getContext(), PerfilCliente.class);
+                i.putExtra(Constantes.GO_TO_PERFIL, Constantes.FRAGMENT_PLANES);
+                startActivity(i);
+                getActivity().finish();
             }
         });
 

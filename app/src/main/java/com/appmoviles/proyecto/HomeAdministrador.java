@@ -1,5 +1,6 @@
 package com.appmoviles.proyecto;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
@@ -10,16 +11,17 @@ import android.view.MenuItem;
 
 import com.appmoviles.proyecto.util.Constantes;
 
-public class HomeAdministrador extends FragmentActivity implements ClientesFragment.OnViewPerfilCliente,
-        EstadisticasFragment.OnViewPerfilEstadisticas,
-        CargarDatosFragment.OnViewPerfilCargar,
-        TransaccionesFragment.OnViewPerfiltransaccion {
+import java.io.Serializable;
+
+public class HomeAdministrador extends FragmentActivity implements
+        Serializable {
 
     private ClientesFragment clientesFragment;
     private EstadisticasFragment estadisticasFragment;
     private TransaccionesFragment transaccionesFragment;
     private CargarDatosFragment cargarDatosFragment;
     private PerfilCliente perfilCliente;
+    private String donde_viene = "";
     FragmentManager manager;
 
 
@@ -33,14 +35,15 @@ public class HomeAdministrador extends FragmentActivity implements ClientesFragm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_administrador);
 
+        Intent i = getIntent();
+        if (i != null) {
+            donde_viene = i.getStringExtra(Constantes.FRAGMENT);
+        }
+
         clientesFragment = new ClientesFragment();
-        clientesFragment.setListener(this);
         cargarDatosFragment = new CargarDatosFragment();
-        cargarDatosFragment.setListener(this);
         estadisticasFragment = new EstadisticasFragment();
-        estadisticasFragment.setListener(this);
         transaccionesFragment = new TransaccionesFragment();
-        transaccionesFragment.setListener(this);
         perfilCliente = new PerfilCliente();
 
         // Sub fragments
@@ -51,13 +54,10 @@ public class HomeAdministrador extends FragmentActivity implements ClientesFragm
         datosClienteFragment.setInteractionListener(transaccionesFragment);
 
 
+        primerFragment();
+
         BottomNavigationView navigation = findViewById(R.id.home_admin_navigation);
         navigation.setSelectedItemId(R.id.menubar_clientes);
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.contenido, clientesFragment);
-        transaction.commit();
-
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -84,6 +84,33 @@ public class HomeAdministrador extends FragmentActivity implements ClientesFragm
                 return true;
             }
         });
+    }
+
+    private void primerFragment() {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        if (donde_viene != null) {
+            if (donde_viene.equals(Constantes.FRAGMENT_CLIENTE)) {
+                transaction.replace(R.id.contenido, clientesFragment);
+                transaction.commit();
+            }
+            if(donde_viene.equals(Constantes.FRAGMENT_ESTADISTICAS)){
+                transaction.replace(R.id.contenido, estadisticasFragment);
+                transaction.commit();
+            }
+            if(donde_viene.equals(Constantes.FRAGMENT_TRANSACCION)){
+                transaction.replace(R.id.contenido, transaccionesFragment);
+                transaction.commit();
+            }
+            if(donde_viene.equals(Constantes.FRAGMENT_CARGAR)){
+                transaction.replace(R.id.contenido, cargarDatosFragment);
+                transaction.commit();
+            }
+        } else {
+            transaction.replace(R.id.contenido, clientesFragment);
+            transaction.commit();
+        }
+
     }
 
     public void llamarFragmentAgregarMonto() {
@@ -131,51 +158,4 @@ public class HomeAdministrador extends FragmentActivity implements ClientesFragm
         super.onBackPressed();
     }
 
-    @Override
-    public void onViewPerfilCliente() {
-        Bundle clave = new Bundle();
-        clave.putString(Constantes.GO_TO_PERFIL, Constantes.CLIENTES);
-        clave.putSerializable(Constantes.FRAGMENT, clientesFragment);
-        perfilCliente.setArguments(clave);
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.contenido, perfilCliente);
-        transaction.commit();
-    }
-
-    @Override
-    public void onViewPerfilEstadisticas() {
-        Bundle clave = new Bundle();
-        clave.putString(Constantes.GO_TO_PERFIL, Constantes.ESTADISTICAS);
-        clave.putSerializable(Constantes.FRAGMENT, estadisticasFragment);
-        perfilCliente.setArguments(clave);
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.contenido, perfilCliente);
-        transaction.commit();
-    }
-
-    @Override
-    public void onViewPerfilCargar() {
-        Bundle clave = new Bundle();
-        clave.putString(Constantes.GO_TO_PERFIL, Constantes.CARGAR);
-        clave.putSerializable(Constantes.FRAGMENT, cargarDatosFragment);
-        perfilCliente.setArguments(clave);
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.contenido, perfilCliente);
-        transaction.commit();
-    }
-
-    @Override
-    public void onViewPerfiltransaccion() {
-        Bundle clave = new Bundle();
-        clave.putString(Constantes.GO_TO_PERFIL, Constantes.TRANSACCIONES);
-        clave.putSerializable(Constantes.FRAGMENT, transaccionesFragment);
-        perfilCliente.setArguments(clave);
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.contenido, perfilCliente);
-        transaction.commit();
-    }
 }

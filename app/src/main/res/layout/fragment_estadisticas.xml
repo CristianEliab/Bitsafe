@@ -60,7 +60,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
-                    android:background="@drawable/fragment_ic_notificaciones_cliente" />
+                    android:background="@drawable/fragment_ic_notificaciones_cliente"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
@@ -76,9 +77,9 @@
 
 
                 <LinearLayout
+                    android:id="@+id/iv_fragment_estadisticas_est"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
-                    android:id="@+id/iv_fragment_estadisticas_est"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -98,8 +99,8 @@
                 android:layout_below="@+id/rl_fragment_estadisticas_panel_estadisticas"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginBottom="50dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="50dp">
 
                 <EditText
                     android:id="@+id/et_fragment_estadisticas_descripcion_grafica"

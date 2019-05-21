@@ -1,342 +1,328 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:layout_height="match_parent">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <RelativeLayout
-            android:id="@+id/tb_fragment_cambio_ajustes"
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/aplicacion_toolbar_opciones"
-            android:background="@color/colorBitsafeBlue"
-            android:elevation="4dp">
-
-            <ImageView
-                android:id="@+id/iv_fragment_cambio_ajustes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
-                android:background="@drawable/fragment_ic_return" />
-
-            <TextView
-                android:id="@+id/tv_fragment_cambio_ajustes_texto_actividad"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
-                android:gravity="center"
-                android:text="Ajustes"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/fragments_toolbar" />
-
-            <ImageView
-                android:id="@+id/iv_fragment_cambio_ajustes_clientes_perfil"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
-                android:background="@drawable/fragment_ic_perfil_cliente_blanco" />
-
-            <ImageView
-                android:id="@+id/iv_fragment_dt_cambio_ajustes_notificaciones"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
-                android:background="@drawable/fragment_ic_notificaciones_cliente" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl_cambio_ajustes"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/tb_fragment_cambio_ajustes">
+            android:layout_height="match_parent">
 
             <RelativeLayout
-                android:id="@+id/rl_cambio_ajuestes_mis_claves"
+                android:id="@+id/tb_fragment_cambio_ajustes"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/registro_figura_texto_redondo_opciones">
-
-                <TextView
-                    android:id="@+id/tv_cambio_ajustes_mis_claves"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mis Claves"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@color/colorBitsafeBlue"
-                    android:textSize="23dp" />
+                android:layout_height="@dimen/aplicacion_toolbar_opciones"
+                android:background="@color/colorBitsafeBlue"
+                android:elevation="4dp">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_cambio_ajustes_mis_claves"
-                    android:id="@+id/view"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_linea"/>
-
-
-                <TextView
-                    android:id="@+id/tv_cambiar_pin"
+                    android:id="@+id/iv_fragment_cambio_ajustes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/view"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Cambiar PIN"
-                    android:textColor="#42423f"
-                    android:textSize="@dimen/fragments_toolbar" />
-
-                <ImageView
-                    android:id="@+id/image_flecha_cambiar_pin"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="89dp"
-                    android:layout_marginEnd="27dp"
-                    android:src="@drawable/ic_fecha_next" />
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/aplicacion_margin_left_btn_return"
+                    android:background="@drawable/fragment_ic_return" />
 
                 <TextView
-                    android:id="@+id/tv_cambiar_huella"
+                    android:id="@+id/tv_fragment_cambio_ajustes_texto_actividad"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_cambiar_pin"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Cambiar Huella"
-                    android:textColor="#42423f"
-                    android:textSize="@dimen/fragments_toolbar" />
-
-                <ImageView
-                    android:id="@+id/image_flecha_cambiar_huella"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="155dp"
-                    android:layout_marginEnd="27dp"
-                    android:layout_marginBottom="20dp"
-                    android:src="@drawable/ic_fecha_next" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_cambio_ajustes_mis_datos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/registro_figura_texto_redondo_opciones"
-                android:layout_below="@id/rl_cambio_ajuestes_mis_claves"
-                android:layout_marginTop="60dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp">
-
-                <TextView
-                    android:id="@+id/tv_cambio_ajustes_mis_datos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mis Datos"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@color/colorBitsafeBlue"
-                    android:textSize="23dp" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_cambio_ajustes_mis_datos"
-                    android:id="@+id/view_datos"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_linea"/>
-
-                <TextView
-                    android:id="@+id/tv_cambiar_nombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/view_datos"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Nombre"
-                    android:textColor="#42423f"
-                    android:textSize="@dimen/fragments_toolbar" />
-
-                <ImageView
-                    android:id="@+id/image_flecha_cambiar_nombre"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="100dp"
-                    android:layout_marginEnd="27dp"
-                    android:src="@drawable/ic_fecha_next" />
-
-                <TextView
-                    android:id="@+id/tv_cambiar_cedula"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_cambiar_nombre"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Cedula"
-                    android:textColor="#42423f"
-                    android:textSize="@dimen/fragments_toolbar" />
-
-                <ImageView
-                    android:id="@+id/image_flecha_cambiar_cedula"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="166dp"
-                    android:layout_marginEnd="27dp"
-                    android:src="@drawable/ic_fecha_next" />
-
-                <TextView
-                    android:id="@+id/tv_cambiar_celular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_cambiar_cedula"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Celular"
-                    android:textColor="#42423f"
-                    android:textSize="@dimen/fragments_toolbar" />
-
-                <ImageView
-                    android:id="@+id/image_flecha_cambiar_celular"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="233dp"
-                    android:layout_marginEnd="27dp"
-                    android:src="@drawable/ic_fecha_next" />
-
-                <TextView
-                    android:id="@+id/tv_cambiar_correo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_cambiar_celular"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="E-mail"
-                    android:textColor="#42423f"
-                    android:textSize="@dimen/fragments_toolbar" />
-
-                <ImageView
-                    android:id="@+id/image_flecha_cambiar_correo"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="299dp"
-                    android:layout_marginEnd="27dp"
-                    android:src="@drawable/ic_fecha_next" />
-
-                <TextView
-                    android:id="@+id/tv_cambiar_hogar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_cambiar_correo"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Ubicación"
-                    android:textColor="#42423f"
-                    android:textSize="@dimen/fragments_toolbar" />
-
-                <ImageView
-                    android:id="@+id/image_flecha_cambiar_hogar"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="365dp"
-                    android:layout_marginEnd="27dp"
-                    android:src="@drawable/ic_fecha_next" />
-
-                <TextView
-                    android:id="@+id/tv_cambiar_labor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_cambiar_hogar"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Labor"
-                    android:textColor="#42423f"
-                    android:textSize="@dimen/fragments_toolbar" />
-
-                <ImageView
-                    android:id="@+id/image_flecha_cambiar_labor"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="439dp"
-                    android:layout_marginEnd="27dp"
-                    android:layout_marginBottom="20dp"
-                    android:src="@drawable/ic_fecha_next" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/rl_cambio_ajustes_mis_datos"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="100dp"
-                android:background="@drawable/registro_boton_registrarse"
-                android:layout_centerHorizontal="true">
-
-                <TextView
-                    android:id="@+id/tv_guardar_cambios"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
                     android:gravity="center"
-                    android:layout_centerHorizontal="true"
-                    android:text="Guardar Cambios"
+                    android:text="Ajustes"
                     android:textColor="@color/colorWhite"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/fragments_toolbar" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_cambio_ajustes_clientes_perfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
+                    android:background="@drawable/fragment_ic_perfil_cliente_blanco"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/iv_fragment_dt_cambio_ajustes_notificaciones"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
+                    android:background="@drawable/fragment_ic_notificaciones_cliente"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_cambio_ajustes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tb_fragment_cambio_ajustes">
+
+                <RelativeLayout
+                    android:id="@+id/rl_cambio_ajuestes_mis_claves"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/registro_figura_texto_redondo_opciones">
+
+                    <TextView
+                        android:id="@+id/tv_cambio_ajustes_mis_claves"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Mis Claves"
+                        android:textColor="@color/colorBitsafeBlue"
+                        android:textSize="23dp" />
+
+                    <ImageView
+                        android:id="@+id/view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_cambio_ajustes_mis_claves"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_linea" />
+
+
+                    <TextView
+                        android:id="@+id/tv_cambiar_pin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/view"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:text="Cambiar PIN"
+                        android:textColor="#42423f"
+                        android:textSize="@dimen/fragments_toolbar" />
+
+                    <ImageView
+                        android:id="@+id/image_flecha_cambiar_pin"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="89dp"
+                        android:layout_marginEnd="27dp"
+                        android:src="@drawable/ic_fecha_next" />
+
+                    <TextView
+                        android:id="@+id/tv_cambiar_huella"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_cambiar_pin"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="40dp"
+                        android:text="Cambiar Huella"
+                        android:textColor="#42423f"
+                        android:textSize="@dimen/fragments_toolbar" />
+
+                    <ImageView
+                        android:id="@+id/image_flecha_cambiar_huella"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="155dp"
+                        android:layout_marginEnd="27dp"
+                        android:layout_marginBottom="20dp"
+                        android:src="@drawable/ic_fecha_next" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_cambio_ajustes_mis_datos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rl_cambio_ajuestes_mis_claves"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/registro_figura_texto_redondo_opciones">
+
+                    <TextView
+                        android:id="@+id/tv_cambio_ajustes_mis_datos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Mis Datos"
+                        android:textColor="@color/colorBitsafeBlue"
+                        android:textSize="23dp" />
+
+                    <ImageView
+                        android:id="@+id/view_datos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_cambio_ajustes_mis_datos"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_linea" />
+
+                    <TextView
+                        android:id="@+id/tv_cambiar_nombre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/view_datos"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:text="Nombre"
+                        android:textColor="#42423f"
+                        android:textSize="@dimen/fragments_toolbar" />
+
+                    <ImageView
+                        android:id="@+id/image_flecha_cambiar_nombre"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="100dp"
+                        android:layout_marginEnd="27dp"
+                        android:src="@drawable/ic_fecha_next" />
+
+                    <TextView
+                        android:id="@+id/tv_cambiar_cedula"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_cambiar_nombre"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="40dp"
+                        android:text="Cedula"
+                        android:textColor="#42423f"
+                        android:textSize="@dimen/fragments_toolbar" />
+
+                    <ImageView
+                        android:id="@+id/image_flecha_cambiar_cedula"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="166dp"
+                        android:layout_marginEnd="27dp"
+                        android:src="@drawable/ic_fecha_next" />
+
+                    <TextView
+                        android:id="@+id/tv_cambiar_celular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_cambiar_cedula"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="40dp"
+                        android:text="Celular"
+                        android:textColor="#42423f"
+                        android:textSize="@dimen/fragments_toolbar" />
+
+                    <ImageView
+                        android:id="@+id/image_flecha_cambiar_celular"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="233dp"
+                        android:layout_marginEnd="27dp"
+                        android:src="@drawable/ic_fecha_next" />
+
+                    <TextView
+                        android:id="@+id/tv_cambiar_correo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_cambiar_celular"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="40dp"
+                        android:text="E-mail"
+                        android:textColor="#42423f"
+                        android:textSize="@dimen/fragments_toolbar" />
+
+                    <ImageView
+                        android:id="@+id/image_flecha_cambiar_correo"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="299dp"
+                        android:layout_marginEnd="27dp"
+                        android:src="@drawable/ic_fecha_next" />
+
+                    <TextView
+                        android:id="@+id/tv_cambiar_hogar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_cambiar_correo"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="40dp"
+                        android:text="Ubicación"
+                        android:textColor="#42423f"
+                        android:textSize="@dimen/fragments_toolbar" />
+
+                    <ImageView
+                        android:id="@+id/image_flecha_cambiar_hogar"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="365dp"
+                        android:layout_marginEnd="27dp"
+                        android:src="@drawable/ic_fecha_next" />
+
+                    <TextView
+                        android:id="@+id/tv_cambiar_labor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_cambiar_hogar"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="40dp"
+                        android:text="Labor"
+                        android:textColor="#42423f"
+                        android:textSize="@dimen/fragments_toolbar" />
+
+                    <ImageView
+                        android:id="@+id/image_flecha_cambiar_labor"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="439dp"
+                        android:layout_marginEnd="27dp"
+                        android:layout_marginBottom="20dp"
+                        android:src="@drawable/ic_fecha_next" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rl_cambio_ajustes_mis_datos"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="100dp"
+                    android:background="@drawable/registro_boton_registrarse">
+
+                    <Button
+                        android:id="@+id/tv_guardar_cambios"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:text="Guardar Cambios"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="20dp" />
+
+                </RelativeLayout>
 
             </RelativeLayout>
 
         </RelativeLayout>
 
-    </RelativeLayout>
-
-</ScrollView>
-
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/home_clientes_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorBarraNavegacion"
-        app:itemIconTint="@drawable/home_cliente_selector"
-        app:itemTextColor="@drawable/home_cliente_selector"
-        app:labelVisibilityMode="selected"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_cliente">
-
-    </android.support.design.widget.BottomNavigationView>
+    </ScrollView>
 
 </RelativeLayout>

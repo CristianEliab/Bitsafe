@@ -1,6 +1,7 @@
 package com.appmoviles.proyecto;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.appmoviles.proyecto.util.Constantes;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -265,7 +267,10 @@ public class FinanzasFragment extends Fragment implements View.OnClickListener, 
                 break;
             case R.id.iv_fragment_finanzas_perfil:
                 //Cuando se presiona el botón perfil
-                listener.onViewPerfil();
+                Intent i = new Intent(getContext(), PerfilCliente.class);
+                i.putExtra(Constantes.GO_TO_PERFIL, Constantes.FRAGMENT_FINANZAS);
+                startActivity(i);
+                getActivity().finish();
                 break;
 
         }
@@ -274,17 +279,5 @@ public class FinanzasFragment extends Fragment implements View.OnClickListener, 
 
     public void mostrarMensaje(String texto) {
         Toast.makeText(getActivity(), texto, Toast.LENGTH_LONG).show();
-    }
-
-
-    //Patrón observer
-    public interface OnViewPerfil{
-        void onViewPerfil();
-    }
-
-    private OnViewPerfil listener;
-
-    public void setListener(OnViewPerfil listener) {
-        this.listener = listener;
     }
 }

@@ -61,6 +61,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
+                    android:visibility="gone"
                     android:background="@drawable/fragment_ic_notificaciones_cliente" />
 
             </RelativeLayout>
