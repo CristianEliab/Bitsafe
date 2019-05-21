@@ -1,12 +1,10 @@
 package com.appmoviles.proyecto;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -22,6 +20,13 @@ public class HomeAdministrador extends FragmentActivity implements ClientesFragm
     private TransaccionesFragment transaccionesFragment;
     private CargarDatosFragment cargarDatosFragment;
     private PerfilCliente perfilCliente;
+    FragmentManager manager;
+
+
+    // Sub fragments
+    private AgregarMontoFragment agregarMontoFragment;
+    private SeleccionarClienteFragment seleccionarClienteFragment;
+    private DatosClienteFragment datosClienteFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +43,15 @@ public class HomeAdministrador extends FragmentActivity implements ClientesFragm
         transaccionesFragment.setListener(this);
         perfilCliente = new PerfilCliente();
 
-        BottomNavigationView navigation = findViewById(R.id.home_admin_navigation);
+        // Sub fragments
+        agregarMontoFragment = new AgregarMontoFragment();
+        agregarMontoFragment.setInteractionListener(transaccionesFragment);
+        seleccionarClienteFragment = new SeleccionarClienteFragment();
+        datosClienteFragment = new DatosClienteFragment();
+        datosClienteFragment.setInteractionListener(transaccionesFragment);
 
+
+        BottomNavigationView navigation = findViewById(R.id.home_admin_navigation);
         navigation.setSelectedItemId(R.id.menubar_clientes);
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -51,7 +63,7 @@ public class HomeAdministrador extends FragmentActivity implements ClientesFragm
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.menubar_clientes:
                         transaction.replace(R.id.contenido, clientesFragment);
                         transaction.commit();
@@ -72,6 +84,45 @@ public class HomeAdministrador extends FragmentActivity implements ClientesFragm
                 return true;
             }
         });
+    }
+
+    public void llamarFragmentAgregarMonto() {
+        manager = this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = manager.beginTransaction();
+        Bundle parametro = new Bundle();
+        parametro.putSerializable(Constantes.TRANSACCIONES, transaccionesFragment);
+        agregarMontoFragment.setArguments(parametro);
+        fragmentTransaction.replace(R.id.contenido, agregarMontoFragment);
+        fragmentTransaction.commit();
+    }
+
+    public void llamarFragmentClienteOrigin() {
+        manager = this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = manager.beginTransaction();
+        Bundle parametro = new Bundle();
+        parametro.putSerializable(Constantes.TRANSACCIONES, transaccionesFragment);
+        parametro.putString(Constantes.USUARIO, Constantes.USUARIO_ORIGEN);
+        seleccionarClienteFragment.setArguments(parametro);
+        fragmentTransaction.replace(R.id.contenido, seleccionarClienteFragment);
+        fragmentTransaction.commit();
+    }
+
+    public void llamarFragmentClienteDestino() {
+        manager = this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = manager.beginTransaction();
+        Bundle parametro = new Bundle();
+        parametro.putSerializable(Constantes.TRANSACCIONES, transaccionesFragment);
+        parametro.putString(Constantes.USUARIO, Constantes.USUARIO_DESTINO);
+        seleccionarClienteFragment.setArguments(parametro);
+        fragmentTransaction.replace(R.id.contenido, seleccionarClienteFragment);
+        fragmentTransaction.commit();
+    }
+
+    public void llamarFragmentMain() {
+        manager = this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = manager.beginTransaction();
+        fragmentTransaction.replace(R.id.contenido, transaccionesFragment);
+        fragmentTransaction.commit();
     }
 
 

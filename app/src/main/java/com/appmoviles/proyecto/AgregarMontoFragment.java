@@ -38,10 +38,12 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
     private Button btn_agregar_monto_borrar;
 
     private String monto_transaccion;
-    private TransaccionesFragment transaccionesFragment;
     private SharedPreferences myPreferences;
     private Fragment fragment;
 
+
+    // Envio de información
+    private OnFragmentInteractionListener listener;
 
     public AgregarMontoFragment() {
         // Required empty public constructor
@@ -83,19 +85,9 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
         btn_fragment_agregar_monto_guardar_monto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*getActivity().onBackPressed();*/
-                SharedPreferences.Editor myEditor = myPreferences.edit();
-                myEditor.putString(Constantes.MONTO_KEY, monto_transaccion);
-                myEditor.commit();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-               /* transaccionesFragment = new TransaccionesFragment();
-                // Put information
-                listener.onPassClickValue(monto_transaccion);*/
-                //Guardar el monto en la app.
-                transaction.replace(R.id.contenido, fragment);
-                transaction.commit();
-
-
+                HomeAdministrador activity = (HomeAdministrador) getActivity();
+                activity.llamarFragmentMain();
+                listener.onAction(AgregarMontoFragment.this, monto_transaccion);
             }
         });
 
@@ -196,16 +188,8 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
         settings.commit();
     }
 
-
-    //OBSERVER
-    public interface OnItemPassListener {
-        void onPassClickValue(String monto);
-    }
-    private OnItemPassListener listener;
-
-    public void setListener(OnItemPassListener listener) {
+    public void setInteractionListener(OnFragmentInteractionListener listener){
         this.listener = listener;
     }
-
 
 }

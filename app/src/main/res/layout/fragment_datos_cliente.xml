@@ -188,7 +188,7 @@
 
             </RelativeLayout>
 
-            <EditText
+            <Button
                 android:id="@+id/btn_fragment_dt_cliente_guardar"
                 android:layout_width="@dimen/fragment_dt_cliente_guardar_w"
                 android:layout_height="@dimen/fragment_dt_cliente_guardar_h"
@@ -199,11 +199,6 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="50dp"
                 android:background="@drawable/fragment_agregar_monto_figura_btn_guardar"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:enabled="false"
-                android:focusableInTouchMode="false"
                 android:gravity="center"
                 android:text="@string/fragment_dt_clientes_guardarInfo"
                 android:textColor="@color/colorWhite"

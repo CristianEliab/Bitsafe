@@ -21,22 +21,17 @@ public class MiCuentaPerfil extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mi_cuenta_perfil);
 
-
-        Intent i = getIntent();
-        Bundle bundle =  i.getBundleExtra(Constantes.GO_TO_PERFIL);
-        fragment = (Fragment) bundle.getSerializable(Constantes.FRAGMENT);
-
         iv_fragment_micuenta_clientes = findViewById(R.id.iv_fragment_micuenta_clientes);
 
 
         iv_fragment_micuenta_clientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PerfilCliente perfilCliente = new PerfilCliente();
+             /*   PerfilCliente perfilCliente = new PerfilCliente();
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.replace(R.id.contenido_cliente, fragment);
-                transaction.commit();
+                transaction.commit();*/
             }
         });
     }

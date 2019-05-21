@@ -58,5 +58,6 @@ public class Constantes {
     public final static String FRAGMENT_CLIENTE = "FRAGMENT_CLIENTE";
     public final static String USUARIO_DESTINO = "USUARIO_DESTINO";
     public final static String USUARIO_ORIGEN = "USUARIO_ORIGEN";
+    public final static String USUARIO_SERIALIZABLE = "USUARIO_SERIALIZABLE";
 
 }
