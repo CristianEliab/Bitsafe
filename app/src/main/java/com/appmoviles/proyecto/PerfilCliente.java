@@ -1,6 +1,8 @@
 package com.appmoviles.proyecto;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
@@ -28,8 +30,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 
-public class PerfilCliente extends Fragment {
+
+public class PerfilCliente extends Fragment implements Serializable {
 
     private TextView tv_nombre_iniciales;
     private TextView tv_nombre;
@@ -97,8 +101,14 @@ public class PerfilCliente extends Fragment {
             public void onClick(View v) {
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.contenido, fragment);
-                transaction.commit();
+                if(volver_a.equals(Constantes.FINANZAS)){
+                    transaction.replace(R.id.contenido_cliente, fragment);
+                    transaction.commit();
+                }else{
+                    transaction.replace(R.id.contenido, fragment);
+                    transaction.commit();
+                }
+
 
             }
         });
@@ -108,6 +118,10 @@ public class PerfilCliente extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(contexto, MiCuentaPerfil.class);
+                Bundle clave = new Bundle();
+                clave.putString(Constantes.GO_TO_PERFIL, Constantes.FINANZAS);
+                clave.putSerializable(Constantes.FRAGMENT, PerfilCliente.this);
+                i.putExtra(Constantes.GO_TO_PERFIL, clave);
                 startActivity(i);
                 getActivity().finish();
             }
@@ -117,12 +131,28 @@ public class PerfilCliente extends Fragment {
         tv_micuenta_perfil_cliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(contexto, MiCuentaPerfil.class);
+                Intent i = new Intent(getActivity(), MiCuentaPerfil.class);
                 startActivity(i);
                 getActivity().finish();
             }
         });
 
+        tv_ajustes_perfil_cliente = v.findViewById(R.id.tv_ajustes_perfil_cliente);
+        tv_ajustes_perfil_cliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(contexto, AjuestesContrasena.class);
+                startActivity(i);
+            }
+        });
+        tv_ajustes_perfil_cliente = v.findViewById(R.id.tv_ajustes_perfil_cliente);
+        tv_ajustes_perfil_cliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(contexto, AjuestesContrasena.class);
+                startActivity(i);
+            }
+        });
 
         iv_cerrar_perfil_cliente.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,6 +185,45 @@ public class PerfilCliente extends Fragment {
                     }
                 });
 
+        tv_ayuda_perfil_cliente = v.findViewById(R.id.tv_ayuda_perfil_cliente);
+        tv_ayuda_perfil_cliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder ayuda = new AlertDialog.Builder(contexto);
+                ayuda.setTitle("¿Necesitas ayuda?");
+                ayuda.setMessage("Comunicate con nuestro centro de atención 01800 6784637");
+                ayuda.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                ayuda.show();
+            }
+        });
+        tv_informacion_perfil_cliente = v.findViewById(R.id.tv_informacion_perfil_cliente);
+        tv_informacion_perfil_cliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder info = new AlertDialog.Builder(contexto);
+                info.setTitle("Terminos y Condiciones");
+                info.setMessage(" luego de la remisión o puesta en conocimiento,\n" +
+                        "o publicación del reglamento o sus modificaciones o actualizaciones en la página Web del\n" +
+                        "BANCO, este Reglamento se entenderá aceptado por EL CLIENTE con la contratación de\n" +
+                        "productos y/o con la suscripción de la tarjeta de firmas en la que se establecen las condiciones\n" +
+                        "de manejo de las cuentas y/o con el recibo de la Tarjeta Débito, Talonario o cualquier otro\n" +
+                        "medio de manejo recibido por EL CLIENTE y/o con la utilización del producto, canal o\n" +
+                        "servicio asociados y/o manteniendo de fondos disponibles en las cuentas y/o al mantener\n" +
+                        "los productos y/o seguir realizando operaciones o utilizando servicios.");
+                info.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                info.show();
+            }
+        });
 
         return v;
     }

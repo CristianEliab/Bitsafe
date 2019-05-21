@@ -37,6 +37,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ import static com.appmoviles.proyecto.util.Constantes.BUNDLE_TIPO_GASTOS;
 import static com.appmoviles.proyecto.util.Constantes.BUNDLE_TIPO_INGRESOS;
 import static com.appmoviles.proyecto.util.Constantes.BUNDLE_TIPO_I_O;
 
-public class FinanzasFragment extends Fragment implements View.OnClickListener {
+public class FinanzasFragment extends Fragment implements View.OnClickListener, Serializable {
 
     FirebaseAuth auth;
     FirebaseDatabase rtdb;

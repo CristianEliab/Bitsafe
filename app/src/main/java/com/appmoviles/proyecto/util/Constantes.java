@@ -51,11 +51,13 @@ public class Constantes {
 
     //Para mostrar Datos
     public final static String USUARIO = "USUARIO";
+    public final static String FINANZAS = "FINANZAS";
     public final static String DATOS_FRAGMENT = "DATOS_FRAGMENT";
     public final static String TRANSACCIONES_DATOS = "TRANSACCIONES_DATOS";
     public final static String DONDE_VIENE = "DONDE_VIENE";
     public final static String FRAGMENT_CLIENTE = "FRAGMENT_CLIENTE";
     public final static String USUARIO_DESTINO = "USUARIO_DESTINO";
     public final static String USUARIO_ORIGEN = "USUARIO_ORIGEN";
+    public final static String USUARIO_SERIALIZABLE = "USUARIO_SERIALIZABLE";
 
 }

@@ -32,14 +32,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DatosClienteFragment extends Fragment implements Serializable, AdapterDatosCuentas.OnItemClickListener, AdapterDatosBancos.OnItemClickListener, View.OnClickListener {
+public class DatosClienteFragment extends Fragment implements Serializable,
+        AdapterDatosCuentas.OnItemClickListener,
+        AdapterDatosBancos.OnItemClickListener,
+        View.OnClickListener {
 
     private RelativeLayout rl_fragment_clientes_toolbar;
     private EditText et_cuenta_seleccionado;
     private EditText et_banco_seleccionado;
     private TextView tv_fragment_dt_clientes_texto_nombre_cliente;
     private TextView tv_datos_cliente_registro_nombre;
-    private TextView tv_fragment_dt_clientes_texto_actividad;
     private RecyclerView lista_bancos_cliente;
     private RecyclerView lista_cuentas_cliente;
     private ImageView iv_down_bancos;
@@ -48,9 +50,7 @@ public class DatosClienteFragment extends Fragment implements Serializable, Adap
     private ImageView iv_fragment_dt_clientes_perfil;
     private ArrayList<Banco> listaBancos;
     private ArrayList<Cuenta> listaCuentas;
-    private Cliente cliente;
-    private EditText btn_fragment_dt_cliente_guardar;
-    private String cliente_origen = "";
+    private Button btn_fragment_dt_cliente_guardar;
     private boolean selecciono_banco;
     private boolean selecciono_cuenta;
     private boolean down_bancos;
@@ -58,11 +58,16 @@ public class DatosClienteFragment extends Fragment implements Serializable, Adap
     private Usuario usuario;
     private Fragment fragment;
     private String donde_viene;
+    private String tipo_usuario = "";
 
-    private Fragment transaccionesFragment;
     private AdapterDatosCuentas adapterDatosCuentas;
     private AdapterDatosBancos adapterDatosBancos;
     private PerfilCliente perfilCliente;
+    private Fragment transaccion;
+
+    // Envio de información
+    private OnFragmentInteractionListener listener;
+
 
     public DatosClienteFragment() {
         // Required empty public constructor
@@ -79,9 +84,10 @@ public class DatosClienteFragment extends Fragment implements Serializable, Adap
                              Bundle savedInstanceState) {
 
         if (getArguments() != null) {
-            usuario = (Usuario) getArguments().getSerializable(Constantes.USUARIO);
+            usuario = (Usuario) getArguments().getSerializable(Constantes.USUARIO_SERIALIZABLE);
+            tipo_usuario = getArguments().getString(Constantes.USUARIO);
             fragment = (Fragment) getArguments().getSerializable(Constantes.CLIENTES);
-            transaccionesFragment = (Fragment) getArguments().getSerializable(Constantes.TRANSACCIONES_DATOS);
+            transaccion = (Fragment) getArguments().getSerializable(Constantes.TRANSACCIONES_DATOS);
             donde_viene = getArguments().getString(Constantes.DONDE_VIENE);
         }
 
@@ -95,7 +101,6 @@ public class DatosClienteFragment extends Fragment implements Serializable, Adap
         iv_down_bancos = v.findViewById(R.id.iv_down_bancos);
         iv_down_cuentas = v.findViewById(R.id.iv_down_cuentas);
         rl_fragment_clientes_toolbar = v.findViewById(R.id.rl_fragment_clientes_toolbar);
-        tv_fragment_dt_clientes_texto_actividad = v.findViewById(R.id.tv_fragment_dt_clientes_texto_actividad);
         tv_datos_cliente_registro_nombre = v.findViewById(R.id.tv_datos_cliente_registro_nombre);
         btn_fragment_dt_cliente_guardar = v.findViewById(R.id.btn_fragment_dt_cliente_guardar);
         tv_fragment_dt_clientes_texto_nombre_cliente = v.findViewById(R.id.tv_fragment_dt_clientes_texto_nombre_cliente);
@@ -144,26 +149,20 @@ public class DatosClienteFragment extends Fragment implements Serializable, Adap
         lista_cuentas_cliente.setAdapter(adapterDatosCuentas);
 
 
-        btn_fragment_dt_cliente_guardar.setFocusable(false);
-        btn_fragment_dt_cliente_guardar.setClickable(false);
-        btn_fragment_dt_cliente_guardar.setKeyListener(null);
         btn_fragment_dt_cliente_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*transaccionesFragment = new TransaccionesFragment();*//*
-
-                // Utilizado para enviar variables entre dos fragments
-                Bundle parametro = new Bundle();
-                if (cliente_origen != null) {
-                    parametro.putString(Constantes.CLIENTE_ORIGEN_KEY_NOMBRE, cliente_origen);
-                    transaccionesFragment.setArguments(parametro);
-                }*/
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (transaccionesFragment != null) {
-                    transaction.replace(R.id.contenido, (TransaccionesFragment) transaccionesFragment);
-                    transaction.commit();
+                if (listener != null) {
+                    HomeAdministrador activity = (HomeAdministrador) getActivity();
+                    if (tipo_usuario.equals(Constantes.USUARIO_DESTINO)) {
+                        activity.llamarFragmentMain();
+                        listener.onActionUsuario(tipo_usuario, usuario);
+                    }
+                    if (tipo_usuario.equals(Constantes.USUARIO_ORIGEN)) {
+                        activity.llamarFragmentMain();
+                        listener.onActionUsuario(tipo_usuario, usuario);
+                    }
                 }
-                //getActivity().onBackPressed();
             }
         });
 
@@ -187,9 +186,6 @@ public class DatosClienteFragment extends Fragment implements Serializable, Adap
         // Configuraciones
         selecciono_banco = false;
         selecciono_cuenta = false;
-        tv_datos_cliente_registro_nombre.setText(cliente_origen);
-        tv_fragment_dt_clientes_texto_nombre_cliente.setText(cliente_origen);
-
 
         return v;
     }
@@ -204,14 +200,9 @@ public class DatosClienteFragment extends Fragment implements Serializable, Adap
     }
 
     private void actualizarInfo() {
-        // Con el método getArguments() obtengo la información enviada por parametro.
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            if (usuario != null) {
-                cliente_origen = usuario.getNombre();
-            } else {
-                cliente_origen = bundle.getString(Constantes.CLIENTE_ORIGEN_KEY_NOMBRE);
-            }
+        if (usuario != null) {
+            tv_datos_cliente_registro_nombre.setText(usuario.getNombre());
+            tv_fragment_dt_clientes_texto_nombre_cliente.setText(usuario.getNombre());
         }
     }
 
@@ -221,16 +212,10 @@ public class DatosClienteFragment extends Fragment implements Serializable, Adap
         if (cuenta != null) {
             selecciono_cuenta = true;
             if (selecciono_banco && selecciono_cuenta) {
-                btn_fragment_dt_cliente_guardar.setFocusable(true);
-                btn_fragment_dt_cliente_guardar.setClickable(true);
-                btn_fragment_dt_cliente_guardar.setEnabled(true);
                 btn_fragment_dt_cliente_guardar.setBackground(getResources().getDrawable(R.drawable.fragment_agregar_monto_figura_btn_guardar_activo));
             }
         } else {
             selecciono_cuenta = false;
-            btn_fragment_dt_cliente_guardar.setFocusable(false);
-            btn_fragment_dt_cliente_guardar.setEnabled(false);
-            btn_fragment_dt_cliente_guardar.setClickable(false);
             btn_fragment_dt_cliente_guardar.setBackground(getResources().getDrawable(R.drawable.fragment_agregar_monto_figura_btn_guardar));
         }
 
@@ -242,16 +227,10 @@ public class DatosClienteFragment extends Fragment implements Serializable, Adap
         if (banco != null) {
             selecciono_banco = true;
             if (selecciono_banco && selecciono_cuenta) {
-                btn_fragment_dt_cliente_guardar.setFocusable(true);
-                btn_fragment_dt_cliente_guardar.setClickable(true);
-                btn_fragment_dt_cliente_guardar.setEnabled(true);
                 btn_fragment_dt_cliente_guardar.setBackground(getResources().getDrawable(R.drawable.fragment_agregar_monto_figura_btn_guardar_activo));
             }
         } else {
             selecciono_banco = false;
-            btn_fragment_dt_cliente_guardar.setFocusable(false);
-            btn_fragment_dt_cliente_guardar.setClickable(false);
-            btn_fragment_dt_cliente_guardar.setEnabled(false);
             btn_fragment_dt_cliente_guardar.setBackground(getResources().getDrawable(R.drawable.fragment_agregar_monto_figura_btn_guardar));
         }
     }
@@ -288,8 +267,16 @@ public class DatosClienteFragment extends Fragment implements Serializable, Adap
                 }
                 break;
             case R.id.iv_fragment_dt_clientes_return:
-                transaction.replace(R.id.contenido, fragment);
-                transaction.commit();
+                if (donde_viene != null) {
+                    if (donde_viene.equals(Constantes.FRAGMENT_CLIENTE)) {
+                        transaction.replace(R.id.contenido, fragment);
+                        transaction.commit();
+                    }
+                    if (donde_viene.equals(Constantes.TRANSACCIONES_DATOS)) {
+                        transaction.replace(R.id.contenido, transaccion);
+                        transaction.commit();
+                    }
+                }
                 break;
             case R.id.iv_fragment_dt_clientes_perfil:
                 perfilCliente = new PerfilCliente();
@@ -301,5 +288,10 @@ public class DatosClienteFragment extends Fragment implements Serializable, Adap
                 transaction.commit();
                 break;
         }
+    }
+
+
+    public void setInteractionListener(OnFragmentInteractionListener listener) {
+        this.listener = listener;
     }
 }
