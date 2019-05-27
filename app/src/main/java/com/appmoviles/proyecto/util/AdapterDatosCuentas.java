@@ -83,4 +83,9 @@ public class AdapterDatosCuentas extends RecyclerView.Adapter<AdapterDatosCuenta
         notifyDataSetChanged();
     }
 
+    public void removeAll(){
+        data = new ArrayList<>();
+        notifyDataSetChanged();
+    }
+
 }

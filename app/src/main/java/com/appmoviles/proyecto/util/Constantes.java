@@ -34,6 +34,13 @@ public class Constantes {
     public final static String CHILD_BANCOS = "bancos";
     public final static String CHILD_CUENTAS = "cuentas";
     public final static String CHILD_TRANSACCIONES = "transacciones";
+    public final static String CHILD_ROL_USUARIO = "rolusuario";
+
+    public final static String CHILD_USUARIOS_ID = "usuarios_id";
+    public final static String CHILD_BANCOS_ID = "bancos_id";
+    public final static String CHILD_CUENTAS_ID = "cuentas_id";
+    public final static String CHILD_TRANSACCIONES_ID = "transacciones_id";
+    public final static String CHILD_ROL_USUARIO_ID = "rolusuario_id";
 
     public final static String GO_TO_PERFIL = "GO_TO_PERFIL";
     public final static String CLIENTES = "CLIENTE";

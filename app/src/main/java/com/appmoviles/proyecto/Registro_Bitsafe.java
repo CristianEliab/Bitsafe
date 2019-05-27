@@ -2,8 +2,10 @@ package com.appmoviles.proyecto;
 
 import android.animation.Animator;
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -27,12 +29,15 @@ import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appmoviles.proyecto.modelo.Usuario;
+import com.appmoviles.proyecto.util.BaseActivity;
 import com.appmoviles.proyecto.util.Constantes;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,7 +48,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Calendar;
 
 
-public class Registro_Bitsafe extends AppCompatActivity {
+public class Registro_Bitsafe extends BaseActivity implements View.OnClickListener {
 
     private Button btn_registro_registrarse;
     private EditText et_registro_nombre;
@@ -55,6 +60,8 @@ public class Registro_Bitsafe extends AppCompatActivity {
     private EditText et_registro_confirmar_contrasenia;
     private Button et_registro_fecha_nacimiento;
     private Spinner sp_registro_genero;
+    private TextView tv_ter_con;
+    private CheckBox checkbox_terminos;
     private int mYear, mMonth, mDay;
     private String genero;
 
@@ -82,6 +89,8 @@ public class Registro_Bitsafe extends AppCompatActivity {
         et_registro_confirmar_contrasenia = findViewById(R.id.et_registro_confirmar_contrasenia);
         et_registro_fecha_nacimiento = findViewById(R.id.et_registro_fecha_nacimiento);
         sp_registro_genero = findViewById(R.id.sp_registro_genero);
+        tv_ter_con = findViewById(R.id.tv_ter_con);
+        checkbox_terminos = findViewById(R.id.checkbox_terminos);
 
         // Conectar con la base de datos
 
@@ -95,92 +104,36 @@ public class Registro_Bitsafe extends AppCompatActivity {
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
-        et_registro_fecha_nacimiento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //
-                DatePickerFragment date = new DatePickerFragment();
-                /**
-                 * Set Up Current Date Into dialog
-                 */
-                Calendar calender = Calendar.getInstance();
-                Bundle args = new Bundle();
-                args.putInt("year", calender.get(Calendar.YEAR));
-                args.putInt("month", calender.get(Calendar.MONTH));
-                args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
-                date.setArguments(args);
-                /**
-                 * Set Call back to capture selected date
-                 */
-                date.setCallBack(ondate);
-                FragmentManager manager = getSupportFragmentManager();
-                date.show(manager, "Date Picker");
-            }
-        });
-
-
-        /* Click al boton registrarse*/
-
-        btn_registro_registrarse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                final String correo = et_registro_correo.getText().toString();
-                final String pass = et_registro_contrasenia.getText().toString();
-                final String repass = et_registro_confirmar_contrasenia.getText().toString();
-
-                if (verificarCampos(correo, pass, repass)) {
-                    if (pass.equals(repass)) {
-                        auth.createUserWithEmailAndPassword(correo, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                            @Override
-                            public void onSuccess(AuthResult authResult) {
-                                String uid = auth.getCurrentUser().getUid();
-                                Usuario usuario = new Usuario(uid,
-                                        et_registro_nombre.getText().toString(),
-                                        et_registro_cedula.getText().toString(),
-                                        et_registro_celular.getText().toString(),
-                                        correo,
-                                        et_registro_ubicacion.getText().toString());
-
-                                usuario.setFecha_nacimiento(et_registro_fecha_nacimiento.getText().toString());
-                                usuario.setGenero(sp_registro_genero.getSelectedItem().toString());
-
-                                rtdb.getReference().child(Constantes.CHILD_USUARIOS).push().setValue(usuario);
-
-                                // Animación para dar el cambio de pantalla
-                                animation();
-
-                                Intent i = new Intent(Registro_Bitsafe.this, HomeCliente.class);
-                                startActivity(i);
-                                finish();
-
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(Registro_Bitsafe.this, "Hubo un error", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }
-
-
-            }
-        });
+        tv_ter_con.setOnClickListener(this);
+        et_registro_fecha_nacimiento.setOnClickListener(this);
+        btn_registro_registrarse.setOnClickListener(this);
 
     }
 
-    private boolean verificarCampos(String correo, String pass, String repass) {
+    private boolean verificarCampos(String correo, String pass, String repass, String nombre, String cedula, String celular, String ubicacion) {
         boolean correcto = false;
-
-        if (correo != null && pass != null && repass != null
-                && !correo.trim().equals("")
+        if (nombre.trim().equals("")) {
+            et_registro_nombre.setError("Ingrese el nombre");
+            return false;
+        }
+        if (cedula.trim().equals("")) {
+            et_registro_cedula.setError("Ingrese la cedula");
+            return false;
+        }
+        if (celular.trim().equals("")) {
+            et_registro_celular.setError("Ingrese el número celular");
+            return false;
+        }
+        if (!correo.trim().equals("")
                 && !pass.trim().equals("")
                 && !repass.trim().equals("")
-        ) {
+                && repass.equals(pass)) {
             correcto = true;
+        } else {
+            et_registro_correo.setError("Ingrese el correo");
+            et_registro_contrasenia.setError("Ingrese la contraseña");
+            et_registro_confirmar_contrasenia.setError("Confirme la contraseña");
         }
-
         return correcto;
     }
 
@@ -242,5 +195,103 @@ public class Registro_Bitsafe extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    @Override
+    public void onClick(View v) {
+        AlertDialog.Builder info = new AlertDialog.Builder(this);
+        switch (v.getId()) {
+            case R.id.tv_ter_con:
+                info.setTitle(R.string.terminos_y_condiciones);
+                info.setMessage(R.string.mensaje_terminos_condiciones);
+                info.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                info.show();
+                break;
+            case R.id.et_registro_fecha_nacimiento:
+                //
+                DatePickerFragment date = new DatePickerFragment();
+                /**
+                 * Set Up Current Date Into dialog
+                 */
+                Calendar calender = Calendar.getInstance();
+                Bundle args = new Bundle();
+                args.putInt("year", calender.get(Calendar.YEAR));
+                args.putInt("month", calender.get(Calendar.MONTH));
+                args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
+                date.setArguments(args);
+                /**
+                 * Set Call back to capture selected date
+                 */
+                date.setCallBack(ondate);
+                FragmentManager manager = getSupportFragmentManager();
+                date.show(manager, "Date Picker");
+                break;
+            case R.id.btn_registro_registrarse:
+
+                final String correo = et_registro_correo.getText().toString();
+                final String pass = et_registro_contrasenia.getText().toString();
+                final String repass = et_registro_confirmar_contrasenia.getText().toString();
+                final String nombre = et_registro_nombre.getText().toString();
+                final String cedula = et_registro_cedula.getText().toString();
+                final String celular = et_registro_celular.getText().toString();
+                final String ubicacion = et_registro_ubicacion.getText().toString();
+
+                if (!checkbox_terminos.isChecked()) {
+                    info = new AlertDialog.Builder(this);
+                    info.setTitle(R.string.aceptar_terminos);
+                    info.setMessage(R.string.mensaje_aceptar_y_terminos);
+                    info.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    info.show();
+                } else {
+                    if (verificarCampos(correo, pass, repass, nombre, cedula, celular, ubicacion)) {
+                        if (pass.equals(repass)) {
+
+                            showProgressDialog(v.getContext());
+
+                            auth.createUserWithEmailAndPassword(correo, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                @Override
+                                public void onSuccess(AuthResult authResult) {
+                                    String uid = auth.getCurrentUser().getUid();
+                                    Usuario usuario = new Usuario(uid,
+                                            nombre,
+                                            cedula,
+                                            celular,
+                                            correo,
+                                            ubicacion);
+
+                                    usuario.setFecha_nacimiento(et_registro_fecha_nacimiento.getText().toString());
+                                    usuario.setGenero(sp_registro_genero.getSelectedItem().toString());
+
+                                    rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(usuario.getUsuarioID()).setValue(usuario);
+
+                                    // Animación para dar el cambio de pantalla
+                                    hideProgressDialog();
+
+                                    Intent i = new Intent(Registro_Bitsafe.this, HomeCliente.class);
+                                    startActivity(i);
+                                    finish();
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(Registro_Bitsafe.this, "Hubo un error", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
+                }
+                break;
+        }
     }
 }

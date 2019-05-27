@@ -76,7 +76,7 @@ public class SeleccionarClienteFragment extends Fragment implements AdapterTempl
         libreta.setAdapter(adapter);
         adapter.setListener(this);
 
-        rtdb.getReference().child(Constantes.CHILD_USUARIOS)
+        rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

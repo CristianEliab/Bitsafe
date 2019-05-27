@@ -170,22 +170,14 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
         });
 
 
-        rtdb.getReference().child(Constantes.CHILD_USUARIOS)
+        rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(auth.getCurrentUser().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        //Respuesta de firebase
-                        for (DataSnapshot hijo : dataSnapshot.getChildren()) {
-                            //Si es admin, loguearse
-                            Usuario usuario = hijo.getValue(Usuario.class);
-                            if (auth.getCurrentUser() != null) {
-                                if (usuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
-                                    tv_nombre_cliente_perfil_cliente.setText(usuario.getNombre());
-                                    if (usuario.getTelefono() != null) {
-                                        tv_numero_telefono_perfil_cliente.setText(usuario.getTelefono());
-                                    }
-                                }
-                            }
+                        Usuario usuario = dataSnapshot.getValue(Usuario.class);
+                        tv_nombre_cliente_perfil_cliente.setText(usuario.getNombre());
+                        if (usuario.getTelefono() != null) {
+                            tv_numero_telefono_perfil_cliente.setText(usuario.getTelefono());
                         }
                     }
 
@@ -201,7 +193,7 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
             public void onClick(View v) {
                 AlertDialog.Builder ayuda = new AlertDialog.Builder(getApplicationContext());
                 ayuda.setTitle(R.string.title_ayuda);
-                ayuda.setMessage("Comunicate con nuestro centro de atención 01800 6784637");
+                ayuda.setMessage(R.string.comunicacion_ayuda);
                 ayuda.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -217,15 +209,8 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder info = new AlertDialog.Builder(getApplicationContext());
-                info.setTitle("Terminos y Condiciones");
-                info.setMessage(" luego de la remisión o puesta en conocimiento,\n" +
-                        "o publicación del reglamento o sus modificaciones o actualizaciones en la página Web del\n" +
-                        "BANCO, este Reglamento se entenderá aceptado por EL CLIENTE con la contratación de\n" +
-                        "productos y/o con la suscripción de la tarjeta de firmas en la que se establecen las condiciones\n" +
-                        "de manejo de las cuentas y/o con el recibo de la Tarjeta Débito, Talonario o cualquier otro\n" +
-                        "medio de manejo recibido por EL CLIENTE y/o con la utilización del producto, canal o\n" +
-                        "servicio asociados y/o manteniendo de fondos disponibles en las cuentas y/o al mantener\n" +
-                        "los productos y/o seguir realizando operaciones o utilizando servicios.");
+                info.setTitle(R.string.terminos_y_condiciones);
+                info.setMessage(R.string.mensaje_terminos_condiciones);
                 info.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -73,44 +73,26 @@
                 android:layout_below="@+id/tb_fragment_estadisticas_toolbar"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="50dp"
+                android:layout_marginBottom="100dp"
                 android:layout_marginRight="10dp">
 
 
                 <LinearLayout
                     android:id="@+id/iv_fragment_estadisticas_est"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="600dp"
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/pc_fragment_finanzas_gastos"
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/view_estadisticas"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent">
+
+                    </android.support.v4.view.ViewPager>
+
 
                 </LinearLayout>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_fragment_estadisticas_panel_descripcion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_fragment_estadisticas_panel_estadisticas"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="50dp">
-
-                <EditText
-                    android:id="@+id/et_fragment_estadisticas_descripcion_grafica"
-                    android:layout_width="@dimen/fragment_estadisticas_descripcion_w"
-                    android:layout_height="@dimen/fragment_estadisticas_descripcion_h"
-                    android:background="@drawable/fragment_estadisticas_texto_descripcion"
-                    android:gravity="left"
-                    android:hint="@string/fragment_estadisticas_descripcion"
-                    android:textColorHint="@color/colorWhite"
-                    android:textSize="@dimen/fragment_estadisticas_descripcion" />
 
             </RelativeLayout>
 

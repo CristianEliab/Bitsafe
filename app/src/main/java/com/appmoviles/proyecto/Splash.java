@@ -56,7 +56,7 @@ public class Splash extends AppCompatActivity {
 
         //rtdb.getReference().removeValue();
 
-        /*// Carga la base de datos la primera vez.
+       /* // Carga la base de datos la primera vez.
         if (cargodb) {
             // Obtener el fichero desdes la carpeta raw
             InputStream in = getResources().openRawResource(R.raw.database);
@@ -87,47 +87,6 @@ public class Splash extends AppCompatActivity {
         iv_splash_screen.setBackgroundResource(R.drawable.animacion_item);
         animacion = (AnimationDrawable) iv_splash_screen.getBackground();
         goToMain();
-
-       /* if (auth.getCurrentUser() == null) {
-
-            Intent i = new Intent(this, LoginCorreo.class);
-            startActivity(i);
-            finish();
-
-            return;
-        }*/
-
-
-        /*rtdb.getReference().child("rolusuario")
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        admin = false;
-                        for (DataSnapshot hijo : dataSnapshot.getChildren()) {
-                            //Si es admin, loguearse
-                            RolUsuario rolUsuario = hijo.getValue(RolUsuario.class);
-                            if (rolUsuario.getRolID().equals("02") &&
-                                    rolUsuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
-                                admin = true;
-                            }
-                        }
-
-                        if (admin) {
-                            Intent i = new Intent(Splash.this, HomeAdministrador.class);
-                            startActivity(i);
-                            finish();
-                        } else {
-                            Intent i = new Intent(Splash.this, HomeCliente.class);
-                            startActivity(i);
-                            finish();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });*/
 
     }
 

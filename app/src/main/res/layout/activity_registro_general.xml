@@ -25,12 +25,22 @@
         </RelativeLayout>
 
 
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_imagenes"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:layout_below="@+id/rl_registro_general_icon_bitsafe"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
+
+        </android.support.v4.view.ViewPager>
+
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_registro_general_icon_bitsafe"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="300dp">
+            android:layout_below="@+id/view_imagenes"
+            android:layout_centerHorizontal="true">
 
             <RelativeLayout
                 android:id="@+id/rl_registro_general_panel_bitsafe"
@@ -68,8 +78,8 @@
 
             <FrameLayout
                 android:id="@+id/FrameLayout_botton_facebook"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/rl_registro_general_panel_bitsafe">
 
                 <com.facebook.login.widget.LoginButton
@@ -87,7 +97,7 @@
 
                 <RelativeLayout
                     android:id="@+id/rl_registro_general_panel_facebook"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:layout_below="@+id/FrameLayout_botton_facebook"
                     android:layout_centerHorizontal="true"
@@ -123,7 +133,7 @@
             <FrameLayout
                 android:id="@+id/FrameLayout_botton_google"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/FrameLayout_botton_facebook">
 
                 <com.google.android.gms.common.SignInButton
@@ -134,7 +144,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:textSize="40sp"
-                    android:visibility="visible"/>
+                    android:visibility="visible" />
 
                 <RelativeLayout
                     android:id="@+id/rl_registro_general_panel_google"
@@ -169,9 +179,7 @@
 
                 </RelativeLayout>
 
-
             </FrameLayout>
-
 
         </RelativeLayout>
 

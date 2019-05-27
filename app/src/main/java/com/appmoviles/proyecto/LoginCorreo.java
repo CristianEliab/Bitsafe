@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -21,16 +22,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appmoviles.proyecto.modelo.RolUsuario;
+import com.appmoviles.proyecto.util.BaseActivity;
+import com.appmoviles.proyecto.util.Constantes;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class LoginCorreo extends AppCompatActivity {
+public class LoginCorreo extends BaseActivity {
 
     private static final int REQUEST_CODE = 11;
     private static final String READ_EXTERNAL = Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -101,7 +105,6 @@ public class LoginCorreo extends AppCompatActivity {
                 final String correo = et_login_correo_contrasenia.getText().toString().trim();
                 String pass = et_login_correo_confirmar_contrasenia.getText().toString().trim();
 
-
                 if (!correo.trim().equals("") && !pass.trim().equals("") && correo != null && pass != null) {
                     loguearUsuario(correo, pass);
                 } else {
@@ -131,10 +134,10 @@ public class LoginCorreo extends AppCompatActivity {
         }
 
 
-
     }
 
     private void loguearUsuario(final String correo, String pass) {
+        showProgressDialog(this);
         auth.signInWithEmailAndPassword(correo, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
@@ -144,19 +147,18 @@ public class LoginCorreo extends AppCompatActivity {
                 myEditor.putString(EMAIL_USER, correo);
                 myEditor.commit();
 
-                rtdb.getReference().child("rolusuario")
-                        .addValueEventListener(new ValueEventListener() {
+                rtdb.getReference().child(Constantes.CHILD_ROL_USUARIO_ID).child(auth.getCurrentUser().getUid())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                RolUsuario rolUsuario = dataSnapshot.getValue(RolUsuario.class);
                                 admin = false;
-                                for (DataSnapshot hijo : dataSnapshot.getChildren()) {
-                                    //Si es admin, loguearse
-                                    RolUsuario rolUsuario = hijo.getValue(RolUsuario.class);
-                                    if (rolUsuario.getRolID().equals("02") &&
-                                            rolUsuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
-                                        admin = true;
-                                    }
+                                if (rolUsuario.getRolID().equals("02") &&
+                                        rolUsuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
+                                    admin = true;
                                 }
+
+                                hideProgressDialog();
 
                                 if (admin) {
                                     Intent i = new Intent(LoginCorreo.this, HomeAdministrador.class);
@@ -171,21 +173,29 @@ public class LoginCorreo extends AppCompatActivity {
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
+
                             }
                         });
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                et_login_correo_confirmar_contrasenia.setError("No se pudo ingresar.");
-            }
-        });
+        }).
+
+                addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        et_login_correo_confirmar_contrasenia.setError("No se pudo ingresar.");
+                    }
+                });
 
     }
 
+    @Override
+    protected void onPause() {
+        hideProgressDialog();
+        super.onPause();
+    }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         // We need an Editor object to make preference changes.
         // All objects are from android.context.Context
@@ -194,6 +204,7 @@ public class LoginCorreo extends AppCompatActivity {
         editor.putString("user_email", correo_guardado);
         // Commit the edits!
         editor.commit();
+        hideProgressDialog();
 
     }
 
@@ -208,5 +219,6 @@ public class LoginCorreo extends AppCompatActivity {
         editor.putString("user_email", correo_guardado);
         // Commit the edits!
         editor.commit();
+        hideProgressDialog();
     }
 }

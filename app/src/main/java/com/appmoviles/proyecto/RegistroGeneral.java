@@ -3,6 +3,7 @@ package com.appmoviles.proyecto;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.appmoviles.proyecto.modelo.Usuario;
 import com.appmoviles.proyecto.util.BaseActivity;
 import com.appmoviles.proyecto.util.Constantes;
+import com.appmoviles.proyecto.util.SlidesAdapter;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -43,8 +45,10 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegistroGeneral extends BaseActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private static final int RC_SIGN_IN = 430;
+    private static final int RC_SIGN_IN = 9001;
     private RelativeLayout rl_registro_general_panel_bitsafe;
+    private ViewPager viewPager;
+    private SlidesAdapter slidesAdapter;
     private SignInButton btn_sign_in_google;
     private LoginButton btn_registro_general_facebook;
     private CallbackManager callbackManager;
@@ -65,11 +69,16 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
 
 
         rl_registro_general_panel_bitsafe = findViewById(R.id.rl_registro_general_panel_bitsafe);
+        viewPager = findViewById(R.id.view_imagenes);
         btn_sign_in_google = findViewById(R.id.btn_sign_in_google);
         btn_registro_general_facebook = findViewById(R.id.btn_registro_general_facebook);
         btn_registro_general_facebook.setOnClickListener(this);
         rl_registro_general_panel_bitsafe.setOnClickListener(this);
         btn_sign_in_google.setOnClickListener(this);
+
+
+        slidesAdapter = new SlidesAdapter(this);
+        viewPager.setAdapter(slidesAdapter);
 
         initializeGPlusSettings();
     }
@@ -101,7 +110,7 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
                             }
                         });
             case R.id.btn_sign_in_google:
-                signIn();
+                /*signIn();*/
                 break;
         }
     }
@@ -154,30 +163,12 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            // Google Sign In was successful, authenticate with Firebase
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                Log.e(TAG, "Google sign in failed", e);
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-            callbackManager.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
 
+        /*
         showProgressDialog();
+        */
 
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -200,7 +191,7 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
 
                     rtdb.getReference().child(Constantes.CHILD_USUARIOS).push().setValue(usuario);
 
-                    hideProgressDialog();
+                    /*hideProgressDialog();*/
 
                     Intent i = new Intent(RegistroGeneral.this, HomeCliente.class);
                     startActivity(i);
@@ -211,6 +202,27 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
                 }
             }
         });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            /*// Google Sign In was successful, authenticate with Firebase
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            } catch (ApiException e) {
+                // Google Sign In failed, update UI appropriately
+                Log.e(TAG, "Google sign in failed", e);
+            }*/
+        } else {
+           /* super.onActivityResult(requestCode, resultCode, data);
+            callbackManager.onActivityResult(requestCode, resultCode, data);*/
+        }
     }
 
 

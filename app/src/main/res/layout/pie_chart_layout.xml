@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pie_chart_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pc_fragment_estadisticas"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp" />
+
+        <RelativeLayout
+            android:id="@+id/rl_fragment_estadisticas_panel_descripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pc_fragment_estadisticas"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="50dp">
+
+            <EditText
+                android:id="@+id/et_fragment_estadisticas_descripcion_grafica"
+                android:layout_width="@dimen/fragment_estadisticas_descripcion_w"
+                android:layout_height="@dimen/fragment_estadisticas_descripcion_h"
+                android:background="@drawable/fragment_estadisticas_texto_descripcion"
+                android:enabled="false"
+                android:gravity="left"
+                android:hint="@string/fragment_estadisticas_descripcion"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="@dimen/fragment_estadisticas_descripcion" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>
