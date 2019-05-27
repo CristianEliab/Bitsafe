@@ -262,6 +262,7 @@ public class Registro_Bitsafe extends BaseActivity implements View.OnClickListen
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
                                     String uid = auth.getCurrentUser().getUid();
+                                    long fechaCreacion = auth.getCurrentUser().getMetadata().getCreationTimestamp();
                                     Usuario usuario = new Usuario(uid,
                                             nombre,
                                             cedula,
@@ -271,6 +272,7 @@ public class Registro_Bitsafe extends BaseActivity implements View.OnClickListen
 
                                     usuario.setFecha_nacimiento(et_registro_fecha_nacimiento.getText().toString());
                                     usuario.setGenero(sp_registro_genero.getSelectedItem().toString());
+                                    usuario.setFechaCreacion(fechaCreacion);
 
                                     rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(usuario.getUsuarioID()).setValue(usuario);
 

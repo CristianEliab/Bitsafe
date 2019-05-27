@@ -2,6 +2,7 @@ package com.appmoviles.proyecto;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -15,13 +16,24 @@ import com.appmoviles.proyecto.util.Constantes;
 import com.appmoviles.proyecto.util.EstadisticasAdapter;
 import com.appmoviles.proyecto.util.Grafica;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -31,6 +43,7 @@ public class EstadisticasFragment extends Fragment implements Serializable, View
     private ViewPager view_estadisticas;
     private EstadisticasAdapter estadisticasAdapter;
     private ArrayList<Grafica> listaEstadisticas;
+    FirebaseDatabase rtdb;
 
     public EstadisticasFragment() {
         // Required empty public constructor
@@ -49,7 +62,7 @@ public class EstadisticasFragment extends Fragment implements Serializable, View
         View v = inflater.inflate(R.layout.fragment_estadisticas, container, false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-
+        rtdb = FirebaseDatabase.getInstance();
         listaEstadisticas = new ArrayList<>();
 
         view_estadisticas = v.findViewById(R.id.view_estadisticas);
@@ -71,11 +84,11 @@ public class EstadisticasFragment extends Fragment implements Serializable, View
 
         //Piechart
         List<PieEntry> entries_3 = new ArrayList<>();
-        entries_3.add(new PieEntry(33.3f, "Green"));
-        entries_3.add(new PieEntry(33.3f, "Yellow"));
-        entries_3.add(new PieEntry(33.3f, "Red"));
-        PieDataSet set_2 = new PieDataSet(entries_3, "Gráfica 1");
-        set_2.setColors(ColorTemplate.MATERIAL_COLORS);
+        entries_3.add(new PieEntry(33.3f, "18 años - 30 años"));
+        entries_3.add(new PieEntry(33.3f, "30 años - 40 años"));
+        entries_3.add(new PieEntry(33.3f, "40 años >"));
+        PieDataSet set_2 = new PieDataSet(entries_3, "Edades");
+        set_2.setColors(ColorTemplate.COLORFUL_COLORS);
         PieData data_1 = new PieData(set_2);
         // refresh
         entries_3 = new ArrayList<>();
@@ -85,18 +98,27 @@ public class EstadisticasFragment extends Fragment implements Serializable, View
         set_2.setColors(ColorTemplate.MATERIAL_COLORS);
         PieData data_2 = new PieData(set_2);
         // refresh
-        entries_3 = new ArrayList<>();
-        entries_3.add(new PieEntry(18.5f, "Green"));
-        entries_3.add(new PieEntry(26.7f, "Yellow"));
-        entries_3.add(new PieEntry(24.0f, "Red"));
-        entries_3.add(new PieEntry(30.8f, "Blue"));
-        set_2 = new PieDataSet(entries_3, "Clientes");
-        set_2.setColors(ColorTemplate.MATERIAL_COLORS);
-        PieData data_3 = new PieData(set_2);
+        List<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(0f, 30f, "En"));
+        entries.add(new BarEntry(1f, 80f, "Fe"));
+        entries.add(new BarEntry(2f, 60f, "Ma"));
+        entries.add(new BarEntry(3f, 50f, "Ab"));
+        entries.add(new BarEntry(4f, 70f, "Ma"));
+        entries.add(new BarEntry(5f, 60f, "Jn"));
+        entries.add(new BarEntry(6f, 30f, "Jl"));
+        entries.add(new BarEntry(7f, 80f, "Ag"));
+        entries.add(new BarEntry(8f, 60f, "Sp"));
+        entries.add(new BarEntry(9f, 50f, "Oc"));
+        entries.add(new BarEntry(10f, 70f, "No"));
+        entries.add(new BarEntry(11f, 60f, "Dc"));
+        BarDataSet set = new BarDataSet(entries, "Clientes por Mes");
+        set.setColors(ColorTemplate.PASTEL_COLORS);
+        BarData data_3 = new BarData(set);
+        // end Barchart
 
-        Grafica grafica1 = new Grafica(data_1, "Gráfica 1");
-        Grafica grafica2 = new Grafica(data_1, "Hombre y Mujeres");
-        Grafica grafica3 = new Grafica(data_1, "Clientes");
+        Grafica grafica1 = new Grafica(Constantes.TIPO_PIE, data_1, null, "Gráfica 1");
+        Grafica grafica2 = new Grafica(Constantes.TIPO_PIE, data_2, null, "Hombre y Mujeres");
+        Grafica grafica3 = new Grafica(Constantes.TIPO_BAR, null, data_3, "Clientes");
 
         listaEstadisticas.add(grafica1);
         listaEstadisticas.add(grafica2);

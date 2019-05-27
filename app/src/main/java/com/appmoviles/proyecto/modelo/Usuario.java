@@ -21,6 +21,7 @@ public class Usuario implements Serializable {
     private String contrasenia;
     private ArrayList<Banco> listaBancos;
     private ArrayList<Cuenta> listaCuentas;
+    private long fechaCreacion;
 
     public Usuario(String usuarioID, String nombre, String fecha_nacimiento, String telefono, String genero, String estadoUsuarioID, String loginID, String configuracionID, String cedula, String ubicacion, String correo, ArrayList<Banco> listaBancos, ArrayList<Cuenta> listaCuentas) {
         this.usuarioID = usuarioID;
@@ -152,5 +153,13 @@ public class Usuario implements Serializable {
 
     public void setListaCuentas(ArrayList<Cuenta> listaCuentas) {
         this.listaCuentas = listaCuentas;
+    }
+
+    public long getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(long fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 }

@@ -47,6 +47,7 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
     Fragment fragment;
 
     private String volver_a;
+    private String donde_viene;
 
     public PerfilCliente() {
 
@@ -63,6 +64,7 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
         if (i != null) {
             volver_a = i.getStringExtra(Constantes.GO_TO_PERFIL);
             fragment = (Fragment) i.getSerializableExtra(Constantes.FRAGMENT);
+            donde_viene = i.getStringExtra(Constantes.DONDE_VIENE);
         }
 
         rtdb = FirebaseDatabase.getInstance();
@@ -122,6 +124,13 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
                 if (volver_a.equals(Constantes.FRAGMENT_CARGAR)) {
                     Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
                     i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CARGAR);
+                    startActivity(i);
+                    finish();
+                }
+                if (volver_a.equals(Constantes.DATOS_FRAGMENT)) {
+                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.DATOS_FRAGMENT);
+                    i.putExtra(Constantes.DONDE_VIENE, donde_viene);
                     startActivity(i);
                     finish();
                 }

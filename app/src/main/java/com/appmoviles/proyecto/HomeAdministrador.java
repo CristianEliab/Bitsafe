@@ -22,6 +22,7 @@ public class HomeAdministrador extends FragmentActivity implements
     private CargarDatosFragment cargarDatosFragment;
     private PerfilCliente perfilCliente;
     private String donde_viene = "";
+    private String donde_viene_seleccionar_cliente = "";
     FragmentManager manager;
 
 
@@ -38,6 +39,7 @@ public class HomeAdministrador extends FragmentActivity implements
         Intent i = getIntent();
         if (i != null) {
             donde_viene = i.getStringExtra(Constantes.FRAGMENT);
+            donde_viene_seleccionar_cliente = i.getStringExtra(Constantes.DONDE_VIENE);
         }
 
         clientesFragment = new ClientesFragment();
@@ -87,31 +89,41 @@ public class HomeAdministrador extends FragmentActivity implements
     }
 
     private void primerFragment() {
-        FragmentManager manager = getSupportFragmentManager();
+        manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         if (donde_viene != null) {
             if (donde_viene.equals(Constantes.FRAGMENT_CLIENTE)) {
                 transaction.replace(R.id.contenido, clientesFragment);
                 transaction.commit();
             }
-            if(donde_viene.equals(Constantes.FRAGMENT_ESTADISTICAS)){
+            if (donde_viene.equals(Constantes.FRAGMENT_ESTADISTICAS)) {
                 transaction.replace(R.id.contenido, estadisticasFragment);
                 transaction.commit();
             }
-            if(donde_viene.equals(Constantes.FRAGMENT_TRANSACCION)){
+            if (donde_viene.equals(Constantes.FRAGMENT_TRANSACCION)) {
                 transaction.replace(R.id.contenido, transaccionesFragment);
                 transaction.commit();
             }
-            if(donde_viene.equals(Constantes.FRAGMENT_CARGAR)){
+            if (donde_viene.equals(Constantes.FRAGMENT_CARGAR)) {
                 transaction.replace(R.id.contenido, cargarDatosFragment);
                 transaction.commit();
+            }
+            if (donde_viene.equals(Constantes.DATOS_FRAGMENT)) {
+                if (donde_viene_seleccionar_cliente.equals(Constantes.FRAGMENT_CLIENTE)) {
+                    transaction.replace(R.id.contenido, clientesFragment);
+                    transaction.commit();
+                }
+                if (donde_viene_seleccionar_cliente.equals(Constantes.FRAGMENT_TRANSACCION)) {
+                    transaction.replace(R.id.contenido, transaccionesFragment);
+                    transaction.commit();
+                }
             }
         } else {
             transaction.replace(R.id.contenido, clientesFragment);
             transaction.commit();
         }
 
-    }
+        }
 
     public void llamarFragmentAgregarMonto() {
         manager = this.getSupportFragmentManager();
@@ -129,6 +141,7 @@ public class HomeAdministrador extends FragmentActivity implements
         Bundle parametro = new Bundle();
         parametro.putSerializable(Constantes.TRANSACCIONES, transaccionesFragment);
         parametro.putString(Constantes.USUARIO, Constantes.USUARIO_ORIGEN);
+        parametro.putString(Constantes.DONDE_VIENE, Constantes.FRAGMENT_TRANSACCION);
         seleccionarClienteFragment.setArguments(parametro);
         fragmentTransaction.replace(R.id.contenido, seleccionarClienteFragment);
         fragmentTransaction.commit();
@@ -140,6 +153,7 @@ public class HomeAdministrador extends FragmentActivity implements
         Bundle parametro = new Bundle();
         parametro.putSerializable(Constantes.TRANSACCIONES, transaccionesFragment);
         parametro.putString(Constantes.USUARIO, Constantes.USUARIO_DESTINO);
+        parametro.putString(Constantes.DONDE_VIENE, Constantes.FRAGMENT_TRANSACCION);
         seleccionarClienteFragment.setArguments(parametro);
         fragmentTransaction.replace(R.id.contenido, seleccionarClienteFragment);
         fragmentTransaction.commit();

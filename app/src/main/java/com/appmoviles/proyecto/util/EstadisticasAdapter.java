@@ -10,7 +10,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.appmoviles.proyecto.R;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.util.ArrayList;
 
@@ -42,10 +45,34 @@ public class EstadisticasAdapter extends PagerAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.pie_chart_layout, container, false);
         PieChart pieChart = view.findViewById(R.id.pc_fragment_estadisticas);
+        BarChart barChart = view.findViewById(R.id.bc_fragment_finanzas_gastos);
         TextView textView = view.findViewById(R.id.et_fragment_estadisticas_descripcion_grafica);
         textView.setHint(listaEstadisticas.get(position).getDescripcion());
-        pieChart.setData(listaEstadisticas.get(position).getPieData());
-        pieChart.invalidate();
+
+        //BarChart
+        final String[] quarters = new String[]{"En", "Fe", "Ma", "Ab", "My", "Jn", "Jl", "Ag", "Sp", "Oc", "No", "Dc"};
+
+        ValueFormatter formatter = new ValueFormatter() {
+            @Override
+            public String getAxisLabel(float value, AxisBase axis) {
+                return quarters[(int) value];
+            }
+        };
+        if (listaEstadisticas.get(position).getTipo().equals(Constantes.TIPO_BAR)) {
+            barChart.setVisibility(View.VISIBLE);
+            listaEstadisticas.get(position).getBarData().setBarWidth(0.9f); // set custom bar width
+            barChart.setData(listaEstadisticas.get(position).getBarData());
+            barChart.setFitBars(true); // make the x-axis fit exactly all bars
+            barChart.invalidate(); // refresh
+            barChart.setScaleEnabled(false);//escalas de las X y Y
+            barChart.getXAxis().setValueFormatter(formatter);
+        }
+        if (listaEstadisticas.get(position).getTipo().equals(Constantes.TIPO_PIE)) {
+            pieChart.setVisibility(View.VISIBLE);
+            pieChart.setData(listaEstadisticas.get(position).getPieData());
+            pieChart.invalidate();
+        }
+
         // refresh
         container.addView(view);
         return view;

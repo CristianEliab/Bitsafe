@@ -41,6 +41,22 @@ public class Constantes {
     public final static String CHILD_CUENTAS_ID = "cuentas_id";
     public final static String CHILD_TRANSACCIONES_ID = "transacciones_id";
     public final static String CHILD_ROL_USUARIO_ID = "rolusuario_id";
+    public final static String CHILD_ESTADISTICAS_ID = "rolusuario_id";
+
+
+    public final static String CHILD_ESTADISTICAS_ENERO = "ENERO";
+    public final static String CHILD_ESTADISTICAS_FEBRERO = "FEBRERO";
+    public final static String CHILD_ESTADISTICAS_MARZO = "MARZO";
+    public final static String CHILD_ESTADISTICAS_ABRIL = "ABRIL";
+    public final static String CHILD_ESTADISTICAS_MAYO = "MAYO";
+    public final static String CHILD_ESTADISTICAS_JUNIO = "JUNIO";
+    public final static String CHILD_ESTADISTICAS_JULIO = "JULIO";
+    public final static String CHILD_ESTADISTICAS_AGOSTO = "AGOSTO";
+    public final static String CHILD_ESTADISTICAS_SEPTIEMBRE = "SEPTIEMBRE";
+    public final static String CHILD_ESTADISTICAS_OCTUBRE = "OCTUBRE";
+    public final static String CHILD_ESTADISTICAS_NOVIEMBRE = "NOVIEMBRE";
+    public final static String CHILD_ESTADISTICAS_DICIEMBRE = "DICIEMBRE";
+
 
     public final static String GO_TO_PERFIL = "GO_TO_PERFIL";
     public final static String CLIENTES = "CLIENTE";
@@ -55,6 +71,9 @@ public class Constantes {
     public final static String ICON_BANCO_BANCOLOMBIA = "banco_bancolombia";
     public final static String ICON_BANCO_ITAU = "banco_itau";
 
+    //PARA LAS GRÄFICAS
+    public final static String TIPO_PIE = "tipopie";
+    public final static String TIPO_BAR = "tipobar";
 
     //Para mostrar Datos
     public final static String USUARIO = "USUARIO";

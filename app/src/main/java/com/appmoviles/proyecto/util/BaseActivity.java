@@ -34,8 +34,7 @@ public class BaseActivity extends AppCompatActivity {
 
         GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(gifImageView);
         Glide.with(this)
-                .load(R.drawable.loading)
-                .placeholder(R.drawable.loading)
+                .load(R.drawable.loading_4)
                 .centerCrop()
                 .crossFade()
                 .into(imageViewTarget);

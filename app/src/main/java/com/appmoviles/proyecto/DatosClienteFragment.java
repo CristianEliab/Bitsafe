@@ -294,7 +294,9 @@ public class DatosClienteFragment extends Fragment implements Serializable,
             case R.id.iv_fragment_dt_clientes_perfil:
                 Intent i = new Intent(getActivity(), PerfilCliente.class);
                 i.putExtra(Constantes.GO_TO_PERFIL, Constantes.DATOS_FRAGMENT);
-                i.putExtra(Constantes.FRAGMENT, this);
+                i.putExtra(Constantes.DONDE_VIENE, donde_viene);
+                DatosClienteFragment datosClienteFragment = new DatosClienteFragment();
+                i.putExtra(Constantes.FRAGMENT, datosClienteFragment);
                 startActivity(i);
                 getActivity().finish();
                 break;
