@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
     private String monto_transaccion;
     private SharedPreferences myPreferences;
     private Fragment fragment;
+    private Fragment homeCliente;
 
 
     // Envio de información
@@ -63,6 +65,8 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
 
         if (getArguments() != null) {
             fragment = (Fragment) getArguments().getSerializable(Constantes.TRANSACCIONES);
+            //homeCliente = (Fragment) getArguments().getSerializable(Constantes.CREAR_TRANSACCION);
+
         }
 
         myPreferences
@@ -75,9 +79,19 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
         iv_fragment_agregar_monto_return.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.contenido, fragment);
-                transaction.commit();
+
+                if(fragment != null){
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.contenido, fragment);
+                    transaction.commit();
+                } else if(homeCliente != null){
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.contenido_cliente, homeCliente);
+                    transaction.commit();
+                }else{
+                    //Se devuelve a la anterior
+                    getFragmentManager().popBackStack();
+                }
 
             }
         });
@@ -85,9 +99,24 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
         btn_fragment_agregar_monto_guardar_monto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HomeAdministrador activity = (HomeAdministrador) getActivity();
-                activity.llamarFragmentMain();
-                listener.onAction(AgregarMontoFragment.this, monto_transaccion);
+
+                if(fragment != null){
+                    HomeAdministrador activity = (HomeAdministrador) getActivity();
+                    activity.llamarFragmentMain();
+                    listener.onAction(AgregarMontoFragment.this, monto_transaccion);
+                } else if(homeCliente != null){
+                    /*
+                    HomeCliente activity = (HomeCliente) getActivity();
+                    activity.llamarFragmentMain();
+                    listener.onAction(AgregarMontoFragment.this, monto_transaccion);
+                    */
+                }
+                //Ruta default
+                else{
+                    listenerComunicacion.montoDigitado(et_agregar_monto_monto.getHint().toString());
+                    getFragmentManager().popBackStack();
+                }
+
             }
         });
 
@@ -189,8 +218,24 @@ public class AgregarMontoFragment extends Fragment implements View.OnClickListen
         settings.commit();*/
     }
 
+
+
+
     public void setInteractionListener(OnFragmentInteractionListener listener){
         this.listener = listener;
+    }
+
+
+    //Interface para comunicación con las cosas de Muriel
+    public interface InterfaceComunicacion{
+        void montoDigitado(String monto);
+    }
+
+    private InterfaceComunicacion listenerComunicacion;
+
+    public void setListenerComunicacion(InterfaceComunicacion listenerComunicacionParam){
+        this.listenerComunicacion = listenerComunicacionParam;
+
     }
 
 }

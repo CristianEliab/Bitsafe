@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.appmoviles.proyecto.modelo.Cuenta;
 import com.appmoviles.proyecto.modelo.Transaccion;
+import com.appmoviles.proyecto.util.Constantes;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
@@ -130,7 +131,13 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_fragment_finanzas_transacciones_agregar_transaccion:
+
+                Bundle bundle = new Bundle();
+                bundle.putString(BUNDLE_TIPO_I_O, tipo_ingreso_o_gasto);
+                bundle.putSerializable(BUNDLE_CUENTA, cuentaSeleccionada);
+
                 finanzasCrearTransaccionFragment = new FinanzasCrearTransaccionFragment();
+                finanzasCrearTransaccionFragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.contenido_cliente, finanzasCrearTransaccionFragment);
                 transaction.addToBackStack(null);
@@ -177,7 +184,7 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
                 Transaccion transaccionTmp;
                 for (DataSnapshot hijo : dataSnapshot.getChildren()) {
                     transaccionTmp = hijo.getValue(Transaccion.class);
-                    //Solo se agregan transacciones de las cuales les llegó doinero a la cuenta seleccionada
+                    //Solo se agregan transacciones de las cuales les llegó dinero a la cuenta seleccionada
                     if (transaccionTmp.getCuentaOrigenID().equals(cuentaSeleccionada.getCuentaID())) {
                         adapterTemplate_transacciones.agregarTransaccion(transaccionTmp);
                     }
@@ -201,7 +208,11 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
 
         List<Transaccion> listaTransacciones = adapterTemplate_transacciones.darTransacciones();
         for (int i = 0; i < listaTransacciones.size(); i++) {
-            float monto = Float.parseFloat(listaTransacciones.get(i).getMontoTransaccion());
+
+            String montoTmp = listaTransacciones.get(i).getMontoTransaccion();
+            montoTmp = montoTmp.replaceAll(Constantes.PUNTO, "");
+
+            float monto = Float.parseFloat(montoTmp);
             float contador = i + 1;
             entries_1.add(new Entry(contador, monto));
 

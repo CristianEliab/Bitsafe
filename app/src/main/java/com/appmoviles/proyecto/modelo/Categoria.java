@@ -1,18 +1,29 @@
 package com.appmoviles.proyecto.modelo;
 
+import java.util.List;
+
 public class Categoria {
 
     private String categoriaID;
     private String nombre;
-    private Categoria subCategoriaID;
+    private Categoria SubCategoria;
+
+
+    public Categoria() {
+    }
 
     public Categoria(String categoriaID, String nombre, Categoria subCategoria) {
         this.categoriaID = categoriaID;
         this.nombre = nombre;
-        this.subCategoriaID = subCategoria;
+        SubCategoria = subCategoria;
     }
 
-    public Categoria() {
+    public Categoria getSubCategoria() {
+        return SubCategoria;
+    }
+
+    public void setSubCategoria(Categoria subCategoria) {
+        SubCategoria = subCategoria;
     }
 
     public String getCategoriaID() {
@@ -31,11 +42,9 @@ public class Categoria {
         this.nombre = nombre;
     }
 
-    public Categoria getSubCategoria() {
-        return subCategoriaID;
-    }
 
-    public void setSubCategoria(Categoria idCategoria) {
-        this.subCategoriaID = idCategoria;
+    @Override
+    public String toString() {
+        return nombre;
     }
 }

@@ -34,6 +34,7 @@ public class Constantes {
     public final static String CHILD_BANCOS = "bancos";
     public final static String CHILD_CUENTAS = "cuentas";
     public final static String CHILD_TRANSACCIONES = "transacciones";
+    public final static String CHILD_CATEGORIAS = "categorias";
 
     public final static String GO_TO_PERFIL = "GO_TO_PERFIL";
     public final static String CLIENTES = "CLIENTE";
@@ -41,6 +42,8 @@ public class Constantes {
     public final static String CARGAR = "CARGAR";
     public final static String TRANSACCIONES = "TRANSACCIONES";
     public final static String FRAGMENT = "FRAGMENT";
+
+    public final static String CREAR_TRANSACCION = "CREAR_TRANSACCION";
 
     //PARA LAS IMÁGENES
     public final static String ICON_BANCO_DAVIVIENDA = "banco_davivienda";
@@ -65,5 +68,12 @@ public class Constantes {
     public final static String USUARIO_DESTINO = "USUARIO_DESTINO";
     public final static String USUARIO_ORIGEN = "USUARIO_ORIGEN";
     public final static String USUARIO_SERIALIZABLE = "USUARIO_SERIALIZABLE";
+
+
+    //Para crear transacciones, ID de Cuentas predeterminadas
+    //Sale dinero de una cuenta predeterminada a mi cuenta --> INGRESO
+    public final static String CUENTA_ORIGEN_ID = "999";
+    //Sale dinero de mi cuenta a una cuenta predeterminada --> GASTO
+    public final static String CUENTA_DESTINO_ID = "8888";
 
 }

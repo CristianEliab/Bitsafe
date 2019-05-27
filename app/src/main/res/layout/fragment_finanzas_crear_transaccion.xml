@@ -168,6 +168,7 @@
                     android:gravity="center"
                     android:hint="@string/fragment_estadisticas_descripcion"
                     android:textColorHint="@color/colorWhite"
+                    android:textColor="@color/colorWhite"
                     android:textSize="@dimen/fragment_transacciones_tamanio" />
 
             </RelativeLayout>
