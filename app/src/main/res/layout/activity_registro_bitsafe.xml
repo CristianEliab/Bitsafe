@@ -192,78 +192,10 @@
                 android:layout_below="@+id/et_registro_confirmar_contrasenia"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
+                android:layout_marginBottom="100dp"
                 android:background="@drawable/registro_boton_registrarse"
                 android:hint="@string/registro_registrarse"
                 android:textColorHint="@color/colorWhite" />
-
-
-            <RelativeLayout
-                android:id="@+id/rl_registro_panel_facebook"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btn_registro_registrarse"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/registro_boton_facebook">
-
-                <ImageView
-                    android:id="@+id/iv_facebook"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/registro_ic_facebook" />
-
-                <Button
-                    android:id="@+id/btn_registro_facebook"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="50dp"
-                    android:background="@drawable/registro_boton_facebook"
-                    android:gravity="center"
-                    android:hint="@string/registro_registrarse_facebook"
-                    android:textColorHint="@color/colorWhite" />
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:id="@+id/rl_registro_panel_google"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_registro_panel_facebook"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/registro_boton_google">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/registro_ic_google" />
-
-                <Button
-                    android:id="@+id/btn_registro_google"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="50dp"
-                    android:background="@drawable/registro_boton_google"
-                    android:gravity="center"
-                    android:hint="@string/registro_registrarse_google"
-                    android:textColorHint="@color/colorWhite" />
-
-            </RelativeLayout>
-
 
         </RelativeLayout>
 

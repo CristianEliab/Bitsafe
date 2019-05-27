@@ -115,7 +115,7 @@ public class LoginCorreo extends AppCompatActivity {
         tv_login_correo_registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(LoginCorreo.this, Registro_Bitsafe.class);
+                Intent i = new Intent(LoginCorreo.this, RegistroGeneral.class);
                 startActivity(i);
                 finish();
             }

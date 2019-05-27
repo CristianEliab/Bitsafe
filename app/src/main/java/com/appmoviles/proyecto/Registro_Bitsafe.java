@@ -1,7 +1,11 @@
 package com.appmoviles.proyecto;
 
+import android.animation.Animator;
+import android.app.ActivityOptions;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,8 +13,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Explode;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,6 +33,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.appmoviles.proyecto.modelo.Usuario;
+import com.appmoviles.proyecto.util.Constantes;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -115,40 +129,103 @@ public class Registro_Bitsafe extends AppCompatActivity {
                 final String pass = et_registro_contrasenia.getText().toString();
                 final String repass = et_registro_confirmar_contrasenia.getText().toString();
 
-                if (pass.equals(repass)) {
-                    auth.createUserWithEmailAndPassword(correo, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                        @Override
-                        public void onSuccess(AuthResult authResult) {
-                            String uid = auth.getCurrentUser().getUid();
-                            Usuario usuario = new Usuario(uid,
-                                    et_registro_nombre.getText().toString(),
-                                    et_registro_cedula.getText().toString(),
-                                    et_registro_celular.getText().toString(),
-                                    correo,
-                                    et_registro_ubicacion.getText().toString());
+                if (verificarCampos(correo, pass, repass)) {
+                    if (pass.equals(repass)) {
+                        auth.createUserWithEmailAndPassword(correo, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(AuthResult authResult) {
+                                String uid = auth.getCurrentUser().getUid();
+                                Usuario usuario = new Usuario(uid,
+                                        et_registro_nombre.getText().toString(),
+                                        et_registro_cedula.getText().toString(),
+                                        et_registro_celular.getText().toString(),
+                                        correo,
+                                        et_registro_ubicacion.getText().toString());
 
-                            usuario.setFecha_nacimiento(et_registro_fecha_nacimiento.getText().toString());
-                            usuario.setGenero(sp_registro_genero.getSelectedItem().toString());
+                                usuario.setFecha_nacimiento(et_registro_fecha_nacimiento.getText().toString());
+                                usuario.setGenero(sp_registro_genero.getSelectedItem().toString());
 
-                            rtdb.getReference().child("users").push().setValue(usuario);
+                                rtdb.getReference().child(Constantes.CHILD_USUARIOS).push().setValue(usuario);
 
-                            Intent i = new Intent(Registro_Bitsafe.this, HomeCliente.class);
-                            startActivity(i);
-                            finish();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(Registro_Bitsafe.this, "Hubo un error", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                                // Animación para dar el cambio de pantalla
+                                animation();
+
+                                Intent i = new Intent(Registro_Bitsafe.this, HomeCliente.class);
+                                startActivity(i);
+                                finish();
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(Registro_Bitsafe.this, "Hubo un error", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 }
 
 
             }
         });
 
+    }
 
+    private boolean verificarCampos(String correo, String pass, String repass) {
+        boolean correcto = false;
+
+        if (correo != null && pass != null && repass != null
+                && !correo.trim().equals("")
+                && !pass.trim().equals("")
+                && !repass.trim().equals("")
+        ) {
+            correcto = true;
+        }
+
+        return correcto;
+    }
+
+
+    private void animation() {
+        Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.changebounds_with_arcmotion);
+        getWindow().setSharedElementEnterTransition(transition);
+        transition.addListener(new Transition.TransitionListener() {
+            @Override
+            public void onTransitionStart(Transition transition) {
+                animateRevealShow(btn_registro_registrarse);
+            }
+
+            @Override
+            public void onTransitionEnd(Transition transition) {
+
+            }
+
+            @Override
+            public void onTransitionCancel(Transition transition) {
+
+            }
+
+            @Override
+            public void onTransitionPause(Transition transition) {
+
+            }
+
+            @Override
+            public void onTransitionResume(Transition transition) {
+
+            }
+        });
+    }
+
+    private void animateRevealShow(View viewRoot) {
+        int cx = (viewRoot.getLeft() + viewRoot.getRight()) / 2;
+        int cy = (viewRoot.getTop() + viewRoot.getBottom()) / 2;
+        int finalRadius = Math.max(viewRoot.getWidth(), viewRoot.getHeight());
+
+        Animator anim = ViewAnimationUtils.createCircularReveal(viewRoot, cx, cy, 0, finalRadius);
+        viewRoot.setVisibility(View.VISIBLE);
+        anim.setDuration(1000);
+        anim.setInterpolator(new AccelerateInterpolator());
+        anim.start();
     }
 
     DatePickerDialog.OnDateSetListener ondate = new DatePickerDialog.OnDateSetListener() {
@@ -161,4 +238,9 @@ public class Registro_Bitsafe extends AppCompatActivity {
         }
     };
 
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

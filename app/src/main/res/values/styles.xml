@@ -6,7 +6,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
+        <item name="android:windowActivityTransitions">true</item>
+        <!-- enable window content transitions -->
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/change_image_transform</item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/change_image_transform</item>
     </style>
 
     <!-- Theme.AppCompat.Light is not a dialog theme -->
@@ -17,5 +23,19 @@
     <style name="BaseAppTheme" parent="android:Theme.Material">
         <!-- enable window content transitions -->
         <item name="android:windowActivityTransitions">true</item>
+        <!-- enable window content transitions -->
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/change_image_transform</item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/change_image_transform</item>
+    </style>
+
+    <style name="FacebookLoginButton">
+        <item name="android:textSize">@dimen/registro_et_tamanio_campos</item>
+        <item name="android:background">@drawable/registro_boton_facebook</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
     </style>
 </resources>

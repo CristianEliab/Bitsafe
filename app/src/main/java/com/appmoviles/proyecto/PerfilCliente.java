@@ -68,7 +68,6 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
         rtdb = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
 
-
         tv_nombre_iniciales = findViewById(R.id.iv_nombre_perfil_cliente);
         tv_nombre = findViewById(R.id.tv_nombre_cliente_perfil_cliente);
         tv_telefono = findViewById(R.id.tv_numero_telefono_perfil_cliente);
@@ -85,42 +84,42 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 if (volver_a.equals(Constantes.FRAGMENT_FINANZAS)) {
-                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    Intent i = new Intent(PerfilCliente.this, HomeCliente.class);
                     i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_FINANZAS);
                     startActivity(i);
                     finish();
                 }
                 if (volver_a.equals(Constantes.FRAGMENT_PLANES)) {
-                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    Intent i = new Intent(PerfilCliente.this, HomeCliente.class);
                     i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_PLANES);
                     startActivity(i);
                     finish();
                 }
                 if (volver_a.equals(Constantes.FRAGMENT_CUENTAS)) {
-                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    Intent i = new Intent(PerfilCliente.this, HomeCliente.class);
                     i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CUENTAS);
                     startActivity(i);
                     finish();
                 }
-                if(volver_a.equals(Constantes.FRAGMENT_CLIENTE)){
+                if (volver_a.equals(Constantes.FRAGMENT_CLIENTE)) {
                     Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
                     i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CLIENTE);
                     startActivity(i);
                     finish();
                 }
-                if(volver_a.equals(Constantes.FRAGMENT_ESTADISTICAS)){
+                if (volver_a.equals(Constantes.FRAGMENT_ESTADISTICAS)) {
                     Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
                     i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_ESTADISTICAS);
                     startActivity(i);
                     finish();
                 }
-                if(volver_a.equals(Constantes.FRAGMENT_TRANSACCION)){
+                if (volver_a.equals(Constantes.FRAGMENT_TRANSACCION)) {
                     Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
                     i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_TRANSACCION);
                     startActivity(i);
                     finish();
                 }
-                if(volver_a.equals(Constantes.FRAGMENT_CARGAR)){
+                if (volver_a.equals(Constantes.FRAGMENT_CARGAR)) {
                     Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
                     i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CARGAR);
                     startActivity(i);
@@ -179,9 +178,13 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
                         for (DataSnapshot hijo : dataSnapshot.getChildren()) {
                             //Si es admin, loguearse
                             Usuario usuario = hijo.getValue(Usuario.class);
-                            if (usuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
-                                tv_nombre_cliente_perfil_cliente.setText(usuario.getNombre());
-                                tv_numero_telefono_perfil_cliente.setText(usuario.getTelefono());
+                            if (auth.getCurrentUser() != null) {
+                                if (usuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
+                                    tv_nombre_cliente_perfil_cliente.setText(usuario.getNombre());
+                                    if (usuario.getTelefono() != null) {
+                                        tv_numero_telefono_perfil_cliente.setText(usuario.getTelefono());
+                                    }
+                                }
                             }
                         }
                     }

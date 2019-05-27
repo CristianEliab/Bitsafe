@@ -110,7 +110,7 @@ public class ClientesFragment extends Fragment implements Serializable, AdapterT
         // Utilizado para enviar variables entre dos fragments
         Bundle parametro = new Bundle();
         if (usuario != null) {
-            parametro.putSerializable(Constantes.USUARIO, usuario);
+            parametro.putSerializable(Constantes.USUARIO_SERIALIZABLE, usuario);
             parametro.putSerializable(Constantes.CLIENTES, this);
             parametro.putString(Constantes.DONDE_VIENE, Constantes.FRAGMENT_CLIENTE);
             datosClienteFragment.setArguments(parametro);

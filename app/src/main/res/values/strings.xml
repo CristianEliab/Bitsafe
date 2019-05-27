@@ -13,6 +13,7 @@
     <string name="registro_contrasenia_confirmar">Confirmar contraseña</string>
     <string name="registro_registrarse">Registrarse</string>
     <string name="registro_registrarse_facebook">Registrarse con Facebook</string>
+    <string name="registro_registrarse_bitsafe">Registrarse con cuenta Bitsafe</string>
     <string name="registro_registrarse_google">Registrarse con Google</string>
     <string name="registro_correo">Correo</string>
     <string name="registro_ubicacion">Ubicación</string>
@@ -171,5 +172,6 @@
 
 
     <string name="title_ayuda">¿Necesitas ayuda?</string>
-
+    <string name="facebook_app_id">467274344078371</string> <string name="fb_login_protocol_scheme">fb467274344078371</string>
+    <string name="loading"></string>
 </resources>
