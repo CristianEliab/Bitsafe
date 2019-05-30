@@ -76,4 +76,9 @@ public class Constantes {
     //Sale dinero de mi cuenta a una cuenta predeterminada --> GASTO
     public final static String CUENTA_DESTINO_ID = "8888";
 
+
+    //TPOS DE CUENTAS - PARA PONER IMAGEN
+    public final static String CUENTA_TIPO_CREDITO = "01";
+    public final static String CUENTA_TIPO_DEBIDO = "02";
+
 }

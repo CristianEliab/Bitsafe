@@ -75,17 +75,106 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ly_fragment_finanzas_total_ingresos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/registro_figura_texto_redondo"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/ic_presentacion_ingreso" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal"
+                            android:text="$ "
+                            android:textColor="@color/colorBitsafeBlue"
+                            android:textSize="17dp"
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:id="@+id/tv_fragment_finanzas_total_ingresos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal"
+                            android:text="xxxxxx"
+                            android:textColor="@color/colorBitsafeBlue"
+                            android:textSize="17dp"
+                            android:textStyle="italic" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ly_fragment_finanzas_total_gastos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/registro_figura_texto_redondo"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/ic_presentacion_gasto" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal"
+                            android:text="$ "
+                            android:textColor="@color/colorBitsafeBlue"
+                            android:textSize="17dp"
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:id="@+id/tv_fragment_finanzas_total_gastos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal"
+                            android:text="xxxxxx"
+                            android:textColor="@color/colorBitsafeBlue"
+                            android:textSize="17dp"
+                            android:textStyle="italic" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:gravity="center_horizontal"
                     android:orientation="vertical">
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/fragment_finanzas_ingresos"
+                        android:gravity="center_horizontal"
+                        android:text="@string/fragment_finanzas_ingresos_gastos_line_chart"
                         android:textColor="@color/colorBitsafeBlue"
-                        android:textSize="20dp"
+                        android:textSize="17dp"
                         android:textStyle="italic" />
 
 
@@ -106,9 +195,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/fragment_finanzas_gastos"
+                        android:text="@string/fragment_finanzas_ingresos_gastos_bar_chart"
                         android:textColor="@color/colorBitsafeBlue"
-                        android:textSize="20dp"
+                        android:textSize="17dp"
                         android:textStyle="italic" />
 
 
@@ -128,9 +217,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/fragment_finanzas_gastos"
+                        android:text="@string/fragment_finanzas_ingresos_gastos_pie_chart"
                         android:textColor="@color/colorBitsafeBlue"
-                        android:textSize="20dp"
+                        android:textSize="17dp"
                         android:textStyle="italic" />
 
                     <com.github.mikephil.charting.charts.PieChart

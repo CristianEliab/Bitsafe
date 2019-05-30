@@ -160,7 +160,7 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
                 Transaccion transaccionTmp;
                 for (DataSnapshot hijo : dataSnapshot.getChildren()) {
                     transaccionTmp = hijo.getValue(Transaccion.class);
-                    //Solo se agregan transacciones de las cuales les llegó doinero a la cuenta seleccionada
+                    //Solo se agregan transacciones de las cuales les llegó dinero a la cuenta seleccionada
                     if (transaccionTmp.getCuentaDestinoID().equals(cuentaSeleccionada.getCuentaID())) {
                         adapterTemplate_transacciones.agregarTransaccion(transaccionTmp);
                     }
@@ -184,7 +184,7 @@ public class FinanzasTransaccionesFragment extends Fragment implements AdapterTe
                 Transaccion transaccionTmp;
                 for (DataSnapshot hijo : dataSnapshot.getChildren()) {
                     transaccionTmp = hijo.getValue(Transaccion.class);
-                    //Solo se agregan transacciones de las cuales les llegó dinero a la cuenta seleccionada
+                    //Solo se agregan transacciones de las cuales salió dinero de la cuenta seleccionada
                     if (transaccionTmp.getCuentaOrigenID().equals(cuentaSeleccionada.getCuentaID())) {
                         adapterTemplate_transacciones.agregarTransaccion(transaccionTmp);
                     }

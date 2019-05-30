@@ -12,6 +12,8 @@ import com.appmoviles.proyecto.modelo.Cuenta;
 
 import java.util.ArrayList;
 
+import static com.appmoviles.proyecto.util.Constantes.CUENTA_TIPO_CREDITO;
+import static com.appmoviles.proyecto.util.Constantes.CUENTA_TIPO_DEBIDO;
 import static com.appmoviles.proyecto.util.Constantes.ICON_BANCO_BANCOLOMBIA;
 import static com.appmoviles.proyecto.util.Constantes.ICON_BANCO_BOGOTA;
 import static com.appmoviles.proyecto.util.Constantes.ICON_BANCO_DAVIVIENDA;
@@ -45,6 +47,14 @@ public class AdapterTemplate_Cuentas  extends RecyclerView.Adapter<AdapterTempla
         ((TextView) holder.root.findViewById(R.id.tv_renglon_cuenta_numero_cuenta)).setText(data.get(position).getNumeroCuenta());
         ((TextView) holder.root.findViewById(R.id.tv_renglon_cuenta_fecha_vinculacion)).setText(data.get(position).getFechaVinculacion());
         ((TextView) holder.root.findViewById(R.id.tv_renglon_cuenta_saldo)).setText(data.get(position).getSaldo());
+
+        if(data.get(position).getTipoCuentaID().equals(CUENTA_TIPO_DEBIDO)){
+            ((ImageView) holder.root.findViewById(R.id.iv_renglon_cuenta_imagen_banco)).setBackgroundResource(R.drawable.ic_debit_card);
+        }
+        else if(data.get(position).getTipoCuentaID().equals(CUENTA_TIPO_CREDITO)){
+            ((ImageView) holder.root.findViewById(R.id.iv_renglon_cuenta_imagen_banco)).setBackgroundResource(R.drawable.ic_credit_card);
+        }
+
 
         holder.root.findViewById(R.id.rl_renglon_relative_marco_cuenta).setOnClickListener(new View.OnClickListener() {
             @Override

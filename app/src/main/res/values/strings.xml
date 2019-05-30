@@ -64,8 +64,13 @@
 
 
     <!--HECHO POR MURIEL-->
-    <string name="fragment_finanzas_ingresos">Resumen Ingresos</string>
-    <string name="fragment_finanzas_gastos">Resumen Gastos</string>
+
+    <string name="fragment_finanzas_ingresos_gastos_line_chart">Resumen de Ingresos y Gastos a través del tiempo</string>
+    <string name="fragment_finanzas_ingresos_gastos_bar_chart">Resumen de Ingresos y gastos por categorías </string>
+    <string name="fragment_finanzas_ingresos_gastos_pie_chart">Resumen de Transacciones por categorías</string>
+
+
+
     <!-- TRANSACCIONES -->
     <string name="fragment_finanzas_transacciones_toolbar">Transacciones</string>
     <string name="fragment_finanzas_transacciones_monto">Monto:</string>
