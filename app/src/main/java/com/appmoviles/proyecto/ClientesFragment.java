@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import com.appmoviles.proyecto.modelo.Usuario;
 import com.appmoviles.proyecto.util.AdapterTemplate_Clientes;
 import com.appmoviles.proyecto.util.Constantes;
+import com.appmoviles.proyecto.util.Consultas;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,6 +38,8 @@ public class ClientesFragment extends Fragment implements Serializable, AdapterT
 
     FirebaseAuth auth;
     FirebaseDatabase rtdb;
+
+    Consultas consultas;
 
     public ClientesFragment() {
         // Required empty public constructor
@@ -58,6 +61,10 @@ public class ClientesFragment extends Fragment implements Serializable, AdapterT
 
         rtdb = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
+
+        consultas = Consultas.getInstance();
+        consultas.calcularRegistrosFecha();
+        consultas.calcularGeneros();
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
@@ -83,6 +90,7 @@ public class ClientesFragment extends Fragment implements Serializable, AdapterT
                             //Si es admin, loguearse
                             Usuario usuario = hijo.getValue(Usuario.class);
                             adapter.agregarUsuario(usuario);
+                            consultas.addUsuarios(usuario);
                         }
                     }
                     @Override

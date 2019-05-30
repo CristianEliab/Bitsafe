@@ -255,12 +255,10 @@ public class Registro_Bitsafe extends BaseActivity implements View.OnClickListen
                 } else {
                     if (verificarCampos(correo, pass, repass, nombre, cedula, celular, ubicacion)) {
                         if (pass.equals(repass)) {
-
-                            showProgressDialog(v.getContext());
-
                             auth.createUserWithEmailAndPassword(correo, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
+                                    showProgressDialog(Registro_Bitsafe.this);
                                     String uid = auth.getCurrentUser().getUid();
                                     long fechaCreacion = auth.getCurrentUser().getMetadata().getCreationTimestamp();
                                     Usuario usuario = new Usuario(uid,

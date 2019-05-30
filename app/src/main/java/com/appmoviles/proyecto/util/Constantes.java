@@ -41,7 +41,7 @@ public class Constantes {
     public final static String CHILD_CUENTAS_ID = "cuentas_id";
     public final static String CHILD_TRANSACCIONES_ID = "transacciones_id";
     public final static String CHILD_ROL_USUARIO_ID = "rolusuario_id";
-    public final static String CHILD_ESTADISTICAS_ID = "rolusuario_id";
+    public final static String CHILD_ESTADISTICAS_ID = "estadisticas";
 
 
     public final static String CHILD_ESTADISTICAS_ENERO = "ENERO";
@@ -57,6 +57,16 @@ public class Constantes {
     public final static String CHILD_ESTADISTICAS_NOVIEMBRE = "NOVIEMBRE";
     public final static String CHILD_ESTADISTICAS_DICIEMBRE = "DICIEMBRE";
 
+    public final static String CHILD_ESTADISTICAS_GENERO_ID = "estadisticasgenero";
+    public final static String CHILD_ESTADISTICAS_MASCULINO = "masculino";
+    public final static String CHILD_ESTADISTICAS_FEMENINO = "femenino";
+
+    public final static String MASCULINO = "M";
+    public final static String FEMENINO = "F";
+
+
+    public final static String REGISTRO_MASCULINO = "Masculino";
+    public final static String REGISTRO_FEMENINO = "Femenino";
 
     public final static String GO_TO_PERFIL = "GO_TO_PERFIL";
     public final static String CLIENTES = "CLIENTE";

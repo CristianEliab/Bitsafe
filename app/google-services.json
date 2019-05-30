@@ -13,7 +13,32 @@
           "package_name": "com.appmoviles.proyecto"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "550051516802-8sb3tmr13h1a32u7udr122fb0iqamok0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appmoviles.proyecto",
+            "certificate_hash": "910b60385d68384b20d9d47176ac2029b71b7f02"
+          }
+        },
+        {
+          "client_id": "550051516802-n9upeo2ndndd8pl8d3c48qo4p9qtmc2m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appmoviles.proyecto",
+            "certificate_hash": "13943a7da1f7214a6a2ce2693a010b222a086976"
+          }
+        },
+        {
+          "client_id": "550051516802-7kikmdr7o79tt8ma08heoso3mi52uf02.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appmoviles.proyecto",
+            "certificate_hash": "90a9f2c051d4b796acfbb5478d7abb6a917dfadf"
+          }
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAh7lJWhLSvfN9vBUzFG-oa9pDQV1wnGp4"

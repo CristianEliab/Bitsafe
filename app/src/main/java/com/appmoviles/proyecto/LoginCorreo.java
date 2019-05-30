@@ -120,7 +120,6 @@ public class LoginCorreo extends BaseActivity {
             public void onClick(View v) {
                 Intent i = new Intent(LoginCorreo.this, RegistroGeneral.class);
                 startActivity(i);
-                finish();
             }
         });
 
@@ -137,7 +136,6 @@ public class LoginCorreo extends BaseActivity {
     }
 
     private void loguearUsuario(final String correo, String pass) {
-        showProgressDialog(this);
         auth.signInWithEmailAndPassword(correo, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
@@ -146,6 +144,8 @@ public class LoginCorreo extends BaseActivity {
                 SharedPreferences.Editor myEditor = myPreferences.edit();
                 myEditor.putString(EMAIL_USER, correo);
                 myEditor.commit();
+
+                showProgressDialog(LoginCorreo.this);
 
                 rtdb.getReference().child(Constantes.CHILD_ROL_USUARIO_ID).child(auth.getCurrentUser().getUid())
                         .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -182,7 +182,7 @@ public class LoginCorreo extends BaseActivity {
                 addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        et_login_correo_confirmar_contrasenia.setError("No se pudo ingresar.");
+                        et_login_correo_confirmar_contrasenia.setError("No se pudo ingresar. ");
                     }
                 });
 

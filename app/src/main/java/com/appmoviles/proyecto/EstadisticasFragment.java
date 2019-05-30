@@ -13,7 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appmoviles.proyecto.util.Constantes;
+import com.appmoviles.proyecto.util.Consultas;
 import com.appmoviles.proyecto.util.EstadisticasAdapter;
+import com.appmoviles.proyecto.util.EstadisticasGenero;
+import com.appmoviles.proyecto.util.EstadisticasMes;
 import com.appmoviles.proyecto.util.Grafica;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -34,6 +37,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -44,6 +48,9 @@ public class EstadisticasFragment extends Fragment implements Serializable, View
     private EstadisticasAdapter estadisticasAdapter;
     private ArrayList<Grafica> listaEstadisticas;
     FirebaseDatabase rtdb;
+    Consultas consultas;
+    private HashMap<String, EstadisticasMes> estadisticasMesHashMap;
+    private HashMap<String, EstadisticasGenero> estadisticasGeneroHashMap;
 
     public EstadisticasFragment() {
         // Required empty public constructor
@@ -53,6 +60,7 @@ public class EstadisticasFragment extends Fragment implements Serializable, View
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -73,8 +81,11 @@ public class EstadisticasFragment extends Fragment implements Serializable, View
         iv_fragment_estadisticas_perfil = v.findViewById(R.id.iv_fragment_estadisticas_perfil);
         iv_fragment_estadisticas_perfil.setOnClickListener(this);
 
-        agregarEstadisticas();
+        consultas = Consultas.getInstance();
+        estadisticasMesHashMap = consultas.getDiccionario();
+        estadisticasGeneroHashMap = consultas.getDiccionaioGenero();
 
+        agregarEstadisticas();
 
         return v;
     }
@@ -84,43 +95,37 @@ public class EstadisticasFragment extends Fragment implements Serializable, View
 
         //Piechart
         List<PieEntry> entries_3 = new ArrayList<>();
-        entries_3.add(new PieEntry(33.3f, "18 años - 30 años"));
-        entries_3.add(new PieEntry(33.3f, "30 años - 40 años"));
-        entries_3.add(new PieEntry(33.3f, "40 años >"));
         PieDataSet set_2 = new PieDataSet(entries_3, "Edades");
-        set_2.setColors(ColorTemplate.COLORFUL_COLORS);
-        PieData data_1 = new PieData(set_2);
         // refresh
         entries_3 = new ArrayList<>();
-        entries_3.add(new PieEntry(50f, "Blue"));
-        entries_3.add(new PieEntry(50f, "Red"));
+        entries_3.add(new PieEntry(estadisticasGeneroHashMap.get(Constantes.FEMENINO).getNumero_femeninos(), "F"));
+        entries_3.add(new PieEntry(estadisticasGeneroHashMap.get(Constantes.MASCULINO).getNumero_masculinos(), "M"));
+
         set_2 = new PieDataSet(entries_3, "Hombre y Mujeres");
         set_2.setColors(ColorTemplate.MATERIAL_COLORS);
         PieData data_2 = new PieData(set_2);
         // refresh
         List<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(0f, 30f, "En"));
-        entries.add(new BarEntry(1f, 80f, "Fe"));
-        entries.add(new BarEntry(2f, 60f, "Ma"));
-        entries.add(new BarEntry(3f, 50f, "Ab"));
-        entries.add(new BarEntry(4f, 70f, "Ma"));
-        entries.add(new BarEntry(5f, 60f, "Jn"));
-        entries.add(new BarEntry(6f, 30f, "Jl"));
-        entries.add(new BarEntry(7f, 80f, "Ag"));
-        entries.add(new BarEntry(8f, 60f, "Sp"));
-        entries.add(new BarEntry(9f, 50f, "Oc"));
-        entries.add(new BarEntry(10f, 70f, "No"));
-        entries.add(new BarEntry(11f, 60f, "Dc"));
+        entries.add(new BarEntry(0f, estadisticasMesHashMap.get("01").getNumeroClientes(), "En"));
+        entries.add(new BarEntry(1f, estadisticasMesHashMap.get("02").getNumeroClientes(), "Fe"));
+        entries.add(new BarEntry(2f, estadisticasMesHashMap.get("03").getNumeroClientes(), "Ma"));
+        entries.add(new BarEntry(3f, estadisticasMesHashMap.get("04").getNumeroClientes(), "Ab"));
+        entries.add(new BarEntry(4f, estadisticasMesHashMap.get("05").getNumeroClientes(), "Ma"));
+        entries.add(new BarEntry(5f, estadisticasMesHashMap.get("06").getNumeroClientes(), "Jn"));
+        entries.add(new BarEntry(6f, estadisticasMesHashMap.get("07").getNumeroClientes(), "Jl"));
+        entries.add(new BarEntry(7f, estadisticasMesHashMap.get("08").getNumeroClientes(), "Ag"));
+        entries.add(new BarEntry(8f, estadisticasMesHashMap.get("09").getNumeroClientes(), "Sp"));
+        entries.add(new BarEntry(9f, estadisticasMesHashMap.get("10").getNumeroClientes(), "Oc"));
+        entries.add(new BarEntry(10f, estadisticasMesHashMap.get("11").getNumeroClientes(), "No"));
+        entries.add(new BarEntry(11f, estadisticasMesHashMap.get("12").getNumeroClientes(), "Dc"));
         BarDataSet set = new BarDataSet(entries, "Clientes por Mes");
         set.setColors(ColorTemplate.PASTEL_COLORS);
         BarData data_3 = new BarData(set);
         // end Barchart
 
-        Grafica grafica1 = new Grafica(Constantes.TIPO_PIE, data_1, null, "Gráfica 1");
         Grafica grafica2 = new Grafica(Constantes.TIPO_PIE, data_2, null, "Hombre y Mujeres");
         Grafica grafica3 = new Grafica(Constantes.TIPO_BAR, null, data_3, "Clientes");
 
-        listaEstadisticas.add(grafica1);
         listaEstadisticas.add(grafica2);
         listaEstadisticas.add(grafica3);
 

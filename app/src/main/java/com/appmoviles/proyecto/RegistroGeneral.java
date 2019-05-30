@@ -149,7 +149,7 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
                     usuario.setUsuarioID(uid);
                     usuario.setTelefono(telefono);
 
-                    rtdb.getReference().child(Constantes.CHILD_USUARIOS).push().setValue(usuario);
+                    rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).push().setValue(usuario);
 
                     Intent i = new Intent(RegistroGeneral.this, HomeCliente.class);
                     startActivity(i);
@@ -220,8 +220,8 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
                 Log.e(TAG, "Google sign in failed", e);
             }*/
         } else {
-           /* super.onActivityResult(requestCode, resultCode, data);
-            callbackManager.onActivityResult(requestCode, resultCode, data);*/
+            super.onActivityResult(requestCode, resultCode, data);
+            callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
 

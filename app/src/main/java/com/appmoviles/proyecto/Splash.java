@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.appmoviles.proyecto.modelo.RolUsuario;
+import com.appmoviles.proyecto.util.Consultas;
 import com.appmoviles.proyecto.util.JsonParse;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,6 +34,7 @@ public class Splash extends AppCompatActivity {
     private Animation transicion;
     private JsonParse jsonParse;
     private boolean admin;
+    Consultas consultas;
 
 
     private boolean cargodb;
@@ -53,6 +55,9 @@ public class Splash extends AppCompatActivity {
         myPreferences = PreferenceManager.getDefaultSharedPreferences(Splash.this);
         //myPreferences.edit().clear().commit();
         cargodb = myPreferences.getBoolean(GUARDO, true);
+
+        /*consultas = Consultas.getInstance();
+        consultas.crearBase();*/
 
         //rtdb.getReference().removeValue();
 
