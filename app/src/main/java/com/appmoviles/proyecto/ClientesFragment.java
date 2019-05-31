@@ -63,8 +63,6 @@ public class ClientesFragment extends Fragment implements Serializable, AdapterT
         auth = FirebaseAuth.getInstance();
 
         consultas = Consultas.getInstance();
-        consultas.calcularRegistrosFecha();
-        consultas.calcularGeneros();
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 

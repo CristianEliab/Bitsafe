@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.appmoviles.proyecto.modelo.Banco;
 import com.appmoviles.proyecto.modelo.Cliente;
 import com.appmoviles.proyecto.modelo.Transaccion;
+import com.appmoviles.proyecto.modelo.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,5 +87,8 @@ public class AdapterTemplate_Transacciones extends RecyclerView.Adapter<AdapterT
     }
 
     //Hasta aquí patrón observer
-
+    public  void removeAll(){
+        data = new ArrayList<>();
+        notifyDataSetChanged();
+    }
 }

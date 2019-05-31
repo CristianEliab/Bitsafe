@@ -1,6 +1,7 @@
 package com.appmoviles.proyecto;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.appmoviles.proyecto.modelo.Banco;
 import com.appmoviles.proyecto.modelo.Cliente;
 import com.appmoviles.proyecto.modelo.Cuenta;
+import com.appmoviles.proyecto.modelo.Transaccion;
 import com.appmoviles.proyecto.modelo.Usuario;
 import com.appmoviles.proyecto.util.AdapterDatosBancos;
 import com.appmoviles.proyecto.util.AdapterDatosCuentas;
@@ -37,11 +39,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.appmoviles.proyecto.util.Constantes.CHILD_TRANSACCIONES;
+
 
 public class DatosClienteFragment extends Fragment implements Serializable,
         AdapterDatosCuentas.OnItemClickListener,
         AdapterDatosBancos.OnItemClickListener,
-        View.OnClickListener {
+        View.OnClickListener, AdapterTemplate_Transacciones.OnItemClickListener {
 
     private RelativeLayout rl_fragment_clientes_toolbar;
     private EditText et_cuenta_seleccionado;
@@ -71,6 +75,13 @@ public class DatosClienteFragment extends Fragment implements Serializable,
     private AdapterDatosBancos adapterDatosBancos;
     private Fragment transaccion;
     FirebaseDatabase rtdb;
+
+
+    // -------------------------
+    private RecyclerView lista_transacciones;
+    private AdapterTemplate_Transacciones adapterTemplate_transacciones;
+    private Cuenta cuentaSeleccionada;
+    private ProgressDialog progressDialog;
 
     // Envio de información
     private OnFragmentInteractionListener listener;
@@ -116,6 +127,13 @@ public class DatosClienteFragment extends Fragment implements Serializable,
         iv_fragment_dt_clientes_return = v.findViewById(R.id.iv_fragment_dt_clientes_return);
         iv_fragment_dt_clientes_perfil = v.findViewById(R.id.iv_fragment_dt_clientes_perfil);
 
+        // Lista de transacciones
+        lista_transacciones = v.findViewById(R.id.lista_transacciones);
+        lista_transacciones.setHasFixedSize(true);
+        lista_transacciones.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapterTemplate_transacciones = new AdapterTemplate_Transacciones();
+        adapterTemplate_transacciones.setListener(this);
+        lista_transacciones.setAdapter(adapterTemplate_transacciones);
 
         listaBancos = usuario.getListaBancos();
         listaCuentas = usuario.getListaCuentas();
@@ -164,18 +182,43 @@ public class DatosClienteFragment extends Fragment implements Serializable,
         // Visualización si viene del FragmentClientes
         if (donde_viene != null) {
             if (donde_viene.equals(Constantes.FRAGMENT_CLIENTE)) {
-                btn_fragment_dt_cliente_guardar.setVisibility(View.INVISIBLE);
+                btn_fragment_dt_cliente_guardar.setVisibility(View.GONE);
             }
         }
 
         actualizarInfo();
         agregarDatos();
-
         // Configuraciones
         selecciono_banco = false;
         selecciono_cuenta = false;
 
         return v;
+    }
+
+
+    public void cargarTransacciones() {
+        rtdb.getReference().child(CHILD_TRANSACCIONES).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Transaccion transaccionTmp;
+                for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                    transaccionTmp = hijo.getValue(Transaccion.class);
+                    if (cuentaSeleccionada != null) {
+                        if (transaccionTmp.getCuentaDestinoID().equals(cuentaSeleccionada.getCuentaID())
+                                || transaccionTmp.getCuentaOrigenID().equals(cuentaSeleccionada.getCuentaID())) {
+                            adapterTemplate_transacciones.agregarTransaccion(transaccionTmp);
+                        }
+                    }
+                }
+
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void agregarDatos() {
@@ -184,8 +227,10 @@ public class DatosClienteFragment extends Fragment implements Serializable,
                 adapterDatosBancos.agregarBanco(banco);
             }
         }
-        for (Cuenta cuenta : listaCuentas) {
-            adapterDatosCuentas.agregarCuenta(cuenta);
+        if (listaCuentas != null) {
+            for (Cuenta cuenta : listaCuentas) {
+                adapterDatosCuentas.agregarCuenta(cuenta);
+            }
         }
     }
 
@@ -203,6 +248,13 @@ public class DatosClienteFragment extends Fragment implements Serializable,
             selecciono_cuenta = true;
             if (selecciono_banco && selecciono_cuenta) {
                 btn_fragment_dt_cliente_guardar.setBackground(getResources().getDrawable(R.drawable.fragment_agregar_monto_figura_btn_guardar_activo));
+                cuentaSeleccionada = cuenta;
+
+                // Cargar Datos
+                progressDialog = new ProgressDialog(getContext());
+                progressDialog.setMessage("Por favor espere mientras se cargan los datos");
+                progressDialog.show();
+                cargarTransacciones();
             }
         } else {
             selecciono_cuenta = false;
@@ -268,6 +320,7 @@ public class DatosClienteFragment extends Fragment implements Serializable,
                     filtrarLista(bancoSeleccionado);
                     if (down_cuentas) {
                         down_cuentas = false;
+                        adapterTemplate_transacciones.removeAll();
                         lista_cuentas_cliente.setVisibility(View.GONE);
                         rl_fragment_clientes_toolbar.invalidate();
                         iv_down_cuentas.setBackgroundResource(R.drawable.cuenta_informacion_ic_plus);
@@ -306,5 +359,10 @@ public class DatosClienteFragment extends Fragment implements Serializable,
 
     public void setInteractionListener(OnFragmentInteractionListener listener) {
         this.listener = listener;
+    }
+
+    @Override
+    public void onItemClick(Transaccion transaccion) {
+
     }
 }

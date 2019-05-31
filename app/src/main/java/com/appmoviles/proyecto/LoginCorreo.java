@@ -59,8 +59,9 @@ public class LoginCorreo extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_correo);
 
-        verificarPermisos();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        verificarPermisos();
 
     }
 
@@ -148,26 +149,34 @@ public class LoginCorreo extends BaseActivity {
                 showProgressDialog(LoginCorreo.this);
 
                 rtdb.getReference().child(Constantes.CHILD_ROL_USUARIO_ID).child(auth.getCurrentUser().getUid())
-                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                        .addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 RolUsuario rolUsuario = dataSnapshot.getValue(RolUsuario.class);
-                                admin = false;
-                                if (rolUsuario.getRolID().equals("02") &&
-                                        rolUsuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
-                                    admin = true;
-                                }
+                                if (rolUsuario == null) {
+                                    hideProgressDialog();
 
-                                hideProgressDialog();
-
-                                if (admin) {
-                                    Intent i = new Intent(LoginCorreo.this, HomeAdministrador.class);
-                                    startActivity(i);
-                                    finish();
-                                } else {
                                     Intent i = new Intent(LoginCorreo.this, HomeCliente.class);
                                     startActivity(i);
                                     finish();
+                                } else {
+                                    admin = false;
+                                    if (rolUsuario.getRolID().equals("02") &&
+                                            rolUsuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
+                                        admin = true;
+                                    }
+
+                                    hideProgressDialog();
+
+                                    if (admin) {
+                                        Intent i = new Intent(LoginCorreo.this, HomeAdministrador.class);
+                                        startActivity(i);
+                                        finish();
+                                    } else {
+                                        Intent i = new Intent(LoginCorreo.this, HomeCliente.class);
+                                        startActivity(i);
+                                        finish();
+                                    }
                                 }
                             }
 
@@ -177,14 +186,12 @@ public class LoginCorreo extends BaseActivity {
                             }
                         });
             }
-        }).
-
-                addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        et_login_correo_confirmar_contrasenia.setError("No se pudo ingresar. ");
-                    }
-                });
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                et_login_correo_confirmar_contrasenia.setError("No se pudo ingresar. ");
+            }
+        });
 
     }
 

@@ -7,7 +7,9 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -50,6 +52,8 @@ import java.util.Calendar;
 
 public class Registro_Bitsafe extends BaseActivity implements View.OnClickListener {
 
+    public static final String EMAIL_USER = "CorreoUsuario";
+
     private Button btn_registro_registrarse;
     private EditText et_registro_nombre;
     private EditText et_registro_cedula;
@@ -64,6 +68,7 @@ public class Registro_Bitsafe extends BaseActivity implements View.OnClickListen
     private CheckBox checkbox_terminos;
     private int mYear, mMonth, mDay;
     private String genero;
+    private SharedPreferences myPreferences;
 
 
     FirebaseAuth auth;
@@ -99,6 +104,8 @@ public class Registro_Bitsafe extends BaseActivity implements View.OnClickListen
 
         // Get Current Date
         final Calendar c = Calendar.getInstance();
+        myPreferences = PreferenceManager.getDefaultSharedPreferences(Registro_Bitsafe.this);
+
 
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
@@ -271,6 +278,10 @@ public class Registro_Bitsafe extends BaseActivity implements View.OnClickListen
                                     usuario.setFecha_nacimiento(et_registro_fecha_nacimiento.getText().toString());
                                     usuario.setGenero(sp_registro_genero.getSelectedItem().toString());
                                     usuario.setFechaCreacion(fechaCreacion);
+
+                                    SharedPreferences.Editor myEditor = myPreferences.edit();
+                                    myEditor.putString(EMAIL_USER, correo);
+                                    myEditor.commit();
 
                                     rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(usuario.getUsuarioID()).setValue(usuario);
 

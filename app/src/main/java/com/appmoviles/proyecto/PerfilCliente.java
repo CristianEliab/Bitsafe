@@ -203,7 +203,7 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
                 AlertDialog.Builder ayuda = new AlertDialog.Builder(getApplicationContext());
                 ayuda.setTitle(R.string.title_ayuda);
                 ayuda.setMessage(R.string.comunicacion_ayuda);
-                ayuda.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                ayuda.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -220,7 +220,7 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
                 AlertDialog.Builder info = new AlertDialog.Builder(getApplicationContext());
                 info.setTitle(R.string.terminos_y_condiciones);
                 info.setMessage(R.string.mensaje_terminos_condiciones);
-                info.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                info.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

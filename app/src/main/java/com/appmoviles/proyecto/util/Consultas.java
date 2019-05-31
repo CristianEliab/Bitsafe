@@ -62,7 +62,7 @@ public class Consultas {
         diccionarioGenero.put(Constantes.FEMENINO, new EstadisticasGenero(0, 0, new ArrayList<String>()));
         diccionarioGenero.put(Constantes.MASCULINO, new EstadisticasGenero(0, 0, new ArrayList<String>()));
 
-        rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_ENERO).setValue(diccionario.get("01"));
+      /*  rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_ENERO).setValue(diccionario.get("01"));
         rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_FEBRERO).setValue(diccionario.get("02"));
         rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_MARZO).setValue(diccionario.get("03"));
         rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_ABRIL).setValue(diccionario.get("04"));
@@ -75,53 +75,30 @@ public class Consultas {
         rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_NOVIEMBRE).setValue(diccionario.get("11"));
         rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_DICIEMBRE).setValue(diccionario.get("12"));
         rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_GENERO_ID).child(Constantes.CHILD_ESTADISTICAS_MASCULINO).setValue(diccionarioGenero.get(Constantes.MASCULINO));
-        rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_GENERO_ID).child(Constantes.CHILD_ESTADISTICAS_FEMENINO).setValue(diccionarioGenero.get(Constantes.FEMENINO));
+        rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_GENERO_ID).child(Constantes.CHILD_ESTADISTICAS_FEMENINO).setValue(diccionarioGenero.get(Constantes.FEMENINO));*/
     }
 
 
     public void calcularGeneros() {
         for (final Usuario usuario : listaUsuario) {
-            guardarGeneros();
             if (usuario.getGenero() != null) {
                 if (usuario.getGenero().equals(Constantes.REGISTRO_FEMENINO)) {
-                    rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_GENERO_ID).child(Constantes.CHILD_ESTADISTICAS_FEMENINO).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            EstadisticasGenero estadisticasGenero = dataSnapshot.getValue(EstadisticasGenero.class);
-                            if (estadisticasGenero.getNumero_femeninos() == 0l) {
-                                estadisticasGenero.setNumero_femeninos(1);
-                            } else {
-                                estadisticasGenero.setNumero_femeninos(estadisticasGenero.getNumero_femeninos() + 1);
-                            }
-
-                            diccionarioGenero.put(Constantes.FEMENINO, estadisticasGenero);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                    EstadisticasGenero estadisticasGenero = diccionarioGenero.get(Constantes.FEMENINO);
+                    ArrayList<String> listaId = estadisticasGenero.getListaID();
+                    if (!listaId.contains(usuario.getUsuarioID())) {
+                        estadisticasGenero.setNumero_femeninos(estadisticasGenero.getNumero_femeninos() + 1);
+                        diccionarioGenero.put(Constantes.FEMENINO, estadisticasGenero);
+                        listaId.add(usuario.getUsuarioID());
+                    }
                 }
                 if (usuario.getGenero().equals(Constantes.REGISTRO_MASCULINO)) {
-                    rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_GENERO_ID).child(Constantes.CHILD_ESTADISTICAS_MASCULINO).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            EstadisticasGenero estadisticasGenero = dataSnapshot.getValue(EstadisticasGenero.class);
-                            if (estadisticasGenero.getNumero_masculinos() == 0l) {
-                                estadisticasGenero.setNumero_masculinos(1);
-                            } else {
-                                estadisticasGenero.setNumero_masculinos(estadisticasGenero.getNumero_masculinos() + 1);
-                            }
-
-                            diccionarioGenero.put(Constantes.MASCULINO, estadisticasGenero);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                    EstadisticasGenero estadisticasGenero = diccionarioGenero.get(Constantes.MASCULINO);
+                    ArrayList<String> listaId = estadisticasGenero.getListaID();
+                    if (!listaId.contains(usuario.getUsuarioID())) {
+                        estadisticasGenero.setNumero_masculinos(estadisticasGenero.getNumero_masculinos() + 1);
+                        diccionarioGenero.put(Constantes.MASCULINO, estadisticasGenero);
+                        listaId.add(usuario.getUsuarioID());
+                    }
                 }
             }
         }
@@ -146,7 +123,6 @@ public class Consultas {
 
     public void calcularRegistrosFecha() {
         for (final Usuario usuario : listaUsuario) {
-            guardarEstadisticas();
             if (usuario.getFechaCreacion() != 0l) {
                 long val = usuario.getFechaCreacion();
                 Date date = new Date(val);
@@ -154,378 +130,116 @@ public class Consultas {
                 String dateText = df2.format(date);
                 String[] datos = dateText.split("/");
                 String mes = datos[1];
+                EstadisticasMes estadisticasMes;
+                ArrayList<String> listaId;
                 switch (mes) {
                     case "01":
-                        rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_ENERO).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                EstadisticasMes estadisticasMes = dataSnapshot.getValue(EstadisticasMes.class);
-                                ArrayList<String> listaID = estadisticasMes.getListaUsuariosID();
-                                float numero = 0;
-                                if (listaID == null) {
-                                    listaID = new ArrayList<>();
-                                    listaID.add(usuario.getUsuarioID());
-                                    numero = 1;
-                                } else {
-                                    for (String id : listaID) {
-                                        if (!id.equals(usuario.getUsuarioID())) {
-                                            numero = estadisticasMes.getNumeroClientes() + 1;
-                                            listaID.add(usuario.getUsuarioID());
-                                        }
-                                    }
-                                }
-
-                                estadisticasMes.setListaUsuariosID(listaID);
-                                estadisticasMes.setNumeroClientes(numero);
-                                diccionario.put("01", estadisticasMes);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        estadisticasMes = diccionario.get("01");
+                        listaId = estadisticasMes.getListaUsuariosID();
+                        if (!listaId.contains(usuario.getUsuarioID())) {
+                            estadisticasMes.setNumeroClientes(estadisticasMes.getNumeroClientes() + 1);
+                            diccionario.put("01", estadisticasMes);
+                            listaId.add(usuario.getUsuarioID());
+                        }
                         break;
                     case "02":
-                        rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_FEBRERO).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                EstadisticasMes estadisticasMes = dataSnapshot.getValue(EstadisticasMes.class);
-                                ArrayList<String> listaID = estadisticasMes.getListaUsuariosID();
-                                float numero = 0;
-                                if (listaID == null) {
-                                    listaID = new ArrayList<>();
-                                    listaID.add(usuario.getUsuarioID());
-                                    numero = 1;
-                                } else {
-                                    for (String id : listaID) {
-                                        if (!id.equals(usuario.getUsuarioID())) {
-                                            numero = estadisticasMes.getNumeroClientes() + 1;
-                                            listaID.add(usuario.getUsuarioID());
-                                        }
-                                    }
-                                }
-
-                                estadisticasMes.setListaUsuariosID(listaID);
-                                estadisticasMes.setNumeroClientes(numero);
-                                diccionario.put("02", estadisticasMes);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        estadisticasMes = diccionario.get("02");
+                        listaId = estadisticasMes.getListaUsuariosID();
+                        if (!listaId.contains(usuario.getUsuarioID())) {
+                            estadisticasMes.setNumeroClientes(estadisticasMes.getNumeroClientes() + 1);
+                            diccionario.put("02", estadisticasMes);
+                            listaId.add(usuario.getUsuarioID());
+                        }
                         break;
                     case "03":
-                        rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_MARZO).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                EstadisticasMes estadisticasMes = dataSnapshot.getValue(EstadisticasMes.class);
-                                ArrayList<String> listaID = estadisticasMes.getListaUsuariosID();
-                                float numero = 0;
-                                if (listaID == null) {
-                                    listaID = new ArrayList<>();
-                                    listaID.add(usuario.getUsuarioID());
-                                    numero = 1;
-                                } else {
-                                    for (String id : listaID) {
-                                        if (!id.equals(usuario.getUsuarioID())) {
-                                            numero = estadisticasMes.getNumeroClientes() + 1;
-                                            listaID.add(usuario.getUsuarioID());
-                                        }
-                                    }
-                                }
-
-                                estadisticasMes.setListaUsuariosID(listaID);
-                                estadisticasMes.setNumeroClientes(numero);
-                                diccionario.put("03", estadisticasMes);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        estadisticasMes = diccionario.get("03");
+                        listaId = estadisticasMes.getListaUsuariosID();
+                        if (!listaId.contains(usuario.getUsuarioID())) {
+                            estadisticasMes.setNumeroClientes(estadisticasMes.getNumeroClientes() + 1);
+                            diccionario.put("03", estadisticasMes);
+                            listaId.add(usuario.getUsuarioID());
+                        }
                         break;
                     case "04":
-                        rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_ABRIL).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                EstadisticasMes estadisticasMes = dataSnapshot.getValue(EstadisticasMes.class);
-                                ArrayList<String> listaID = estadisticasMes.getListaUsuariosID();
-                                float numero = 0;
-                                if (listaID == null) {
-                                    listaID = new ArrayList<>();
-                                    listaID.add(usuario.getUsuarioID());
-                                    numero = 1;
-                                } else {
-                                    for (String id : listaID) {
-                                        if (!id.equals(usuario.getUsuarioID())) {
-                                            numero = estadisticasMes.getNumeroClientes() + 1;
-                                            listaID.add(usuario.getUsuarioID());
-                                        }
-                                    }
-                                }
-
-                                estadisticasMes.setListaUsuariosID(listaID);
-                                estadisticasMes.setNumeroClientes(numero);
-                                diccionario.put("04", estadisticasMes);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        estadisticasMes = diccionario.get("04");
+                        listaId = estadisticasMes.getListaUsuariosID();
+                        if (!listaId.contains(usuario.getUsuarioID())) {
+                            estadisticasMes.setNumeroClientes(estadisticasMes.getNumeroClientes() + 1);
+                            diccionario.put("04", estadisticasMes);
+                            listaId.add(usuario.getUsuarioID());
+                        }
                         break;
                     case "05":
-                        rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_MAYO).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                EstadisticasMes estadisticasMes = dataSnapshot.getValue(EstadisticasMes.class);
-                                ArrayList<String> listaID = estadisticasMes.getListaUsuariosID();
-                                float numero = 0;
-                                if (listaID == null) {
-                                    listaID = new ArrayList<>();
-                                    listaID.add(usuario.getUsuarioID());
-                                    numero = 1;
-                                } else {
-                                    for (String id : listaID) {
-                                        if (!id.equals(usuario.getUsuarioID())) {
-                                            numero = estadisticasMes.getNumeroClientes() + 1;
-                                            listaID.add(usuario.getUsuarioID());
-                                        }
-                                    }
-                                }
-
-                                estadisticasMes.setListaUsuariosID(listaID);
-                                estadisticasMes.setNumeroClientes(numero);
-                                diccionario.put("05", estadisticasMes);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        estadisticasMes = diccionario.get("05");
+                        listaId = estadisticasMes.getListaUsuariosID();
+                        if (!listaId.contains(usuario.getUsuarioID())) {
+                            estadisticasMes.setNumeroClientes(estadisticasMes.getNumeroClientes() + 1);
+                            diccionario.put("05", estadisticasMes);
+                            listaId.add(usuario.getUsuarioID());
+                        }
                         break;
                     case "06":
-                        rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_JUNIO).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                EstadisticasMes estadisticasMes = dataSnapshot.getValue(EstadisticasMes.class);
-                                ArrayList<String> listaID = estadisticasMes.getListaUsuariosID();
-                                float numero = 0;
-                                if (listaID == null) {
-                                    listaID = new ArrayList<>();
-                                    listaID.add(usuario.getUsuarioID());
-                                    numero = 1;
-                                } else {
-                                    for (String id : listaID) {
-                                        if (!id.equals(usuario.getUsuarioID())) {
-                                            numero = estadisticasMes.getNumeroClientes() + 1;
-                                            listaID.add(usuario.getUsuarioID());
-                                        }
-                                    }
-                                }
-
-                                estadisticasMes.setListaUsuariosID(listaID);
-                                estadisticasMes.setNumeroClientes(numero);
-                                diccionario.put("06", estadisticasMes);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        estadisticasMes = diccionario.get("06");
+                        listaId = estadisticasMes.getListaUsuariosID();
+                        if (!listaId.contains(usuario.getUsuarioID())) {
+                            estadisticasMes.setNumeroClientes(estadisticasMes.getNumeroClientes() + 1);
+                            diccionario.put("06", estadisticasMes);
+                            listaId.add(usuario.getUsuarioID());
+                        }
                         break;
                     case "07":
-                        rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_JULIO).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                EstadisticasMes estadisticasMes = dataSnapshot.getValue(EstadisticasMes.class);
-                                ArrayList<String> listaID = estadisticasMes.getListaUsuariosID();
-                                float numero = 0;
-                                if (listaID == null) {
-                                    listaID = new ArrayList<>();
-                                    listaID.add(usuario.getUsuarioID());
-                                    numero = 1;
-                                } else {
-                                    for (String id : listaID) {
-                                        if (!id.equals(usuario.getUsuarioID())) {
-                                            numero = estadisticasMes.getNumeroClientes() + 1;
-                                            listaID.add(usuario.getUsuarioID());
-                                        }
-                                    }
-                                }
-
-                                estadisticasMes.setListaUsuariosID(listaID);
-                                estadisticasMes.setNumeroClientes(numero);
-                                diccionario.put("07", estadisticasMes);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        estadisticasMes = diccionario.get("07");
+                        listaId = estadisticasMes.getListaUsuariosID();
+                        if (!listaId.contains(usuario.getUsuarioID())) {
+                            estadisticasMes.setNumeroClientes(estadisticasMes.getNumeroClientes() + 1);
+                            diccionario.put("07", estadisticasMes);
+                            listaId.add(usuario.getUsuarioID());
+                        }
                         break;
                     case "08":
-                        rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_AGOSTO).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                EstadisticasMes estadisticasMes = dataSnapshot.getValue(EstadisticasMes.class);
-                                ArrayList<String> listaID = estadisticasMes.getListaUsuariosID();
-                                float numero = 0;
-                                if (listaID == null) {
-                                    listaID = new ArrayList<>();
-                                    listaID.add(usuario.getUsuarioID());
-                                    numero = 1;
-                                } else {
-                                    for (String id : listaID) {
-                                        if (!id.equals(usuario.getUsuarioID())) {
-                                            numero = estadisticasMes.getNumeroClientes() + 1;
-                                            listaID.add(usuario.getUsuarioID());
-                                        }
-                                    }
-                                }
-
-                                estadisticasMes.setListaUsuariosID(listaID);
-                                estadisticasMes.setNumeroClientes(numero);
-                                diccionario.put("08", estadisticasMes);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        estadisticasMes = diccionario.get("08");
+                        listaId = estadisticasMes.getListaUsuariosID();
+                        if (!listaId.contains(usuario.getUsuarioID())) {
+                            estadisticasMes.setNumeroClientes(estadisticasMes.getNumeroClientes() + 1);
+                            diccionario.put("08", estadisticasMes);
+                            listaId.add(usuario.getUsuarioID());
+                        }
                         break;
                     case "09":
-                        rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_SEPTIEMBRE).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                EstadisticasMes estadisticasMes = dataSnapshot.getValue(EstadisticasMes.class);
-                                ArrayList<String> listaID = estadisticasMes.getListaUsuariosID();
-                                float numero = 0;
-                                if (listaID == null) {
-                                    listaID = new ArrayList<>();
-                                    listaID.add(usuario.getUsuarioID());
-                                    numero = 1;
-                                } else {
-                                    for (String id : listaID) {
-                                        if (!id.equals(usuario.getUsuarioID())) {
-                                            numero = estadisticasMes.getNumeroClientes() + 1;
-                                            listaID.add(usuario.getUsuarioID());
-                                        }
-                                    }
-                                }
-
-                                estadisticasMes.setListaUsuariosID(listaID);
-                                estadisticasMes.setNumeroClientes(numero);
-                                diccionario.put("09", estadisticasMes);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        estadisticasMes = diccionario.get("09");
+                        listaId = estadisticasMes.getListaUsuariosID();
+                        if (!listaId.contains(usuario.getUsuarioID())) {
+                            estadisticasMes.setNumeroClientes(estadisticasMes.getNumeroClientes() + 1);
+                            diccionario.put("09", estadisticasMes);
+                            listaId.add(usuario.getUsuarioID());
+                        }
                         break;
                     case "10":
-                        rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_OCTUBRE).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                EstadisticasMes estadisticasMes = dataSnapshot.getValue(EstadisticasMes.class);
-                                ArrayList<String> listaID = estadisticasMes.getListaUsuariosID();
-                                float numero = 0;
-                                if (listaID == null) {
-                                    listaID = new ArrayList<>();
-                                    listaID.add(usuario.getUsuarioID());
-                                    numero = 1;
-                                } else {
-                                    for (String id : listaID) {
-                                        if (!id.equals(usuario.getUsuarioID())) {
-                                            numero = estadisticasMes.getNumeroClientes() + 1;
-                                            listaID.add(usuario.getUsuarioID());
-                                        }
-                                    }
-                                }
-
-                                estadisticasMes.setListaUsuariosID(listaID);
-                                estadisticasMes.setNumeroClientes(numero);
-                                diccionario.put("10", estadisticasMes);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        estadisticasMes = diccionario.get("10");
+                        listaId = estadisticasMes.getListaUsuariosID();
+                        if (!listaId.contains(usuario.getUsuarioID())) {
+                            estadisticasMes.setNumeroClientes(estadisticasMes.getNumeroClientes() + 1);
+                            diccionario.put("10", estadisticasMes);
+                            listaId.add(usuario.getUsuarioID());
+                        }
                         break;
                     case "11":
-                        rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_NOVIEMBRE).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                EstadisticasMes estadisticasMes = dataSnapshot.getValue(EstadisticasMes.class);
-                                ArrayList<String> listaID = estadisticasMes.getListaUsuariosID();
-                                float numero = 0;
-                                if (listaID == null) {
-                                    listaID = new ArrayList<>();
-                                    listaID.add(usuario.getUsuarioID());
-                                    numero = 1;
-                                } else {
-                                    for (String id : listaID) {
-                                        if (!id.equals(usuario.getUsuarioID())) {
-                                            numero = estadisticasMes.getNumeroClientes() + 1;
-                                            listaID.add(usuario.getUsuarioID());
-                                        }
-                                    }
-                                }
-
-                                estadisticasMes.setListaUsuariosID(listaID);
-                                estadisticasMes.setNumeroClientes(numero);
-                                diccionario.put("11", estadisticasMes);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        estadisticasMes = diccionario.get("11");
+                        listaId = estadisticasMes.getListaUsuariosID();
+                        if (!listaId.contains(usuario.getUsuarioID())) {
+                            estadisticasMes.setNumeroClientes(estadisticasMes.getNumeroClientes() + 1);
+                            diccionario.put("11", estadisticasMes);
+                            listaId.add(usuario.getUsuarioID());
+                        }
                         break;
                     case "12":
-                        rtdb.getReference().child(Constantes.CHILD_ESTADISTICAS_ID).child(Constantes.CHILD_ESTADISTICAS_DICIEMBRE).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                EstadisticasMes estadisticasMes = dataSnapshot.getValue(EstadisticasMes.class);
-                                ArrayList<String> listaID = estadisticasMes.getListaUsuariosID();
-                                float numero = 0;
-                                if (listaID == null) {
-                                    listaID = new ArrayList<>();
-                                    listaID.add(usuario.getUsuarioID());
-                                    numero = 1;
-                                } else {
-                                    for (String id : listaID) {
-                                        if (!id.equals(usuario.getUsuarioID())) {
-                                            numero = estadisticasMes.getNumeroClientes() + 1;
-                                            listaID.add(usuario.getUsuarioID());
-                                        }
-                                    }
-                                }
-
-                                estadisticasMes.setListaUsuariosID(listaID);
-                                estadisticasMes.setNumeroClientes(numero);
-                                diccionario.put("12", estadisticasMes);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        estadisticasMes = diccionario.get("12");
+                        listaId = estadisticasMes.getListaUsuariosID();
+                        if (!listaId.contains(usuario.getUsuarioID())) {
+                            estadisticasMes.setNumeroClientes(estadisticasMes.getNumeroClientes() + 1);
+                            diccionario.put("12", estadisticasMes);
+                            listaId.add(usuario.getUsuarioID());
+                        }
                         break;
                 }
             }
@@ -606,5 +320,13 @@ public class Consultas {
 
     public void setDiccionaioGenero(HashMap<String, EstadisticasGenero> diccionaioGenero) {
         this.diccionarioGenero = diccionaioGenero;
+    }
+
+    public ArrayList<Usuario> getListaUsuario() {
+        return listaUsuario;
+    }
+
+    public void setListaUsuario(ArrayList<Usuario> listaUsuario) {
+        this.listaUsuario = listaUsuario;
     }
 }

@@ -240,21 +240,23 @@
 
 
                 <EditText
-                    android:id="@+id/btn_fragment_transacciones_descripcion_clientes"
+                    android:id="@+id/et_fragment_transacciones_descripcion_clientes"
                     android:layout_width="@dimen/fragment_transacciones_campos_w"
                     android:layout_height="@dimen/fragment_transacciones_campos_h"
                     android:layout_below="@+id/btn_fragment_transacciones_ingresar_clientes"
                     android:background="@drawable/fragment_transacciones_campo_ingresar"
                     android:drawableLeft="@drawable/fragment_transacciones_ic_description"
                     android:gravity="center"
+                    android:textColor="@color/colorWhite"
                     android:hint="@string/fragment_estadisticas_descripcion"
                     android:textColorHint="@color/colorWhite"
                     android:textSize="@dimen/fragment_transacciones_tamanio" />
 
                 <ImageView
+                    android:id="@+id/guardar_transacciones"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/btn_fragment_transacciones_descripcion_clientes"
+                    android:layout_below="@+id/et_fragment_transacciones_descripcion_clientes"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="50dp"
                     android:layout_marginBottom="50dp"

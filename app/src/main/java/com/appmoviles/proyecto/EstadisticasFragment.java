@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.appmoviles.proyecto.modelo.Usuario;
 import com.appmoviles.proyecto.util.Constantes;
 import com.appmoviles.proyecto.util.Consultas;
 import com.appmoviles.proyecto.util.EstadisticasAdapter;
@@ -51,6 +52,7 @@ public class EstadisticasFragment extends Fragment implements Serializable, View
     Consultas consultas;
     private HashMap<String, EstadisticasMes> estadisticasMesHashMap;
     private HashMap<String, EstadisticasGenero> estadisticasGeneroHashMap;
+    private ArrayList<Usuario> usuarioArrayList;
 
     public EstadisticasFragment() {
         // Required empty public constructor
@@ -82,8 +84,11 @@ public class EstadisticasFragment extends Fragment implements Serializable, View
         iv_fragment_estadisticas_perfil.setOnClickListener(this);
 
         consultas = Consultas.getInstance();
+        consultas.calcularRegistrosFecha();
+        consultas.calcularGeneros();
         estadisticasMesHashMap = consultas.getDiccionario();
         estadisticasGeneroHashMap = consultas.getDiccionaioGenero();
+        usuarioArrayList = consultas.getListaUsuario();
 
         agregarEstadisticas();
 
@@ -97,9 +102,14 @@ public class EstadisticasFragment extends Fragment implements Serializable, View
         List<PieEntry> entries_3 = new ArrayList<>();
         PieDataSet set_2 = new PieDataSet(entries_3, "Edades");
         // refresh
+        float numero_femenino = estadisticasGeneroHashMap.get(Constantes.FEMENINO).getNumero_femeninos();
+        float numero_masculino = estadisticasGeneroHashMap.get(Constantes.MASCULINO).getNumero_masculinos();
+        float total = listaEstadisticas.size();
+        float porcentajeFemenino = ((numero_femenino / total) * 100);
+        float porcentajeMasculino = ((numero_masculino / total) * 100);
         entries_3 = new ArrayList<>();
-        entries_3.add(new PieEntry(estadisticasGeneroHashMap.get(Constantes.FEMENINO).getNumero_femeninos(), "F"));
-        entries_3.add(new PieEntry(estadisticasGeneroHashMap.get(Constantes.MASCULINO).getNumero_masculinos(), "M"));
+        entries_3.add(new PieEntry(numero_femenino, "F"));
+        entries_3.add(new PieEntry(numero_masculino, "M"));
 
         set_2 = new PieDataSet(entries_3, "Hombre y Mujeres");
         set_2.setColors(ColorTemplate.MATERIAL_COLORS);
@@ -122,9 +132,8 @@ public class EstadisticasFragment extends Fragment implements Serializable, View
         set.setColors(ColorTemplate.PASTEL_COLORS);
         BarData data_3 = new BarData(set);
         // end Barchart
-
-        Grafica grafica2 = new Grafica(Constantes.TIPO_PIE, data_2, null, "Hombre y Mujeres");
-        Grafica grafica3 = new Grafica(Constantes.TIPO_BAR, null, data_3, "Clientes");
+        Grafica grafica2 = new Grafica(Constantes.TIPO_PIE, data_2, null, "Gráfica de Generos");
+        Grafica grafica3 = new Grafica(Constantes.TIPO_BAR, null, data_3, "Gráfica de Clientes por Mes");
 
         listaEstadisticas.add(grafica2);
         listaEstadisticas.add(grafica3);

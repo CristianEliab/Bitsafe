@@ -182,4 +182,13 @@
     <string name="comunicacion_ayuda">Comunicate con nuestro centro de atención 01800 6784637</string>
     <string name="aceptar_terminos">Aceptar Terminos y Condiciones</string>
     <string name="mensaje_aceptar_y_terminos">Es necesario aceptar los terminos y condiciones para continuar con nuestros servicios</string>
+
+
+    <string name="descripcion_grafica_generos">La presente gráfica refleja en porcentaje de usuarios de género femenino y masculino presentes en el Bitsafe</string>
+    <string name="descripcion_grafica_clientes">La presente gráfica refleja el número de usuarios que se registraron por mes en este año en Bitsafe</string>
+
+    <string name="guardar_transaccion">Guardar</string>
+    <string name="confirmacion">¿Desea guardar la transacción?</string>
+
+    <string name="aceptar">Aceptar</string>
 </resources>

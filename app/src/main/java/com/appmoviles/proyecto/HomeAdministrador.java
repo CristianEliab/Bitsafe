@@ -79,6 +79,10 @@ public class HomeAdministrador extends FragmentActivity implements
                         transaction.commit();
                         break;
                     case R.id.menubar_transacciones:
+                        transaccionesFragment.setMonto("Agregar Monto");
+                        transaccionesFragment.setFecha("Agregar Fecha");
+                        transaccionesFragment.setUsuario_destino(null);
+                        transaccionesFragment.setUsuario_origen(null);
                         transaction.replace(R.id.contenido, transaccionesFragment);
                         transaction.commit();
                         break;
@@ -123,7 +127,7 @@ public class HomeAdministrador extends FragmentActivity implements
             transaction.commit();
         }
 
-        }
+    }
 
     public void llamarFragmentAgregarMonto() {
         manager = this.getSupportFragmentManager();

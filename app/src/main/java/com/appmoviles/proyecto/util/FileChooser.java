@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -75,7 +76,7 @@ public class FileChooser {
         dialog.setContentView(list);
         dialog.setTitle("Seleccione el archivo");
         dialog.getWindow().setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
-        refresh(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
+        refresh(Environment.getExternalStorageDirectory());
     }
 
     public void showDialog() {
@@ -158,5 +159,16 @@ public class FileChooser {
         } else {
             return new File(currentPath, fileChosen);
         }
+    }
+
+
+    public File getAlbumStorageDir(String albumName) {
+        // Get the directory for the user's public pictures directory.
+        File file = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOWNLOADS), albumName);
+        if (!file.mkdirs()) {
+            Log.e("Problemas", "Directory not created");
+        }
+        return file;
     }
 }

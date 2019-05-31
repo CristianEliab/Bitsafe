@@ -47,7 +47,8 @@ public class EstadisticasAdapter extends PagerAdapter {
         PieChart pieChart = view.findViewById(R.id.pc_fragment_estadisticas);
         BarChart barChart = view.findViewById(R.id.bc_fragment_finanzas_gastos);
         TextView textView = view.findViewById(R.id.et_fragment_estadisticas_descripcion_grafica);
-        textView.setHint(listaEstadisticas.get(position).getDescripcion());
+        TextView textView1 = view.findViewById(R.id.titulo_descripcion);
+        textView1.setText(listaEstadisticas.get(position).getDescripcion());
 
         //BarChart
         final String[] quarters = new String[]{"En", "Fe", "Ma", "Ab", "My", "Jn", "Jl", "Ag", "Sp", "Oc", "No", "Dc"};
@@ -66,11 +67,13 @@ public class EstadisticasAdapter extends PagerAdapter {
             barChart.invalidate(); // refresh
             barChart.setScaleEnabled(false);//escalas de las X y Y
             barChart.getXAxis().setValueFormatter(formatter);
+            textView.setHint(R.string.descripcion_grafica_generos);
         }
         if (listaEstadisticas.get(position).getTipo().equals(Constantes.TIPO_PIE)) {
             pieChart.setVisibility(View.VISIBLE);
             pieChart.setData(listaEstadisticas.get(position).getPieData());
             pieChart.invalidate();
+            textView.setHint(R.string.descripcion_grafica_clientes);
         }
 
         // refresh

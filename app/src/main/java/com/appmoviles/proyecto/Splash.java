@@ -47,6 +47,8 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        consultas = Consultas.getInstance();
+        consultas.crearBase();
 
         // Conectar con la base de datos
         rtdb = FirebaseDatabase.getInstance();
@@ -56,12 +58,11 @@ public class Splash extends AppCompatActivity {
         //myPreferences.edit().clear().commit();
         cargodb = myPreferences.getBoolean(GUARDO, true);
 
-        /*consultas = Consultas.getInstance();
-        consultas.crearBase();*/
+
 
         //rtdb.getReference().removeValue();
 
-       /* // Carga la base de datos la primera vez.
+        /*// Carga la base de datos la primera vez.
         if (cargodb) {
             // Obtener el fichero desdes la carpeta raw
             InputStream in = getResources().openRawResource(R.raw.database);
