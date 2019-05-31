@@ -47,6 +47,7 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
     Fragment fragment;
 
     private String volver_a;
+    private String donde_viene;
 
     public PerfilCliente() {
 
@@ -63,11 +64,11 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
         if (i != null) {
             volver_a = i.getStringExtra(Constantes.GO_TO_PERFIL);
             fragment = (Fragment) i.getSerializableExtra(Constantes.FRAGMENT);
+            donde_viene = i.getStringExtra(Constantes.DONDE_VIENE);
         }
 
         rtdb = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
-
 
         tv_nombre_iniciales = findViewById(R.id.iv_nombre_perfil_cliente);
         tv_nombre = findViewById(R.id.tv_nombre_cliente_perfil_cliente);
@@ -85,44 +86,51 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 if (volver_a.equals(Constantes.FRAGMENT_FINANZAS)) {
-                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    Intent i = new Intent(PerfilCliente.this, HomeCliente.class);
                     i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_FINANZAS);
                     startActivity(i);
                     finish();
                 }
                 if (volver_a.equals(Constantes.FRAGMENT_PLANES)) {
-                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    Intent i = new Intent(PerfilCliente.this, HomeCliente.class);
                     i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_PLANES);
                     startActivity(i);
                     finish();
                 }
                 if (volver_a.equals(Constantes.FRAGMENT_CUENTAS)) {
-                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    Intent i = new Intent(PerfilCliente.this, HomeCliente.class);
                     i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CUENTAS);
                     startActivity(i);
                     finish();
                 }
-                if(volver_a.equals(Constantes.FRAGMENT_CLIENTE)){
+                if (volver_a.equals(Constantes.FRAGMENT_CLIENTE)) {
                     Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
                     i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CLIENTE);
                     startActivity(i);
                     finish();
                 }
-                if(volver_a.equals(Constantes.FRAGMENT_ESTADISTICAS)){
+                if (volver_a.equals(Constantes.FRAGMENT_ESTADISTICAS)) {
                     Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
                     i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_ESTADISTICAS);
                     startActivity(i);
                     finish();
                 }
-                if(volver_a.equals(Constantes.FRAGMENT_TRANSACCION)){
+                if (volver_a.equals(Constantes.FRAGMENT_TRANSACCION)) {
                     Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
                     i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_TRANSACCION);
                     startActivity(i);
                     finish();
                 }
-                if(volver_a.equals(Constantes.FRAGMENT_CARGAR)){
+                if (volver_a.equals(Constantes.FRAGMENT_CARGAR)) {
                     Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
                     i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CARGAR);
+                    startActivity(i);
+                    finish();
+                }
+                if (volver_a.equals(Constantes.DATOS_FRAGMENT)) {
+                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.DATOS_FRAGMENT);
+                    i.putExtra(Constantes.DONDE_VIENE, donde_viene);
                     startActivity(i);
                     finish();
                 }
@@ -171,18 +179,14 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
         });
 
 
-        rtdb.getReference().child(Constantes.CHILD_USUARIOS)
+        rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(auth.getCurrentUser().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        //Respuesta de firebase
-                        for (DataSnapshot hijo : dataSnapshot.getChildren()) {
-                            //Si es admin, loguearse
-                            Usuario usuario = hijo.getValue(Usuario.class);
-                            if (usuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
-                                tv_nombre_cliente_perfil_cliente.setText(usuario.getNombre());
-                                tv_numero_telefono_perfil_cliente.setText(usuario.getTelefono());
-                            }
+                        Usuario usuario = dataSnapshot.getValue(Usuario.class);
+                        tv_nombre_cliente_perfil_cliente.setText(usuario.getNombre());
+                        if (usuario.getTelefono() != null) {
+                            tv_numero_telefono_perfil_cliente.setText(usuario.getTelefono());
                         }
                     }
 
@@ -198,8 +202,8 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
             public void onClick(View v) {
                 AlertDialog.Builder ayuda = new AlertDialog.Builder(getApplicationContext());
                 ayuda.setTitle(R.string.title_ayuda);
-                ayuda.setMessage("Comunicate con nuestro centro de atención 01800 6784637");
-                ayuda.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                ayuda.setMessage(R.string.comunicacion_ayuda);
+                ayuda.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -214,16 +218,9 @@ public class PerfilCliente extends AppCompatActivity implements Serializable {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder info = new AlertDialog.Builder(getApplicationContext());
-                info.setTitle("Terminos y Condiciones");
-                info.setMessage(" luego de la remisión o puesta en conocimiento,\n" +
-                        "o publicación del reglamento o sus modificaciones o actualizaciones en la página Web del\n" +
-                        "BANCO, este Reglamento se entenderá aceptado por EL CLIENTE con la contratación de\n" +
-                        "productos y/o con la suscripción de la tarjeta de firmas en la que se establecen las condiciones\n" +
-                        "de manejo de las cuentas y/o con el recibo de la Tarjeta Débito, Talonario o cualquier otro\n" +
-                        "medio de manejo recibido por EL CLIENTE y/o con la utilización del producto, canal o\n" +
-                        "servicio asociados y/o manteniendo de fondos disponibles en las cuentas y/o al mantener\n" +
-                        "los productos y/o seguir realizando operaciones o utilizando servicios.");
-                info.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                info.setTitle(R.string.terminos_y_condiciones);
+                info.setMessage(R.string.mensaje_terminos_condiciones);
+                info.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

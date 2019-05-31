@@ -1,6 +1,8 @@
 package com.appmoviles.proyecto;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,12 +17,16 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.appmoviles.proyecto.modelo.Transaccion;
 import com.appmoviles.proyecto.modelo.Usuario;
 import com.appmoviles.proyecto.util.Constantes;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.UUID;
 
 
 public class TransaccionesFragment extends Fragment implements View.OnClickListener, Serializable, OnFragmentInteractionListener {
@@ -30,17 +36,23 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
     private Button btn_fragment_transacciones_clientes_origen;
     private Button btn_fragment_transacciones_clientes_destino;
     private Button btn_fragment_transacciones_agregar_fecha;
-    private EditText btn_fragment_transacciones_descripcion_clientes;
+    private EditText et_fragment_transacciones_descripcion_clientes;
     private ImageView tv_fragment_transacciones_foto_origen;
     private ImageView tv_fragment_transacciones_foto_destino;
     private ImageView iv_fragment_transacciones_perfil;
+    private ImageView guardar_transacciones;
 
     private String monto;
     private Usuario usuario_origen;
     private Usuario usuario_destino;
     private String fecha;
+    private String descripcion = "";
+    private int diaSeleccionado;
+    private int mesSeleccionado;
+    private int anioSeleccionado;
 
     private SharedPreferences myPreferences;
+    FirebaseDatabase rtdb;
 
 
     public TransaccionesFragment() {
@@ -64,10 +76,11 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
         btn_fragment_transacciones_clientes_origen = v.findViewById(R.id.btn_fragment_transacciones_clientes_origen);
         btn_fragment_transacciones_clientes_destino = v.findViewById(R.id.btn_fragment_transacciones_clientes_destino);
         btn_fragment_transacciones_agregar_fecha = v.findViewById(R.id.btn_fragment_transacciones_agregar_fecha);
-        btn_fragment_transacciones_descripcion_clientes = v.findViewById(R.id.btn_fragment_transacciones_descripcion_clientes);
+        et_fragment_transacciones_descripcion_clientes = v.findViewById(R.id.et_fragment_transacciones_descripcion_clientes);
         tv_fragment_transacciones_foto_origen = v.findViewById(R.id.tv_fragment_transacciones_foto_origen);
         tv_fragment_transacciones_foto_destino = v.findViewById(R.id.tv_fragment_transacciones_foto_destino);
         iv_fragment_transacciones_perfil = v.findViewById(R.id.iv_fragment_transacciones_perfil);
+        guardar_transacciones = v.findViewById(R.id.guardar_transacciones);
 
         // Pedir la información
         myPreferences
@@ -85,6 +98,9 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
         if (fecha != null) {
             btn_fragment_transacciones_agregar_fecha.setHint(fecha);
         }
+        if (descripcion != null) {
+            et_fragment_transacciones_descripcion_clientes.setText(descripcion);
+        }
 
 
         // Acciones
@@ -93,6 +109,7 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
         btn_fragment_transacciones_agregar_monto.setOnClickListener(this);
         btn_fragment_transacciones_agregar_fecha.setOnClickListener(this);
         iv_fragment_transacciones_perfil.setOnClickListener(this);
+        guardar_transacciones.setOnClickListener(this);
 
         return v;
     }
@@ -135,7 +152,55 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
                 startActivity(i);
                 getActivity().finish();
                 break;
+            case R.id.guardar_transacciones:
+                guardarTransaccion();
+                break;
         }
+    }
+
+    private void guardarTransaccion() {
+        if (comprobarInformacion()) {
+            final Transaccion transaccionNueva = new Transaccion();
+            transaccionNueva.setTransaccionID(UUID.randomUUID().toString());
+            transaccionNueva.setMontoTransaccion(monto);
+            descripcion = et_fragment_transacciones_descripcion_clientes.getText().toString();
+            transaccionNueva.setDescripcion(descripcion);
+            transaccionNueva.setFechaTransaccion(anioSeleccionado + "-" + mesSeleccionado + "-" + diaSeleccionado);
+
+            // Cuentas
+            transaccionNueva.setCuentaOrigenID(usuario_origen.getListaCuentas().get(0).getCuentaID());
+            transaccionNueva.setCuentaDestinoID(usuario_destino.getListaCuentas().get(0).getCuentaID());
+            // Cuentas
+
+            AlertDialog.Builder info = new AlertDialog.Builder(getContext());
+            info.setTitle(R.string.guardar_transaccion);
+            info.setMessage(R.string.confirmacion);
+            info.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    rtdb.getReference().child(Constantes.CHILD_TRANSACCIONES).push().setValue(transaccionNueva);
+                    usuario_origen = null;
+                    usuario_destino = null;
+                    monto = null;
+                    fecha = null;
+                    descripcion = "";
+                }
+            });
+            info.show();
+        }
+    }
+
+    private boolean comprobarInformacion() {
+        boolean agregar = false;
+        if (!monto.equals("") &&
+                usuario_origen != null &&
+                usuario_destino != null &&
+                fecha.equals("")) {
+            agregar = true;
+        } else {
+            Toast.makeText(getContext(), "Ingrese cada uno de los campos", Toast.LENGTH_SHORT).show();
+        }
+        return agregar;
     }
 
 
@@ -162,7 +227,9 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
 
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-
+            diaSeleccionado = dayOfMonth;
+            mesSeleccionado = monthOfYear;
+            anioSeleccionado = year;
             btn_fragment_transacciones_agregar_fecha.setHint(String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear + 1)
                     + "-" + String.valueOf(year));
         }
@@ -186,4 +253,35 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
     }
 
 
+    public String getMonto() {
+        return monto;
+    }
+
+    public void setMonto(String monto) {
+        this.monto = monto;
+    }
+
+    public Usuario getUsuario_origen() {
+        return usuario_origen;
+    }
+
+    public void setUsuario_origen(Usuario usuario_origen) {
+        this.usuario_origen = usuario_origen;
+    }
+
+    public Usuario getUsuario_destino() {
+        return usuario_destino;
+    }
+
+    public void setUsuario_destino(Usuario usuario_destino) {
+        this.usuario_destino = usuario_destino;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
 }

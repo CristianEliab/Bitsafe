@@ -1,5 +1,6 @@
 package com.appmoviles.proyecto;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -76,7 +77,7 @@ public class SeleccionarClienteFragment extends Fragment implements AdapterTempl
         libreta.setAdapter(adapter);
         adapter.setListener(this);
 
-        rtdb.getReference().child(Constantes.CHILD_USUARIOS)
+        rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -99,8 +100,15 @@ public class SeleccionarClienteFragment extends Fragment implements AdapterTempl
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.contenido, fragment);
-                transaction.commit();
+                if (fragment == null) {
+                    TransaccionesFragment transaccionesFragment = new TransaccionesFragment();
+                    transaction.replace(R.id.contenido, transaccionesFragment);
+                    transaction.commit();
+                } else {
+                    transaction.replace(R.id.contenido, fragment);
+                    transaction.commit();
+                }
+
             }
         });
 
@@ -129,6 +137,20 @@ public class SeleccionarClienteFragment extends Fragment implements AdapterTempl
                 }
                 transaction.replace(R.id.contenido, datosClienteFragment);
                 transaction.commit();
+            }
+        });
+
+
+        iv_fragment_sl_clientes_perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), PerfilCliente.class);
+                i.putExtra(Constantes.GO_TO_PERFIL, Constantes.DATOS_FRAGMENT);
+                i.putExtra(Constantes.DONDE_VIENE, Constantes.FRAGMENT_TRANSACCION);
+                DatosClienteFragment datosClienteFragment = new DatosClienteFragment();
+                i.putExtra(Constantes.FRAGMENT, datosClienteFragment);
+                startActivity(i);
+                getActivity().finish();
             }
         });
 

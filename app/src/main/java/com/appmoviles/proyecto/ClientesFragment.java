@@ -1,25 +1,25 @@
 package com.appmoviles.proyecto;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.appmoviles.proyecto.modelo.Cliente;
-import com.appmoviles.proyecto.modelo.RolUsuario;
 import com.appmoviles.proyecto.modelo.Usuario;
 import com.appmoviles.proyecto.util.AdapterTemplate_Clientes;
 import com.appmoviles.proyecto.util.Constantes;
+import com.appmoviles.proyecto.util.Consultas;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,17 +27,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
-public class ClientesFragment extends Fragment implements Serializable, AdapterTemplate_Clientes.OnItemClickUsuario {
+public class ClientesFragment extends Fragment implements Serializable, AdapterTemplate_Clientes.OnItemClickUsuario, View.OnClickListener {
 
     private RecyclerView libreta;
     private AdapterTemplate_Clientes adapter;
     private ImageView iv_fragment_clientes_perfil;
     private DatosClienteFragment datosClienteFragment;
+    private EditText et_fragment_clientes_filtro;
 
     FirebaseAuth auth;
     FirebaseDatabase rtdb;
+
+    Consultas consultas;
 
     public ClientesFragment() {
         // Required empty public constructor
@@ -55,12 +57,14 @@ public class ClientesFragment extends Fragment implements Serializable, AdapterT
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_clientes, container, false);
         iv_fragment_clientes_perfil = v.findViewById(R.id.iv_fragment_clientes_perfil);
+        et_fragment_clientes_filtro = v.findViewById(R.id.et_fragment_clientes_filtro);
 
         rtdb = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        consultas = Consultas.getInstance();
 
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         libreta = v.findViewById(R.id.lista_clientes);
         adapter = new AdapterTemplate_Clientes();
@@ -71,18 +75,11 @@ public class ClientesFragment extends Fragment implements Serializable, AdapterT
         libreta.setAdapter(adapter);
 
 
-        iv_fragment_clientes_perfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), PerfilCliente.class);
-                i.putExtra(Constantes.GO_TO_PERFIL, Constantes.FRAGMENT_CLIENTE);
-                startActivity(i);
-                getActivity().finish();
-            }
-        });
+        iv_fragment_clientes_perfil.setOnClickListener(this);
+        et_fragment_clientes_filtro.setOnClickListener(this);
 
-        final ArrayList<Usuario> usuarios = new ArrayList<>();
-        rtdb.getReference().child(Constantes.CHILD_USUARIOS)
+
+        rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -91,9 +88,9 @@ public class ClientesFragment extends Fragment implements Serializable, AdapterT
                             //Si es admin, loguearse
                             Usuario usuario = hijo.getValue(Usuario.class);
                             adapter.agregarUsuario(usuario);
+                            consultas.addUsuarios(usuario);
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
@@ -110,7 +107,7 @@ public class ClientesFragment extends Fragment implements Serializable, AdapterT
         // Utilizado para enviar variables entre dos fragments
         Bundle parametro = new Bundle();
         if (usuario != null) {
-            parametro.putSerializable(Constantes.USUARIO, usuario);
+            parametro.putSerializable(Constantes.USUARIO_SERIALIZABLE, usuario);
             parametro.putSerializable(Constantes.CLIENTES, this);
             parametro.putString(Constantes.DONDE_VIENE, Constantes.FRAGMENT_CLIENTE);
             datosClienteFragment.setArguments(parametro);
@@ -119,4 +116,33 @@ public class ClientesFragment extends Fragment implements Serializable, AdapterT
         transaction.commit();
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_fragment_clientes_perfil:
+                Intent i = new Intent(getActivity(), PerfilCliente.class);
+                i.putExtra(Constantes.GO_TO_PERFIL, Constantes.FRAGMENT_CLIENTE);
+                startActivity(i);
+                getActivity().finish();
+                break;
+            case R.id.et_fragment_clientes_filtro:
+                et_fragment_clientes_filtro.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        adapter.getFilter().filter(s.toString());
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+                break;
+        }
+    }
 }

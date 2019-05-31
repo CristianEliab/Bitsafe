@@ -10,7 +10,67 @@
       "cedula": "3156067465",
       "ubicacion": "Cali",
       "correo": "eliadcrist@gmail.com",
-      "configuracionID": "01"
+      "configuracionID": "01",
+      "bancos": [
+        {
+          "bancoID": "01",
+          "nombreBanco": "Davivienda",
+          "icono": "banco_davivienda"
+        },
+        {
+          "bancoID": "02",
+          "nombreBanco": "Bogota",
+          "icono": "banco_bogota"
+        },
+        {
+          "bancoID": "03",
+          "nombreBanco": "Bancolombia",
+          "icono": "banco_bancolombia"
+        },
+        {
+          "bancoID": "04",
+          "nombreBanco": "Itau",
+          "icono": "banco_itau"
+        }
+      ],
+      "cuentas": [
+        {
+          "cuentaID": "01",
+          "numeroCuenta": "3456-6971-7765-5421",
+          "tipoCuentaID": "01",
+          "tipoCuentaNombre": "Cuenta Credito",
+          "bancoID": "01",
+          "saldo": "200000",
+          "fechaVinculacion": "2019-02-10"
+        },
+        {
+          "cuentaID": "02",
+          "numeroCuenta": "6791-2317-3479-3214",
+          "tipoCuentaID": "01",
+          "tipoCuentaNombre": "Cuenta Credito",
+          "bancoID": "02",
+          "saldo": "200000",
+          "fechaVinculacion": "2019-02-10"
+        },
+        {
+          "cuentaID": "03",
+          "numeroCuenta": "5678-9012-3456-1234",
+          "tipoCuentaID": "01",
+          "tipoCuentaNombre": "Cuenta Credito",
+          "bancoID": "03",
+          "saldo": "200000",
+          "fechaVinculacion": "2019-02-10"
+        },
+        {
+          "cuentaID": "04",
+          "numeroCuenta": "9012-3456-6497-1576",
+          "tipoCuentaID": "01",
+          "tipoCuentaNombre": "Cuenta Credito",
+          "bancoID": "04",
+          "saldo": "200000",
+          "fechaVinculacion": "2019-02-10"
+        }
+      ]
     },
     {
       "usuarioID": "VmYXVfTQFEf3rdtZtjfFyg2xNdu1",
@@ -22,7 +82,25 @@
       "cedula": "1122335566",
       "ubicacion": "Cali",
       "correo": "alejandra@gmail.com",
-      "configuracionID": "02"
+      "configuracionID": "02",
+      "bancos": [
+        {
+          "bancoID": "04",
+          "nombreBanco": "Itau",
+          "icono": "banco_itau"
+        }
+      ],
+      "cuentas": [
+        {
+          "cuentaID": "01",
+          "numeroCuenta": "3456-9764-3546-6721",
+          "tipoCuentaID": "01",
+          "tipoCuentaNombre": "Cuenta Credito",
+          "bancoID": "04",
+          "saldo": "200000",
+          "fechaVinculacion": "2019-02-10"
+        }
+      ]
     },
     {
       "usuarioID": "A295owdX7mTiwVYOx1PW2XcUlk53",
@@ -34,7 +112,39 @@
       "cedula": "11448899156",
       "ubicacion": "Cali",
       "correo": "steven@gmail.com",
-      "configuracionID": "02"
+      "configuracionID": "02",
+      "bancos": [
+        {
+          "bancoID": "01",
+          "nombreBanco": "Davivienda",
+          "icono": "banco_davivienda"
+        },
+        {
+          "bancoID": "04",
+          "nombreBanco": "Itau",
+          "icono": "banco_itau"
+        }
+      ],
+      "cuentas": [
+        {
+          "cuentaID": "01",
+          "numeroCuenta": "3456-9754-6764-3215",
+          "tipoCuentaID": "01",
+          "tipoCuentaNombre": "Cuenta Credito",
+          "bancoID": "01",
+          "saldo": "200000",
+          "fechaVinculacion": "2019-02-10"
+        },
+        {
+          "cuentaID": "02",
+          "numeroCuenta": "3649-6197-9184-2011",
+          "tipoCuentaID": "01",
+          "tipoCuentaNombre": "Cuenta Credito",
+          "bancoID": "04",
+          "saldo": "200000",
+          "fechaVinculacion": "2019-02-10"
+        }
+      ]
     },
     {
       "usuarioID": "KErt3qoS59QyupH045HTA8L5jYx1",
@@ -46,7 +156,34 @@
       "cedula": "1234189967",
       "ubicacion": "Cali",
       "correo": "johan@gmail.com",
-      "configuracionID": "02"
+      "configuracionID": "02",
+      "bancos": [
+        {
+          "bancoID": "01",
+          "nombreBanco": "Davivienda",
+          "icono": "banco_davivienda"
+        }
+      ],
+      "cuentas": [
+        {
+          "cuentaID": "01",
+          "numeroCuenta": "6794-1498-0197-3416",
+          "tipoCuentaID": "01",
+          "tipoCuentaNombre": "Cuenta Credito",
+          "bancoID": "01",
+          "saldo": "200000",
+          "fechaVinculacion": "2019-02-10"
+        },
+        {
+          "cuentaID": "02",
+          "numeroCuenta": "1435-1487-9874-1948",
+          "tipoCuentaID": "01",
+          "tipoCuentaNombre": "Cuenta Credito",
+          "bancoID": "02",
+          "saldo": "200000",
+          "fechaVinculacion": "2019-02-10"
+        }
+      ]
     }
   ],
   "actividad": [

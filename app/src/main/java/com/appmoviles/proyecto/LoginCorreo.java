@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -21,16 +22,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appmoviles.proyecto.modelo.RolUsuario;
+import com.appmoviles.proyecto.util.BaseActivity;
+import com.appmoviles.proyecto.util.Constantes;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class LoginCorreo extends AppCompatActivity {
+public class LoginCorreo extends BaseActivity {
 
     private static final int REQUEST_CODE = 11;
     private static final String READ_EXTERNAL = Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -55,8 +59,9 @@ public class LoginCorreo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_correo);
 
-        verificarPermisos();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        verificarPermisos();
 
     }
 
@@ -101,7 +106,6 @@ public class LoginCorreo extends AppCompatActivity {
                 final String correo = et_login_correo_contrasenia.getText().toString().trim();
                 String pass = et_login_correo_confirmar_contrasenia.getText().toString().trim();
 
-
                 if (!correo.trim().equals("") && !pass.trim().equals("") && correo != null && pass != null) {
                     loguearUsuario(correo, pass);
                 } else {
@@ -115,9 +119,8 @@ public class LoginCorreo extends AppCompatActivity {
         tv_login_correo_registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(LoginCorreo.this, Registro_Bitsafe.class);
+                Intent i = new Intent(LoginCorreo.this, RegistroGeneral.class);
                 startActivity(i);
-                finish();
             }
         });
 
@@ -129,7 +132,6 @@ public class LoginCorreo extends AppCompatActivity {
             et_login_correo_contrasenia.setText(correo_guardado);
             et_login_correo_contrasenia.setTextColor(Color.rgb(130, 130, 130));
         }
-
 
 
     }
@@ -144,48 +146,63 @@ public class LoginCorreo extends AppCompatActivity {
                 myEditor.putString(EMAIL_USER, correo);
                 myEditor.commit();
 
-                rtdb.getReference().child("rolusuario")
+                showProgressDialog(LoginCorreo.this);
+
+                rtdb.getReference().child(Constantes.CHILD_ROL_USUARIO_ID).child(auth.getCurrentUser().getUid())
                         .addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                admin = false;
-                                for (DataSnapshot hijo : dataSnapshot.getChildren()) {
-                                    //Si es admin, loguearse
-                                    RolUsuario rolUsuario = hijo.getValue(RolUsuario.class);
+                                RolUsuario rolUsuario = dataSnapshot.getValue(RolUsuario.class);
+                                if (rolUsuario == null) {
+                                    hideProgressDialog();
+
+                                    Intent i = new Intent(LoginCorreo.this, HomeCliente.class);
+                                    startActivity(i);
+                                    finish();
+                                } else {
+                                    admin = false;
                                     if (rolUsuario.getRolID().equals("02") &&
                                             rolUsuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
                                         admin = true;
                                     }
-                                }
 
-                                if (admin) {
-                                    Intent i = new Intent(LoginCorreo.this, HomeAdministrador.class);
-                                    startActivity(i);
-                                    finish();
-                                } else {
-                                    Intent i = new Intent(LoginCorreo.this, HomeCliente.class);
-                                    startActivity(i);
-                                    finish();
+                                    hideProgressDialog();
+
+                                    if (admin) {
+                                        Intent i = new Intent(LoginCorreo.this, HomeAdministrador.class);
+                                        startActivity(i);
+                                        finish();
+                                    } else {
+                                        Intent i = new Intent(LoginCorreo.this, HomeCliente.class);
+                                        startActivity(i);
+                                        finish();
+                                    }
                                 }
                             }
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
+
                             }
                         });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                et_login_correo_confirmar_contrasenia.setError("No se pudo ingresar.");
+                et_login_correo_confirmar_contrasenia.setError("No se pudo ingresar. ");
             }
         });
 
     }
 
+    @Override
+    protected void onPause() {
+        hideProgressDialog();
+        super.onPause();
+    }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         // We need an Editor object to make preference changes.
         // All objects are from android.context.Context
@@ -194,6 +211,7 @@ public class LoginCorreo extends AppCompatActivity {
         editor.putString("user_email", correo_guardado);
         // Commit the edits!
         editor.commit();
+        hideProgressDialog();
 
     }
 
@@ -208,5 +226,6 @@ public class LoginCorreo extends AppCompatActivity {
         editor.putString("user_email", correo_guardado);
         // Commit the edits!
         editor.commit();
+        hideProgressDialog();
     }
 }

@@ -60,7 +60,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
-                    android:background="@drawable/fragment_ic_notificaciones_cliente" />
+                    android:background="@drawable/fragment_ic_notificaciones_cliente"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
@@ -88,16 +89,17 @@
 
             </android.support.v7.widget.RecyclerView>
 
+
             <ImageView
                 android:id="@+id/fb_fragment_sl_cliente_agregar_cliente"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
+                android:background="@drawable/fragment_cliente_circular"
                 android:clickable="true"
                 android:focusable="true"
-                android:background="@drawable/fragment_cliente_circular"
-                android:src="@drawable/fragment_sl_clientes_ic_agregar_cliente"/>
+                android:src="@drawable/fragment_sl_clientes_ic_agregar_cliente" />
 
 
         </RelativeLayout>

@@ -1,8 +1,10 @@
 package com.appmoviles.proyecto;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -23,20 +25,27 @@ import android.widget.Toast;
 import com.appmoviles.proyecto.modelo.Banco;
 import com.appmoviles.proyecto.modelo.Cliente;
 import com.appmoviles.proyecto.modelo.Cuenta;
+import com.appmoviles.proyecto.modelo.Transaccion;
 import com.appmoviles.proyecto.modelo.Usuario;
 import com.appmoviles.proyecto.util.AdapterDatosBancos;
 import com.appmoviles.proyecto.util.AdapterDatosCuentas;
 import com.appmoviles.proyecto.util.Constantes;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.appmoviles.proyecto.util.Constantes.CHILD_TRANSACCIONES;
+
 
 public class DatosClienteFragment extends Fragment implements Serializable,
         AdapterDatosCuentas.OnItemClickListener,
         AdapterDatosBancos.OnItemClickListener,
-        View.OnClickListener {
+        View.OnClickListener, AdapterTemplate_Transacciones.OnItemClickListener {
 
     private RelativeLayout rl_fragment_clientes_toolbar;
     private EditText et_cuenta_seleccionado;
@@ -60,11 +69,19 @@ public class DatosClienteFragment extends Fragment implements Serializable,
     private Fragment fragment;
     private String donde_viene;
     private String tipo_usuario = "";
+    private Banco bancoSeleccionado;
 
     private AdapterDatosCuentas adapterDatosCuentas;
     private AdapterDatosBancos adapterDatosBancos;
-    private PerfilCliente perfilCliente;
     private Fragment transaccion;
+    FirebaseDatabase rtdb;
+
+
+    // -------------------------
+    private RecyclerView lista_transacciones;
+    private AdapterTemplate_Transacciones adapterTemplate_transacciones;
+    private Cuenta cuentaSeleccionada;
+    private ProgressDialog progressDialog;
 
     // Envio de información
     private OnFragmentInteractionListener listener;
@@ -95,6 +112,8 @@ public class DatosClienteFragment extends Fragment implements Serializable,
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_datos_cliente, container, false);
 
+        rtdb = FirebaseDatabase.getInstance();
+
         lista_bancos_cliente = v.findViewById(R.id.lista_bancos_cliente);
         lista_cuentas_cliente = v.findViewById(R.id.lista_cuentas_cliente);
         et_banco_seleccionado = v.findViewById(R.id.et_banco_seleccionado);
@@ -108,30 +127,16 @@ public class DatosClienteFragment extends Fragment implements Serializable,
         iv_fragment_dt_clientes_return = v.findViewById(R.id.iv_fragment_dt_clientes_return);
         iv_fragment_dt_clientes_perfil = v.findViewById(R.id.iv_fragment_dt_clientes_perfil);
 
-        listaBancos = new ArrayList<Banco>();
-        Banco b1 = new Banco();
-        b1.setNombreBanco("Bancolombia");
-        Banco b2 = new Banco();
-        b2.setNombreBanco("Banco Bogota");
-        Banco b3 = new Banco();
-        b3.setNombreBanco("Davivienda");
-        listaBancos.add(b1);
-        listaBancos.add(b2);
-        listaBancos.add(b3);
+        // Lista de transacciones
+        lista_transacciones = v.findViewById(R.id.lista_transacciones);
+        lista_transacciones.setHasFixedSize(true);
+        lista_transacciones.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapterTemplate_transacciones = new AdapterTemplate_Transacciones();
+        adapterTemplate_transacciones.setListener(this);
+        lista_transacciones.setAdapter(adapterTemplate_transacciones);
 
-        listaCuentas = new ArrayList<Cuenta>();
-        Cuenta c1 = new Cuenta();
-        c1.setNumeroCuenta("2222-3333-4444-5555");
-        Cuenta c2 = new Cuenta();
-        c2.setNumeroCuenta("1234-1456-2345-4668");
-        Cuenta c3 = new Cuenta();
-        c3.setNumeroCuenta("5555-1231-5357-4564");
-        Cuenta c4 = new Cuenta();
-        c4.setNumeroCuenta("8888-1231-5357-4564");
-        listaCuentas.add(c1);
-        listaCuentas.add(c2);
-        listaCuentas.add(c3);
-        listaCuentas.add(c4);
+        listaBancos = usuario.getListaBancos();
+        listaCuentas = usuario.getListaCuentas();
 
         // Adaptador bancos
         adapterDatosBancos = new AdapterDatosBancos();
@@ -177,13 +182,12 @@ public class DatosClienteFragment extends Fragment implements Serializable,
         // Visualización si viene del FragmentClientes
         if (donde_viene != null) {
             if (donde_viene.equals(Constantes.FRAGMENT_CLIENTE)) {
-                btn_fragment_dt_cliente_guardar.setVisibility(View.INVISIBLE);
+                btn_fragment_dt_cliente_guardar.setVisibility(View.GONE);
             }
         }
 
         actualizarInfo();
         agregarDatos();
-
         // Configuraciones
         selecciono_banco = false;
         selecciono_cuenta = false;
@@ -191,12 +195,42 @@ public class DatosClienteFragment extends Fragment implements Serializable,
         return v;
     }
 
+
+    public void cargarTransacciones() {
+        rtdb.getReference().child(CHILD_TRANSACCIONES).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Transaccion transaccionTmp;
+                for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                    transaccionTmp = hijo.getValue(Transaccion.class);
+                    if (cuentaSeleccionada != null) {
+                        if (transaccionTmp.getCuentaDestinoID().equals(cuentaSeleccionada.getCuentaID())
+                                || transaccionTmp.getCuentaOrigenID().equals(cuentaSeleccionada.getCuentaID())) {
+                            adapterTemplate_transacciones.agregarTransaccion(transaccionTmp);
+                        }
+                    }
+                }
+
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void agregarDatos() {
-        for (Banco banco : listaBancos) {
-            adapterDatosBancos.agregarBanco(banco);
+        if (listaBancos != null) {
+            for (Banco banco : listaBancos) {
+                adapterDatosBancos.agregarBanco(banco);
+            }
         }
-        for (Cuenta cuenta : listaCuentas) {
-            adapterDatosCuentas.agregarCuenta(cuenta);
+        if (listaCuentas != null) {
+            for (Cuenta cuenta : listaCuentas) {
+                adapterDatosCuentas.agregarCuenta(cuenta);
+            }
         }
     }
 
@@ -214,6 +248,13 @@ public class DatosClienteFragment extends Fragment implements Serializable,
             selecciono_cuenta = true;
             if (selecciono_banco && selecciono_cuenta) {
                 btn_fragment_dt_cliente_guardar.setBackground(getResources().getDrawable(R.drawable.fragment_agregar_monto_figura_btn_guardar_activo));
+                cuentaSeleccionada = cuenta;
+
+                // Cargar Datos
+                progressDialog = new ProgressDialog(getContext());
+                progressDialog.setMessage("Por favor espere mientras se cargan los datos");
+                progressDialog.show();
+                cargarTransacciones();
             }
         } else {
             selecciono_cuenta = false;
@@ -226,7 +267,9 @@ public class DatosClienteFragment extends Fragment implements Serializable,
     public void onItemClick(Banco banco) {
         et_banco_seleccionado.setText(banco.getNombreBanco());
         if (banco != null) {
+            bancoSeleccionado = banco;
             selecciono_banco = true;
+            filtrarLista(banco);
             if (selecciono_banco && selecciono_cuenta) {
                 btn_fragment_dt_cliente_guardar.setBackground(getResources().getDrawable(R.drawable.fragment_agregar_monto_figura_btn_guardar_activo));
             }
@@ -236,11 +279,29 @@ public class DatosClienteFragment extends Fragment implements Serializable,
         }
     }
 
+    private void filtrarLista(Banco banco) {
+        if (listaCuentas != null && listaCuentas.size() > 0) {
+            ArrayList<Cuenta> listaCopia = new ArrayList<>();
+            for (Cuenta cuenta : listaCuentas) {
+                if (banco.getBancoID().equals(cuenta.getBancoID())) {
+                    listaCopia.add(cuenta);
+                }
+            }
+            listaCuentas = listaCopia;
+
+            adapterDatosCuentas.removeAll();
+            for (Cuenta cuenta : listaCuentas) {
+                adapterDatosCuentas.agregarCuenta(cuenta);
+            }
+        }
+    }
+
     @Override
     public void onClick(View v) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         switch (v.getId()) {
             case R.id.iv_down_bancos:
+                listaCuentas = usuario.getListaCuentas();
                 if (down_bancos) {
                     down_bancos = false;
                     lista_bancos_cliente.setVisibility(View.GONE);
@@ -255,16 +316,20 @@ public class DatosClienteFragment extends Fragment implements Serializable,
 
                 break;
             case R.id.iv_down_cuentas:
-                if (down_cuentas) {
-                    down_cuentas = false;
-                    lista_cuentas_cliente.setVisibility(View.GONE);
-                    rl_fragment_clientes_toolbar.invalidate();
-                    iv_down_cuentas.setBackgroundResource(R.drawable.cuenta_informacion_ic_plus);
-                } else {
-                    down_cuentas = true;
-                    lista_cuentas_cliente.setVisibility(View.VISIBLE);
-                    rl_fragment_clientes_toolbar.invalidate();
-                    iv_down_cuentas.setBackgroundResource(R.drawable.cuenta_informacion_ic_minus);
+                if (selecciono_banco) {
+                    filtrarLista(bancoSeleccionado);
+                    if (down_cuentas) {
+                        down_cuentas = false;
+                        adapterTemplate_transacciones.removeAll();
+                        lista_cuentas_cliente.setVisibility(View.GONE);
+                        rl_fragment_clientes_toolbar.invalidate();
+                        iv_down_cuentas.setBackgroundResource(R.drawable.cuenta_informacion_ic_plus);
+                    } else {
+                        down_cuentas = true;
+                        lista_cuentas_cliente.setVisibility(View.VISIBLE);
+                        rl_fragment_clientes_toolbar.invalidate();
+                        iv_down_cuentas.setBackgroundResource(R.drawable.cuenta_informacion_ic_minus);
+                    }
                 }
                 break;
             case R.id.iv_fragment_dt_clientes_return:
@@ -282,7 +347,9 @@ public class DatosClienteFragment extends Fragment implements Serializable,
             case R.id.iv_fragment_dt_clientes_perfil:
                 Intent i = new Intent(getActivity(), PerfilCliente.class);
                 i.putExtra(Constantes.GO_TO_PERFIL, Constantes.DATOS_FRAGMENT);
-                i.putExtra(Constantes.FRAGMENT, this);
+                i.putExtra(Constantes.DONDE_VIENE, donde_viene);
+                DatosClienteFragment datosClienteFragment = new DatosClienteFragment();
+                i.putExtra(Constantes.FRAGMENT, datosClienteFragment);
                 startActivity(i);
                 getActivity().finish();
                 break;
@@ -292,5 +359,10 @@ public class DatosClienteFragment extends Fragment implements Serializable,
 
     public void setInteractionListener(OnFragmentInteractionListener listener) {
         this.listener = listener;
+    }
+
+    @Override
+    public void onItemClick(Transaccion transaccion) {
+
     }
 }

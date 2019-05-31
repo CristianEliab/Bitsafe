@@ -13,6 +13,7 @@
     <string name="registro_contrasenia_confirmar">Confirmar contraseña</string>
     <string name="registro_registrarse">Registrarse</string>
     <string name="registro_registrarse_facebook">Registrarse con Facebook</string>
+    <string name="registro_registrarse_bitsafe">Registrarse con cuenta Bitsafe</string>
     <string name="registro_registrarse_google">Registrarse con Google</string>
     <string name="registro_correo">Correo</string>
     <string name="registro_ubicacion">Ubicación</string>
@@ -176,5 +177,23 @@
 
 
     <string name="title_ayuda">¿Necesitas ayuda?</string>
+    <string name="facebook_app_id">467274344078371</string>
+    <string name="fb_login_protocol_scheme">fb467274344078371</string>
+    <string name="loading"></string>
+    <string name="terminos_y_condiciones">Terminos y Condiciones</string>
+    <string name="mensaje_terminos_condiciones"> \n \nA continución, la remisión o puesta en conocimiento,
+        o publicación del reglamento o sus modificaciones o actualizaciones en la página Web del BANCO, este Reglamento se entenderá aceptado por EL CLIENTE con la contratación de productos y/o con la suscripción  de la tarjeta de firmas en la que se establecen las condiciones
+        de manejo de las cuentas y/o con el recibo de la Tarjeta Débito, Talonario o cualquier otro medio de manejo recibido por EL CLIENTE y/o con la utilización del producto, canal o servicio asociados y/o manteniendo de fondos disponibles en las cuentas y/o al mantener los productos y/o seguir realizando operaciones o utilizando servicios.</string>
+    <string name="comunicacion_ayuda">Comunicate con nuestro centro de atención 01800 6784637</string>
+    <string name="aceptar_terminos">Aceptar Terminos y Condiciones</string>
+    <string name="mensaje_aceptar_y_terminos">Es necesario aceptar los terminos y condiciones para continuar con nuestros servicios</string>
 
+
+    <string name="descripcion_grafica_generos">La presente gráfica refleja en porcentaje de usuarios de género femenino y masculino presentes en el Bitsafe</string>
+    <string name="descripcion_grafica_clientes">La presente gráfica refleja el número de usuarios que se registraron por mes en este año en Bitsafe</string>
+
+    <string name="guardar_transaccion">Guardar</string>
+    <string name="confirmacion">¿Desea guardar la transacción?</string>
+
+    <string name="aceptar">Aceptar</string>
 </resources>
