@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,8 +16,12 @@ import android.widget.Toast;
 
 import com.appmoviles.proyecto.util.Constantes;
 import com.appmoviles.proyecto.util.FileChooser;
+import com.appmoviles.proyecto.util.JsonParse;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 
 
@@ -66,8 +71,7 @@ public class CargarDatosFragment extends Fragment implements View.OnClickListene
             @Override
             public void fileSelected(final File file) {
                 // ....do something with the file
-                String filename = file.getName();
-                Toast.makeText(getContext(), "Archivo: " + filename +" seleccionado!", Toast.LENGTH_SHORT).show();
+                cargarClientes(file);
                 // then actually do something in another module
 
             }
@@ -77,6 +81,19 @@ public class CargarDatosFragment extends Fragment implements View.OnClickListene
         fileChooser.showDialog();
     }
 
+    private void cargarClientes(File file) {
+        try {
+            InputStream in = new FileInputStream(file);
+            JsonParse jsonParse = new JsonParse();
+            jsonParse.readJsonStream(in);
+            jsonParse.cargarDesdeArchivo();
+        } catch (IOException e) {
+            Toast.makeText(getContext(), "Error " + e.getMessage() + "-" + e.getCause() + "-" + e.getStackTrace(), Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "Error " + e.getMessage() + "-" + e.getCause() + "-" + e.getStackTrace(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -84,6 +101,25 @@ public class CargarDatosFragment extends Fragment implements View.OnClickListene
                 processFile();
                 break;
         }
+    }
+
+    /* Checks if external storage is available for read and write */
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    /* Checks if external storage is available to at least read */
+    public boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+            return true;
+        }
+        return false;
     }
 
 }

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/rl_registro_general_icon_bitsafe"
+            android:layout_width="@dimen/login_rl_panel_w"
+            android:layout_height="@dimen/login_rl_panel_h"
+            android:background="@color/colorBitsafeBlue">
+
+            <ImageView
+                android:id="@+id/iv_login_icon_bitsafe"
+                android:layout_width="@dimen/login_iv_icon_w"
+                android:layout_height="@dimen/login_iv_icon_h"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/aplicacion_ic_bitsafe_icon" />
+
+        </RelativeLayout>
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_imagenes"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:layout_below="@+id/rl_registro_general_icon_bitsafe"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
+
+        </android.support.v4.view.ViewPager>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_imagenes"
+            android:layout_centerHorizontal="true">
+
+            <RelativeLayout
+                android:id="@+id/rl_registro_general_panel_bitsafe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_registro_registrarse"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/registro_boton_bitsafe">
+
+                <ImageView
+                    android:id="@+id/iv_registro_general_facebook"
+                    android:layout_width="100dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/aplicacion_ic_bitsafe_icon" />
+
+                <TextView
+                    android:id="@+id/btn_registro_general_bitsafe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_alignLeft="@+id/iv_registro_general_facebook"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="100dp"
+                    android:background="@drawable/registro_boton_bitsafe"
+                    android:gravity="center"
+                    android:hint="@string/registro_registrarse_bitsafe"
+                    android:textColorHint="@color/colorWhite" />
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/FrameLayout_botton_facebook"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rl_registro_general_panel_bitsafe">
+
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/btn_registro_general_facebook"
+                    style="@style/FacebookLoginButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/rl_registro_general_panel_bitsafe"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="40sp"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_registro_general_panel_facebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/FrameLayout_botton_facebook"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/registro_boton_facebook">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/registro_ic_facebook" />
+
+                    <TextView
+                        android:id="@+id/btn_registro_general_facebook_visible"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="50dp"
+                        android:background="@drawable/registro_boton_facebook"
+                        android:gravity="center"
+                        android:hint="@string/registro_registrarse_facebook"
+                        android:textColorHint="@color/colorWhite" />
+
+                </RelativeLayout>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/FrameLayout_botton_google"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/FrameLayout_botton_facebook">
+
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/btn_sign_in_google"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="40sp"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_registro_general_panel_google"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/FrameLayout_botton_facebook"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="50dp"
+                    android:background="@drawable/registro_boton_google">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/registro_ic_google" />
+
+                    <TextView
+                        android:id="@+id/btn_registro_general_google"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="50dp"
+                        android:background="@drawable/registro_boton_google"
+                        android:gravity="center"
+                        android:hint="@string/registro_registrarse_google"
+                        android:textColorHint="@color/colorWhite" />
+
+                </RelativeLayout>
+
+            </FrameLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</ScrollView>

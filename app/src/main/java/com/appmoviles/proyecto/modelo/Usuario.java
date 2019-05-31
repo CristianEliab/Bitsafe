@@ -1,6 +1,7 @@
 package com.appmoviles.proyecto.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Usuario implements Serializable {
 
@@ -18,8 +19,12 @@ public class Usuario implements Serializable {
     private String ubicacion;
     private String correo;
     private String contrasenia;
+    private ArrayList<Banco> listaBancos;
+    private ArrayList<Cuenta> listaCuentas;
+    private long fechaCreacion;
+    private String fecha_cargar;
 
-    public Usuario(String usuarioID, String nombre, String fecha_nacimiento, String telefono, String genero, String estadoUsuarioID, String loginID, String configuracionID, String cedula, String ubicacion, String correo) {
+    public Usuario(String usuarioID, String nombre, String fecha_nacimiento, String telefono, String genero, String estadoUsuarioID, String loginID, String configuracionID, String cedula, String ubicacion, String correo, ArrayList<Banco> listaBancos, ArrayList<Cuenta> listaCuentas) {
         this.usuarioID = usuarioID;
         this.nombre = nombre;
         this.fecha_nacimiento = fecha_nacimiento;
@@ -31,6 +36,8 @@ public class Usuario implements Serializable {
         this.cedula = cedula;
         this.ubicacion = ubicacion;
         this.correo = correo;
+        this.listaBancos = listaBancos;
+        this.listaCuentas = listaCuentas;
     }
 
     public Usuario(String usuarioID, String nombre, String cedula, String telefono, String correo, String ubicacion) {
@@ -131,5 +138,37 @@ public class Usuario implements Serializable {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public ArrayList<Banco> getListaBancos() {
+        return listaBancos;
+    }
+
+    public void setListaBancos(ArrayList<Banco> listaBancos) {
+        this.listaBancos = listaBancos;
+    }
+
+    public ArrayList<Cuenta> getListaCuentas() {
+        return listaCuentas;
+    }
+
+    public void setListaCuentas(ArrayList<Cuenta> listaCuentas) {
+        this.listaCuentas = listaCuentas;
+    }
+
+    public long getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(long fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getFecha_cargar() {
+        return fecha_cargar;
+    }
+
+    public void setFecha_cargar(String fecha_cargar) {
+        this.fecha_cargar = fecha_cargar;
     }
 }

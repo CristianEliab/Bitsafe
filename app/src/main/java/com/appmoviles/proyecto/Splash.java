@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.appmoviles.proyecto.modelo.RolUsuario;
+import com.appmoviles.proyecto.util.Consultas;
 import com.appmoviles.proyecto.util.JsonParse;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,6 +34,7 @@ public class Splash extends AppCompatActivity {
     private Animation transicion;
     private JsonParse jsonParse;
     private boolean admin;
+    Consultas consultas;
 
 
     private boolean cargodb;
@@ -45,6 +47,8 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        consultas = Consultas.getInstance();
+        consultas.crearBase();
 
         // Conectar con la base de datos
         rtdb = FirebaseDatabase.getInstance();
@@ -53,6 +57,8 @@ public class Splash extends AppCompatActivity {
         myPreferences = PreferenceManager.getDefaultSharedPreferences(Splash.this);
         //myPreferences.edit().clear().commit();
         cargodb = myPreferences.getBoolean(GUARDO, true);
+
+
 
         //rtdb.getReference().removeValue();
 
@@ -87,47 +93,6 @@ public class Splash extends AppCompatActivity {
         iv_splash_screen.setBackgroundResource(R.drawable.animacion_item);
         animacion = (AnimationDrawable) iv_splash_screen.getBackground();
         goToMain();
-
-       /* if (auth.getCurrentUser() == null) {
-
-            Intent i = new Intent(this, LoginCorreo.class);
-            startActivity(i);
-            finish();
-
-            return;
-        }*/
-
-
-        /*rtdb.getReference().child("rolusuario")
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        admin = false;
-                        for (DataSnapshot hijo : dataSnapshot.getChildren()) {
-                            //Si es admin, loguearse
-                            RolUsuario rolUsuario = hijo.getValue(RolUsuario.class);
-                            if (rolUsuario.getRolID().equals("02") &&
-                                    rolUsuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
-                                admin = true;
-                            }
-                        }
-
-                        if (admin) {
-                            Intent i = new Intent(Splash.this, HomeAdministrador.class);
-                            startActivity(i);
-                            finish();
-                        } else {
-                            Intent i = new Intent(Splash.this, HomeCliente.class);
-                            startActivity(i);
-                            finish();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });*/
 
     }
 

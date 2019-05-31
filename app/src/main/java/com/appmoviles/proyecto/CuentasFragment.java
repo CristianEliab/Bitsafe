@@ -47,7 +47,7 @@ public class CuentasFragment extends Fragment implements Serializable {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), PerfilCliente.class);
-                i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CUENTAS);
+                i.putExtra(Constantes.GO_TO_PERFIL, Constantes.FRAGMENT_CUENTAS);
                 startActivity(i);
                 getActivity().finish();
 

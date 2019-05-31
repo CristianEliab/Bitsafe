@@ -1,43 +1,41 @@
 package com.appmoviles.proyecto.util;
 
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.appmoviles.proyecto.R;
 import com.appmoviles.proyecto.modelo.Banco;
-import com.appmoviles.proyecto.modelo.Cliente;
-import com.appmoviles.proyecto.modelo.Cuenta;
 import com.appmoviles.proyecto.modelo.Usuario;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-import static com.appmoviles.proyecto.util.Constantes.CHILD_BANCOS;
-import static com.appmoviles.proyecto.util.Constantes.CHILD_CUENTAS;
-
-public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTemplate_Clientes.CustomViewHolder> implements Serializable {
+public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTemplate_Clientes.CustomViewHolder> implements Serializable, Filterable {
 
     //Los datos que vamos a mostrar (View)
-    private ArrayList<Usuario> data;
+    public ArrayList<Usuario> data;
+    public ArrayList<Usuario> dataFiltro;
     private LinearLayoutManager manage;
     private AdaptadorIconsBancos adaptadorIconsBancos;
-    private List<Cuenta> listaCuentas;
+    CustomFilter filtro;
     int index = -1;
 
-    FirebaseAuth auth;
-    FirebaseDatabase rtdb;
+    @Override
+    public Filter getFilter() {
+        if (filtro == null) {
+            filtro = new CustomFilter();
+        }
+
+        return filtro;
+    }
+
 
     //Renglon y construccion
     public static class CustomViewHolder extends RecyclerView.ViewHolder {
@@ -50,11 +48,8 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
     }
 
     public AdapterTemplate_Clientes() {
-        rtdb = FirebaseDatabase.getInstance();
-        auth = FirebaseAuth.getInstance();
         data = new ArrayList<>();
-        listaCuentas = new ArrayList<>();
-
+        dataFiltro = new ArrayList<>();
     }
 
     @Override
@@ -68,8 +63,10 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
     @Override
     public void onBindViewHolder(CustomViewHolder holder, final int position) {
         ((TextView) holder.root.findViewById(R.id.tv_cliente_registro_nombre)).setText(data.get(position).getNombre());
-        adaptadorIconsBancos = new AdaptadorIconsBancos();
+        LinearLayoutManager manager = new LinearLayoutManager(holder.root.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        ((RecyclerView) holder.root.findViewById(R.id.lista_bancos_icons)).setLayoutManager(manager);
         ((RecyclerView) holder.root.findViewById(R.id.lista_bancos_icons)).setHasFixedSize(true);
+        adaptadorIconsBancos = new AdaptadorIconsBancos();
         ((RecyclerView) holder.root.findViewById(R.id.lista_bancos_icons)).setAdapter(adaptadorIconsBancos);
 
         holder.root.findViewById(R.id.ll_fragment_clientes_registro).setOnClickListener(new View.OnClickListener() {
@@ -81,62 +78,12 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
             }
         });
 
-        /*cargarCuentas(position);
-        cargarBancos();*/
-
-        Banco banco = new Banco();
-        banco.setIcono(Constantes.ICON_BANCO_DAVIVIENDA);
-        adaptadorIconsBancos.agregarBanco(banco);
-
-    }
-
-    public void cargarBancos() {
-        rtdb.getReference().child(CHILD_BANCOS).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final ArrayList<Banco> bancos = new ArrayList<>();
-                for (int i = 0; i < listaCuentas.size(); i++) {
-                    String bancoID = listaCuentas.get(i).getBancoID();
-                    Banco bancoTmp;
-                    for (DataSnapshot hijo : dataSnapshot.getChildren()) {
-                        bancoTmp = hijo.getValue(Banco.class);
-                        //Solo los bancos que tienen cuentas del usuario registrado
-                        if (bancoTmp.getBancoID().equals(bancoID) && !bancos.contains(bancoTmp)) {
-                            bancos.add(bancoTmp);
-                        }
-                    }
-
-                    for (Banco banco: bancos) {
-                        adaptadorIconsBancos.agregarBanco(banco);
-                    }
-                }
+        ArrayList<Banco> list = data.get(position).getListaBancos();
+        if (list != null) {
+            for (Banco banco : list) {
+                adaptadorIconsBancos.agregarBanco(banco);
             }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    public void cargarCuentas(final int position) {
-        listaCuentas = new ArrayList<Cuenta>();
-        rtdb.getReference().child(CHILD_CUENTAS).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Cuenta cuentaTmp;
-                for (DataSnapshot hijo : dataSnapshot.getChildren()) {
-                    cuentaTmp = hijo.getValue(Cuenta.class);
-                    //Solo las cuentas que pertenezcan al usuario logueado
-                    if (cuentaTmp.getUsuarioID().equals(data.get(position).getUsuarioID())) {
-                        listaCuentas.add(cuentaTmp);
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        }
     }
 
     //OBSERVER
@@ -150,8 +97,6 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
         this.listener = listener;
     }
 
-
-
     @Override
     public int getItemCount() {
         return data.size();
@@ -159,6 +104,39 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
 
     public void agregarUsuario(Usuario usuario) {
         data.add(usuario);
+        dataFiltro.add(usuario);
         notifyDataSetChanged();
+    }
+
+    class CustomFilter extends Filter {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults resulst = new FilterResults();
+            if (constraint != null && constraint.length() > 0) {
+                constraint = constraint.toString().toUpperCase();
+                ArrayList<Usuario> filtro = new ArrayList<>();
+                for (Integer i = 0; i < dataFiltro.size(); i++) {
+                    if (dataFiltro.get(i).getNombre().toUpperCase().contains(constraint)) {
+                        Usuario udataFiltro = dataFiltro.get(i);
+                        filtro.add(udataFiltro);
+                    }
+                }
+                resulst.count = filtro.size();
+                resulst.values = filtro;
+            } else {
+                resulst.count = dataFiltro.size();
+                resulst.values = dataFiltro;
+            }
+
+            return resulst;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            data = (ArrayList<Usuario>) results.values;
+            notifyDataSetChanged();
+
+        }
     }
 }

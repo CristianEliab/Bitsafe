@@ -81,7 +81,7 @@
                 android:background="@drawable/fragment_clientes_figura_filtro"
                 android:drawableRight="@drawable/fragment_clientes_ic_buscar_clientes"
                 android:hint="@string/fragment_clientes_filtro"
-                android:inputType=""
+                android:inputType="textFilter"
                 android:textSize="@dimen/fragment_clientes_filtro_texto" />
 
             <android.support.v7.widget.RecyclerView

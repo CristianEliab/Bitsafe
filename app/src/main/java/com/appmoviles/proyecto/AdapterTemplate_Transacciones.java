@@ -143,5 +143,8 @@ public class AdapterTemplate_Transacciones extends RecyclerView.Adapter<AdapterT
     }
 
     //Hasta aquí patrón observer
-
+    public  void removeAll(){
+        data = new ArrayList<>();
+        notifyDataSetChanged();
+    }
 }

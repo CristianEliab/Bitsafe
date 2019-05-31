@@ -25,7 +25,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class JsonParse {
 
@@ -156,24 +159,24 @@ public class JsonParse {
 
     public void saveDataBase() {
         for (Usuario usuario : usuarioArrayList) {
-            rtdb.getReference().child("usuarios").push().setValue(usuario);
+            rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(usuario.getUsuarioID()).setValue(usuario);
         }
-        for (Actividad value : actividadArrayList) {
+       /* for (Actividad value : actividadArrayList) {
             rtdb.getReference().child("actividades").push().setValue(value);
-        }
+        }*/
         for (Banco value : bancoArrayList) {
-            rtdb.getReference().child("bancos").push().setValue(value);
+            rtdb.getReference().child(Constantes.CHILD_BANCOS_ID).child(value.getBancoID()).setValue(value);
         }
-        for (Categoria value : categoriaArrayList) {
+        /*for (Categoria value : categoriaArrayList) {
             rtdb.getReference().child("categorias").push().setValue(value);
         }
         for (ConfiguracionSeguridad value : configuracionSeguridadArrayList) {
             rtdb.getReference().child("configuracionesseguridad").push().setValue(value);
-        }
+        }*/
         for (Cuenta value : cuentaArrayList) {
-            rtdb.getReference().child("cuentas").push().setValue(value);
+            rtdb.getReference().child(Constantes.CHILD_CUENTAS_ID).child(value.getCuentaID()).setValue(value);
         }
-        for (EstadoUsuario value : estadoUsuarioArrayList) {
+       /* for (EstadoUsuario value : estadoUsuarioArrayList) {
             rtdb.getReference().child("estadousuario").push().setValue(value);
         }
         for (Login value : loginArrayList) {
@@ -187,11 +190,11 @@ public class JsonParse {
         }
         for (RolActividad value : rolActividadArrayList) {
             rtdb.getReference().child("rolactividad").push().setValue(value);
-        }
+        }*/
         for (RolUsuario value : rolUsuarioArrayList) {
-            rtdb.getReference().child("rolusuario").push().setValue(value);
+            rtdb.getReference().child(Constantes.CHILD_ROL_USUARIO_ID).child(value.getUsuarioID()).setValue(value);
         }
-        for (TipoCuenta value : tipoCuentaArrayList) {
+        /*for (TipoCuenta value : tipoCuentaArrayList) {
             rtdb.getReference().child("tipocuentas").push().setValue(value);
         }
         for (TipoFlujoDinero value : tipoFlujoDineroArrayList) {
@@ -199,9 +202,31 @@ public class JsonParse {
         }
         for (TipoTransaccion value : tipoTransaccionArrayList) {
             rtdb.getReference().child("tipotransacciones").push().setValue(value);
+        }*/
+        for (Transaccion value : transaccionArrayList) {
+            rtdb.getReference().child(Constantes.CHILD_TRANSACCIONES).push().setValue(value);
+        }
+    }
+
+    public void cargarDesdeArchivo() {
+        for (Usuario usuario : usuarioArrayList) {
+            SimpleDateFormat f = new SimpleDateFormat("dd-MM-yy");
+            if (usuario.getFecha_cargar() != null) {
+                try {
+                    Date d = f.parse(usuario.getFecha_cargar());
+                    long milliseconds = d.getTime();
+                    usuario.setFechaCreacion(milliseconds);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(usuario.getUsuarioID()).setValue(usuario);
+            }else{
+                rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(usuario.getUsuarioID()).setValue(usuario);
+            }
+
         }
         for (Transaccion value : transaccionArrayList) {
-            rtdb.getReference().child("transacciones").push().setValue(value);
+            rtdb.getReference().child(Constantes.CHILD_TRANSACCIONES).push().setValue(value);
         }
     }
 
@@ -217,6 +242,9 @@ public class JsonParse {
         String cedula = null;
         String ubicacion = null;
         String correo = null;
+        String fecha = null;
+        ArrayList<Banco> listabancos = new ArrayList<Banco>();
+        ArrayList<Cuenta> listacuentas = new ArrayList<>();
         reader.beginArray();
         // Inicia el arreglo
         while (reader.hasNext()) {
@@ -257,14 +285,113 @@ public class JsonParse {
                     case "correo":
                         correo = reader.nextString();
                         break;
+                    case "bancos":
+                        listabancos = leerBancos(reader);
+                        break;
+                    case "cuentas":
+                        listacuentas = leerCuentas(reader);
+                        break;
+                    case "fechaCreacion":
+                        fecha = reader.nextString();
+                        break;
                     default:
                         reader.skipValue();
                         break;
                 }
             }
-            this.usuarioArrayList.add(new Usuario(usuarioID, nombre, fecha_nacimiento, telefono, genero, estadoUsuarioID, loginID, configuracionID, cedula, ubicacion, correo));
+            Usuario usuario = new Usuario(usuarioID, nombre, fecha_nacimiento, telefono, genero, estadoUsuarioID, loginID, configuracionID, cedula, ubicacion, correo, listabancos, listacuentas);
+            usuario.setFecha_cargar(fecha);
+            this.usuarioArrayList.add(usuario);
             reader.endObject();
         }
+    }
+
+    private ArrayList<Cuenta> leerCuentas(JsonReader reader) throws IOException {
+        ArrayList<Cuenta> cuentas = new ArrayList<>();
+        String cuentaID = null;
+        String numeroCuenta = null;
+        String usuarioID = null;
+        String tipoCuentaID = null;
+        String tipoCuentaNombre = null;
+        String bancoID = null;
+        String saldo = null;
+        String fechaVinculacion = null;
+        reader.beginArray();
+        while (reader.hasNext()) {
+            reader.beginObject();
+            while (reader.hasNext()) {
+                String name = reader.nextName();
+                switch (name) {
+                    case "cuentaID":
+                        cuentaID = reader.nextString();
+                        break;
+                    case "numeroCuenta":
+                        numeroCuenta = reader.nextString();
+                        break;
+                    case "usuarioID":
+                        usuarioID = reader.nextString();
+                        break;
+                    case "tipoCuentaID":
+                        tipoCuentaID = reader.nextString();
+                        break;
+                    case "tipoCuentaNombre":
+                        tipoCuentaNombre = reader.nextString();
+                        break;
+                    case "bancoID":
+                        bancoID = reader.nextString();
+                        break;
+                    case "saldo":
+                        saldo = reader.nextString();
+                        break;
+                    case "fechaVinculacion":
+                        fechaVinculacion = reader.nextString();
+                        break;
+                    default:
+                        reader.skipValue();
+                        break;
+                }
+            }
+            cuentas.add(new Cuenta(cuentaID, numeroCuenta, usuarioID, tipoCuentaID, tipoCuentaNombre, bancoID, saldo, fechaVinculacion));
+            reader.endObject();
+        }
+        reader.endArray();
+        return cuentas;
+    }
+
+    private ArrayList<Banco> leerBancos(JsonReader reader) throws IOException {
+        ArrayList<Banco> bancos = new ArrayList<>();
+        String bancoID = null;
+        String nombreBanco = null;
+        String icono = null;
+        String saldo = null;
+        reader.beginArray();
+        while (reader.hasNext()) {
+            reader.beginObject();
+            while (reader.hasNext()) {
+                String name = reader.nextName();
+                switch (name) {
+                    case "bancoID":
+                        bancoID = reader.nextString();
+                        break;
+                    case "nombreBanco":
+                        nombreBanco = reader.nextString();
+                        break;
+                    case "icono":
+                        icono = reader.nextString();
+                        break;
+                    case "saldo":
+                        saldo = reader.nextString();
+                        break;
+                    default:
+                        reader.skipValue();
+                        break;
+                }
+            }
+            bancos.add(new Banco(bancoID, nombreBanco, icono, saldo));
+            reader.endObject();
+        }
+        reader.endArray();
+        return bancos;
     }
 
     private void leerArrayTransaccion(JsonReader reader) throws IOException {
