@@ -115,24 +115,24 @@
 
     <string-array name="dias_semana">
         <item>Semanal</item>
-        <item>Lu</item>
-        <item>Ma</item>
-        <item>Mi</item>
-        <item>Ju</item>
-        <item>Vi</item>
-        <item>Sa</item>
-        <item>Do</item>
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miércoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sábado</item>
+        <item>Domingo</item>
     </string-array>
 
     <string-array name="dias_semana_2">
         <item>Cada 2 Semanas</item>
-        <item>Lu</item>
-        <item>Ma</item>
-        <item>Mi</item>
-        <item>Ju</item>
-        <item>Vi</item>
-        <item>Sa</item>
-        <item>Do</item>
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miércoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sábado</item>
+        <item>Domingo</item>
     </string-array>
 
     <string-array name="calendario">

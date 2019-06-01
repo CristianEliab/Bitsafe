@@ -1,6 +1,9 @@
 package com.appmoviles.proyecto;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -11,15 +14,18 @@ import android.widget.DatePicker;
 import android.app.DatePickerDialog;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.Calendar;
 
 
-public class CrearPlanFragment extends Fragment {
+public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddFrequencyPaymentListener {
 
     private LinearLayout ly_agregar_fecha;
     private LinearLayout ly_agregar_frecuencia_pago;
+
+    FrecuenciaPago frecuanciaPagoDialog;
 
     private TextView txtDate, txtTime;
     private int mYear, mMonth, mDay;
@@ -38,6 +44,7 @@ public class CrearPlanFragment extends Fragment {
         ly_agregar_fecha = (LinearLayout) v.findViewById(R.id.ly_agregar_fecha);
         ly_agregar_frecuencia_pago = (LinearLayout) v.findViewById(R.id.ly_agregar_frecuencia_pago);
         txtDate=(TextView) v.findViewById(R.id.et_date);
+        txtTime = (TextView) v.findViewById(R.id.tv_payment_frequency);
 
         ly_agregar_fecha.setOnClickListener(new View.OnClickListener() {
 
@@ -88,7 +95,6 @@ public class CrearPlanFragment extends Fragment {
 
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-
             txtDate.setText(String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear+1)
                     + "-" + String.valueOf(year));
         }
@@ -97,8 +103,17 @@ public class CrearPlanFragment extends Fragment {
     private void showPaymentFrequencyDialog(){
 
         FragmentManager fm = getFragmentManager();
-        FrecuenciaPago frecuanciaPagoDialog = new FrecuenciaPago();
+        frecuanciaPagoDialog = new FrecuenciaPago();
+        frecuanciaPagoDialog.setTargetFragment(this, 0);
         frecuanciaPagoDialog.show(fm, "fragment_payment_frequency");
+    }
 
+    @Override
+    public void OnAddFrequencyPaymentSubmit(String fpSelected) {
+        Log.e("///// Entrooo a close", fpSelected);
+        if(!fpSelected.equals("Diario") && !fpSelected.equals("Semanal") && !fpSelected.equals("Cada 2 Semanas") && !fpSelected.equals("Mensual")) {
+            txtTime.setText(fpSelected);
+            frecuanciaPagoDialog.getDialog().dismiss();
+        }
     }
 }

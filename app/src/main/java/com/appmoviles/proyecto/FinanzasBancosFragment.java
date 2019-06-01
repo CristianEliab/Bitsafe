@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.appmoviles.proyecto.modelo.Banco;
 import com.appmoviles.proyecto.modelo.Cuenta;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,16 +20,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static com.appmoviles.proyecto.util.Constantes.BUNDLE_BANCO;
 import static com.appmoviles.proyecto.util.Constantes.BUNDLE_TIPO_I_O;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_BANCOS;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_CUENTAS;
-
 
 public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_Bancos.OnItemClickListener, View.OnClickListener {
 
@@ -46,7 +41,6 @@ public class FinanzasBancosFragment extends Fragment implements AdapterTemplate_
     private String tipo_ingreso_o_gasto;
 
     private ProgressDialog progressDialog;
-
 
     public FinanzasBancosFragment() {
         // Required empty public constructor

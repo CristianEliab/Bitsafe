@@ -90,7 +90,8 @@
                         android:layout_height="wrap_content"
                         android:background="#00000000"
                         android:hint="Nombre de tu ahorro"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_marginBottom="10dp"
+                        android:textStyle="bold"/>
                     <ImageView
                         android:layout_width="270dp"
                         android:layout_height="4dp"
@@ -102,7 +103,8 @@
                         android:layout_height="wrap_content"
                         android:hint="$0.0"
                         android:textColor="#076AAD"
-                        android:background="#00000000"/>
+                        android:background="#FFFF"
+                        android:inputType="number"/>
                 </LinearLayout>
                 <ImageView
                     android:layout_width="wrap_content"
@@ -149,7 +151,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Define una cuota:"
+                android:text="Define una frecuencia de pago:"
                 android:textColor="#4F4F4F"
                 android:textSize="18dp"
                 android:textStyle="bold"
@@ -174,8 +176,28 @@
                     android:text="Agregar una frecuencia de pago"
                     android:textColor="#FFF"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/tv_payment_frequency"/>
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tu cuota:"
+                android:textColor="#076AAD"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginTop="40dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Completa todos los campos para calcular tus cuotas."
+                android:textColor="#828282"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/tv_cuote" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -186,14 +208,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cancelar"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="40dp"/>
+                    android:layout_gravity="center_vertical"/>
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Guardar"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="40dp"/>
+                    android:layout_gravity="center_vertical" />
             </LinearLayout>
 
 
