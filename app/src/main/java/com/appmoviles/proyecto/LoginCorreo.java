@@ -66,25 +66,13 @@ public class LoginCorreo extends BaseActivity {
     }
 
     private void verificarPermisos() {
-        String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE};
-
-        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                READ_EXTERNAL) == PackageManager.PERMISSION_GRANTED) {
-            if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                    WRITE_EXTERNAL) == PackageManager.PERMISSION_GRANTED) {
-                //Inicia la aplicación
-                init();
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        permissions,
-                        LOCATION_PERMISSION_REQUEST_CODE);
-            }
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    permissions,
-                    LOCATION_PERMISSION_REQUEST_CODE);
-        }
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+        }, 0);
+        init();
     }
 
     private void init() {

@@ -1,6 +1,8 @@
 package com.appmoviles.proyecto;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -83,10 +85,28 @@ public class CargarDatosFragment extends Fragment implements View.OnClickListene
 
     private void cargarClientes(File file) {
         try {
+
             InputStream in = new FileInputStream(file);
             JsonParse jsonParse = new JsonParse();
             jsonParse.readJsonStream(in);
             jsonParse.cargarDesdeArchivo();
+
+            AlertDialog.Builder info = new AlertDialog.Builder(getContext());
+            info = new AlertDialog.Builder(getContext());
+            info.setTitle(R.string.inscripcion_correcto);
+            info.setMessage(R.string.se_agrego_satisfactoriamente);
+            info.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    HomeAdministrador activity = (HomeAdministrador) getActivity();
+                    activity = (HomeAdministrador) getActivity();
+                    activity.llamarClientesFragment();
+                }
+            });
+            info.show();
+
+
         } catch (IOException e) {
             Toast.makeText(getContext(), "Error " + e.getMessage() + "-" + e.getCause() + "-" + e.getStackTrace(), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {

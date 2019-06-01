@@ -272,6 +272,8 @@ public class DatosClienteFragment extends Fragment implements Serializable,
             filtrarLista(banco);
             if (selecciono_banco && selecciono_cuenta) {
                 btn_fragment_dt_cliente_guardar.setBackground(getResources().getDrawable(R.drawable.fragment_agregar_monto_figura_btn_guardar_activo));
+            }else{
+                et_cuenta_seleccionado.setText("");
             }
         } else {
             selecciono_banco = false;

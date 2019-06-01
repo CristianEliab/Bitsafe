@@ -211,7 +211,7 @@ public class Registro_Bitsafe extends BaseActivity implements View.OnClickListen
             case R.id.tv_ter_con:
                 info.setTitle(R.string.terminos_y_condiciones);
                 info.setMessage(R.string.mensaje_terminos_condiciones);
-                info.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                info.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -252,7 +252,7 @@ public class Registro_Bitsafe extends BaseActivity implements View.OnClickListen
                     info = new AlertDialog.Builder(this);
                     info.setTitle(R.string.aceptar_terminos);
                     info.setMessage(R.string.mensaje_aceptar_y_terminos);
-                    info.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    info.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();

@@ -1,5 +1,6 @@
 package com.appmoviles.proyecto.util;
 
+import android.net.Uri;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,12 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.appmoviles.proyecto.R;
 import com.appmoviles.proyecto.modelo.Banco;
 import com.appmoviles.proyecto.modelo.Usuario;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,8 +31,15 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
     public ArrayList<Usuario> dataFiltro;
     private LinearLayoutManager manage;
     private AdaptadorIconsBancos adaptadorIconsBancos;
+    FirebaseStorage storage;
+
+
     CustomFilter filtro;
     int index = -1;
+
+    //
+    FirebaseDatabase rtdb;
+
 
     @Override
     public Filter getFilter() {
@@ -50,6 +64,7 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
     public AdapterTemplate_Clientes() {
         data = new ArrayList<>();
         dataFiltro = new ArrayList<>();
+        rtdb = FirebaseDatabase.getInstance();
     }
 
     @Override
@@ -61,13 +76,14 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
     }
 
     @Override
-    public void onBindViewHolder(CustomViewHolder holder, final int position) {
+    public void onBindViewHolder(final CustomViewHolder holder, final int position) {
         ((TextView) holder.root.findViewById(R.id.tv_cliente_registro_nombre)).setText(data.get(position).getNombre());
         LinearLayoutManager manager = new LinearLayoutManager(holder.root.getContext(), LinearLayoutManager.HORIZONTAL, false);
         ((RecyclerView) holder.root.findViewById(R.id.lista_bancos_icons)).setLayoutManager(manager);
         ((RecyclerView) holder.root.findViewById(R.id.lista_bancos_icons)).setHasFixedSize(true);
         adaptadorIconsBancos = new AdaptadorIconsBancos();
         ((RecyclerView) holder.root.findViewById(R.id.lista_bancos_icons)).setAdapter(adaptadorIconsBancos);
+
 
         holder.root.findViewById(R.id.ll_fragment_clientes_registro).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +94,24 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
             }
         });
 
+        if(data.get(position).isUsuario_nuevo()){
+            data.get(position).setUsuario_nuevo(false);
+            rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(data.get(position).getUsuarioID()).setValue(data.get(position));
+            holder.root.findViewById(R.id.ll_fragment_clientes_registro).setBackgroundResource(R.color.colorNuevoUsuario);
+        }else{
+            holder.root.findViewById(R.id.ll_fragment_clientes_registro).setBackgroundResource(R.color.colorWhite);
+        }
+
+        storage = FirebaseStorage.getInstance();
+        StorageReference ref = storage.getReference().child(Constantes.CHILD_IMAGENES_PERFIL).child(data.get(position).getTelefono());
+        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                ImageView img = holder.root.findViewById(R.id.iv_cliente_registro_foto);
+                Glide.with(holder.root.getContext()).load(uri).into(img);
+            }
+        });
+
         ArrayList<Banco> list = data.get(position).getListaBancos();
         if (list != null) {
             for (Banco banco : list) {
@@ -85,6 +119,7 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
             }
         }
     }
+
 
     //OBSERVER
     public interface OnItemClickUsuario {

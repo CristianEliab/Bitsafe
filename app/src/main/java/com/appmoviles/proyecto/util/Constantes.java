@@ -117,4 +117,8 @@ public class Constantes {
     public final static String CUENTA_TIPO_CREDITO = "01";
     public final static String CUENTA_TIPO_DEBIDO = "02";
 
+
+    // Almacenar Imagenes
+    public final static String CHILD_IMAGENES_PERFIL = "fotos_clientes";
+
 }

@@ -54,6 +54,8 @@ public class ClientesFragment extends Fragment implements Serializable, AdapterT
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_clientes, container, false);
         iv_fragment_clientes_perfil = v.findViewById(R.id.iv_fragment_clientes_perfil);
@@ -63,8 +65,6 @@ public class ClientesFragment extends Fragment implements Serializable, AdapterT
         auth = FirebaseAuth.getInstance();
 
         consultas = Consultas.getInstance();
-
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         libreta = v.findViewById(R.id.lista_clientes);
         adapter = new AdapterTemplate_Clientes();

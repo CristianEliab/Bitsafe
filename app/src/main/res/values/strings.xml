@@ -7,6 +7,8 @@
     <string name="login_celular_numero">número de celular</string>
     <string name="registro_registro">Registro</string>
     <string name="registro_nombre">Nombre</string>
+    <string name="cambiar_pin">Cambiar PIN</string>
+    <string name="cambiar_huella">Cambiar Huella</string>
     <string name="registro_cedula">Cédula</string>
     <string name="registro_celular">Celular</string>
     <string name="registro_contrasenia">Contraseña</string>
@@ -17,6 +19,7 @@
     <string name="registro_registrarse_google">Registrarse con Google</string>
     <string name="registro_correo">Correo</string>
     <string name="registro_ubicacion">Ubicación</string>
+    <string name="registro_labor">Trabajo</string>
     <string name="registro_fecha_nacimiento">Fecha de nacimiento</string>
     <string name="registro_genero">Genero</string>
     <string name="opciones_prompt">Datos opcionales</string>
@@ -192,8 +195,13 @@
     <string name="descripcion_grafica_generos">La presente gráfica refleja en porcentaje de usuarios de género femenino y masculino presentes en el Bitsafe</string>
     <string name="descripcion_grafica_clientes">La presente gráfica refleja el número de usuarios que se registraron por mes en este año en Bitsafe</string>
 
-    <string name="guardar_transaccion">Guardar</string>
+    <string name="guardar">Guardar</string>
     <string name="confirmacion">¿Desea guardar la transacción?</string>
+    <string name="confirmacion_guardar_cambios">¿Desea guardar los cambios?</string>
+
 
     <string name="aceptar">Aceptar</string>
+
+    <string name="inscripcion_correcto">Agrego Correctamente</string>
+    <string name="se_agrego_satisfactoriamente">Se agregar los clientes Satisfactoriamente!</string>
 </resources>

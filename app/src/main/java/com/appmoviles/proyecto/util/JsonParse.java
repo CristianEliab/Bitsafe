@@ -219,8 +219,10 @@ public class JsonParse {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                usuario.setUsuario_nuevo(true);
                 rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(usuario.getUsuarioID()).setValue(usuario);
             }else{
+                usuario.setUsuario_nuevo(true);
                 rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(usuario.getUsuarioID()).setValue(usuario);
             }
 

@@ -4,21 +4,33 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.appmoviles.proyecto.R;
-import com.appmoviles.proyecto.modelo.Cliente;
 import com.appmoviles.proyecto.modelo.Usuario;
 
 import java.util.ArrayList;
 
 
-public class AdapterTemplate_SlClientes extends RecyclerView.Adapter<AdapterTemplate_SlClientes.CustomViewHolder> {
+public class AdapterTemplate_SlClientes extends RecyclerView.Adapter<AdapterTemplate_SlClientes.CustomViewHolder> implements Filterable {
 
     //Los datos que vamos a mostrar (View)
     private ArrayList<Usuario> data;
     int index = -1;
+    CustomFilter filtro;
+    public ArrayList<Usuario> dataFiltro;
+
+    @Override
+    public Filter getFilter() {
+        if (filtro == null) {
+            filtro = new CustomFilter();
+        }
+
+        return filtro;
+    }
 
     //Renglon y construccion
     public static class CustomViewHolder extends RecyclerView.ViewHolder {
@@ -32,6 +44,7 @@ public class AdapterTemplate_SlClientes extends RecyclerView.Adapter<AdapterTemp
 
     public AdapterTemplate_SlClientes() {
         data = new ArrayList<>();
+        dataFiltro = new ArrayList<>();
     }
 
     @Override
@@ -77,6 +90,40 @@ public class AdapterTemplate_SlClientes extends RecyclerView.Adapter<AdapterTemp
 
     public void agregarUsuario(Usuario usuario) {
         data.add(usuario);
+        dataFiltro.add(usuario);
         notifyDataSetChanged();
+    }
+
+
+    class CustomFilter extends Filter {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults resulst = new FilterResults();
+            if (constraint != null && constraint.length() > 0) {
+                constraint = constraint.toString().toUpperCase();
+                ArrayList<Usuario> filtro = new ArrayList<>();
+                for (Integer i = 0; i < dataFiltro.size(); i++) {
+                    if (dataFiltro.get(i).getNombre().toUpperCase().contains(constraint)) {
+                        Usuario udataFiltro = dataFiltro.get(i);
+                        filtro.add(udataFiltro);
+                    }
+                }
+                resulst.count = filtro.size();
+                resulst.values = filtro;
+            } else {
+                resulst.count = dataFiltro.size();
+                resulst.values = dataFiltro;
+            }
+
+            return resulst;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            data = (ArrayList<Usuario>) results.values;
+            notifyDataSetChanged();
+
+        }
     }
 }

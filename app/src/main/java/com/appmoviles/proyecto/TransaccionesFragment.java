@@ -47,9 +47,9 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
     private Usuario usuario_destino;
     private String fecha;
     private String descripcion = "";
-    private int diaSeleccionado;
-    private int mesSeleccionado;
-    private int anioSeleccionado;
+    private int diaSeleccionado = 0;
+    private int mesSeleccionado = 0;
+    private int anioSeleccionado = 0;
 
     private SharedPreferences myPreferences;
     FirebaseDatabase rtdb;
@@ -81,6 +81,12 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
         tv_fragment_transacciones_foto_destino = v.findViewById(R.id.tv_fragment_transacciones_foto_destino);
         iv_fragment_transacciones_perfil = v.findViewById(R.id.iv_fragment_transacciones_perfil);
         guardar_transacciones = v.findViewById(R.id.guardar_transacciones);
+
+
+        // Base de Datos
+        rtdb = FirebaseDatabase.getInstance();
+
+
 
         // Pedir la información
         myPreferences
@@ -173,7 +179,7 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
             // Cuentas
 
             AlertDialog.Builder info = new AlertDialog.Builder(getContext());
-            info.setTitle(R.string.guardar_transaccion);
+            info.setTitle(R.string.guardar);
             info.setMessage(R.string.confirmacion);
             info.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                 @Override
@@ -195,7 +201,7 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
         if (!monto.equals("") &&
                 usuario_origen != null &&
                 usuario_destino != null &&
-                fecha.equals("")) {
+                diaSeleccionado != 0) {
             agregar = true;
         } else {
             Toast.makeText(getContext(), "Ingrese cada uno de los campos", Toast.LENGTH_SHORT).show();

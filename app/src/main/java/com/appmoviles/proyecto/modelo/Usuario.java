@@ -1,5 +1,7 @@
 package com.appmoviles.proyecto.modelo;
 
+import android.net.Uri;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -23,6 +25,10 @@ public class Usuario implements Serializable {
     private ArrayList<Cuenta> listaCuentas;
     private long fechaCreacion;
     private String fecha_cargar;
+    private boolean usuario_nuevo;
+    private String habilitar_sincronizacion;
+
+    private String laborUsuario;
 
     public Usuario(String usuarioID, String nombre, String fecha_nacimiento, String telefono, String genero, String estadoUsuarioID, String loginID, String configuracionID, String cedula, String ubicacion, String correo, ArrayList<Banco> listaBancos, ArrayList<Cuenta> listaCuentas) {
         this.usuarioID = usuarioID;
@@ -170,5 +176,30 @@ public class Usuario implements Serializable {
 
     public void setFecha_cargar(String fecha_cargar) {
         this.fecha_cargar = fecha_cargar;
+    }
+
+    public boolean isUsuario_nuevo() {
+        return usuario_nuevo;
+    }
+
+    public void setUsuario_nuevo(boolean usuario_nuevo) {
+        this.usuario_nuevo = usuario_nuevo;
+    }
+
+    public String getHabilitar_sincronizacion() {
+        return habilitar_sincronizacion;
+    }
+
+    public void setHabilitar_sincronizacion(String habilitar_sincronizacion) {
+        this.habilitar_sincronizacion = habilitar_sincronizacion;
+    }
+
+
+    public String getLaborUsuario() {
+        return laborUsuario;
+    }
+
+    public void setLaborUsuario(String laborUsuario) {
+        this.laborUsuario = laborUsuario;
     }
 }

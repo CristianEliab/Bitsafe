@@ -129,6 +129,13 @@ public class HomeAdministrador extends FragmentActivity implements
 
     }
 
+    public void llamarClientesFragment(){
+        manager = this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = manager.beginTransaction();
+        fragmentTransaction.replace(R.id.contenido, clientesFragment);
+        fragmentTransaction.commit();
+    }
+
     public void llamarFragmentAgregarMonto() {
         manager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
