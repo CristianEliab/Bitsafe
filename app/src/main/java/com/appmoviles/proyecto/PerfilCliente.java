@@ -176,6 +176,7 @@ public class PerfilCliente extends Fragment implements Serializable {
                             if (usuario.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
                                 tv_nombre_cliente_perfil_cliente.setText(usuario.getNombre());
                                 tv_numero_telefono_perfil_cliente.setText(usuario.getTelefono());
+                                tv_nombre_iniciales.setText(usuario.getNombre().charAt(0));
                             }
                         }
                     }

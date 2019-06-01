@@ -177,13 +177,13 @@
 
                 <ImageView
                     android:id="@+id/iv_micuenta_ubicacion_flecha"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="299dp"
                     android:layout_marginTop="9dp"
-                    android:src="@drawable/ic_fecha" />
+                    android:src="@drawable/ic_fecha_next" />
 
 
                 <TextView
@@ -235,13 +235,13 @@
 
                 <ImageView
                     android:id="@+id/iv_micuenta_trabajo_flecha"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="299dp"
                     android:layout_marginTop="9dp"
-                    android:src="@drawable/ic_fecha" />
+                    android:src="@drawable/ic_fecha_next" />
 
                 <TextView
                     android:id="@+id/tv_micuenta_trabajo_pregunta"
@@ -263,7 +263,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="85dp"
                     android:layout_marginTop="6dp"
-                    android:text="Agregar información de tu desarrollo profesional."
+                    android:text="Agregar información de tu profesión."
                     android:textColor="@color/colorBlack"
                     android:textSize="11dp"
                     />
@@ -271,7 +271,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="280dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rl_micuenta_trabajo"
                 android:layout_marginTop="20dp"
@@ -279,25 +279,15 @@
                 android:background="@drawable/registro_boton_registrarse"
                 android:layout_centerHorizontal="true">
 
-                <ImageView
-                    android:id="@+id/iv_micuenta_delete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="13dp"
-                    android:src="@drawable/ic_delete" />
 
                 <TextView
-                    android:id="@+id/tv_micuenta_delete"
+                    android:id="@+id/tv_micuenta_guardar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/iv_micuenta_delete"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="58dp"
                     android:layout_marginTop="6dp"
-                    android:text="Eliminar esta cuenta"
+                    android:layout_marginBottom="6dp"
+                    android:layout_centerHorizontal="true"
+                    android:text="Guardar cambios"
                     android:textColor="@color/colorWhite"
                     android:textSize="20dp" />
 
