@@ -42,45 +42,10 @@
             android:layout_below="@+id/view_imagenes"
             android:layout_centerHorizontal="true">
 
-            <RelativeLayout
-                android:id="@+id/rl_registro_general_panel_bitsafe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btn_registro_registrarse"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/registro_boton_bitsafe">
-
-                <ImageView
-                    android:id="@+id/iv_registro_general_facebook"
-                    android:layout_width="100dp"
-                    android:layout_height="25dp"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/aplicacion_ic_bitsafe_icon" />
-
-                <TextView
-                    android:id="@+id/btn_registro_general_bitsafe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_alignLeft="@+id/iv_registro_general_facebook"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="100dp"
-                    android:background="@drawable/registro_boton_bitsafe"
-                    android:gravity="center"
-                    android:hint="@string/registro_registrarse_bitsafe"
-                    android:textColorHint="@color/colorWhite" />
-
-            </RelativeLayout>
-
             <FrameLayout
                 android:id="@+id/FrameLayout_botton_facebook"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/rl_registro_general_panel_bitsafe">
+                android:layout_height="match_parent">
 
                 <com.facebook.login.widget.LoginButton
                     android:id="@+id/btn_registro_general_facebook"
@@ -130,11 +95,45 @@
 
             </FrameLayout>
 
+            <RelativeLayout
+                android:id="@+id/rl_registro_general_panel_bitsafe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/FrameLayout_botton_facebook"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/registro_boton_bitsafe">
+
+                <ImageView
+                    android:id="@+id/iv_registro_general_facebook"
+                    android:layout_width="100dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/aplicacion_ic_bitsafe_icon" />
+
+                <TextView
+                    android:id="@+id/btn_registro_general_bitsafe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_alignLeft="@+id/iv_registro_general_facebook"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="100dp"
+                    android:background="@drawable/registro_boton_bitsafe"
+                    android:gravity="center"
+                    android:hint="@string/registro_registrarse_bitsafe"
+                    android:textColorHint="@color/colorWhite" />
+
+            </RelativeLayout>
+
             <FrameLayout
                 android:id="@+id/FrameLayout_botton_google"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/FrameLayout_botton_facebook">
+                android:layout_below="@+id/rl_registro_general_panel_bitsafe">
 
                 <com.google.android.gms.common.SignInButton
                     android:id="@+id/btn_sign_in_google"

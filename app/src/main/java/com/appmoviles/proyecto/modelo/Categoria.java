@@ -1,28 +1,28 @@
 package com.appmoviles.proyecto.modelo;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Categoria {
 
     private String categoriaID;
     private String nombre;
-    private Categoria SubCategoria;
+    private ArrayList<Categoria> SubCategoria;
 
 
     public Categoria() {
     }
 
-    public Categoria(String categoriaID, String nombre, Categoria subCategoria) {
+    public Categoria(String categoriaID, String nombre,  ArrayList<Categoria> subCategoria) {
         this.categoriaID = categoriaID;
         this.nombre = nombre;
         SubCategoria = subCategoria;
     }
 
-    public Categoria getSubCategoria() {
+    public  ArrayList<Categoria>  getSubCategoria() {
         return SubCategoria;
     }
 
-    public void setSubCategoria(Categoria subCategoria) {
+    public void setSubCategoria( ArrayList<Categoria>  subCategoria) {
         SubCategoria = subCategoria;
     }
 

@@ -110,7 +110,7 @@ public class Constantes {
     //Sale dinero de una cuenta predeterminada a mi cuenta --> INGRESO
     public final static String CUENTA_ORIGEN_ID = "999";
     //Sale dinero de mi cuenta a una cuenta predeterminada --> GASTO
-    public final static String CUENTA_DESTINO_ID = "8888";
+    public final static String CUENTA_DESTINO_ID = "888";
 
 
     //TPOS DE CUENTAS - PARA PONER IMAGEN
@@ -120,5 +120,8 @@ public class Constantes {
 
     // Almacenar Imagenes
     public final static String CHILD_IMAGENES_PERFIL = "fotos_clientes";
+
+    public final static String CATEGORIA_ENVIO_ID = "20";
+    public final static String CATEGORIA_RECEPCION_ID = "30";
 
 }

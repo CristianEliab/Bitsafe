@@ -65,7 +65,7 @@
 
             </RelativeLayout>
 
-            <ImageView
+            <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fb_fragment_sl_cliente_agregar_cliente"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -75,6 +75,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:src="@drawable/fragment_sl_clientes_ic_agregar_cliente" />
+
 
             <EditText
                 android:id="@+id/et_fragment_sl_clientes_filtro"
@@ -99,8 +100,6 @@
 
 
             </android.support.v7.widget.RecyclerView>
-
-
 
 
         </RelativeLayout>

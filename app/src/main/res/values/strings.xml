@@ -74,7 +74,6 @@
     <string name="fragment_finanzas_ingresos_gastos_pie_chart">Resumen de Transacciones por categorías</string>
 
 
-
     <!-- TRANSACCIONES -->
     <string name="fragment_finanzas_transacciones_toolbar">Transacciones</string>
     <string name="fragment_finanzas_transacciones_monto">Monto:</string>
@@ -178,7 +177,6 @@
         <item>30</item>
     </string-array>
 
-
     <string name="title_ayuda">¿Necesitas ayuda?</string>
     <string name="facebook_app_id">467274344078371</string>
     <string name="fb_login_protocol_scheme">fb467274344078371</string>
@@ -201,6 +199,12 @@
 
 
     <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+
+
+    <string name="desea_salir">¿Desea Salir?</string>
+    <string name="mensaje_salida">Por que te vas, tan pronto...</string>
+
 
     <string name="inscripcion_correcto">Agrego Correctamente</string>
     <string name="se_agrego_satisfactoriamente">Se agregar los clientes Satisfactoriamente!</string>

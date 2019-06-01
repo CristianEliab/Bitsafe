@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.appmoviles.proyecto.modelo.Cliente;
 import com.appmoviles.proyecto.modelo.Usuario;
@@ -172,24 +173,38 @@ public class SeleccionarClienteFragment extends Fragment implements AdapterTempl
                 datosClienteFragment = new DatosClienteFragment();
                 transaction = getFragmentManager().beginTransaction();
                 Bundle parametro = new Bundle();
-                if (tipo_usuario.equals(Constantes.USUARIO_ORIGEN)) {
-                    parametro.putSerializable(Constantes.USUARIO_SERIALIZABLE, origen);
-                    parametro.putString(Constantes.USUARIO, Constantes.USUARIO_ORIGEN);
-                    parametro.putSerializable(Constantes.TRANSACCIONES_DATOS, (TransaccionesFragment) fragment);
-                    parametro.putSerializable(Constantes.DONDE_VIENE, Constantes.TRANSACCIONES_DATOS);
-                    datosClienteFragment.setInteractionListener((OnFragmentInteractionListener) fragment);
-                    datosClienteFragment.setArguments(parametro);
+                if (origen != null) {
+                    if (tipo_usuario.equals(Constantes.USUARIO_ORIGEN)) {
+                        parametro.putSerializable(Constantes.USUARIO_SERIALIZABLE, origen);
+                        parametro.putString(Constantes.USUARIO, Constantes.USUARIO_ORIGEN);
+                        parametro.putSerializable(Constantes.TRANSACCIONES_DATOS, (TransaccionesFragment) fragment);
+                        parametro.putSerializable(Constantes.DONDE_VIENE, Constantes.TRANSACCIONES_DATOS);
+                        datosClienteFragment.setInteractionListener((OnFragmentInteractionListener) fragment);
+                        datosClienteFragment.setArguments(parametro);
+                        transaction.replace(R.id.contenido, datosClienteFragment);
+                        transaction.commit();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Seleccione un usuario",
+                            Toast.LENGTH_SHORT).show();
                 }
-                if (tipo_usuario.equals(Constantes.USUARIO_DESTINO)) {
-                    parametro.putSerializable(Constantes.USUARIO_SERIALIZABLE, destino);
-                    parametro.putString(Constantes.USUARIO, Constantes.USUARIO_DESTINO);
-                    parametro.putSerializable(Constantes.TRANSACCIONES_DATOS, (TransaccionesFragment) fragment);
-                    parametro.putSerializable(Constantes.DONDE_VIENE, Constantes.TRANSACCIONES_DATOS);
-                    datosClienteFragment.setInteractionListener((OnFragmentInteractionListener) fragment);
-                    datosClienteFragment.setArguments(parametro);
+                if (destino != null) {
+                    if (tipo_usuario.equals(Constantes.USUARIO_DESTINO)) {
+                        parametro.putSerializable(Constantes.USUARIO_SERIALIZABLE, destino);
+                        parametro.putString(Constantes.USUARIO, Constantes.USUARIO_DESTINO);
+                        parametro.putSerializable(Constantes.TRANSACCIONES_DATOS, (TransaccionesFragment) fragment);
+                        parametro.putSerializable(Constantes.DONDE_VIENE, Constantes.TRANSACCIONES_DATOS);
+                        datosClienteFragment.setInteractionListener((OnFragmentInteractionListener) fragment);
+                        datosClienteFragment.setArguments(parametro);
+                        transaction.replace(R.id.contenido, datosClienteFragment);
+                        transaction.commit();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Seleccione un usuario",
+                            Toast.LENGTH_SHORT).show();
                 }
-                transaction.replace(R.id.contenido, datosClienteFragment);
-                transaction.commit();
+
+
                 break;
             case R.id.iv_fragment_sl_clientes_perfil:
                 Intent i = new Intent(getActivity(), PerfilCliente.class);

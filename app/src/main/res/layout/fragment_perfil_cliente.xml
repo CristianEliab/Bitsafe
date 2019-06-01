@@ -75,28 +75,32 @@
                 android:layout_below="@+id/tb_fragment_perfil_cliente"
                 android:background="#a6edc3">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/iv_perfil_cliente"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="20dp"
-                    android:background="@mipmap/ic_pin_pin"
-                    android:gravity="center"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="38sp" />
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/fragment_cliente_ic_foto_cliente"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="#FF000000"/>
+
 
                 <TextView
                     android:id="@+id/tv_nombre_cliente_perfil_cliente"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="60dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_marginBottom="80dp"
                     android:text="Usuario"
                     android:textColor="#42423f"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tv_cuenta_bitsafe_perfil_cliente"
@@ -104,10 +108,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="60dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_marginBottom="53dp"
                     android:text="Cuenta Bitsafe"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_numero_telefono_perfil_cliente"
@@ -118,7 +122,7 @@
                     android:layout_marginTop="-53dp"
                     android:text="3045840096"
                     android:textColor="#42423f"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/btn_open_gal"
@@ -127,7 +131,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_below="@+id/tv_numero_telefono_perfil_cliente"
                     android:layout_alignEnd="@+id/tv_cuenta_bitsafe_perfil_cliente"
-                    android:layout_marginEnd="120dp"
+                    android:layout_marginEnd="130dp"
                     android:layout_marginTop="-50dp"
                     android:background="@mipmap/ic_photo_gallery" />
 

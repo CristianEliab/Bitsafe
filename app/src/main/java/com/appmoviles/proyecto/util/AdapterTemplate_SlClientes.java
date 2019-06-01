@@ -1,16 +1,24 @@
 package com.appmoviles.proyecto.util;
 
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.appmoviles.proyecto.R;
+import com.appmoviles.proyecto.modelo.Banco;
 import com.appmoviles.proyecto.modelo.Usuario;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -22,6 +30,7 @@ public class AdapterTemplate_SlClientes extends RecyclerView.Adapter<AdapterTemp
     int index = -1;
     CustomFilter filtro;
     public ArrayList<Usuario> dataFiltro;
+    FirebaseStorage storage;
 
     @Override
     public Filter getFilter() {
@@ -70,6 +79,17 @@ public class AdapterTemplate_SlClientes extends RecyclerView.Adapter<AdapterTemp
         } else {
             holder.root.findViewById(R.id.ll_fragment_sl_datos).setBackgroundResource(R.drawable.fragment_clientes_bordes_registros);
         }
+
+
+        storage = FirebaseStorage.getInstance();
+        StorageReference ref = storage.getReference().child(Constantes.CHILD_IMAGENES_PERFIL).child(data.get(position).getTelefono());
+        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                ImageView img = holder.root.findViewById(R.id.iv_sl_datos_foto);
+                Glide.with(holder.root.getContext()).load(uri).into(img);
+            }
+        });
     }
 
     //OBSERVER

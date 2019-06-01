@@ -154,24 +154,43 @@
                         android:layout_marginTop="2dp"
                         android:src="@drawable/ic_linea" />
 
+                    <TextView
+                        android:id="@+id/tv_cambiar_nombre_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/view_datos"
+                        android:allowUndo="true"
+                        android:gravity="left|center"
+                        android:hint="@string/registro_nombre"
+                        android:textSize="15sp" />
+
                     <EditText
                         android:id="@+id/tv_cambiar_nombre"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/registro_et_campos_registro_h"
-                        android:layout_below="@+id/view_datos"
-                        android:layout_marginTop="15dp"
+                        android:layout_below="@+id/tv_cambiar_nombre_tv"
                         android:allowUndo="true"
                         android:gravity="left|center"
                         android:hint="@string/registro_nombre"
                         android:textColorHint="@color/colorBitsafeRegistro"
                         android:textSize="@dimen/registro_et_tamanio_campos" />
 
+                    <TextView
+                        android:id="@+id/tv_cambiar_cedula_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_cambiar_nombre"
+                        android:layout_marginTop="20dp"
+                        android:allowUndo="true"
+                        android:gravity="left|center"
+                        android:hint="@string/registro_cedula"
+                        android:textSize="15sp" />
+
                     <EditText
                         android:id="@+id/tv_cambiar_cedula"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/registro_et_campos_registro_h"
-                        android:layout_below="@+id/tv_cambiar_nombre"
-                        android:layout_marginTop="15dp"
+                        android:layout_below="@+id/tv_cambiar_cedula_tv"
                         android:allowUndo="true"
                         android:gravity="left|center"
                         android:hint="@string/registro_cedula"
@@ -179,38 +198,68 @@
                         android:textColorHint="@color/colorBitsafeRegistro"
                         android:textSize="@dimen/registro_et_tamanio_campos" />
 
+                    <TextView
+                        android:id="@+id/tv_cambiar_celular_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_cambiar_cedula"
+                        android:layout_marginTop="20dp"
+                        android:allowUndo="true"
+                        android:gravity="left|center"
+                        android:hint="@string/registro_celular"
+                        android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/tv_cambiar_celular"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/registro_et_campos_registro_h"
-                        android:layout_below="@+id/tv_cambiar_cedula"
-                        android:layout_marginTop="15dp"
+                        android:layout_below="@+id/tv_cambiar_celular_tv"
                         android:allowUndo="true"
                         android:gravity="left|center"
+                        android:inputType="phone"
                         android:hint="@string/registro_celular"
                         android:textColorHint="@color/colorBitsafeRegistro"
                         android:textSize="@dimen/registro_et_tamanio_campos" />
+
+                    <TextView
+                        android:id="@+id/tv_cambiar_hogar_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_cambiar_celular"
+                        android:layout_marginTop="20dp"
+                        android:allowUndo="true"
+                        android:gravity="left|center"
+                        android:hint="@string/registro_ubicacion"
+                        android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/tv_cambiar_hogar"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/registro_et_campos_registro_h"
-                        android:layout_below="@+id/tv_cambiar_celular"
-                        android:layout_marginTop="15dp"
+                        android:layout_below="@+id/tv_cambiar_hogar_tv"
                         android:allowUndo="true"
                         android:gravity="left|center"
                         android:hint="@string/registro_ubicacion"
-                        android:inputType="phone"
+                        android:inputType="text"
                         android:textColorHint="@color/colorBitsafeRegistro"
                         android:textSize="@dimen/registro_et_tamanio_campos" />
+
+                    <TextView
+                        android:id="@+id/tv_cambiar_labor_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_cambiar_hogar"
+                        android:layout_marginTop="20dp"
+                        android:allowUndo="true"
+                        android:gravity="left|center"
+                        android:hint="@string/registro_labor"
+                        android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/tv_cambiar_labor"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/registro_et_campos_registro_h"
-                        android:layout_below="@+id/tv_cambiar_hogar"
-                        android:layout_marginTop="15dp"
+                        android:layout_below="@+id/tv_cambiar_labor_tv"
                         android:allowUndo="true"
                         android:gravity="left|center"
                         android:hint="@string/registro_labor"
@@ -231,7 +280,7 @@
                     android:gravity="center"
                     android:hint="Guardar Cambios"
                     android:textColorHint="@color/colorWhite"
-                    android:textSize="20dp" />
+                    android:textSize="18sp" />
 
 
             </RelativeLayout>

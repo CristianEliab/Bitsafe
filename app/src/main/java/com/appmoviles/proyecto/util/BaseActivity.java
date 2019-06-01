@@ -24,7 +24,7 @@ public class BaseActivity extends AppCompatActivity {
 
 
     public void showProgressDialog(Context context) {
-        Dialog dialog = new Dialog(context);
+        dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.custom_loading);

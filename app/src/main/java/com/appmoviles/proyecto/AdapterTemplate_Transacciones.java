@@ -64,10 +64,18 @@ public class AdapterTemplate_Transacciones extends RecyclerView.Adapter<AdapterT
                 for (DataSnapshot hijo : dataSnapshot.getChildren()) {
                     categoriaTmp = hijo.getValue(Categoria.class);
                     categoriaLista.add(categoriaTmp);
+                    if (categoriaTmp.getSubCategoria() != null){
+                        ArrayList<Categoria> subcategorias = categoriaTmp.getSubCategoria();
+                        for (Categoria categoria: subcategorias){
+                            categoriaLista.add(categoria);
+                        }
+                    }
+
+
                 }
             }
 
-            @Override
+            @Override 
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }

@@ -94,23 +94,26 @@ public class AdapterTemplate_Clientes extends RecyclerView.Adapter<AdapterTempla
             }
         });
 
-        if(data.get(position).isUsuario_nuevo()){
+        if (data.get(position).isUsuario_nuevo()) {
             data.get(position).setUsuario_nuevo(false);
             rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(data.get(position).getUsuarioID()).setValue(data.get(position));
             holder.root.findViewById(R.id.ll_fragment_clientes_registro).setBackgroundResource(R.color.colorNuevoUsuario);
-        }else{
+        } else {
             holder.root.findViewById(R.id.ll_fragment_clientes_registro).setBackgroundResource(R.color.colorWhite);
         }
 
         storage = FirebaseStorage.getInstance();
-        StorageReference ref = storage.getReference().child(Constantes.CHILD_IMAGENES_PERFIL).child(data.get(position).getTelefono());
-        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                ImageView img = holder.root.findViewById(R.id.iv_cliente_registro_foto);
-                Glide.with(holder.root.getContext()).load(uri).into(img);
-            }
-        });
+        if (data.get(position).getTelefono() != null) {
+            StorageReference ref = storage.getReference().child(Constantes.CHILD_IMAGENES_PERFIL).child(data.get(position).getTelefono());
+            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    ImageView img = holder.root.findViewById(R.id.iv_cliente_registro_foto);
+                    Glide.with(holder.root.getContext()).load(uri).into(img);
+                }
+            });
+        }
+
 
         ArrayList<Banco> list = data.get(position).getListaBancos();
         if (list != null) {

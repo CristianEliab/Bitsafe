@@ -489,6 +489,18 @@ public class FinanzasFragment extends Fragment implements View.OnClickListener, 
                         if (categoriaTmp.getCategoriaID().equals(clave)) {
                             diccionarioNombreCategorias.put(clave, categoriaTmp.getNombre());
                         }
+                        //SI HAY SUBCATEGORÍAS, QUE AÑADA EL NOMBRE
+                        if(categoriaTmp.getSubCategoria() != null){
+                            ArrayList<Categoria> list = categoriaTmp.getSubCategoria();
+                            for (Categoria categoria: list){
+                                if(categoria.getCategoriaID().equals(clave)){
+                                    diccionarioNombreCategorias.put(clave, categoria.getNombre());
+                                }
+                            }
+
+                        }
+
+
                     }
                 }
                 cargarPieChart();

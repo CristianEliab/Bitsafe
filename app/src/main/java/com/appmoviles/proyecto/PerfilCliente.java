@@ -25,6 +25,12 @@ import com.appmoviles.proyecto.util.BaseActivity;
 import com.appmoviles.proyecto.util.Constantes;
 import com.appmoviles.proyecto.util.UtilDomi;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -67,6 +73,8 @@ public class PerfilCliente extends BaseActivity implements Serializable, View.On
     private Usuario me;
 
     FirebaseStorage storage;
+    private GoogleApiClient mGoogleApiClient;
+
 
 
     FirebaseAuth auth;
@@ -118,61 +126,58 @@ public class PerfilCliente extends BaseActivity implements Serializable, View.On
             public void onClick(View v) {
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                if (volver_a == null) {
-                    Toast.makeText(PerfilCliente.this, "Arreglar!!!!!", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (volver_a.equals(Constantes.FRAGMENT_FINANZAS)) {
-                        Intent i = new Intent(PerfilCliente.this, HomeCliente.class);
-                        i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_FINANZAS);
-                        startActivity(i);
-                        finish();
-                    }
-                    if (volver_a.equals(Constantes.FRAGMENT_PLANES)) {
-                        Intent i = new Intent(PerfilCliente.this, HomeCliente.class);
-                        i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_PLANES);
-                        startActivity(i);
-                        finish();
-                    }
-                    if (volver_a.equals(Constantes.FRAGMENT_CUENTAS)) {
-                        Intent i = new Intent(PerfilCliente.this, HomeCliente.class);
-                        i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CUENTAS);
-                        startActivity(i);
-                        finish();
-                    }
-                    if (volver_a.equals(Constantes.FRAGMENT_CLIENTE)) {
-                        Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
-                        i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CLIENTE);
-                        startActivity(i);
-                        finish();
-                    }
-                    if (volver_a.equals(Constantes.FRAGMENT_ESTADISTICAS)) {
-                        Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
-                        i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_ESTADISTICAS);
-                        startActivity(i);
-                        finish();
-                    }
-                    if (volver_a.equals(Constantes.FRAGMENT_TRANSACCION)) {
-                        Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
-                        i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_TRANSACCION);
-                        startActivity(i);
-                        finish();
-                    }
-                    if (volver_a.equals(Constantes.FRAGMENT_CARGAR)) {
-                        Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
-                        i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CARGAR);
-                        startActivity(i);
-                        finish();
-                    }
-                    if (volver_a.equals(Constantes.DATOS_FRAGMENT)) {
-                        Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
-                        i.putExtra(Constantes.FRAGMENT, Constantes.DATOS_FRAGMENT);
-                        i.putExtra(Constantes.DONDE_VIENE, donde_viene);
-                        startActivity(i);
-                        finish();
-                    }
+                if (volver_a.equals(Constantes.FRAGMENT_FINANZAS)) {
+                    Intent i = new Intent(PerfilCliente.this, HomeCliente.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_FINANZAS);
+                    startActivity(i);
+                    finish();
                 }
-
+                if (volver_a.equals(Constantes.FRAGMENT_PLANES)) {
+                    Intent i = new Intent(PerfilCliente.this, HomeCliente.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_PLANES);
+                    startActivity(i);
+                    finish();
+                }
+                if (volver_a.equals(Constantes.FRAGMENT_CUENTAS)) {
+                    Intent i = new Intent(PerfilCliente.this, HomeCliente.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CUENTAS);
+                    startActivity(i);
+                    finish();
+                }
+                if (volver_a.equals(Constantes.FRAGMENT_CLIENTE)) {
+                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CLIENTE);
+                    startActivity(i);
+                    finish();
+                }
+                if (volver_a.equals(Constantes.FRAGMENT_ESTADISTICAS)) {
+                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_ESTADISTICAS);
+                    startActivity(i);
+                    finish();
+                }
+                if (volver_a.equals(Constantes.FRAGMENT_TRANSACCION)) {
+                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_TRANSACCION);
+                    startActivity(i);
+                    finish();
+                }
+                if (volver_a.equals(Constantes.FRAGMENT_CARGAR)) {
+                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CARGAR);
+                    startActivity(i);
+                    finish();
+                }
+                if (volver_a.equals(Constantes.DATOS_FRAGMENT)) {
+                    Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                    i.putExtra(Constantes.FRAGMENT, Constantes.DATOS_FRAGMENT);
+                    i.putExtra(Constantes.DONDE_VIENE, donde_viene);
+                    startActivity(i);
+                    finish();
+                }
             }
+
+
         });
 
 
@@ -183,7 +188,6 @@ public class PerfilCliente extends BaseActivity implements Serializable, View.On
                 Intent i = new Intent(PerfilCliente.this, MiCuentaPerfil.class);
                 i.putExtra(Constantes.DONDE_VIENE, volver_a);
                 startActivity(i);
-                finish();
             }
         });
 
@@ -193,24 +197,32 @@ public class PerfilCliente extends BaseActivity implements Serializable, View.On
             public void onClick(View v) {
                 Intent i = new Intent(PerfilCliente.this, AjustesContrasena.class);
                 startActivity(i);
-                finish();
             }
         });
 
         iv_cerrar_perfil_cliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                auth.signOut();
-                Intent i = new Intent(PerfilCliente.this, Splash.class);
-                startActivity(i);
-                finish();
+
+                FirebaseAuth.getInstance().signOut();
+
+                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.default_web_client_id))
+                        .requestEmail()
+                        .build();
+                mGoogleApiClient = new GoogleApiClient.Builder(PerfilCliente.this)
+                        .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                        .build();
+
+                // Google sign out
+                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
             }
         });
 
         tv_cerrar_perfil_cliente_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                auth.signOut();
+                FirebaseAuth.getInstance().signOut();
                 Intent i = new Intent(PerfilCliente.this, Splash.class);
                 startActivity(i);
                 finish();
@@ -320,15 +332,19 @@ public class PerfilCliente extends BaseActivity implements Serializable, View.On
 
     private void subirImagen() {
         try {
-            if (me.getTelefono() != null) {
-                StorageReference ref = storage.getReference().child(Constantes.CHILD_IMAGENES_PERFIL).child(me.getTelefono());
-                FileInputStream fis = new FileInputStream(photoFile);
-                ref.putStream(fis).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        cargarFotoPerfil();
-                    }
-                });
+            if (me != null) {
+                if (me.getTelefono() != null) {
+                    StorageReference ref = storage.getReference().child(Constantes.CHILD_IMAGENES_PERFIL).child(me.getTelefono());
+                    FileInputStream fis = new FileInputStream(photoFile);
+                    ref.putStream(fis).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            showProgressDialog(PerfilCliente.this);
+                            cargarFotoPerfil();
+                            hideProgressDialog();
+                        }
+                    });
+                }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -336,14 +352,75 @@ public class PerfilCliente extends BaseActivity implements Serializable, View.On
     }
 
     private void cargarFotoPerfil() {
-        showProgressDialog(this);
-        StorageReference ref = storage.getReference().child(Constantes.CHILD_IMAGENES_PERFIL).child(me.getTelefono());
-        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(PerfilCliente.this).load(uri).into(iv_perfil_cliente);
-                hideProgressDialog();
+        if (me.getTelefono() != null) {
+            StorageReference ref = storage.getReference().child(Constantes.CHILD_IMAGENES_PERFIL).child(me.getTelefono());
+            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(PerfilCliente.this).load(uri).into(iv_perfil_cliente);
+                }
+            });
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        if (volver_a == null) {
+            Toast.makeText(PerfilCliente.this, "Arreglar!!!!!", Toast.LENGTH_SHORT).show();
+        } else {
+            if (volver_a.equals(Constantes.FRAGMENT_FINANZAS)) {
+                Intent i = new Intent(PerfilCliente.this, HomeCliente.class);
+                i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_FINANZAS);
+                startActivity(i);
+                finish();
             }
-        });
+            if (volver_a.equals(Constantes.FRAGMENT_PLANES)) {
+                Intent i = new Intent(PerfilCliente.this, HomeCliente.class);
+                i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_PLANES);
+                startActivity(i);
+                finish();
+            }
+            if (volver_a.equals(Constantes.FRAGMENT_CUENTAS)) {
+                Intent i = new Intent(PerfilCliente.this, HomeCliente.class);
+                i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CUENTAS);
+                startActivity(i);
+                finish();
+            }
+            if (volver_a.equals(Constantes.FRAGMENT_CLIENTE)) {
+                Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CLIENTE);
+                startActivity(i);
+                finish();
+            }
+            if (volver_a.equals(Constantes.FRAGMENT_ESTADISTICAS)) {
+                Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_ESTADISTICAS);
+                startActivity(i);
+                finish();
+            }
+            if (volver_a.equals(Constantes.FRAGMENT_TRANSACCION)) {
+                Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_TRANSACCION);
+                startActivity(i);
+                finish();
+            }
+            if (volver_a.equals(Constantes.FRAGMENT_CARGAR)) {
+                Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                i.putExtra(Constantes.FRAGMENT, Constantes.FRAGMENT_CARGAR);
+                startActivity(i);
+                finish();
+            }
+            if (volver_a.equals(Constantes.DATOS_FRAGMENT)) {
+                Intent i = new Intent(PerfilCliente.this, HomeAdministrador.class);
+                i.putExtra(Constantes.FRAGMENT, Constantes.DATOS_FRAGMENT);
+                i.putExtra(Constantes.DONDE_VIENE, donde_viene);
+                startActivity(i);
+                finish();
+            }
+        }
     }
 }

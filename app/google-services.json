@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "550051516802-0cqcavbvo2f2tl4uuqbkeu0lk0mb5mhp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appmoviles.proyecto",
+            "certificate_hash": "1b0b749fd44d4ff7264c7073ecbd8b5b1a27cf78"
+          }
+        },
+        {
           "client_id": "550051516802-8sb3tmr13h1a32u7udr122fb0iqamok0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -37,6 +45,10 @@
             "package_name": "com.appmoviles.proyecto",
             "certificate_hash": "90a9f2c051d4b796acfbb5478d7abb6a917dfadf"
           }
+        },
+        {
+          "client_id": "550051516802-qg5i9go20raueghqpaas2bg96s09r7l8.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [

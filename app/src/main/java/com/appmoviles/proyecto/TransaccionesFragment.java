@@ -87,7 +87,6 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
         rtdb = FirebaseDatabase.getInstance();
 
 
-
         // Pedir la información
         myPreferences
                 = (SharedPreferences) PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -138,6 +137,7 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.btn_fragment_transacciones_agregar_fecha:
                 DatePickerFragment date = new DatePickerFragment();
+                date.setInteractionListener(this);
                 Calendar calender = Calendar.getInstance();
                 Bundle args = new Bundle();
                 args.putInt("year", calender.get(Calendar.YEAR));
@@ -145,6 +145,7 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
                 args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
                 date.setArguments(args);
                 date.setCallBack(ondate);
+
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 date.show(manager, "Date Picker");
                 break;
@@ -155,6 +156,7 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
                 usuario_origen = null;
                 monto = null;
                 fecha = null;
+                descripcion = null;
                 startActivity(i);
                 getActivity().finish();
                 break;
@@ -166,17 +168,9 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
 
     private void guardarTransaccion() {
         if (comprobarInformacion()) {
-            final Transaccion transaccionNueva = new Transaccion();
-            transaccionNueva.setTransaccionID(UUID.randomUUID().toString());
-            transaccionNueva.setMontoTransaccion(monto);
-            descripcion = et_fragment_transacciones_descripcion_clientes.getText().toString();
-            transaccionNueva.setDescripcion(descripcion);
-            transaccionNueva.setFechaTransaccion(anioSeleccionado + "-" + mesSeleccionado + "-" + diaSeleccionado);
 
-            // Cuentas
-            transaccionNueva.setCuentaOrigenID(usuario_origen.getListaCuentas().get(0).getCuentaID());
-            transaccionNueva.setCuentaDestinoID(usuario_destino.getListaCuentas().get(0).getCuentaID());
-            // Cuentas
+            final Transaccion envio = crearTransaccion(Constantes.CATEGORIA_ENVIO_ID);
+            final Transaccion recepcion = crearTransaccion(Constantes.CATEGORIA_RECEPCION_ID);
 
             AlertDialog.Builder info = new AlertDialog.Builder(getContext());
             info.setTitle(R.string.guardar);
@@ -184,16 +178,50 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
             info.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    rtdb.getReference().child(Constantes.CHILD_TRANSACCIONES).push().setValue(transaccionNueva);
+                    rtdb.getReference().child(Constantes.CHILD_TRANSACCIONES).push().setValue(envio);
+                    rtdb.getReference().child(Constantes.CHILD_TRANSACCIONES).push().setValue(recepcion);
                     usuario_origen = null;
                     usuario_destino = null;
                     monto = null;
                     fecha = null;
-                    descripcion = "";
+                    descripcion = null;
+
+                    HomeAdministrador activity = (HomeAdministrador) getActivity();
+                    Toast.makeText(getContext(), "Se creo satisfactoriamente", Toast.LENGTH_LONG).show();
+                    activity.llamarFragmentClienteDestino();
                 }
             });
             info.show();
+
+
         }
+    }
+
+    private Transaccion crearTransaccion(String categoriaID) {
+        Transaccion transaccionNueva = new Transaccion();
+        if (categoriaID.equals(Constantes.CATEGORIA_ENVIO_ID)) {
+            transaccionNueva.setTransaccionID(UUID.randomUUID().toString());
+            transaccionNueva.setMontoTransaccion(monto);
+            descripcion = et_fragment_transacciones_descripcion_clientes.getText().toString();
+            transaccionNueva.setDescripcion(descripcion);
+            transaccionNueva.setFechaTransaccion(anioSeleccionado + "-" + mesSeleccionado + "-" + diaSeleccionado);
+            transaccionNueva.setCategoriaID(Constantes.CATEGORIA_ENVIO_ID);
+            // Cuentas
+            transaccionNueva.setCuentaOrigenID(usuario_origen.getListaCuentas().get(0).getCuentaID());
+            transaccionNueva.setCuentaDestinoID(Constantes.CUENTA_DESTINO_ID);
+        }
+        if (categoriaID.equals(Constantes.CATEGORIA_RECEPCION_ID)) {
+            transaccionNueva.setTransaccionID(UUID.randomUUID().toString());
+            transaccionNueva.setMontoTransaccion(monto);
+            descripcion = et_fragment_transacciones_descripcion_clientes.getText().toString();
+            transaccionNueva.setDescripcion(descripcion);
+            transaccionNueva.setFechaTransaccion(anioSeleccionado + "-" + mesSeleccionado + "-" + diaSeleccionado);
+            transaccionNueva.setCategoriaID(Constantes.CATEGORIA_RECEPCION_ID);
+            // Cuentas
+            transaccionNueva.setCuentaOrigenID(Constantes.CUENTA_ORIGEN_ID);
+            transaccionNueva.setCuentaDestinoID(usuario_destino.getListaCuentas().get(0).getCuentaID());
+        }
+        return transaccionNueva;
     }
 
     private boolean comprobarInformacion() {
@@ -246,6 +274,9 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
         if (origin instanceof AgregarMontoFragment) {
             monto = (String) message;
         }
+        if (origin instanceof DatePickerFragment) {
+            fecha = (String) message;
+        }
     }
 
     @Override
@@ -289,5 +320,13 @@ public class TransaccionesFragment extends Fragment implements View.OnClickListe
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }

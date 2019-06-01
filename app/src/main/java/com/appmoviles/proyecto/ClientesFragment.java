@@ -145,4 +145,6 @@ public class ClientesFragment extends Fragment implements Serializable, AdapterT
                 break;
         }
     }
+
+
 }

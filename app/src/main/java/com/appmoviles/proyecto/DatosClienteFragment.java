@@ -3,6 +3,7 @@ package com.appmoviles.proyecto;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -30,10 +31,14 @@ import com.appmoviles.proyecto.modelo.Usuario;
 import com.appmoviles.proyecto.util.AdapterDatosBancos;
 import com.appmoviles.proyecto.util.AdapterDatosCuentas;
 import com.appmoviles.proyecto.util.Constantes;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -58,6 +63,7 @@ public class DatosClienteFragment extends Fragment implements Serializable,
     private ImageView iv_down_cuentas;
     private ImageView iv_fragment_dt_clientes_return;
     private ImageView iv_fragment_dt_clientes_perfil;
+    private ImageView iv_sl_cliente_registro_foto;
     private ArrayList<Banco> listaBancos;
     private ArrayList<Cuenta> listaCuentas;
     private Button btn_fragment_dt_cliente_guardar;
@@ -86,6 +92,8 @@ public class DatosClienteFragment extends Fragment implements Serializable,
     // Envio de información
     private OnFragmentInteractionListener listener;
 
+    FirebaseStorage storage;
+
 
     public DatosClienteFragment() {
         // Required empty public constructor
@@ -110,7 +118,7 @@ public class DatosClienteFragment extends Fragment implements Serializable,
         }
 
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_datos_cliente, container, false);
+        final View v = inflater.inflate(R.layout.fragment_datos_cliente, container, false);
 
         rtdb = FirebaseDatabase.getInstance();
 
@@ -126,6 +134,7 @@ public class DatosClienteFragment extends Fragment implements Serializable,
         tv_fragment_dt_clientes_texto_nombre_cliente = v.findViewById(R.id.tv_fragment_dt_clientes_texto_nombre_cliente);
         iv_fragment_dt_clientes_return = v.findViewById(R.id.iv_fragment_dt_clientes_return);
         iv_fragment_dt_clientes_perfil = v.findViewById(R.id.iv_fragment_dt_clientes_perfil);
+        iv_sl_cliente_registro_foto = v.findViewById(R.id.iv_sl_cliente_registro_foto);
 
         // Lista de transacciones
         lista_transacciones = v.findViewById(R.id.lista_transacciones);
@@ -135,8 +144,11 @@ public class DatosClienteFragment extends Fragment implements Serializable,
         adapterTemplate_transacciones.setListener(this);
         lista_transacciones.setAdapter(adapterTemplate_transacciones);
 
-        listaBancos = usuario.getListaBancos();
-        listaCuentas = usuario.getListaCuentas();
+        if (usuario != null) {
+            listaBancos = usuario.getListaBancos();
+            listaCuentas = usuario.getListaCuentas();
+        }
+
 
         // Adaptador bancos
         adapterDatosBancos = new AdapterDatosBancos();
@@ -191,6 +203,18 @@ public class DatosClienteFragment extends Fragment implements Serializable,
         // Configuraciones
         selecciono_banco = false;
         selecciono_cuenta = false;
+
+
+        storage = FirebaseStorage.getInstance();
+        StorageReference ref = storage.getReference().child(Constantes.CHILD_IMAGENES_PERFIL).child(usuario.getTelefono());
+        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                ImageView img = v.findViewById(R.id.iv_sl_cliente_registro_foto);
+                Glide.with(v.getContext()).load(uri).into(img);
+            }
+        });
+
 
         return v;
     }
@@ -272,7 +296,7 @@ public class DatosClienteFragment extends Fragment implements Serializable,
             filtrarLista(banco);
             if (selecciono_banco && selecciono_cuenta) {
                 btn_fragment_dt_cliente_guardar.setBackground(getResources().getDrawable(R.drawable.fragment_agregar_monto_figura_btn_guardar_activo));
-            }else{
+            } else {
                 et_cuenta_seleccionado.setText("");
             }
         } else {

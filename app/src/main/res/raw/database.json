@@ -35,7 +35,7 @@
       ],
       "cuentas": [
         {
-          "cuentaID": "01",
+          "cuentaID": "45",
           "numeroCuenta": "3456-6971-7765-5421",
           "tipoCuentaID": "01",
           "tipoCuentaNombre": "Cuenta Credito",
@@ -44,29 +44,11 @@
           "fechaVinculacion": "2019-02-10"
         },
         {
-          "cuentaID": "02",
+          "cuentaID": "46",
           "numeroCuenta": "6791-2317-3479-3214",
           "tipoCuentaID": "01",
           "tipoCuentaNombre": "Cuenta Credito",
           "bancoID": "02",
-          "saldo": "200000",
-          "fechaVinculacion": "2019-02-10"
-        },
-        {
-          "cuentaID": "03",
-          "numeroCuenta": "5678-9012-3456-1234",
-          "tipoCuentaID": "01",
-          "tipoCuentaNombre": "Cuenta Credito",
-          "bancoID": "03",
-          "saldo": "200000",
-          "fechaVinculacion": "2019-02-10"
-        },
-        {
-          "cuentaID": "04",
-          "numeroCuenta": "9012-3456-6497-1576",
-          "tipoCuentaID": "01",
-          "tipoCuentaNombre": "Cuenta Credito",
-          "bancoID": "04",
           "saldo": "200000",
           "fechaVinculacion": "2019-02-10"
         }
@@ -92,7 +74,7 @@
       ],
       "cuentas": [
         {
-          "cuentaID": "01",
+          "cuentaID": "44",
           "numeroCuenta": "3456-9764-3546-6721",
           "tipoCuentaID": "01",
           "tipoCuentaNombre": "Cuenta Credito",
@@ -127,7 +109,7 @@
       ],
       "cuentas": [
         {
-          "cuentaID": "01",
+          "cuentaID": "40",
           "numeroCuenta": "3456-9754-6764-3215",
           "tipoCuentaID": "01",
           "tipoCuentaNombre": "Cuenta Credito",
@@ -136,7 +118,7 @@
           "fechaVinculacion": "2019-02-10"
         },
         {
-          "cuentaID": "02",
+          "cuentaID": "41",
           "numeroCuenta": "3649-6197-9184-2011",
           "tipoCuentaID": "01",
           "tipoCuentaNombre": "Cuenta Credito",
@@ -166,7 +148,7 @@
       ],
       "cuentas": [
         {
-          "cuentaID": "01",
+          "cuentaID": "42",
           "numeroCuenta": "6794-1498-0197-3416",
           "tipoCuentaID": "01",
           "tipoCuentaNombre": "Cuenta Credito",
@@ -175,7 +157,7 @@
           "fechaVinculacion": "2019-02-10"
         },
         {
-          "cuentaID": "02",
+          "cuentaID": "43",
           "numeroCuenta": "1435-1487-9874-1948",
           "tipoCuentaID": "01",
           "tipoCuentaNombre": "Cuenta Credito",
@@ -460,6 +442,10 @@
     },
     {
       "usuarioID": "KErt3qoS59QyupH045HTA8L5jYx1",
+      "rolID": "02"
+    },
+    {
+      "usuarioID": "EhZRPO2ISDaGmPQJkFb5XbTWWb92",
       "rolID": "02"
     }
   ],

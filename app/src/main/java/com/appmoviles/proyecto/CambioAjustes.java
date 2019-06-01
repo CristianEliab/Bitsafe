@@ -58,37 +58,31 @@ public class CambioAjustes extends AppCompatActivity {
         iv_fragment_cambio_ajustes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(CambioAjustes.this, AjustesContrasena.class);
-                startActivity(i);
-                finish();
+                onBackPressed();
             }
         });
 
         tv_guardar_cambios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (comprobarInformacion()) {
-                    AlertDialog.Builder info = new AlertDialog.Builder(CambioAjustes.this);
-                    info.setTitle(R.string.guardar);
-                    info.setMessage(R.string.confirmacion_guardar_cambios);
-                    info.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            usuario.setNombre(tv_cambiar_nombre.getText().toString());
-                            usuario.setCedula(tv_cambiar_cedula.getText().toString());
-                            String[] campos = tv_cambiar_celular.getText().toString().split(" ");
-                            usuario.setTelefono(campos[1]);
-                            usuario.setUbicacion(tv_cambiar_hogar.getText().toString());
-                            usuario.setLaborUsuario(tv_cambiar_labor.getText().toString());
-                            rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(auth.getCurrentUser().getUid()).setValue(usuario);
-                            Intent i = new Intent(CambioAjustes.this, PerfilCliente.class);
-                            startActivity(i);
-                            finish();
-                        }
-                    });
-                    info.show();
-                }
+                AlertDialog.Builder info = new AlertDialog.Builder(CambioAjustes.this);
+                info.setTitle(R.string.guardar);
+                info.setMessage(R.string.confirmacion_guardar_cambios);
+                info.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        usuario.setNombre(tv_cambiar_nombre.getText().toString());
+                        usuario.setCedula(tv_cambiar_cedula.getText().toString());
+                        usuario.setTelefono(tv_cambiar_celular.getText().toString());
+                        usuario.setUbicacion(tv_cambiar_hogar.getText().toString());
+                        usuario.setLaborUsuario(tv_cambiar_labor.getText().toString());
+                        rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(usuario.getUsuarioID()).setValue(usuario);
+                        Intent i = new Intent(CambioAjustes.this, PerfilCliente.class);
+                        startActivity(i);
+                        dialog.dismiss();
+                    }
+                });
+                info.show();
             }
         });
 
@@ -108,30 +102,15 @@ public class CambioAjustes extends AppCompatActivity {
         }
     }
 
-    private boolean comprobarInformacion() {
-        boolean agregar = false;
-        if (!tv_cambiar_nombre.getText().toString().equals("") &&
-                !tv_cambiar_cedula.getText().toString().equals("") &&
-                !tv_cambiar_celular.getText().toString().equals("") &&
-                !tv_cambiar_hogar.getText().toString().equals("") &&
-                !tv_cambiar_labor.getText().toString().equals("")) {
-            agregar = true;
-        } else {
-            Toast.makeText(this, "Ingrese cada uno de los campos", Toast.LENGTH_SHORT).show();
-        }
-        return agregar;
-    }
-
-
     private void cargaInfo() {
         if (usuario.getNombre() != null) {
             tv_cambiar_nombre.setText(usuario.getNombre());
         }
         if (usuario.getCedula() != null) {
-            tv_cambiar_cedula.setText("Cedula: " + usuario.getCedula());
+            tv_cambiar_cedula.setText(usuario.getCedula());
         }
         if (usuario.getTelefono() != null) {
-            tv_cambiar_celular.setText("+57 " + usuario.getTelefono());
+            tv_cambiar_celular.setText(usuario.getTelefono());
         }
         if (usuario.getUbicacion() != null) {
             tv_cambiar_hogar.setText(usuario.getUbicacion());
@@ -139,5 +118,10 @@ public class CambioAjustes extends AppCompatActivity {
         if (usuario.getLaborUsuario() != null) {
             tv_cambiar_labor.setText(usuario.getLaborUsuario());
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

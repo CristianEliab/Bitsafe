@@ -19,6 +19,7 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -62,10 +63,12 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_general);
 
+        FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         rtdb = FirebaseDatabase.getInstance();
+
 
 
         rl_registro_general_panel_bitsafe = findViewById(R.id.rl_registro_general_panel_bitsafe);
@@ -80,7 +83,6 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
         slidesAdapter = new SlidesAdapter(this);
         viewPager.setAdapter(slidesAdapter);
 
-        initializeGPlusSettings();
     }
 
     @Override
@@ -109,8 +111,10 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
                                 // App code
                             }
                         });
+                break;
             case R.id.btn_sign_in_google:
-                /*signIn();*/
+                initializeGPlusSettings();
+                signIn();
                 break;
         }
     }
@@ -118,6 +122,7 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
     private void initializeGPlusSettings() {
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -129,6 +134,7 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
     }
 
     private void handleFacebookAccessToken(AccessToken accessToken) {
+        showProgressDialog(this);
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -149,8 +155,9 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
                     usuario.setUsuarioID(uid);
                     usuario.setTelefono(telefono);
 
-                    rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).push().setValue(usuario);
+                    rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(mAuth.getCurrentUser().getUid()).setValue(usuario);
 
+                    hideProgressDialog();
                     Intent i = new Intent(RegistroGeneral.this, HomeCliente.class);
                     startActivity(i);
                     finish();
@@ -165,11 +172,7 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-
-        /*
-        showProgressDialog();
-        */
-
+        showProgressDialog(this);
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -189,10 +192,9 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
                     usuario.setUsuarioID(uid);
                     usuario.setTelefono(telefono);
 
-                    rtdb.getReference().child(Constantes.CHILD_USUARIOS).push().setValue(usuario);
+                    rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(mAuth.getCurrentUser().getUid()).setValue(usuario);
 
-                    /*hideProgressDialog();*/
-
+                    hideProgressDialog();
                     Intent i = new Intent(RegistroGeneral.this, HomeCliente.class);
                     startActivity(i);
                     finish();
@@ -207,9 +209,11 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
-            /*// Google Sign In was successful, authenticate with Firebase
+            // Google Sign In was successful, authenticate with Firebase
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful, authenticate with Firebase
@@ -218,11 +222,23 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.e(TAG, "Google sign in failed", e);
-            }*/
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-            callbackManager.onActivityResult(requestCode, resultCode, data);
+            }
         }
+    }
+
+    public void getGoogleCredentials() {
+        String googleIdToken = "";
+        // [START auth_google_cred]
+        AuthCredential credential = GoogleAuthProvider.getCredential(googleIdToken, null);
+        // [END auth_google_cred]
+    }
+
+
+    public void getFbCredentials() {
+        AccessToken token = AccessToken.getCurrentAccessToken();
+        // [START auth_fb_cred]
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        // [END auth_fb_cred]
     }
 
 

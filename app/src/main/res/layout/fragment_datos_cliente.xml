@@ -90,14 +90,15 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/iv_sl_cliente_registro_foto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/fragment_cliente_ic_foto_cliente" />
+                    android:src="@drawable/fragment_cliente_ic_foto_cliente"
+                    app:civ_border_width="1dp" />
 
                 <TextView
                     android:id="@+id/tv_datos_cliente_registro_nombre"
@@ -210,8 +211,8 @@
                 android:id="@+id/lista_transacciones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/btn_fragment_dt_cliente_guardar"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp">
 
