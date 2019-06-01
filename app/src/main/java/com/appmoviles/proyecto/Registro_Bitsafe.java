@@ -38,6 +38,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appmoviles.proyecto.modelo.Banco;
+import com.appmoviles.proyecto.modelo.Cuenta;
 import com.appmoviles.proyecto.modelo.Usuario;
 import com.appmoviles.proyecto.util.BaseActivity;
 import com.appmoviles.proyecto.util.Constantes;
@@ -47,7 +49,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.UUID;
 
 
 public class Registro_Bitsafe extends BaseActivity implements View.OnClickListener {
@@ -279,6 +286,8 @@ public class Registro_Bitsafe extends BaseActivity implements View.OnClickListen
                                     usuario.setGenero(sp_registro_genero.getSelectedItem().toString());
                                     usuario.setFechaCreacion(fechaCreacion);
 
+                                    generarCuentasBancarias(usuario);
+
                                     SharedPreferences.Editor myEditor = myPreferences.edit();
                                     myEditor.putString(EMAIL_USER, correo);
                                     myEditor.commit();
@@ -304,5 +313,92 @@ public class Registro_Bitsafe extends BaseActivity implements View.OnClickListen
                 }
                 break;
         }
+    }
+
+    private void generarCuentasBancarias(Usuario usuario) {
+        ArrayList<Banco> listaBancos = new ArrayList<>();
+        ArrayList<Cuenta> cuentaArrayList = new ArrayList<>();
+
+        Cuenta cuenta = new Cuenta();
+        cuenta.setCuentaID(UUID.randomUUID().toString());
+        cuenta.setUsuarioID(usuario.getUsuarioID());
+        int numero_1 = (int) (Math.random() * 8000) + 1000;
+        int numero_2 = (int) (Math.random() * 8000) + 1000;
+        int numero_3 = (int) (Math.random() * 8000) + 1000;
+        int numero_4 = (int) (Math.random() * 8000) + 1000;
+
+        cuenta.setNumeroCuenta(numero_1 + "-" + numero_2 + "-" + numero_3 + "-" + numero_4);
+
+        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yy");
+        try {
+            Date d = f.parse(usuario.getFecha_cargar());
+            long milliseconds = d.getTime();
+            usuario.setFechaCreacion(milliseconds);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        cuenta.setFechaVinculacion(usuario.getFechaCreacion() + "");
+
+        int saldo = (int) (Math.random() * 1000000) + 50000;
+
+        cuenta.setSaldo(saldo + "");
+
+        int tipoCuenta = (int) (Math.random() * 2) + 1;
+
+        cuenta.setTipoCuentaID("0" + tipoCuenta);
+        if (tipoCuenta == 0) {
+            cuenta.setTipoCuentaNombre("Cuenta Credito");
+        } else {
+            cuenta.setTipoCuentaNombre("Cuenta Debito");
+        }
+
+        int bancoID = (int) (Math.random() * 4) + 1;
+        cuenta.setBancoID("0" + bancoID);
+
+        // Se crea la cuenta
+        cuentaArrayList.add(cuenta);
+
+        Banco banco1 = new Banco();
+
+        switch (bancoID) {
+            case 1:
+                banco1.setIcono(Constantes.ICON_BANCO_DAVIVIENDA);
+                banco1.setNombreBanco(Constantes.BANCO_DAVIVIENDA);
+                banco1.setBancoID("0" + bancoID);
+                banco1.setSaldo(saldo + "");
+                break;
+            case 2:
+                banco1.setIcono(Constantes.ICON_BANCO_BOGOTA);
+                banco1.setNombreBanco(Constantes.BANCO_BOGOTA);
+                banco1.setBancoID("0" + bancoID);
+                banco1.setSaldo(saldo + "");
+                break;
+            case 3:
+                banco1.setIcono(Constantes.ICON_BANCO_BANCOLOMBIA);
+                banco1.setNombreBanco(Constantes.BANCO_BANCOLOMBIA);
+                banco1.setBancoID("0" + bancoID);
+                banco1.setSaldo(saldo + "");
+                break;
+            case 4:
+                banco1.setIcono(Constantes.ICON_BANCO_ITAU);
+                banco1.setNombreBanco(Constantes.BANCO_ITAU);
+                banco1.setBancoID("0" + bancoID);
+                banco1.setSaldo(saldo + "");
+                break;
+        }
+
+
+        listaBancos.add(banco1);
+
+
+
+        usuario.setListaBancos(listaBancos);
+        usuario.setListaCuentas(cuentaArrayList);
+
+
+        rtdb.getReference().child(Constantes.CHILD_CUENTAS).push().setValue(cuenta);
+
     }
 }

@@ -84,6 +84,11 @@ public class Constantes {
     public final static String ICON_BANCO_BANCOLOMBIA = "banco_bancolombia";
     public final static String ICON_BANCO_ITAU = "banco_itau";
 
+    public final static String BANCO_DAVIVIENDA = "Banco Davivienda";
+    public final static String BANCO_BOGOTA = "Banco Bogota";
+    public final static String BANCO_BANCOLOMBIA = "Banco Bancolombia";
+    public final static String BANCO_ITAU = "Banco Itau";
+
     //PARA LAS GRÄFICAS
     public final static String TIPO_PIE = "tipopie";
     public final static String TIPO_BAR = "tipobar";

@@ -191,9 +191,9 @@ public class JsonParse {
         for (RolActividad value : rolActividadArrayList) {
             rtdb.getReference().child("rolactividad").push().setValue(value);
         }*/
-        for (RolUsuario value : rolUsuarioArrayList) {
+        /*for (RolUsuario value : rolUsuarioArrayList) {
             rtdb.getReference().child(Constantes.CHILD_ROL_USUARIO_ID).child(value.getUsuarioID()).setValue(value);
-        }
+        }*/
         /*for (TipoCuenta value : tipoCuentaArrayList) {
             rtdb.getReference().child("tipocuentas").push().setValue(value);
         }
