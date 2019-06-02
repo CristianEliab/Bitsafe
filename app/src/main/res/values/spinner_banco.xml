@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <string name="banco">Banco</string>
+        <string-array name="banco">
+            <item>Banco de Bogotá </item>
+            <item>Davivienda</item>
+            <item>Itaú</item>
+            <item>Bancolombia</item>
+        </string-array>
+
+</resources>

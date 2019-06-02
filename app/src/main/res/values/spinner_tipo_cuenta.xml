@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tipo_de_cuenta">Tipo de Cuenta</string>
+    <string-array name="tipo_de_cuenta">
+    <item>Cuenta Credito </item>
+    <item>Cuenta Debito</item>
+    </string-array>
+</resources>

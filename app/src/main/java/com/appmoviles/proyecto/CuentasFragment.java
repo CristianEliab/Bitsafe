@@ -78,7 +78,7 @@ public class CuentasFragment extends Fragment implements Serializable, AdapterTe
         btn_vincular_cuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.main, new VincularCuentaFragment()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.vincular, new VincularCuentaFragment()).addToBackStack(null).commit();
             }
         });
 

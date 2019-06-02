@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CuentasFragment">
+    tools:context=".CuentasFragment"
+    android:id="@+id/vincular">
 
     <RelativeLayout
         android:id="@+id/rl_fragment_cuentas_toolbar"
