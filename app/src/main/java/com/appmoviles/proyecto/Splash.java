@@ -37,7 +37,6 @@ public class Splash extends AppCompatActivity {
     Consultas consultas;
 
 
-
     private boolean cargodb;
     private SharedPreferences myPreferences;
     FirebaseDatabase rtdb;
