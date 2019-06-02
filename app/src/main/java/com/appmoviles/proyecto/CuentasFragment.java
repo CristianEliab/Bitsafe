@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,10 +34,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.appmoviles.proyecto.util.Constantes.CHILD_BANCOS;
+import static com.appmoviles.proyecto.util.Constantes.CHILD_BANCOS_ID;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_CUENTAS;
 
 
-public class CuentasFragment extends Fragment implements Serializable, AdapterTemplate_CuentasVinculadas.OnItemClickListener {
+public class CuentasFragment extends Fragment implements Serializable, AdapterTemplate_Cuentas.OnItemClickListener {
 
     private ImageView iv_fragment_cuentas_perfil;
     FirebaseDatabase database;
@@ -44,8 +47,9 @@ public class CuentasFragment extends Fragment implements Serializable, AdapterTe
 
     private ImageButton btn_vincular_cuenta;
     private RecyclerView rv_fragment_cuentas_bancos_lista_;
-    private AdapterTemplate_CuentasVinculadas adapterTemplate_cuentasVinculadas;
+    private AdapterTemplate_Cuentas adapterTemplate_cuentas;
     private List<Cuenta> listaCuentas;
+    private List<Banco> listaBancos;
 
     private ProgressDialog progressDialog;
 
@@ -83,9 +87,9 @@ public class CuentasFragment extends Fragment implements Serializable, AdapterTe
         rv_fragment_cuentas_bancos_lista_.setHasFixedSize(true);
         rv_fragment_cuentas_bancos_lista_.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapterTemplate_cuentasVinculadas = new AdapterTemplate_CuentasVinculadas();
-        rv_fragment_cuentas_bancos_lista_.setAdapter(adapterTemplate_cuentasVinculadas);
-        adapterTemplate_cuentasVinculadas.setListener(this);
+        adapterTemplate_cuentas = new AdapterTemplate_Cuentas();
+        rv_fragment_cuentas_bancos_lista_.setAdapter(adapterTemplate_cuentas);
+        adapterTemplate_cuentas.setListener(this);
 
         iv_fragment_cuentas_perfil = v.findViewById(R.id.iv_fragment_cuentas_perfil);
 
@@ -100,38 +104,40 @@ public class CuentasFragment extends Fragment implements Serializable, AdapterTe
             }
         });
 
+
         progressDialog = new ProgressDialog(v.getContext());
         progressDialog.setMessage("Por favor espere mientras se cargan los datos");
         progressDialog.show();
+
+        cargarCuentas();
         return v;
     }
 
 
 
     public void cargarCuentas() {
-
-        listaCuentas = new ArrayList<Cuenta>();
         database.getReference().child(CHILD_CUENTAS).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Cuenta cuentaTmp;
                 for (DataSnapshot hijo : dataSnapshot.getChildren()) {
                     cuentaTmp = hijo.getValue(Cuenta.class);
-                    //Solo las cuentas que pertenezcan al usuario logueado
+                    //Solo se agregan las cuentas que pertenezcan al usuario logueado
                     if (cuentaTmp.getUsuarioID().equals(auth.getCurrentUser().getUid())) {
-                        listaCuentas.add(cuentaTmp);
+                        cuentaTmp.setNumeroCuenta("Cuenta #: " + cuentaTmp.getNumeroCuenta());
+                        adapterTemplate_cuentas.agregarCuenta(cuentaTmp);
                     }
+
                 }
+                progressDialog.dismiss();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-
         });
     }
-
     @Override
     public void onItemClick(Cuenta cuenta) {
 

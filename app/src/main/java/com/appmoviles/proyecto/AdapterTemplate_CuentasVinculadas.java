@@ -73,8 +73,9 @@ public class AdapterTemplate_CuentasVinculadas extends RecyclerView.Adapter<Adap
         return data_c.size();
 }
 
-    public void agregarCuenta(Cuenta cuenta){
+    public void agregar(Cuenta cuenta, Banco banco){
         data_c.add(cuenta);
+        data_b.add(banco);
         notifyDataSetChanged();
     }
 
