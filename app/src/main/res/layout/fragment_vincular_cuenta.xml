@@ -141,7 +141,6 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:textSize="15dp"
-                    android:inputType="number"
                     android:id="@+id/tv_numero_cuenta"/>
             </LinearLayout>
 
@@ -179,6 +178,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ly_continuar_cuenta"
                 android:layout_width="@dimen/fragment_agregar_monto_guardar_w"
                 android:layout_height="@dimen/fragment_agregar_monto_guardar_h"
                 android:background="@drawable/registro_boton_bitsafe"
