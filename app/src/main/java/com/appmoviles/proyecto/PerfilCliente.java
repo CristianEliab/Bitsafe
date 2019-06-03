@@ -94,6 +94,7 @@ public class PerfilCliente extends Fragment implements Serializable {
         iv_fragment_perfil_clientes = v.findViewById(R.id.iv_fragment_perfil_clientes);
         tv_nombre_cliente_perfil_cliente = v.findViewById(R.id.tv_nombre_cliente_perfil_cliente);
         tv_numero_telefono_perfil_cliente = v.findViewById(R.id.tv_numero_telefono_perfil_cliente);
+
         tv_cerrar_perfil_cliente = v.findViewById(R.id.tv_cerrar_perfil_cliente);
 
         iv_fragment_perfil_clientes.setOnClickListener(new View.OnClickListener() {
