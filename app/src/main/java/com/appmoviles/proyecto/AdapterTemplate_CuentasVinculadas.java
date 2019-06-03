@@ -44,6 +44,7 @@ public class AdapterTemplate_CuentasVinculadas extends RecyclerView.Adapter<Adap
     public AdapterTemplate_CuentasVinculadas.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LinearLayout v = (LinearLayout) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.renglon_cuentas_bancarias, viewGroup, false);
         AdapterTemplate_CuentasVinculadas.CustomViewHolder vh = new AdapterTemplate_CuentasVinculadas.CustomViewHolder(v);
+
         return vh;
     }
 

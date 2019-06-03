@@ -51,6 +51,7 @@ public class CuentasFragment extends Fragment implements Serializable, AdapterTe
     private List<Cuenta> listaCuentas;
     private List<Banco> listaBancos;
 
+
     private ProgressDialog progressDialog;
 
     public CuentasFragment() {

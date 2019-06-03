@@ -52,7 +52,9 @@ public class VincularCuentaFragment extends Fragment implements Serializable {
     private int mYear, mMonth, mDay;
     private String fechita;
 
-    public VincularCuentaFragment(){}
+    public VincularCuentaFragment(){
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
