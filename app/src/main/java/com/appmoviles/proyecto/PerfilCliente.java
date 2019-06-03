@@ -251,7 +251,7 @@ public class PerfilCliente extends BaseActivity implements Serializable, View.On
         tv_ayuda_perfil_cliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder ayuda = new AlertDialog.Builder(getApplicationContext());
+                AlertDialog.Builder ayuda = new AlertDialog.Builder(PerfilCliente.this);
                 ayuda.setTitle(R.string.title_ayuda);
                 ayuda.setMessage(R.string.comunicacion_ayuda);
                 ayuda.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
@@ -268,7 +268,7 @@ public class PerfilCliente extends BaseActivity implements Serializable, View.On
         tv_informacion_perfil_cliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder info = new AlertDialog.Builder(getApplicationContext());
+                AlertDialog.Builder info = new AlertDialog.Builder(PerfilCliente.this);
                 info.setTitle(R.string.terminos_y_condiciones);
                 info.setMessage(R.string.mensaje_terminos_condiciones);
                 info.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {

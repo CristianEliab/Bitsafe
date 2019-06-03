@@ -99,9 +99,6 @@ public class VincularCuentaFragment extends Fragment implements Serializable {
 
         tv_numero_cuenta = v.findViewById(R.id.tv_numero_cuenta);
 
-
-
-        /**
         tv_numero_cuenta.addTextChangedListener(new TextWatcher() {
 
             private static final int TOTAL_SYMBOLS = 19; // size of pattern 0000-0000-0000-0000
@@ -168,7 +165,7 @@ public class VincularCuentaFragment extends Fragment implements Serializable {
                 return digits;
             }
         });
-            **/
+
 
 
 

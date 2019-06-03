@@ -30,7 +30,7 @@ public class MiCuentaPerfil extends AppCompatActivity {
     private TextView tv_micuenta_telefono_numero;
     private TextView tv_micuenta_ubicacion_pregunta;
     private TextView tv_micuenta_trabajo_pregunta;
-    private RelativeLayout eliminar_cuenta;
+    //private RelativeLayout eliminar_cuenta;
 
     FirebaseAuth auth;
     FirebaseDatabase rtdb;
@@ -48,7 +48,7 @@ public class MiCuentaPerfil extends AppCompatActivity {
         tv_micuenta_telefono_numero = findViewById(R.id.tv_micuenta_telefono_numero);
         tv_micuenta_ubicacion_pregunta = findViewById(R.id.tv_micuenta_ubicacion_pregunta);
         tv_micuenta_trabajo_pregunta = findViewById(R.id.tv_micuenta_trabajo_pregunta);
-        eliminar_cuenta = findViewById(R.id.eliminar_cuenta);
+        //eliminar_cuenta = findViewById(R.id.eliminar_cuenta);
 
 
         rtdb = FirebaseDatabase.getInstance();

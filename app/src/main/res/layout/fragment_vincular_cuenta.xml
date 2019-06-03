@@ -140,6 +140,7 @@
                     android:textColor="@color/colorWhite"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
+                    android:inputType="phone"
                     android:textSize="15dp"
                     android:id="@+id/tv_numero_cuenta"/>
             </LinearLayout>

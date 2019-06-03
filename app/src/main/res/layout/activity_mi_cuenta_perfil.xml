@@ -38,7 +38,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
                     android:gravity="center"
-                    android:text="@string/fragment_micuenta_clientes"
+                    android:text="@string/fragment_perfil_clientes"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/fragments_toolbar" />
 
@@ -196,7 +196,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="85dp"
                     android:layout_marginTop="6dp"
-                    android:text="Agregar información de tu ubicación."
+                    android:text="Información de tu ubicación."
                     android:textColor="@color/colorBlack"
                     android:textSize="10sp" />
 
@@ -243,46 +243,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="85dp"
                     android:layout_marginTop="6dp"
-                    android:text="Agregar información de tu desarrollo profesional."
+                    android:text="Información de tu desarrollo profesional."
                     android:textColor="@color/colorBlack"
                     android:textSize="11sp" />
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/eliminar_cuenta"
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_micuenta_trabajo"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="100dp"
-                android:background="@drawable/registro_boton_registrarse">
-
-                <ImageView
-                    android:id="@+id/iv_micuenta_delete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="13dp"
-                    android:src="@drawable/ic_delete" />
-
-                <TextView
-                    android:id="@+id/tv_micuenta_delete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/iv_micuenta_delete"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="58dp"
-                    android:layout_marginTop="6dp"
-                    android:text="Eliminar esta cuenta"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="18sp" />
-
-
-            </RelativeLayout>
 
         </RelativeLayout>
 
