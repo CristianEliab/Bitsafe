@@ -59,8 +59,9 @@ public class FrecuenciaPago extends DialogFragment {
         spinner_diario.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String header = spinner_diario.getItemAtPosition(0).toString();
                 String text = spinner_diario.getSelectedItem().toString();
-                callback.OnAddFrequencyPaymentSubmit(text);
+                callback.OnAddFrequencyPaymentSubmit(header+"/"+text);
                 //closeDialog(text);
             }
             @Override
@@ -70,8 +71,9 @@ public class FrecuenciaPago extends DialogFragment {
         spinner_semanal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String header = spinner_semanal.getItemAtPosition(0).toString();
                 String text = spinner_semanal.getSelectedItem().toString();
-                callback.OnAddFrequencyPaymentSubmit(text);
+                callback.OnAddFrequencyPaymentSubmit(header+"/"+text);
                 //closeDialog(text);
             }
             @Override
@@ -81,8 +83,9 @@ public class FrecuenciaPago extends DialogFragment {
         spinner_2semanas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String header = spinner_2semanas.getItemAtPosition(0).toString();
                 String text = spinner_2semanas.getSelectedItem().toString();
-                callback.OnAddFrequencyPaymentSubmit(text);
+                callback.OnAddFrequencyPaymentSubmit(header+"/"+text);
                 //closeDialog(text);
             }
             @Override
@@ -92,8 +95,9 @@ public class FrecuenciaPago extends DialogFragment {
         spinner_mensual.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String header = spinner_mensual.getItemAtPosition(0).toString();
                 String text = spinner_mensual.getSelectedItem().toString();
-                callback.OnAddFrequencyPaymentSubmit(text);
+                callback.OnAddFrequencyPaymentSubmit(header+"/"+text);
                 //closeDialog(text);
             }
             @Override
