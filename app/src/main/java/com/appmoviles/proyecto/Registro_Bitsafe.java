@@ -38,6 +38,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appmoviles.proyecto.modelo.Banco;
+import com.appmoviles.proyecto.modelo.Cuenta;
 import com.appmoviles.proyecto.modelo.Usuario;
 import com.appmoviles.proyecto.util.BaseActivity;
 import com.appmoviles.proyecto.util.Constantes;
@@ -47,7 +49,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.UUID;
 
 
 public class Registro_Bitsafe extends BaseActivity implements View.OnClickListener {
@@ -160,6 +167,11 @@ public class Registro_Bitsafe extends BaseActivity implements View.OnClickListen
             }
 
             @Override
+            public void onTransitionEnd(Transition transition) {
+
+            }
+
+            @Override
             public void onTransitionCancel(Transition transition) {
 
             }
@@ -212,97 +224,193 @@ public class Registro_Bitsafe extends BaseActivity implements View.OnClickListen
                 info.setTitle(R.string.terminos_y_condiciones);
                 info.setMessage(R.string.mensaje_terminos_condiciones);
                 info.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                info.setPositiveButton(R.string.aceptar,new DialogInterface.OnClickListener()
+
+                    {
+                        @Override
+                        public void onClick (DialogInterface dialog,int which){
                         dialog.dismiss();
                     }
-                });
+                    });
                 info.show();
                 break;
             case R.id.et_registro_fecha_nacimiento:
-                //
-                DatePickerFragment date = new DatePickerFragment();
-                /**
-                 * Set Up Current Date Into dialog
-                 */
-                Calendar calender = Calendar.getInstance();
-                Bundle args = new Bundle();
-                args.putInt("year", calender.get(Calendar.YEAR));
-                args.putInt("month", calender.get(Calendar.MONTH));
-                args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
+                    //
+                    DatePickerFragment date = new DatePickerFragment();
+                    /**
+                     * Set Up Current Date Into dialog
+                     */
+                    Calendar calender = Calendar.getInstance();
+                    Bundle args = new Bundle();
+                args.putInt("year",calender.get(Calendar.YEAR));
+                args.putInt("month",calender.get(Calendar.MONTH));
+                args.putInt("day",calender.get(Calendar.DAY_OF_MONTH));
                 date.setArguments(args);
-                /**
-                 * Set Call back to capture selected date
-                 */
+                    /**
+                     * Set Call back to capture selected date
+                     */
                 date.setCallBack(ondate);
-                FragmentManager manager = getSupportFragmentManager();
-                date.show(manager, "Date Picker");
+                    FragmentManager manager = getSupportFragmentManager();
+                date.show(manager,"Date Picker");
                 break;
             case R.id.btn_registro_registrarse:
 
-                final String correo = et_registro_correo.getText().toString();
-                final String pass = et_registro_contrasenia.getText().toString();
-                final String repass = et_registro_confirmar_contrasenia.getText().toString();
-                final String nombre = et_registro_nombre.getText().toString();
-                final String cedula = et_registro_cedula.getText().toString();
-                final String celular = et_registro_celular.getText().toString();
-                final String ubicacion = et_registro_ubicacion.getText().toString();
+                    final String correo = et_registro_correo.getText().toString();
+                    final String pass = et_registro_contrasenia.getText().toString();
+                    final String repass = et_registro_confirmar_contrasenia.getText().toString();
+                    final String nombre = et_registro_nombre.getText().toString();
+                    final String cedula = et_registro_cedula.getText().toString();
+                    final String celular = et_registro_celular.getText().toString();
+                    final String ubicacion = et_registro_ubicacion.getText().toString();
 
-                if (!checkbox_terminos.isChecked()) {
-                    info = new AlertDialog.Builder(this);
-                    info.setTitle(R.string.aceptar_terminos);
-                    info.setMessage(R.string.mensaje_aceptar_y_terminos);
-                    info.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    info.show();
-                } else {
-                    if (verificarCampos(correo, pass, repass, nombre, cedula, celular, ubicacion)) {
-                        if (pass.equals(repass)) {
-                            auth.createUserWithEmailAndPassword(correo, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                                @Override
-                                public void onSuccess(AuthResult authResult) {
-                                    showProgressDialog(Registro_Bitsafe.this);
-                                    String uid = auth.getCurrentUser().getUid();
-                                    long fechaCreacion = auth.getCurrentUser().getMetadata().getCreationTimestamp();
-                                    Usuario usuario = new Usuario(uid,
-                                            nombre,
-                                            cedula,
-                                            celular,
-                                            correo,
-                                            ubicacion);
+                if(!checkbox_terminos.isChecked())
 
-                                    usuario.setFecha_nacimiento(et_registro_fecha_nacimiento.getText().toString());
-                                    usuario.setGenero(sp_registro_genero.getSelectedItem().toString());
-                                    usuario.setFechaCreacion(fechaCreacion);
+                    {
+                        info = new AlertDialog.Builder(this);
+                        info.setTitle(R.string.aceptar_terminos);
+                        info.setMessage(R.string.mensaje_aceptar_y_terminos);
+                        info.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        info.show();
+                    } else
 
-                                    SharedPreferences.Editor myEditor = myPreferences.edit();
-                                    myEditor.putString(EMAIL_USER, correo);
-                                    myEditor.commit();
+                    {
+                        if (verificarCampos(correo, pass, repass, nombre, cedula, celular, ubicacion)) {
+                            if (pass.equals(repass)) {
+                                auth.createUserWithEmailAndPassword(correo, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                    @Override
+                                    public void onSuccess(AuthResult authResult) {
+                                        showProgressDialog(Registro_Bitsafe.this);
+                                        String uid = auth.getCurrentUser().getUid();
+                                        long fechaCreacion = auth.getCurrentUser().getMetadata().getCreationTimestamp();
+                                        Usuario usuario = new Usuario(uid,
+                                                nombre,
+                                                cedula,
+                                                celular,
+                                                correo,
+                                                ubicacion);
 
-                                    rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(usuario.getUsuarioID()).setValue(usuario);
+                                        usuario.setFecha_nacimiento(et_registro_fecha_nacimiento.getText().toString());
+                                        usuario.setGenero(sp_registro_genero.getSelectedItem().toString());
+                                        usuario.setFechaCreacion(fechaCreacion);
 
-                                    // Animación para dar el cambio de pantalla
-                                    hideProgressDialog();
+                                        generarCuentasBancarias(usuario);
 
-                                    Intent i = new Intent(Registro_Bitsafe.this, HomeCliente.class);
-                                    startActivity(i);
-                                    finish();
+                                        SharedPreferences.Editor myEditor = myPreferences.edit();
+                                        myEditor.putString(EMAIL_USER, correo);
+                                        myEditor.commit();
 
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(Registro_Bitsafe.this, "Hubo un error", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                                        rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(usuario.getUsuarioID()).setValue(usuario);
+
+                                        // Animación para dar el cambio de pantalla
+                                        hideProgressDialog();
+
+                                        Intent i = new Intent(Registro_Bitsafe.this, HomeCliente.class);
+                                        startActivity(i);
+                                        finish();
+
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(Registro_Bitsafe.this, "Hubo un error", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
                         }
                     }
+                break;
                 }
+        }
+    }
+
+    private void generarCuentasBancarias(Usuario usuario) {
+        ArrayList<Banco> listaBancos = new ArrayList<>();
+        ArrayList<Cuenta> cuentaArrayList = new ArrayList<>();
+
+        Cuenta cuenta = new Cuenta();
+        cuenta.setCuentaID(UUID.randomUUID().toString());
+        cuenta.setUsuarioID(usuario.getUsuarioID());
+        int numero_1 = (int) (Math.random() * 8000) + 1000;
+        int numero_2 = (int) (Math.random() * 8000) + 1000;
+        int numero_3 = (int) (Math.random() * 8000) + 1000;
+        int numero_4 = (int) (Math.random() * 8000) + 1000;
+
+        cuenta.setNumeroCuenta(numero_1 + "-" + numero_2 + "-" + numero_3 + "-" + numero_4);
+
+        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yy");
+        try {
+            Date d = f.parse(usuario.getFecha_cargar());
+            long milliseconds = d.getTime();
+            usuario.setFechaCreacion(milliseconds);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        cuenta.setFechaVinculacion(usuario.getFechaCreacion() + "");
+
+        int saldo = (int) (Math.random() * 1000000) + 50000;
+
+        cuenta.setSaldo(saldo + "");
+
+        int tipoCuenta = (int) (Math.random() * 2) + 1;
+
+        cuenta.setTipoCuentaID("0" + tipoCuenta);
+        if (tipoCuenta == 0) {
+            cuenta.setTipoCuentaNombre("Cuenta Credito");
+        } else {
+            cuenta.setTipoCuentaNombre("Cuenta Debito");
+        }
+
+        int bancoID = (int) (Math.random() * 4) + 1;
+        cuenta.setBancoID("0" + bancoID);
+
+        // Se crea la cuenta
+        cuentaArrayList.add(cuenta);
+
+        Banco banco1 = new Banco();
+
+        switch (bancoID) {
+            case 1:
+                banco1.setIcono(Constantes.ICON_BANCO_DAVIVIENDA);
+                banco1.setNombreBanco(Constantes.BANCO_DAVIVIENDA);
+                banco1.setBancoID("0" + bancoID);
+                banco1.setSaldo(saldo + "");
+                break;
+            case 2:
+                banco1.setIcono(Constantes.ICON_BANCO_BOGOTA);
+                banco1.setNombreBanco(Constantes.BANCO_BOGOTA);
+                banco1.setBancoID("0" + bancoID);
+                banco1.setSaldo(saldo + "");
+                break;
+            case 3:
+                banco1.setIcono(Constantes.ICON_BANCO_BANCOLOMBIA);
+                banco1.setNombreBanco(Constantes.BANCO_BANCOLOMBIA);
+                banco1.setBancoID("0" + bancoID);
+                banco1.setSaldo(saldo + "");
+                break;
+            case 4:
+                banco1.setIcono(Constantes.ICON_BANCO_ITAU);
+                banco1.setNombreBanco(Constantes.BANCO_ITAU);
+                banco1.setBancoID("0" + bancoID);
+                banco1.setSaldo(saldo + "");
                 break;
         }
+
+
+        listaBancos.add(banco1);
+
+
+        usuario.setListaBancos(listaBancos);
+        usuario.setListaCuentas(cuentaArrayList);
+
+
+        rtdb.getReference().child(Constantes.CHILD_CUENTAS).push().setValue(cuenta);
+
     }
 }

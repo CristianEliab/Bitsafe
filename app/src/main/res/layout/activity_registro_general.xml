@@ -130,11 +130,13 @@
 
             </FrameLayout>
 
+
             <FrameLayout
                 android:id="@+id/FrameLayout_botton_google"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/FrameLayout_botton_facebook">
+                android:layout_below="@+id/rl_registro_general_panel_bitsafe">
 
                 <com.google.android.gms.common.SignInButton
                     android:id="@+id/btn_sign_in_google"

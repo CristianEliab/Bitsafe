@@ -176,6 +176,24 @@ public class JsonParse {
         for (Cuenta value : cuentaArrayList) {
             rtdb.getReference().child(Constantes.CHILD_CUENTAS_ID).child(value.getCuentaID()).setValue(value);
         }
+        /*for (Usuario usuario : usuarioArrayList) {
+            rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(usuario.getUsuarioID()).setValue(usuario);
+        }*/
+       /* for (Actividad value : actividadArrayList) {
+            rtdb.getReference().child("actividades").push().setValue(value);
+        }*/
+        /*for (Banco value : bancoArrayList) {
+            rtdb.getReference().child(Constantes.CHILD_BANCOS_ID).child(value.getBancoID()).setValue(value);
+        }*/
+       /* for (Categoria value : categoriaArrayList) {
+            rtdb.getReference().child(Constantes.CHILD_CATEGORIAS).push().setValue(value);
+        }*/
+       /* for (ConfiguracionSeguridad value : configuracionSeguridadArrayList) {
+            rtdb.getReference().child("configuracionesseguridad").push().setValue(value);
+        }*/
+       /* for (Cuenta value : cuentaArrayList) {
+            rtdb.getReference().child(Constantes.CHILD_CUENTAS).push().setValue(value);
+        }*/
        /* for (EstadoUsuario value : estadoUsuarioArrayList) {
             rtdb.getReference().child("estadousuario").push().setValue(value);
         }
@@ -194,6 +212,9 @@ public class JsonParse {
         for (RolUsuario value : rolUsuarioArrayList) {
             rtdb.getReference().child(Constantes.CHILD_ROL_USUARIO_ID).child(value.getUsuarioID()).setValue(value);
         }
+        /*for (RolUsuario value : rolUsuarioArrayList) {
+            rtdb.getReference().child(Constantes.CHILD_ROL_USUARIO_ID).child(value.getUsuarioID()).setValue(value);
+        }*/
         /*for (TipoCuenta value : tipoCuentaArrayList) {
             rtdb.getReference().child("tipocuentas").push().setValue(value);
         }
@@ -206,6 +227,9 @@ public class JsonParse {
         for (Transaccion value : transaccionArrayList) {
             rtdb.getReference().child(Constantes.CHILD_TRANSACCIONES).push().setValue(value);
         }
+        /*for (Transaccion value : transaccionArrayList) {
+            rtdb.getReference().child(Constantes.CHILD_TRANSACCIONES).push().setValue(value);
+        }*/
     }
 
     public void cargarDesdeArchivo() {
@@ -220,7 +244,8 @@ public class JsonParse {
                     e.printStackTrace();
                 }
                 rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(usuario.getUsuarioID()).setValue(usuario);
-            }else{
+            } else {
+                usuario.setUsuario_nuevo(true);
                 rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(usuario.getUsuarioID()).setValue(usuario);
             }
 
@@ -228,6 +253,15 @@ public class JsonParse {
         for (Transaccion value : transaccionArrayList) {
             rtdb.getReference().child(Constantes.CHILD_TRANSACCIONES).push().setValue(value);
         }
+    }
+
+    public void crearCategorias() {
+        Categoria categoria1 = new Categoria("20", "Envio de Dinero", null);
+        Categoria categoria2 = new Categoria("30", "Recepción de Dinero", null);
+
+
+        rtdb.getReference().child(Constantes.CHILD_CATEGORIAS).push().setValue(categoria1);
+        rtdb.getReference().child(Constantes.CHILD_CATEGORIAS).push().setValue(categoria2);
     }
 
     private void leerArrayUsuario(JsonReader reader) throws IOException {
@@ -741,7 +775,7 @@ public class JsonParse {
     private void leerArrayCategorias(JsonReader reader) throws IOException {
         String categoriaID = null;
         String nombre = null;
-        Categoria subCategoriaID = null;
+        ArrayList<Categoria> subCategoriaID = null;
         reader.beginArray();
         while (reader.hasNext()) {
             reader.beginObject();
@@ -767,7 +801,8 @@ public class JsonParse {
         }
     }
 
-    private Categoria leerSubcategorias(JsonReader reader) throws IOException {
+    private ArrayList<Categoria> leerSubcategorias(JsonReader reader) throws IOException {
+        ArrayList<Categoria> listCategorias = new ArrayList<>();
         Categoria value = new Categoria();
         String categoriaID = null;
         String nombre = null;
@@ -792,13 +827,11 @@ public class JsonParse {
                         break;
                 }
             }
+            listCategorias.add(new Categoria(categoriaID, nombre, null));
             reader.endObject();
-            value.setCategoriaID(categoriaID);
-            value.setNombre(nombre);
-            value.setSubCategoria(null);
         }
         reader.endArray();
-        return value;
+        return listCategorias;
     }
 
     private void leerArrayConfiguracionSeguridad(JsonReader reader) throws IOException {

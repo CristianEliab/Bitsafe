@@ -11,6 +11,11 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+<<<<<<< HEAD
+=======
+import com.appmoviles.proyecto.modelo.Banco;
+import com.appmoviles.proyecto.modelo.Cuenta;
+>>>>>>> origin/master
 import com.appmoviles.proyecto.modelo.Usuario;
 import com.appmoviles.proyecto.util.BaseActivity;
 import com.appmoviles.proyecto.util.Constantes;
@@ -19,6 +24,10 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+<<<<<<< HEAD
+=======
+import com.facebook.FacebookSdk;
+>>>>>>> origin/master
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -41,6 +50,15 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
+<<<<<<< HEAD
+=======
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.UUID;
+
+>>>>>>> origin/master
 
 public class RegistroGeneral extends BaseActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
@@ -62,6 +80,10 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_general);
 
+<<<<<<< HEAD
+=======
+        FacebookSdk.sdkInitialize(getApplicationContext());
+>>>>>>> origin/master
         callbackManager = CallbackManager.Factory.create();
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -80,7 +102,10 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
         slidesAdapter = new SlidesAdapter(this);
         viewPager.setAdapter(slidesAdapter);
 
+<<<<<<< HEAD
         initializeGPlusSettings();
+=======
+>>>>>>> origin/master
     }
 
     @Override
@@ -109,8 +134,15 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
                                 // App code
                             }
                         });
+<<<<<<< HEAD
             case R.id.btn_sign_in_google:
                 /*signIn();*/
+=======
+                break;
+            case R.id.btn_sign_in_google:
+                initializeGPlusSettings();
+                signIn();
+>>>>>>> origin/master
                 break;
         }
     }
@@ -118,6 +150,10 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
     private void initializeGPlusSettings() {
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+<<<<<<< HEAD
+=======
+                .requestIdToken(getString(R.string.default_web_client_id))
+>>>>>>> origin/master
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -129,6 +165,10 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
     }
 
     private void handleFacebookAccessToken(AccessToken accessToken) {
+<<<<<<< HEAD
+=======
+        showProgressDialog(this);
+>>>>>>> origin/master
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -149,8 +189,16 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
                     usuario.setUsuarioID(uid);
                     usuario.setTelefono(telefono);
 
+<<<<<<< HEAD
                     rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).push().setValue(usuario);
 
+=======
+                    generarCuentasBancarias(usuario);
+
+                    rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(mAuth.getCurrentUser().getUid()).setValue(usuario);
+
+                    hideProgressDialog();
+>>>>>>> origin/master
                     Intent i = new Intent(RegistroGeneral.this, HomeCliente.class);
                     startActivity(i);
                     finish();
@@ -165,11 +213,15 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+<<<<<<< HEAD
 
         /*
         showProgressDialog();
         */
 
+=======
+        showProgressDialog(this);
+>>>>>>> origin/master
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -189,10 +241,18 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
                     usuario.setUsuarioID(uid);
                     usuario.setTelefono(telefono);
 
+<<<<<<< HEAD
                     rtdb.getReference().child(Constantes.CHILD_USUARIOS).push().setValue(usuario);
 
                     /*hideProgressDialog();*/
 
+=======
+                    generarCuentasBancarias(usuario);
+
+                    rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID).child(mAuth.getCurrentUser().getUid()).setValue(usuario);
+
+                    hideProgressDialog();
+>>>>>>> origin/master
                     Intent i = new Intent(RegistroGeneral.this, HomeCliente.class);
                     startActivity(i);
                     finish();
@@ -207,9 +267,17 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+<<<<<<< HEAD
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             /*// Google Sign In was successful, authenticate with Firebase
+=======
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // Google Sign In was successful, authenticate with Firebase
+>>>>>>> origin/master
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful, authenticate with Firebase
@@ -218,6 +286,7 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.e(TAG, "Google sign in failed", e);
+<<<<<<< HEAD
             }*/
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -225,6 +294,27 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
         }
     }
 
+=======
+            }
+        }
+    }
+
+    public void getGoogleCredentials() {
+        String googleIdToken = "";
+        // [START auth_google_cred]
+        AuthCredential credential = GoogleAuthProvider.getCredential(googleIdToken, null);
+        // [END auth_google_cred]
+    }
+
+
+    public void getFbCredentials() {
+        AccessToken token = AccessToken.getCurrentAccessToken();
+        // [START auth_fb_cred]
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        // [END auth_fb_cred]
+    }
+
+>>>>>>> origin/master
 
     @Override
     public void onBackPressed() {
@@ -235,4 +325,93 @@ public class RegistroGeneral extends BaseActivity implements View.OnClickListene
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+<<<<<<< HEAD
+=======
+
+    private void generarCuentasBancarias(Usuario usuario) {
+        ArrayList<Banco> listaBancos = new ArrayList<>();
+        ArrayList<Cuenta> cuentaArrayList = new ArrayList<>();
+
+        Cuenta cuenta = new Cuenta();
+        cuenta.setCuentaID(UUID.randomUUID().toString());
+        cuenta.setUsuarioID(usuario.getUsuarioID());
+        int numero_1 = (int) (Math.random() * 8000) + 1000;
+        int numero_2 = (int) (Math.random() * 8000) + 1000;
+        int numero_3 = (int) (Math.random() * 8000) + 1000;
+        int numero_4 = (int) (Math.random() * 8000) + 1000;
+
+        cuenta.setNumeroCuenta(numero_1 + "-" + numero_2 + "-" + numero_3 + "-" + numero_4);
+
+        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yy");
+        try {
+            Date d = f.parse(usuario.getFecha_cargar());
+            long milliseconds = d.getTime();
+            usuario.setFechaCreacion(milliseconds);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        cuenta.setFechaVinculacion(usuario.getFechaCreacion() + "");
+
+        int saldo = (int) (Math.random() * 1000000) + 50000;
+
+        cuenta.setSaldo(saldo + "");
+
+        int tipoCuenta = (int) (Math.random() * 2) + 1;
+
+        cuenta.setTipoCuentaID("0" + tipoCuenta);
+        if (tipoCuenta == 0) {
+            cuenta.setTipoCuentaNombre("Cuenta Credito");
+        } else {
+            cuenta.setTipoCuentaNombre("Cuenta Debito");
+        }
+
+        int bancoID = (int) (Math.random() * 4) + 1;
+        cuenta.setBancoID("0" + bancoID);
+
+        // Se crea la cuenta
+        cuentaArrayList.add(cuenta);
+
+        Banco banco1 = new Banco();
+
+        switch (bancoID) {
+            case 1:
+                banco1.setIcono(Constantes.ICON_BANCO_DAVIVIENDA);
+                banco1.setNombreBanco(Constantes.BANCO_DAVIVIENDA);
+                banco1.setBancoID("0" + bancoID);
+                banco1.setSaldo(saldo + "");
+                break;
+            case 2:
+                banco1.setIcono(Constantes.ICON_BANCO_BOGOTA);
+                banco1.setNombreBanco(Constantes.BANCO_BOGOTA);
+                banco1.setBancoID("0" + bancoID);
+                banco1.setSaldo(saldo + "");
+                break;
+            case 3:
+                banco1.setIcono(Constantes.ICON_BANCO_BANCOLOMBIA);
+                banco1.setNombreBanco(Constantes.BANCO_BANCOLOMBIA);
+                banco1.setBancoID("0" + bancoID);
+                banco1.setSaldo(saldo + "");
+                break;
+            case 4:
+                banco1.setIcono(Constantes.ICON_BANCO_ITAU);
+                banco1.setNombreBanco(Constantes.BANCO_ITAU);
+                banco1.setBancoID("0" + bancoID);
+                banco1.setSaldo(saldo + "");
+                break;
+        }
+
+
+        listaBancos.add(banco1);
+
+
+        usuario.setListaBancos(listaBancos);
+        usuario.setListaCuentas(cuentaArrayList);
+
+
+        rtdb.getReference().child(Constantes.CHILD_CUENTAS).push().setValue(cuenta);
+
+    }
+>>>>>>> origin/master
 }

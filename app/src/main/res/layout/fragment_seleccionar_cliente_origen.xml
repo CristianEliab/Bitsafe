@@ -65,6 +65,17 @@
 
             </RelativeLayout>
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fb_fragment_sl_cliente_agregar_cliente"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/fragment_cliente_circular"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/fragment_sl_clientes_ic_agregar_cliente" />
+
 
             <EditText
                 android:id="@+id/et_fragment_sl_clientes_filtro"
@@ -77,7 +88,7 @@
                 android:background="@drawable/fragment_clientes_figura_filtro"
                 android:drawableRight="@drawable/fragment_clientes_ic_buscar_clientes"
                 android:hint="@string/fragment_clientes_filtro"
-                android:inputType=""
+                android:inputType="textFilter"
                 android:textSize="@dimen/fragment_clientes_filtro_texto" />
 
             <android.support.v7.widget.RecyclerView
@@ -87,19 +98,8 @@
                 android:layout_below="@+id/et_fragment_sl_clientes_filtro"
                 android:layout_marginTop="20dp">
 
+
             </android.support.v7.widget.RecyclerView>
-
-
-            <ImageView
-                android:id="@+id/fb_fragment_sl_cliente_agregar_cliente"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/fragment_cliente_circular"
-                android:clickable="true"
-                android:focusable="true"
-                android:src="@drawable/fragment_sl_clientes_ic_agregar_cliente" />
 
 
         </RelativeLayout>

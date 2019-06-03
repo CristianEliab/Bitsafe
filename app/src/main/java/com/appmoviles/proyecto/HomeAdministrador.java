@@ -1,5 +1,8 @@
 package com.appmoviles.proyecto;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -83,6 +86,7 @@ public class HomeAdministrador extends FragmentActivity implements
                         transaccionesFragment.setFecha("Agregar Fecha");
                         transaccionesFragment.setUsuario_destino(null);
                         transaccionesFragment.setUsuario_origen(null);
+                        transaccionesFragment.setDescripcion(null);
                         transaction.replace(R.id.contenido, transaccionesFragment);
                         transaction.commit();
                         break;
@@ -129,6 +133,13 @@ public class HomeAdministrador extends FragmentActivity implements
 
     }
 
+    public void llamarClientesFragment() {
+        manager = this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = manager.beginTransaction();
+        fragmentTransaction.replace(R.id.contenido, clientesFragment);
+        fragmentTransaction.commit();
+    }
+
     public void llamarFragmentAgregarMonto() {
         manager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
@@ -173,7 +184,47 @@ public class HomeAdministrador extends FragmentActivity implements
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 0) {
+            AlertDialog.Builder info = new AlertDialog.Builder(this);
+            info = new AlertDialog.Builder(this);
+            info.setTitle(R.string.desea_salir);
+            info.setMessage(R.string.mensaje_salida);
+            info.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            info.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    finish();
+                }
+            });
+            info.show();
+        } else {
+            AlertDialog.Builder info = new AlertDialog.Builder(this);
+            info = new AlertDialog.Builder(this);
+            info.setTitle(R.string.desea_salir);
+            info.setMessage(R.string.mensaje_salida);
+            info.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            info.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    finish();
+                }
+            });
+            info.show();
+        }
+
     }
 
 }

@@ -62,8 +62,8 @@ public class Splash extends AppCompatActivity {
 
         //rtdb.getReference().removeValue();
 
-        /*// Carga la base de datos la primera vez.
-        if (cargodb) {
+        // Carga la base de datos la primera vez.
+       /* if (cargodb) {
             // Obtener el fichero desdes la carpeta raw
             InputStream in = getResources().openRawResource(R.raw.database);
             try {
@@ -71,13 +71,12 @@ public class Splash extends AppCompatActivity {
                 jsonParse.readJsonStream(in);
                 jsonParse.saveDataBase();
                 cargodb = false;
+                // Utilidades
                 // We need an Editor object to make preference changes.
                 // All objects are from android.context.Context
                 SharedPreferences.Editor myEditor = myPreferences.edit();
                 myEditor.putBoolean(GUARDO, cargodb);
                 myEditor.commit();
-            } catch (IOException e) {
-                Toast.makeText(Splash.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 Toast.makeText(Splash.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }

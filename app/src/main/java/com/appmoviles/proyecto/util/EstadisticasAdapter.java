@@ -68,12 +68,14 @@ public class EstadisticasAdapter extends PagerAdapter {
             barChart.setScaleEnabled(false);//escalas de las X y Y
             barChart.getXAxis().setValueFormatter(formatter);
             textView.setHint(R.string.descripcion_grafica_generos);
+            textView.setHint(R.string.descripcion_grafica_clientes);
         }
         if (listaEstadisticas.get(position).getTipo().equals(Constantes.TIPO_PIE)) {
             pieChart.setVisibility(View.VISIBLE);
             pieChart.setData(listaEstadisticas.get(position).getPieData());
             pieChart.invalidate();
             textView.setHint(R.string.descripcion_grafica_clientes);
+            textView.setHint(R.string.descripcion_grafica_generos);
         }
 
         // refresh

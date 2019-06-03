@@ -1,0 +1,88 @@
+{
+  "categoria": [
+    {
+      "categoriaID": "01",
+      "nombre": "Cheques",
+      "subCategorias": [
+        {
+          "categoriaID": "02",
+          "nombre": "Cruzado",
+          "subCategorias": "null"
+        },
+        {
+          "categoriaID": "03",
+          "nombre": "Caja",
+          "subCategorias": "null"
+        }
+      ]
+    },
+    {
+      "categoriaID": "04",
+      "nombre": "Comunicaciones",
+      "subCategorias": [
+        {
+          "categoriaID": "05",
+          "nombre": "Internet",
+          "subCategorias": "null"
+        },
+        {
+          "categoriaID": "06",
+          "nombre": "Redes",
+          "subCategorias": "null"
+        },
+        {
+          "categoriaID": "07",
+          "nombre": "Wifi",
+          "subCategorias": "null"
+        },
+        {
+          "categoriaID": "08",
+          "nombre": "Red telefónica",
+          "subCategorias": "null"
+        }
+      ]
+    },
+    {
+      "categoriaID": "09",
+      "nombre": "Internet",
+      "subCategorias": [
+        {}
+      ]
+    },
+    {
+      "categoriaID": "10",
+      "nombre": "Compras",
+      "subCategorias": [
+        {}
+      ]
+    },
+    {
+      "categoriaID": "11",
+      "nombre": "Caja",
+      "subCategorias": [
+        {}
+      ]
+    },
+    {
+      "categoriaID": "12",
+      "nombre": "Cruzado",
+      "subCategorias": [
+        {}
+      ]
+    },
+    {
+      "categoriaID": "20",
+      "nombre": "Envio",
+      "subCategorias": [
+        {}
+      ]
+    },
+    {
+      "categoriaID": "30",
+      "nombre": "Recepción",
+      "subCategorias": [
+        {}
+      ]
+    }
+  ]
+}

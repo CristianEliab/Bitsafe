@@ -28,16 +28,13 @@ public class AjustesContrasena extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(AjustesContrasena.this, CambioAjustes.class);
                 startActivity(i);
-                finish();
             }
         });
 
         iv_fragment_ajustes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(AjustesContrasena.this, PerfilCliente.class);
-                startActivity(i);
-                finish();
+                onBackPressed();
             }
         });
 

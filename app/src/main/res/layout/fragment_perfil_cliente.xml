@@ -53,8 +53,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/aplicacion_margin_right_btn_perfil"
-                    android:visibility="gone"
-                    android:background="@drawable/fragment_ic_perfil_cliente_blanco" />
+                    android:background="@drawable/fragment_ic_perfil_cliente_blanco"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/iv_fragment_dt_clientes_notificaciones"
@@ -63,39 +63,44 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/aplicacion_margin_right_btn_notificaciones"
-                    android:visibility="gone"
-                    android:background="@drawable/fragment_ic_notificaciones_cliente" />
+                    android:background="@drawable/fragment_ic_notificaciones_cliente"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rl_nombre_cliente_perfil_cliente"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="200dp"
                 android:layout_below="@+id/tb_fragment_perfil_cliente"
                 android:background="#a6edc3">
 
-                <TextView
-                    android:id="@+id/iv_nombre_perfil_cliente"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/iv_perfil_cliente"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
                     android:layout_centerVertical="true"
-                    android:background="@mipmap/ic_pin_pin"
-                    android:gravity="center"
-                    android:text="AR"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="38dp" />
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/fragment_cliente_ic_foto_cliente"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="#FF000000"/>
+
 
                 <TextView
                     android:id="@+id/tv_nombre_cliente_perfil_cliente"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/iv_nombre_perfil_cliente"
-                    android:layout_marginLeft="220dp"
-                    android:layout_marginTop="42dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="80dp"
                     android:text="Usuario"
                     android:textColor="#42423f"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tv_cuenta_bitsafe_perfil_cliente"
@@ -103,10 +108,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="76dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_marginBottom="53dp"
                     android:text="Cuenta Bitsafe"
-                    android:textSize="18dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_numero_telefono_perfil_cliente"
@@ -117,7 +122,18 @@
                     android:layout_marginTop="-53dp"
                     android:text="3045840096"
                     android:textColor="#42423f"
-                    android:textSize="20dp" />
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/btn_open_gal"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_below="@+id/tv_numero_telefono_perfil_cliente"
+                    android:layout_alignEnd="@+id/tv_cuenta_bitsafe_perfil_cliente"
+                    android:layout_marginEnd="130dp"
+                    android:layout_marginTop="-50dp"
+                    android:background="@mipmap/ic_photo_gallery" />
 
 
             </RelativeLayout>
@@ -240,8 +256,8 @@
 
                     <ImageView
                         android:id="@+id/iv_cerrar_perfil_cliente"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="50dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:src="@drawable/ic_logout" />
@@ -250,11 +266,11 @@
                         android:id="@+id/tv_cerrar_perfil_cliente_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/iv_cerrar_perfil_cliente"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
-                        android:layout_alignLeft="@+id/iv_cerrar_perfil_cliente"
-                        android:text="Cerrar sesión"
                         android:layout_marginLeft="60dp"
+                        android:text="Cerrar sesión"
                         android:textColor="#d80d17"
                         android:textSize="@dimen/fragments_toolbar" />
 

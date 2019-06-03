@@ -107,7 +107,10 @@ public class DialogoEscogerCategoria extends DialogFragment {
                 List<Categoria> listaCategoriasSecundaria = new ArrayList<>();
 
                 if (categoriaSeleccionada.getSubCategoria() != null) {
-                    listaCategoriasSecundaria.add(categoriaSeleccionada.getSubCategoria());
+                    ArrayList<Categoria> list = categoriaSeleccionada.getSubCategoria();
+                    for (Categoria categoria: list){
+                        listaCategoriasSecundaria.add(categoria);
+                    }
                 }
                 cambiarSubCategorias(view, listaCategoriasSecundaria);
 

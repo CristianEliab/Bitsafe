@@ -64,10 +64,18 @@ public class AdapterTemplate_Transacciones extends RecyclerView.Adapter<AdapterT
                 for (DataSnapshot hijo : dataSnapshot.getChildren()) {
                     categoriaTmp = hijo.getValue(Categoria.class);
                     categoriaLista.add(categoriaTmp);
+                    if (categoriaTmp.getSubCategoria() != null){
+                        ArrayList<Categoria> subcategorias = categoriaTmp.getSubCategoria();
+                        for (Categoria categoria: subcategorias){
+                            categoriaLista.add(categoria);
+                        }
+                    }
+
+
                 }
             }
 
-            @Override
+            @Override 
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
@@ -85,7 +93,9 @@ public class AdapterTemplate_Transacciones extends RecyclerView.Adapter<AdapterT
     @Override
     public void onBindViewHolder(CustomViewHolder holder, final int position) {
         ((TextView) holder.root.findViewById(R.id.tv_renglon_transaccion_monto)).setText(data.get(position).getMontoTransaccion());
-        ((TextView) holder.root.findViewById(R.id.tv_renglon_transaccion_categoria)).setText(buscarCategoria(data.get(position).getCategoriaID()).getNombre());
+        if(data.get(position).getCategoriaID() != null){
+            ((TextView) holder.root.findViewById(R.id.tv_renglon_transaccion_categoria)).setText(buscarCategoria(data.get(position).getCategoriaID()).getNombre());
+        }
         ((TextView) holder.root.findViewById(R.id.tv_renglon_transaccion_descripcion)).setText(data.get(position).getDescripcion());
         //((ImageView) holder.root.findViewById(R.id.iv_renglon_transaccion_imagen_banco)).setImageIcon(data.get(position).getNota_2());
         ((TextView) holder.root.findViewById(R.id.tv_renglon_transaccion_fecha)).setText(data.get(position).getFechaTransaccion());

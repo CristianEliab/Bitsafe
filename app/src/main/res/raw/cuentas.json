@@ -1,0 +1,194 @@
+{
+    "cuentas": [
+        {
+            "cuentaID": "01",
+            "numeroCuenta": "1234-5678-9012-3456",
+            "usuarioID": "A295owdX7mTiwVYOx1PW2XcUlk53",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "Cuenta Credito",
+            "bancoID": "02",
+            "saldo": "200000",
+            "fechaVinculacion": "2019-02-10"
+        },
+        {
+            "cuentaID": "02",
+            "numeroCuenta": "5678-3456-1234-3457",
+            "usuarioID": "A295owdX7mTiwVYOx1PW2XcUlk53",
+            "tipoCuentaID": "02",
+            "tipoCuentaNombre": "Cuenta Debito",
+            "bancoID": "01",
+            "saldo": "20000",
+            "fechaVinculacion": "2019-05-22"
+        },
+        {
+            "cuentaID": "03",
+            "numeroCuenta": "4378-6243-1344-7242",
+            "usuarioID": "A295owdX7mTiwVYOx1PW2XcUlk53",
+            "tipoCuentaID": "02",
+            "tipoCuentaNombre": "Cuenta Debito",
+            "bancoID": "01",
+            "saldo": "80000",
+            "fechaVinculacion": "2019-05-20"
+        },
+        {
+            "cuentaID": "888",
+            "numeroCuenta": "xxxxxxxxxxxxxx",
+            "usuarioID": "xxxxxxxxxxxxxx",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "xxxxxxxxxxxxxx",
+            "bancoID": "xxxxxxxxxxxxxx",
+            "saldo": "999999999999",
+            "fechaVinculacion": "xxxxxxxxxxxxxx"
+        },
+        {
+            "cuentaID": "999",
+            "numeroCuenta": "xxxxxxxxxxxxxx",
+            "usuarioID": "xxxxxxxxxxxxxx",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "xxxxxxxxxxxxxx",
+            "bancoID": "xxxxxxxxxxxxxx",
+            "saldo": "999999999999",
+            "fechaVinculacion": "xxxxxxxxxxxxxx"
+        },
+        {
+            "cuentaID": "20",
+            "numeroCuenta": "1111-4597-8794-9748",
+            "usuarioID": "5mPWOOvL6tcFBml0cDnWolb1DTI2",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "Cuenta Credito",
+            "bancoID": "01",
+            "saldo": "40000",
+            "fechaVinculacion": "2019-02-10"
+        },
+        {
+            "cuentaID": "21",
+            "numeroCuenta": "6721-3456-9764-3546",
+            "usuarioID": "Dz8h0vVsdbdKP1PnqPLBhYcgZwv2",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "Cuenta Credito",
+            "bancoID": "04",
+            "saldo": "0",
+            "fechaVinculacion": "2019-02-10"
+        },
+        {
+            "cuentaID": "22",
+            "numeroCuenta": "3456-9754-6764-3215",
+            "usuarioID": "Pbbj3G4LV2OW4syD16GxkIvsuk42",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "Cuenta Credito",
+            "bancoID": "01",
+            "saldo": "500",
+            "fechaVinculacion": "2019-02-10"
+        },
+        {
+            "cuentaID": "23",
+            "numeroCuenta": "9789-1498-0197-3416",
+            "usuarioID": "honkglQWa4NzHa3ycl2yLxTgImy2",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "Cuenta Credito",
+            "bancoID": "01",
+            "saldo": "200000",
+            "fechaVinculacion": "2019-02-10"
+        },
+        {
+            "cuentaID": "24",
+            "numeroCuenta": "6794-1498-6790-3416",
+            "usuarioID": "olHPyElRCAM1abVAVsSgAlJsSJE3",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "Cuenta Credito",
+            "bancoID": "01",
+            "saldo": "300",
+            "fechaVinculacion": "2019-02-10"
+        },
+        {
+            "cuentaID": "25",
+            "numeroCuenta": "9879-1498-0197-3416",
+            "usuarioID": "kwckLSByb9fhY7l3RKgqHWBiHM42",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "Cuenta Credito",
+            "bancoID": "01",
+            "saldo": "300",
+            "fechaVinculacion": "2019-02-10"
+        },
+        {
+            "cuentaID": "26",
+            "numeroCuenta": "1111-1498-0197-3416",
+            "usuarioID": "u0O3MCcagCehorHW6j1uZLPBPVR2",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "Cuenta Credito",
+            "bancoID": "01",
+            "saldo": "300",
+            "fechaVinculacion": "2019-02-10"
+        },
+        {
+            "cuentaID": "40",
+            "numeroCuenta": "3456-9754-6764-3215",
+            "usuarioID": "A295owdX7mTiwVYOx1PW2XcUlk53",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "Cuenta Credito",
+            "bancoID": "01",
+            "saldo": "200000",
+            "fechaVinculacion": "2019-02-10"
+        },
+        {
+            "cuentaID": "41",
+            "numeroCuenta": "3649-6197-9184-2011",
+            "usuarioID": "A295owdX7mTiwVYOx1PW2XcUlk53",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "Cuenta Credito",
+            "bancoID": "04",
+            "saldo": "200000",
+            "fechaVinculacion": "2019-02-10"
+        },
+        {
+            "cuentaID": "42",
+            "numeroCuenta": "6794-1498-0197-3416",
+            "usuarioID": "KErt3qoS59QyupH045HTA8L5jYx1",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "Cuenta Credito",
+            "bancoID": "01",
+            "saldo": "200000",
+            "fechaVinculacion": "2019-02-10"
+        },
+        {
+            "cuentaID": "43",
+            "numeroCuenta": "1435-1487-9874-1948",
+            "usuarioID": "KErt3qoS59QyupH045HTA8L5jYx1",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "Cuenta Credito",
+            "bancoID": "02",
+            "saldo": "200000",
+            "fechaVinculacion": "2019-02-10"
+        },
+        {
+            "cuentaID": "44",
+            "numeroCuenta": "3456-9764-3546-6721",
+            "usuarioID": "VmYXVfTQFEf3rdtZtjfFyg2xNdu1",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "Cuenta Credito",
+            "bancoID": "04",
+            "saldo": "200000",
+            "fechaVinculacion": "2019-02-10"
+        },
+        {
+            "cuentaID": "45",
+            "numeroCuenta": "3456-6971-7765-5421",
+            "usuarioID": "le3DREcuWuV9PtiImpXORaMMNVH3",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "Cuenta Credito",
+            "bancoID": "01",
+            "saldo": "200000",
+            "fechaVinculacion": "2019-02-10"
+        },
+        {
+            "cuentaID": "46",
+            "numeroCuenta": "6791-2317-3479-3214",
+            "usuarioID": "le3DREcuWuV9PtiImpXORaMMNVH3",
+            "tipoCuentaID": "01",
+            "tipoCuentaNombre": "Cuenta Credito",
+            "bancoID": "02",
+            "saldo": "200000",
+            "fechaVinculacion": "2019-02-10"
+        }
+    ]
+}
