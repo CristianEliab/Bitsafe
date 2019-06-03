@@ -86,10 +86,7 @@ public class SeleccionarClienteFragment extends Fragment implements AdapterTempl
         libreta.setAdapter(adapter);
         adapter.setListener(this);
 
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
         rtdb.getReference().child(Constantes.CHILD_USUARIOS_ID)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -110,44 +107,12 @@ public class SeleccionarClienteFragment extends Fragment implements AdapterTempl
         et_fragment_sl_clientes_filtro.setOnClickListener(this);
 
         iv_fragment_sl_clientes_return = v.findViewById(R.id.iv_fragment_sl_clientes_return);
-<<<<<<< HEAD
-        iv_fragment_sl_clientes_return.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (fragment == null) {
-                    TransaccionesFragment transaccionesFragment = new TransaccionesFragment();
-                    transaction.replace(R.id.contenido, transaccionesFragment);
-                    transaction.commit();
-                } else {
-                    transaction.replace(R.id.contenido, fragment);
-                    transaction.commit();
-                }
-
-            }
-        });
-=======
         iv_fragment_sl_clientes_return.setOnClickListener(this);
->>>>>>> origin/master
 
         fb_fragment_sl_cliente_agregar_cliente = v.findViewById(R.id.fb_fragment_sl_cliente_agregar_cliente);
         fb_fragment_sl_cliente_agregar_cliente.setOnClickListener(this);
 
         iv_fragment_sl_clientes_perfil.setOnClickListener(this);
-
-
-        iv_fragment_sl_clientes_perfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), PerfilCliente.class);
-                i.putExtra(Constantes.GO_TO_PERFIL, Constantes.DATOS_FRAGMENT);
-                i.putExtra(Constantes.DONDE_VIENE, Constantes.FRAGMENT_TRANSACCION);
-                DatosClienteFragment datosClienteFragment = new DatosClienteFragment();
-                i.putExtra(Constantes.FRAGMENT, datosClienteFragment);
-                startActivity(i);
-                getActivity().finish();
-            }
-        });
 
         return v;
     }

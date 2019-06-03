@@ -25,13 +25,10 @@ public class Usuario implements Serializable {
     private ArrayList<Cuenta> listaCuentas;
     private long fechaCreacion;
     private String fecha_cargar;
-<<<<<<< HEAD
-=======
     private boolean usuario_nuevo;
     private String habilitar_sincronizacion;
 
     private String laborUsuario;
->>>>>>> origin/master
 
     public Usuario(String usuarioID, String nombre, String fecha_nacimiento, String telefono, String genero, String estadoUsuarioID, String loginID, String configuracionID, String cedula, String ubicacion, String correo, ArrayList<Banco> listaBancos, ArrayList<Cuenta> listaCuentas) {
         this.usuarioID = usuarioID;
@@ -180,8 +177,6 @@ public class Usuario implements Serializable {
     public void setFecha_cargar(String fecha_cargar) {
         this.fecha_cargar = fecha_cargar;
     }
-<<<<<<< HEAD
-=======
 
     public boolean isUsuario_nuevo() {
         return usuario_nuevo;
@@ -207,5 +202,4 @@ public class Usuario implements Serializable {
     public void setLaborUsuario(String laborUsuario) {
         this.laborUsuario = laborUsuario;
     }
->>>>>>> origin/master
 }

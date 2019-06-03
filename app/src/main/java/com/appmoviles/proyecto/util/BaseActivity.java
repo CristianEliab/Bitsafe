@@ -14,7 +14,6 @@ import android.widget.ImageView;
 
 import com.appmoviles.proyecto.R;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 
 public class BaseActivity extends AppCompatActivity {
@@ -25,7 +24,6 @@ public class BaseActivity extends AppCompatActivity {
 
 
     public void showProgressDialog(Context context) {
-        Dialog dialog = new Dialog(context);
         dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -33,12 +31,6 @@ public class BaseActivity extends AppCompatActivity {
 
         ImageView gifImageView = dialog.findViewById(R.id.custom_loading_imageView);
 
-        GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(gifImageView);
-        Glide.with(this)
-                .load(R.drawable.loading_4)
-                .centerCrop()
-                .crossFade()
-                .into(imageViewTarget);
         Glide.with(this)
                 .load(R.drawable.loading_4)
                 .centerCrop()
