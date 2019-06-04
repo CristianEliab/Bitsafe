@@ -1,30 +1,44 @@
 package com.appmoviles.proyecto.modelo;
 
-public class PlanAhorro {
+import java.io.Serializable;
+
+public class PlanAhorro implements Serializable {
 
     private String planAhorroID;
     private String usuarioID;
     private String fechaFinal;
     private String fechaInicio;
-    private String cuotas;
+    private String cuota;
+    private String cantidadCuotas;
     private String monto;
+    private String meta;
     private String periodo;
     private String descripcion;
     private String estadoPlanAhorroID;
 
-    public PlanAhorro(String planAhorroID, String usuarioID, String fechaFinal, String fechaInicio, String cuotas, String monto, String periodo, String descripcion, String estadoPlanAhorroID) {
+    public PlanAhorro(String planAhorroID, String usuarioID, String fechaFinal, String fechaInicio, String cuota, String cantidadCuotas, String monto, String meta , String periodo, String descripcion, String estadoPlanAhorroID) {
         this.planAhorroID = planAhorroID;
         this.usuarioID = usuarioID;
         this.fechaFinal = fechaFinal;
         this.fechaInicio = fechaInicio;
-        this.cuotas = cuotas;
+        this.cuota = cuota;
+        this.cantidadCuotas = cantidadCuotas;
         this.monto = monto;
+        this.meta = meta;
         this.periodo = periodo;
         this.descripcion = descripcion;
         this.estadoPlanAhorroID = estadoPlanAhorroID;
     }
 
     public PlanAhorro() {
+    }
+
+    public String getMeta() {
+        return meta;
+    }
+
+    public void setMeta(String meta) {
+        this.meta = meta;
     }
 
     public String getPlanAhorroID() {
@@ -47,6 +61,22 @@ public class PlanAhorro {
         return fechaFinal;
     }
 
+    public String getCuota() {
+        return cuota;
+    }
+
+    public void setCuota(String cuota) {
+        this.cuota = cuota;
+    }
+
+    public String getCantidadCuotas() {
+        return cantidadCuotas;
+    }
+
+    public void setCantidadCuotas(String cantidadCuotas) {
+        this.cantidadCuotas = cantidadCuotas;
+    }
+
     public void setFechaFinal(String fechaFinal) {
         this.fechaFinal = fechaFinal;
     }
@@ -57,14 +87,6 @@ public class PlanAhorro {
 
     public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
-    }
-
-    public String getCuotas() {
-        return cuotas;
-    }
-
-    public void setCuotas(String cuotas) {
-        this.cuotas = cuotas;
     }
 
     public String getMonto() {

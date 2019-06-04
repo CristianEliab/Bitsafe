@@ -106,7 +106,7 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
                 if (isReady) {
                     sendData();
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-                    builder1.setTitle("¡Tu ahorro "+name+ " ha sido guardado!")
+                    builder1.setTitle("¡Tu ahorro " + name + " ha sido guardado!")
                             .setMessage("Ánimate a seguir ahorrando con Bitsafe. Puedes crear todos los ahorros que desees de manera segura con nuestro servico.")
                             .setCancelable(true);
 
@@ -204,7 +204,7 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
     }
 
     private void sendData() {
-        PlanAhorro planAhorro = new PlanAhorro(UUID.randomUUID().toString(), userId, date, dateInit, String.valueOf(cantidad), String.valueOf(cuotaValue), frequencyPayment, name, "01");
+        PlanAhorro planAhorro = new PlanAhorro(UUID.randomUUID().toString(), userId, date, dateInit, String.valueOf(cuotaValue), String.valueOf(cantidad), "0", String.valueOf(money), frequencyPayment, name, "01");
         database.getReference().child(CHILD_PLANES_AHORRO).push().setValue(planAhorro);
         Log.d("sendData:", "////////// COMPLETO LA SUBIDA DEL OBJ AHORRO /////////////////");
     }

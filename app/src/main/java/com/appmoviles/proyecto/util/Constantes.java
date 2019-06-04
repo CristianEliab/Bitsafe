@@ -23,6 +23,7 @@ public class Constantes {
     public final static String BUNDLE_BANCO = "BUNDLE_BANCO";
     public final static String BUNDLE_CUENTA = "BUNDLE_CUENTA";
     public final static String BUNDLE_TRANSACCION = "BUNDLE_TRANSACCION";
+    public final static String BUNDLE_PLANES_AHORRO = "BUNDLE_PLANES_AHORRO";
 
     public final static String BUNDLE_TIPO_I_O = "BUNDLE_TIPO_I_O";
 
