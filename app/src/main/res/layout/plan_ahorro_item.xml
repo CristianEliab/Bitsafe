@@ -90,7 +90,7 @@
 
         <ImageView
             android:layout_height="6dp"
-            android:layout_width="371dip"
+            android:layout_width="371dp"
             android:src="@drawable/load_bar"
             android:id="@+id/iv_barra_completado"/>
     </RelativeLayout>

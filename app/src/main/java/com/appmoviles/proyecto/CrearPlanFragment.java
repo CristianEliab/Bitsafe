@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -74,6 +75,9 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
     long cantidad;
     float cuotaValue;
 
+    public CrearPlanFragment(){
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,7 +124,13 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
 
                     AlertDialog alert11 = builder1.create();
                     alert11.show();
-                    getFragmentManager().beginTransaction().replace(R.id.main, new PlanesFragment()).addToBackStack(null).commit();
+
+                    PlanesFragment planesFragment = new PlanesFragment();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.contenido_cliente, planesFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+
                 } else {
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
                     builder1.setTitle("No es el ahorro que buscas")
@@ -171,13 +181,16 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if(!etMoney.getText().toString().equals("")) {
+                    money = Float.parseFloat(etMoney.getText().toString());
+                }else if(etMoney.getText().toString().equals("")){
+                    money = 0;
+                }
+                updateCuota();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                money = Float.parseFloat(etMoney.getText().toString());
-                updateCuota();
             }
         });
 
@@ -189,13 +202,16 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if(!etName.getText().toString().equals("")) {
+                    name = etName.getText().toString();
+                }else if(etName.getText().toString().equals("")){
+                    name = null;
+                }
+                updateCuota();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                name = etName.getText().toString();
-                updateCuota();
             }
         });
 
@@ -287,7 +303,7 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
             Log.d("*** money: ", String.valueOf(money));
             Log.d("*** name: ", name);
 
-            if (!frequencyPayment.equals(null) && !date.equals(null) && money != 0 && !name.equals(null)) {
+            if (!frequencyPayment.equals(null) && !date.equals(null) && money > 0 && !name.equals(null)) {
 
                 String[] fpData = frequencyPayment.split("/");
                 String fp = fpData[0];
@@ -304,9 +320,16 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+            }else{
+                tvCuota.setText("Completa todos los campos para calcular tus cuotas.");
+                tvCuota.setTextColor(Color.parseColor("#828282"));
+                isReady = false;
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
+            tvCuota.setText("Completa todos los campos para calcular tus cuotas.");
+            tvCuota.setTextColor(Color.parseColor("#828282"));
+            isReady = false;
         }
     }
 

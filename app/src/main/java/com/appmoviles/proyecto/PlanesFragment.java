@@ -28,7 +28,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import static com.appmoviles.proyecto.util.Constantes.BUNDLE_PLANES_AHORRO;
-import static com.appmoviles.proyecto.util.Constantes.BUNDLE_TIPO_I_O;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_PLANES_AHORRO;
 
 import java.io.Serializable;
@@ -78,7 +77,11 @@ public class PlanesFragment extends Fragment implements Serializable,AdapterTemp
         btn_crear_ahorro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.main, new CrearPlanFragment()).addToBackStack(null).commit();
+                CrearPlanFragment crearPlanFragment = new CrearPlanFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.contenido_cliente, crearPlanFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 
@@ -148,7 +151,7 @@ public class PlanesFragment extends Fragment implements Serializable,AdapterTemp
         editarPlanFragment.setArguments(bundle);
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.content, editarPlanFragment);
+        transaction.replace(R.id.contenido_cliente, editarPlanFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
