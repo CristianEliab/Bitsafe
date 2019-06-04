@@ -1,8 +1,12 @@
 package com.appmoviles.proyecto;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.app.DatePickerDialog;
 import android.widget.EditText;
@@ -21,13 +26,28 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.appmoviles.proyecto.modelo.Cuenta;
+import com.appmoviles.proyecto.modelo.PlanAhorro;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+
+import static com.appmoviles.proyecto.util.Constantes.CHILD_CUENTAS;
+import static com.appmoviles.proyecto.util.Constantes.CHILD_PLANES_AHORRO;
 
 
 public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddFrequencyPaymentListener {
@@ -35,13 +55,24 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
     private LinearLayout ly_agregar_fecha;
     private LinearLayout ly_agregar_frecuencia_pago;
     private EditText etName, etMoney;
+    private Button btn_guardar, btn_cancelar;
 
     FrecuenciaPago frecuanciaPagoDialog;
 
     private TextView tvDate, tvTime, tvCuota;
     private int mYear, mMonth, mDay;
-    private String name, frequencyPayment, date;
+    private String name, frequencyPayment, date, dateInit;
     private float money;
+    private boolean isReady;
+
+    private List<Cuenta> listaCuentas;
+
+    FirebaseDatabase database;
+    FirebaseAuth auth;
+
+    String userId;
+    long cantidad;
+    float cuotaValue;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +85,9 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_crear_plan, container, false);
 
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+
         ly_agregar_fecha = (LinearLayout) v.findViewById(R.id.ly_agregar_fecha);
         ly_agregar_frecuencia_pago = (LinearLayout) v.findViewById(R.id.ly_agregar_frecuencia_pago);
         tvDate = (TextView) v.findViewById(R.id.et_date);
@@ -61,6 +95,58 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
         tvCuota = (TextView) v.findViewById(R.id.tv_cuota);
         etName = (EditText) v.findViewById(R.id.et_name);
         etMoney = (EditText) v.findViewById(R.id.et_money);
+        btn_guardar = (Button) v.findViewById(R.id.btn_guardar);
+        btn_cancelar = (Button) v.findViewById(R.id.btn_cancelar);
+
+        cargarUserID();
+
+        btn_guardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isReady) {
+                    sendData();
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                    builder1.setTitle("¡Tu ahorro "+name+ " ha sido guardado!")
+                            .setMessage("Ánimate a seguir ahorrando con Bitsafe. Puedes crear todos los ahorros que desees de manera segura con nuestro servico.")
+                            .setCancelable(true);
+
+                    builder1.setPositiveButton(
+                            "Continuar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                    getFragmentManager().beginTransaction().replace(R.id.main, new PlanesFragment()).addToBackStack(null).commit();
+                } else {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                    builder1.setTitle("No es el ahorro que buscas")
+                            .setMessage("Primero debes de llenar el formulario correctamente para guardar tu plan de ahorro.")
+                            .setCancelable(true);
+
+                    builder1.setPositiveButton(
+                            "Entendido",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+            }
+        });
+
+        btn_cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.main, new PlanesFragment()).addToBackStack(null).commit();
+            }
+        });
 
         ly_agregar_fecha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +199,23 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
             }
         });
 
+
         return v;
+    }
+
+    private void sendData() {
+        PlanAhorro planAhorro = new PlanAhorro(UUID.randomUUID().toString(), userId, date, dateInit, String.valueOf(cantidad), String.valueOf(cuotaValue), frequencyPayment, name, "01");
+        database.getReference().child(CHILD_PLANES_AHORRO).push().setValue(planAhorro);
+        Log.d("sendData:", "////////// COMPLETO LA SUBIDA DEL OBJ AHORRO /////////////////");
+    }
+
+    public void cargarUserID() {
+
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+        if (firebaseUser != null) {
+            userId = firebaseUser.getUid();
+        }
+
     }
 
     private void showDatePicker() {
@@ -193,10 +295,12 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 try {
                     Date dateSelected = sdf.parse(date);
+                    dateInit = sdf.format(currentTime.getTime());
+
                     long diff = dateSelected.getTime() - currentTime.getTime();
                     long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
                     Log.d("************ Days: ", String.valueOf(days));
-                    //tvCuota.setText();
+                    setTvCuota(days, fp, fpData[1]);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -204,7 +308,33 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
+    }
 
-
+    private void setTvCuota(long days, String fp, String fps) {
+        String msg = "";
+        int divDays = 1;
+        if (fp.equals("Diario")) {
+            divDays = 1;
+            msg = "a Diario en la " + fps + ".";
+        } else if (fp.equals("Semanal")) {
+            divDays = 7;
+            msg = "cada Semana en los días " + fps + ".";
+        } else if (fp.equals("Cada 2 Semanas")) {
+            divDays = 14;
+            msg = "cada 2 Semanas en los días " + fps + ".";
+        } else if (fp.equals("Mensual")) {
+            divDays = 30;
+            msg = "cada Mes en las fechas número " + fps + ".";
+        }
+        cantidad = days / divDays;
+        if (cantidad <= 1) {
+            tvCuota.setText("Se recomienda modificar el formulario para crear una cantidad de cuotas rezonables para tu ahorro.");
+            tvCuota.setTextColor(Color.parseColor("#828282"));
+        } else {
+            cuotaValue = money / cantidad;
+            tvCuota.setText("Para cumplir con tu ahorro, deberás de completar un total de " + cantidad + " cuotas por un valor de " + cuotaValue + " pesos, " + msg);
+            tvCuota.setTextColor(Color.parseColor("#4F4F4F"));
+            isReady = true;
+        }
     }
 }

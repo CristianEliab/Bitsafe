@@ -34,6 +34,7 @@ public class Constantes {
     public final static String CHILD_BANCOS = "bancos";
     public final static String CHILD_CUENTAS = "cuentas";
     public final static String CHILD_TRANSACCIONES = "transacciones";
+    public final static String CHILD_PLANES_AHORRO = "planesahorro";
 
     public final static String GO_TO_PERFIL = "GO_TO_PERFIL";
     public final static String CLIENTES = "CLIENTE";
@@ -65,5 +66,7 @@ public class Constantes {
     public final static String USUARIO_DESTINO = "USUARIO_DESTINO";
     public final static String USUARIO_ORIGEN = "USUARIO_ORIGEN";
     public final static String USUARIO_SERIALIZABLE = "USUARIO_SERIALIZABLE";
+
+    //Para Planes de Ahorro
 
 }
