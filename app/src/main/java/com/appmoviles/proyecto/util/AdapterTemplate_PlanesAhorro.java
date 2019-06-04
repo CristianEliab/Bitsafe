@@ -62,11 +62,6 @@ public class AdapterTemplate_PlanesAhorro extends RecyclerView.Adapter<AdapterTe
 
         int r = (monto*371)/meta;
 
-        Log.e("PLAN", " monto: " + monto);
-        Log.e("PLAN", " meta: " + meta);
-        Log.e("PLAN", " r: " + r);
-
-
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)((ImageView) holder.root.findViewById(R.id.iv_barra_completado)).getLayoutParams();
         params.width = (int) dpToPx(r, holder.root.getContext());
         params.height = dpToPx(6, holder.root.getContext());
