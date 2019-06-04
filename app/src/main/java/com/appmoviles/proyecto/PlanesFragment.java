@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,26 +127,29 @@ public class PlanesFragment extends Fragment implements Serializable,AdapterTemp
 
     @Override
     public void onClick(View v) {
+        Log.e("entro a todo","////////////////////////////////////////////////////////***************************************************************");
+        /*
         switch (v.getId()) {
             case R.id.iv_fragment_finanzas_bancos_return:
                 getFragmentManager().popBackStack();
                 break;
         }
+        */
     }
 
     @Override
     public void onItemClick(PlanAhorro planAhorro) {
+        Log.e("entro a item","////////////////////////////////////////////////////////***************************************************************");
 
-        /*
         Bundle bundle = new Bundle();
         bundle.putSerializable(BUNDLE_PLANES_AHORRO, planAhorro);
 
-        FinanzasCuentasFragment finanzasCuentasFragment = new FinanzasCuentasFragment();
-        finanzasCuentasFragment.setArguments(bundle);
+        EditarPlanFragment editarPlanFragment = new EditarPlanFragment();
+        editarPlanFragment.setArguments(bundle);
+
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.contenido_cliente, finanzasCuentasFragment);
+        transaction.replace(R.id.content, editarPlanFragment);
         transaction.addToBackStack(null);
         transaction.commit();
-        */
     }
 }

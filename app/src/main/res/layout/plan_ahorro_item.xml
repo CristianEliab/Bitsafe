@@ -6,7 +6,8 @@
     android:layout_marginTop="20dp"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:padding="20dip">
+    android:padding="20dip"
+    android:id="@+id/ll_plan_ahorro">
 
     <RelativeLayout
         android:layout_height="wrap_content"
