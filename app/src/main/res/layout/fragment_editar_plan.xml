@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CrearPlanFragment"
+    tools:context=".EditarPlanFragment"
     android:id="@+id/main">
 
     <RelativeLayout
@@ -38,7 +38,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/aplicacion_margin_left_text_fragment"
                 android:gravity="center"
-                android:text="Crear un ahorro"
+                android:text="Editar un ahorro"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/fragments_toolbar" />
 
@@ -70,54 +70,54 @@
             android:orientation="vertical"
             android:paddingLeft="20dp"
             android:paddingRight="20dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/white_shadowed_shape"
-            android:orientation="vertical"
-            android:padding="20dip">
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:orientation="vertical">
-                    <EditText
-                        android:layout_width="wrap_content" 
-                        android:layout_height="wrap_content"
-                        android:background="#00000000"
-                        android:hint="Nombre de tu ahorro"
-                        android:layout_marginBottom="10dp"
-                        android:textStyle="bold"
-                        android:inputType="text"
-                        android:id="@+id/et_name"/>
-                    <ImageView
-                        android:layout_width="270dp"
-                        android:layout_height="4dp"
-                        android:layout_marginTop="1dp"
-                        android:src="@drawable/unloaded_bar"
-                        android:layout_marginBottom="10dp"/>
-                    <EditText
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/white_shadowed_shape"
+                android:orientation="vertical"
+                android:padding="20dip">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="$0.0"
-                        android:textColor="#076AAD"
-                        android:background="#FFFF"
-                        android:inputType="number"
-                        android:id="@+id/et_money"/>
-                </LinearLayout>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_ahorro"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    />
-            </RelativeLayout>
-        </LinearLayout>
+                        android:layout_alignParentLeft="true"
+                        android:orientation="vertical">
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="#00000000"
+                            android:hint="Nombre de tu ahorro"
+                            android:layout_marginBottom="10dp"
+                            android:textStyle="bold"
+                            android:inputType="text"
+                            android:id="@+id/et_name"/>
+                        <ImageView
+                            android:layout_width="270dp"
+                            android:layout_height="4dp"
+                            android:layout_marginTop="1dp"
+                            android:src="@drawable/unloaded_bar"
+                            android:layout_marginBottom="10dp"/>
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="$0.0"
+                            android:textColor="#076AAD"
+                            android:background="#FFFF"
+                            android:inputType="number"
+                            android:id="@+id/et_money"/>
+                    </LinearLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_ahorro"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"

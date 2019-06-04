@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/white_shadowed_shape"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="20dip"
+    android:id="@+id/ll_plan_ahorro">
+
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Computadora"
+            android:textColor="#076AAD"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:id="@+id/tv_titulo"/>
+
+        <ImageButton
+            android:background="#FFFFFF"
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_edit" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_calendar" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:text="Finaliza el 5 de Junio de 2019"
+            android:textColor="#4F4F4F"
+            android:textSize="13dp"
+            android:id="@+id/tv_fecha"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent">
+
+        <TextView
+            android:layout_alignParentStart="true"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="$ 2´000.000"
+            android:textColor="#4F4F4F"
+            android:textSize="13dp"
+            android:id="@+id/tv_monto_acumulado"/>
+
+        <TextView
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="$ 3´000.000"
+            android:textColor="#4F4F4F"
+            android:textSize="13dp"
+            android:id="@+id/tv_monto_final"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent">
+
+        <ImageView
+            android:layout_height="4dp"
+            android:layout_marginTop="1dp"
+            android:layout_width="match_parent"
+            android:src="@drawable/unloaded_bar" />
+
+        <ImageView
+            android:layout_height="6dp"
+            android:layout_width="371dp"
+            android:src="@drawable/load_bar"
+            android:id="@+id/iv_barra_completado"/>
+    </RelativeLayout>
+</LinearLayout>

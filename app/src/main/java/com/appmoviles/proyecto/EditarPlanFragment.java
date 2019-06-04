@@ -1,30 +1,24 @@
 package com.appmoviles.proyecto;
 
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.app.DatePickerDialog;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.appmoviles.proyecto.modelo.Cuenta;
@@ -33,25 +27,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import static com.appmoviles.proyecto.util.Constantes.CHILD_CUENTAS;
+import static com.appmoviles.proyecto.util.Constantes.BUNDLE_PLANES_AHORRO;
 import static com.appmoviles.proyecto.util.Constantes.CHILD_PLANES_AHORRO;
 
-
-public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddFrequencyPaymentListener {
+public class EditarPlanFragment extends Fragment implements  FrecuenciaPago.OnAddFrequencyPaymentListener{
 
     private LinearLayout ly_agregar_fecha;
     private LinearLayout ly_agregar_frecuencia_pago;
@@ -75,7 +66,10 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
     long cantidad;
     float cuotaValue;
 
-    public CrearPlanFragment(){
+    private PlanAhorro planAhorro;
+
+    public EditarPlanFragment(){
+
     }
 
     @Override
@@ -87,10 +81,13 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_crear_plan, container, false);
+        View v = inflater.inflate(R.layout.fragment_editar_plan, container, false);
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
+
+        Bundle bundle = getArguments();
+        planAhorro= (PlanAhorro) bundle.getSerializable(BUNDLE_PLANES_AHORRO);
 
         ly_agregar_fecha = (LinearLayout) v.findViewById(R.id.ly_agregar_fecha);
         ly_agregar_frecuencia_pago = (LinearLayout) v.findViewById(R.id.ly_agregar_frecuencia_pago);
@@ -102,34 +99,13 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
         btn_guardar = (Button) v.findViewById(R.id.btn_guardar);
         btn_cancelar = (Button) v.findViewById(R.id.btn_cancelar);
 
-        cargarUserID();
+        setValues();
 
         btn_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isReady) {
-                    sendData();
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-                    builder1.setTitle("¡Tu ahorro " + name + " ha sido guardado!")
-                            .setMessage("Ánimate a seguir ahorrando con Bitsafe. Puedes crear todos los ahorros que desees de manera segura con nuestro servico.")
-                            .setCancelable(true);
-
-                    builder1.setPositiveButton(
-                            "Continuar",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            });
-
-                    AlertDialog alert11 = builder1.create();
-                    alert11.show();
-
-                    PlanesFragment planesFragment = new PlanesFragment();
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.contenido_cliente, planesFragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
+                    updateData();
 
                 } else {
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
@@ -215,25 +191,78 @@ public class CrearPlanFragment extends Fragment implements FrecuenciaPago.OnAddF
             }
         });
 
-
         return v;
     }
 
-    private void sendData() {
-        PlanAhorro planAhorro = new PlanAhorro(UUID.randomUUID().toString(), userId, date, dateInit, String.valueOf(cuotaValue), String.valueOf(cantidad), "0", String.valueOf(money), frequencyPayment, name, "01");
-        database.getReference().child(CHILD_PLANES_AHORRO).push().setValue(planAhorro);
+    private void updateData() {
+
+        //planAhorro = new PlanAhorro(UUID.randomUUID().toString(), userId, date, dateInit, String.valueOf(cuotaValue), String.valueOf(cantidad), "0", String.valueOf(money), frequencyPayment, name, "01");
+
+        planAhorro.setFechaFinal(date);
+        planAhorro.setFechaInicio(dateInit);
+        planAhorro.setCuota(String.valueOf(cuotaValue));
+        planAhorro.setCantidadCuotas(String.valueOf(cantidad));
+        planAhorro.setMeta(String.valueOf(money));
+        planAhorro.setPeriodo(frequencyPayment);
+        planAhorro.setDescripcion(name);
+
+        database.getReference().child(CHILD_PLANES_AHORRO).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                PlanAhorro plan;
+                for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                    plan = hijo.getValue(PlanAhorro.class);
+                    if (plan.getUsuarioID().equals(planAhorro.getUsuarioID()) && plan.getPlanAhorroID().equals(planAhorro.getPlanAhorroID())) {
+                        DatabaseReference updateData = FirebaseDatabase.getInstance()
+                                .getReference(CHILD_PLANES_AHORRO);
+                        updateData.child(hijo.getKey()).setValue(planAhorro);
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                        builder1.setTitle("¡Tu ahorro " + name + " ha sido guardado!")
+                                .setMessage("Ánimate a seguir ahorrando con Bitsafe. Puedes crear todos los ahorros que desees de manera segura con nuestro servico.")
+                                .setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "Continuar",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+
+                        PlanesFragment planesFragment = new PlanesFragment();
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        transaction.replace(R.id.contenido_cliente, planesFragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         Log.d("sendData:", "////////// COMPLETO LA SUBIDA DEL OBJ AHORRO /////////////////");
     }
 
-    public void cargarUserID() {
+    private void setValues(){
+        tvDate.setText(planAhorro.getFechaFinal());
+        tvTime.setText(planAhorro.getPeriodo());
+        etName.setText(planAhorro.getDescripcion());
+        etMoney.setText(planAhorro.getMeta());
 
-        FirebaseUser firebaseUser = auth.getCurrentUser();
-        if (firebaseUser != null) {
-            userId = firebaseUser.getUid();
-        }
+        frequencyPayment = planAhorro.getPeriodo();
+        date = planAhorro.getFechaFinal();
+        money = Long.parseLong(planAhorro.getMeta().replace("0.0","0"));
+        name = planAhorro.getDescripcion();
 
+        updateCuota();
     }
-
     private void showDatePicker() {
         // Get Current Date
         final Calendar c = Calendar.getInstance();

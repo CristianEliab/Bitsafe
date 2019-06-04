@@ -590,8 +590,10 @@ public class JsonParse {
         String usuarioID = null;
         String fechaFinal = null;
         String fechaInicio = null;
-        String cuotas = null;
+        String cuota = null;
+        String cantidadCuotas = null;
         String monto = null;
+        String meta = null;
         String periodo = null;
         String descripcion = null;
         String estadoPlanAhorroID = null;
@@ -613,11 +615,17 @@ public class JsonParse {
                     case "fechaInicio":
                         fechaInicio = reader.nextString();
                         break;
-                    case "cuotas":
-                        cuotas = reader.nextString();
+                    case "cuota":
+                        cuota = reader.nextString();
+                        break;
+                    case "cantidadCuotas":
+                        cantidadCuotas = reader.nextString();
                         break;
                     case "monto":
                         monto = reader.nextString();
+                        break;
+                    case "meta":
+                        meta = reader.nextString();
                         break;
                     case "periodo":
                         periodo = reader.nextString();
@@ -633,7 +641,7 @@ public class JsonParse {
                         break;
                 }
             }
-            this.planAhorroArrayList.add(new PlanAhorro(planAhorroID, usuarioID, fechaFinal, fechaInicio, cuotas, monto, periodo, descripcion, estadoPlanAhorroID));
+            this.planAhorroArrayList.add(new PlanAhorro(planAhorroID, usuarioID, fechaFinal, fechaInicio, cuota, cantidadCuotas, monto, meta, periodo, descripcion, estadoPlanAhorroID));
             reader.endObject();
         }
     }

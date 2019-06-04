@@ -23,6 +23,7 @@ public class Constantes {
     public final static String BUNDLE_BANCO = "BUNDLE_BANCO";
     public final static String BUNDLE_CUENTA = "BUNDLE_CUENTA";
     public final static String BUNDLE_TRANSACCION = "BUNDLE_TRANSACCION";
+    public final static String BUNDLE_PLANES_AHORRO = "BUNDLE_PLANES_AHORRO";
 
     public final static String BUNDLE_TIPO_I_O = "BUNDLE_TIPO_I_O";
 
@@ -68,6 +69,7 @@ public class Constantes {
 
     public final static String REGISTRO_MASCULINO = "Masculino";
     public final static String REGISTRO_FEMENINO = "Femenino";
+    public final static String CHILD_PLANES_AHORRO = "planesahorro";
 
     public final static String GO_TO_PERFIL = "GO_TO_PERFIL";
     public final static String CLIENTES = "CLIENTE";
